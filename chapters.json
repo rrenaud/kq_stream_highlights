@@ -1,0 +1,2240 @@
+{
+  "video_path": "sf_12_15_2025.mkv",
+  "cabinet_url": "https://kqhivemind.com/cabinet/sf/sf",
+  "video_start_utc": "2025-12-16T04:08:26.495000+00:00",
+  "fps": 60.0,
+  "chapters": [
+    {
+      "game_id": 1700985,
+      "title": "Game 1700985: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 67.632,
+      "end_time": 143.4,
+      "duration": 75.768,
+      "hivemind_url": "https://kqhivemind.com/game/1700985",
+      "set_number": 1,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 81.189,
+          "victim": "gold"
+        },
+        {
+          "time": 95.361,
+          "victim": "gold"
+        },
+        {
+          "time": 133.934,
+          "victim": "blue"
+        },
+        {
+          "time": 143.4,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1700988,
+      "title": "Game 1700988: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 184.28,
+      "end_time": 326.65,
+      "duration": 142.36999999999998,
+      "hivemind_url": "https://kqhivemind.com/game/1700988",
+      "set_number": 1,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 192.13,
+          "victim": "blue"
+        },
+        {
+          "time": 201.152,
+          "victim": "gold"
+        },
+        {
+          "time": 222.447,
+          "victim": "blue"
+        },
+        {
+          "time": 326.609,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1700990,
+      "title": "Game 1700990: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 356.103,
+      "end_time": 386.884,
+      "duration": 30.781000000000006,
+      "hivemind_url": "https://kqhivemind.com/game/1700990",
+      "set_number": 1,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 360.41,
+          "victim": "blue"
+        },
+        {
+          "time": 373.766,
+          "victim": "blue"
+        },
+        {
+          "time": 386.841,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1700991,
+      "title": "Game 1700991: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 408.425,
+      "end_time": 517.88,
+      "duration": 109.45499999999998,
+      "hivemind_url": "https://kqhivemind.com/game/1700991",
+      "set_number": 1,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 444.309,
+          "victim": "gold"
+        },
+        {
+          "time": 453.134,
+          "victim": "gold"
+        },
+        {
+          "time": 468.398,
+          "victim": "blue"
+        },
+        {
+          "time": 508.179,
+          "victim": "blue"
+        },
+        {
+          "time": 517.88,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1700993,
+      "title": "Game 1700993: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "economic",
+      "start_time": 543.247,
+      "end_time": 616.712,
+      "duration": 73.46500000000003,
+      "hivemind_url": "https://kqhivemind.com/game/1700993",
+      "set_number": 1,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 555.879,
+          "victim": "blue"
+        },
+        {
+          "time": 566.534,
+          "victim": "gold"
+        },
+        {
+          "time": 577.259,
+          "victim": "blue"
+        },
+        {
+          "time": 598.462,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1700996,
+      "title": "Game 1700996: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 797.362,
+      "end_time": 849.928,
+      "duration": 52.56600000000003,
+      "hivemind_url": "https://kqhivemind.com/game/1700996",
+      "set_number": 2,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 824.528,
+          "victim": "gold"
+        },
+        {
+          "time": 828.925,
+          "victim": "blue"
+        },
+        {
+          "time": 843.807,
+          "victim": "blue"
+        },
+        {
+          "time": 849.928,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1700998,
+      "title": "Game 1700998: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "snail",
+      "start_time": 875.186,
+      "end_time": 938.581,
+      "duration": 63.39499999999998,
+      "hivemind_url": "https://kqhivemind.com/game/1700998",
+      "set_number": 2,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 892.292,
+          "victim": "gold"
+        },
+        {
+          "time": 929.559,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1700999,
+      "title": "Game 1700999: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 961.108,
+      "end_time": 1042.136,
+      "duration": 81.02800000000002,
+      "hivemind_url": "https://kqhivemind.com/game/1700999",
+      "set_number": 2,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 978.339,
+          "victim": "gold"
+        },
+        {
+          "time": 1012.306,
+          "victim": "gold"
+        },
+        {
+          "time": 1018.073,
+          "victim": "blue"
+        },
+        {
+          "time": 1037.056,
+          "victim": "blue"
+        },
+        {
+          "time": 1042.093,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701003,
+      "title": "Game 1701003: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 1065.39,
+      "end_time": 1274.245,
+      "duration": 208.8549999999998,
+      "hivemind_url": "https://kqhivemind.com/game/1701003",
+      "set_number": 2,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 1104.139,
+          "victim": "blue"
+        },
+        {
+          "time": 1184.192,
+          "victim": "gold"
+        },
+        {
+          "time": 1256.027,
+          "victim": "blue"
+        },
+        {
+          "time": 1274.21,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701006,
+      "title": "Game 1701006: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 1299.278,
+      "end_time": 1366.819,
+      "duration": 67.54099999999994,
+      "hivemind_url": "https://kqhivemind.com/game/1701006",
+      "set_number": 2,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 1304.949,
+          "victim": "gold"
+        },
+        {
+          "time": 1313.904,
+          "victim": "blue"
+        },
+        {
+          "time": 1340.257,
+          "victim": "gold"
+        },
+        {
+          "time": 1356.919,
+          "victim": "blue"
+        },
+        {
+          "time": 1366.783,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701008,
+      "title": "Game 1701008: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 1388.961,
+      "end_time": 1424.228,
+      "duration": 35.26700000000005,
+      "hivemind_url": "https://kqhivemind.com/game/1701008",
+      "set_number": 2,
+      "game_in_set": 6,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 1394.267,
+          "victim": "blue"
+        },
+        {
+          "time": 1409.17,
+          "victim": "blue"
+        },
+        {
+          "time": 1414.862,
+          "victim": "gold"
+        },
+        {
+          "time": 1424.228,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701010,
+      "title": "Game 1701010: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 1547.431,
+      "end_time": 1647.006,
+      "duration": 99.57500000000005,
+      "hivemind_url": "https://kqhivemind.com/game/1701010",
+      "set_number": 3,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 1556.218,
+          "victim": "blue"
+        },
+        {
+          "time": 1628.533,
+          "victim": "blue"
+        },
+        {
+          "time": 1646.973,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701011,
+      "title": "Game 1701011: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 1669.935,
+      "end_time": 1805.07,
+      "duration": 135.135,
+      "hivemind_url": "https://kqhivemind.com/game/1701011",
+      "set_number": 3,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 1709.817,
+          "victim": "gold"
+        },
+        {
+          "time": 1740.139,
+          "victim": "blue"
+        },
+        {
+          "time": 1753.142,
+          "victim": "gold"
+        },
+        {
+          "time": 1805.07,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701013,
+      "title": "Game 1701013: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 1834.239,
+      "end_time": 1986.257,
+      "duration": 152.01800000000003,
+      "hivemind_url": "https://kqhivemind.com/game/1701013",
+      "set_number": 3,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 1887.92,
+          "victim": "gold"
+        },
+        {
+          "time": 1926.397,
+          "victim": "blue"
+        },
+        {
+          "time": 1953.262,
+          "victim": "gold"
+        },
+        {
+          "time": 1986.257,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701015,
+      "title": "Game 1701015: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 2014.953,
+      "end_time": 2057.479,
+      "duration": 42.52599999999984,
+      "hivemind_url": "https://kqhivemind.com/game/1701015",
+      "set_number": 3,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2027.556,
+          "victim": "gold"
+        },
+        {
+          "time": 2033.555,
+          "victim": "gold"
+        },
+        {
+          "time": 2057.479,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701016,
+      "title": "Game 1701016: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "snail",
+      "start_time": 2080.636,
+      "end_time": 2149.215,
+      "duration": 68.57900000000018,
+      "hivemind_url": "https://kqhivemind.com/game/1701016",
+      "set_number": 3,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2091.162,
+          "victim": "gold"
+        },
+        {
+          "time": 2122.45,
+          "victim": "blue"
+        },
+        {
+          "time": 2141.483,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701018,
+      "title": "Game 1701018: Twilight",
+      "map": "Twilight",
+      "winner": "gold",
+      "win_condition": "economic",
+      "start_time": 2174.208,
+      "end_time": 2261.308,
+      "duration": 87.09999999999991,
+      "hivemind_url": "https://kqhivemind.com/game/1701018",
+      "set_number": 3,
+      "game_in_set": 6,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2191.307,
+          "victim": "blue"
+        },
+        {
+          "time": 2228.01,
+          "victim": "blue"
+        },
+        {
+          "time": 2231.827,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701024,
+      "title": "Game 1701024: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 2363.607,
+      "end_time": 2445.795,
+      "duration": 82.1880000000001,
+      "hivemind_url": "https://kqhivemind.com/game/1701024",
+      "set_number": 4,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 2383.533,
+          "victim": "blue"
+        },
+        {
+          "time": 2397.234,
+          "victim": "gold"
+        },
+        {
+          "time": 2406.446,
+          "victim": "gold"
+        },
+        {
+          "time": 2416.922,
+          "victim": "blue"
+        },
+        {
+          "time": 2445.795,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701029,
+      "title": "Game 1701029: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 2469.125,
+      "end_time": 2499.525,
+      "duration": 30.40000000000009,
+      "hivemind_url": "https://kqhivemind.com/game/1701029",
+      "set_number": 4,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2487.342,
+          "victim": "gold"
+        },
+        {
+          "time": 2493.855,
+          "victim": "gold"
+        },
+        {
+          "time": 2499.525,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701031,
+      "title": "Game 1701031: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 2520.882,
+      "end_time": 2586.744,
+      "duration": 65.86200000000008,
+      "hivemind_url": "https://kqhivemind.com/game/1701031",
+      "set_number": 4,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2538.561,
+          "victim": "blue"
+        },
+        {
+          "time": 2542.419,
+          "victim": "gold"
+        },
+        {
+          "time": 2557.028,
+          "victim": "blue"
+        },
+        {
+          "time": 2586.744,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701035,
+      "title": "Game 1701035: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 2610.995,
+      "end_time": 2654.492,
+      "duration": 43.4970000000003,
+      "hivemind_url": "https://kqhivemind.com/game/1701035",
+      "set_number": 4,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2614.019,
+          "victim": "gold"
+        },
+        {
+          "time": 2640.731,
+          "victim": "gold"
+        },
+        {
+          "time": 2654.492,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701037,
+      "title": "Game 1701037: Twilight",
+      "map": "Twilight",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 2677.657,
+      "end_time": 2713.559,
+      "duration": 35.902000000000044,
+      "hivemind_url": "https://kqhivemind.com/game/1701037",
+      "set_number": 4,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2681.242,
+          "victim": "gold"
+        },
+        {
+          "time": 2696.472,
+          "victim": "blue"
+        },
+        {
+          "time": 2705.916,
+          "victim": "blue"
+        },
+        {
+          "time": 2713.559,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701040,
+      "title": "Game 1701040: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 2744.042,
+      "end_time": 2803.033,
+      "duration": 58.990999999999985,
+      "hivemind_url": "https://kqhivemind.com/game/1701040",
+      "set_number": 4,
+      "game_in_set": 6,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2747.42,
+          "victim": "gold"
+        },
+        {
+          "time": 2772.014,
+          "victim": "blue"
+        },
+        {
+          "time": 2783.195,
+          "victim": "blue"
+        },
+        {
+          "time": 2803.033,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701043,
+      "title": "Game 1701043: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 2859.66,
+      "end_time": 2906.114,
+      "duration": 46.45400000000018,
+      "hivemind_url": "https://kqhivemind.com/game/1701043",
+      "set_number": 4,
+      "game_in_set": 7,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2871.634,
+          "victim": "blue"
+        },
+        {
+          "time": 2884.748,
+          "victim": "blue"
+        },
+        {
+          "time": 2906.074,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701045,
+      "title": "Game 1701045: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 2929.502,
+      "end_time": 2992.323,
+      "duration": 62.82099999999991,
+      "hivemind_url": "https://kqhivemind.com/game/1701045",
+      "set_number": 4,
+      "game_in_set": 8,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 2936.571,
+          "victim": "gold"
+        },
+        {
+          "time": 2943.188,
+          "victim": "blue"
+        },
+        {
+          "time": 2950.918,
+          "victim": "gold"
+        },
+        {
+          "time": 2992.323,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701048,
+      "title": "Game 1701048: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 3015.13,
+      "end_time": 3086.81,
+      "duration": 71.67999999999984,
+      "hivemind_url": "https://kqhivemind.com/game/1701048",
+      "set_number": 4,
+      "game_in_set": 9,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 3033.277,
+          "victim": "gold"
+        },
+        {
+          "time": 3048.853,
+          "victim": "gold"
+        },
+        {
+          "time": 3062.802,
+          "victim": "blue"
+        },
+        {
+          "time": 3086.81,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701051,
+      "title": "Game 1701051: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 3245.191,
+      "end_time": 3342.438,
+      "duration": 97.2470000000003,
+      "hivemind_url": "https://kqhivemind.com/game/1701051",
+      "set_number": 5,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 3250.889,
+          "victim": "gold"
+        },
+        {
+          "time": 3256.777,
+          "victim": "blue"
+        },
+        {
+          "time": 3268.846,
+          "victim": "gold"
+        },
+        {
+          "time": 3286.826,
+          "victim": "blue"
+        },
+        {
+          "time": 3342.438,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701052,
+      "title": "Game 1701052: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 3367.203,
+      "end_time": 3504.202,
+      "duration": 136.99900000000025,
+      "hivemind_url": "https://kqhivemind.com/game/1701052",
+      "set_number": 5,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 3396.774,
+          "victim": "blue"
+        },
+        {
+          "time": 3398.722,
+          "victim": "gold"
+        },
+        {
+          "time": 3416.371,
+          "victim": "gold"
+        },
+        {
+          "time": 3449.368,
+          "victim": "blue"
+        },
+        {
+          "time": 3504.202,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701055,
+      "title": "Game 1701055: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 3526.826,
+      "end_time": 3596.426,
+      "duration": 69.59999999999991,
+      "hivemind_url": "https://kqhivemind.com/game/1701055",
+      "set_number": 5,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 3535.088,
+          "victim": "blue"
+        },
+        {
+          "time": 3552.607,
+          "victim": "blue"
+        },
+        {
+          "time": 3595.401,
+          "victim": "gold"
+        },
+        {
+          "time": 3596.426,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701056,
+      "title": "Game 1701056: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 3622.163,
+      "end_time": 3734.943,
+      "duration": 112.7800000000002,
+      "hivemind_url": "https://kqhivemind.com/game/1701056",
+      "set_number": 5,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 3641.308,
+          "victim": "gold"
+        },
+        {
+          "time": 3652.506,
+          "victim": "blue"
+        },
+        {
+          "time": 3665.163,
+          "victim": "gold"
+        },
+        {
+          "time": 3734.942,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701058,
+      "title": "Game 1701058: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 3758.137,
+      "end_time": 3811.539,
+      "duration": 53.402000000000044,
+      "hivemind_url": "https://kqhivemind.com/game/1701058",
+      "set_number": 5,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 3765.235,
+          "victim": "gold"
+        },
+        {
+          "time": 3771.962,
+          "victim": "blue"
+        },
+        {
+          "time": 3783.134,
+          "victim": "gold"
+        },
+        {
+          "time": 3811.539,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701059,
+      "title": "Game 1701059: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 3840.337,
+      "end_time": 3950.143,
+      "duration": 109.80600000000004,
+      "hivemind_url": "https://kqhivemind.com/game/1701059",
+      "set_number": 5,
+      "game_in_set": 6,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 3855.316,
+          "victim": "gold"
+        },
+        {
+          "time": 3874.495,
+          "victim": "blue"
+        },
+        {
+          "time": 3916.074,
+          "victim": "blue"
+        },
+        {
+          "time": 3950.14,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701061,
+      "title": "Game 1701061: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 4069.435,
+      "end_time": 4221.419,
+      "duration": 151.98399999999992,
+      "hivemind_url": "https://kqhivemind.com/game/1701061",
+      "set_number": 6,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 4083.603,
+          "victim": "blue"
+        },
+        {
+          "time": 4100.757,
+          "victim": "gold"
+        },
+        {
+          "time": 4154.141,
+          "victim": "blue"
+        },
+        {
+          "time": 4197.238,
+          "victim": "gold"
+        },
+        {
+          "time": 4221.419,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701064,
+      "title": "Game 1701064: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 4244.932,
+      "end_time": 4305.201,
+      "duration": 60.26900000000023,
+      "hivemind_url": "https://kqhivemind.com/game/1701064",
+      "set_number": 6,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 4272.761,
+          "victim": "gold"
+        },
+        {
+          "time": 4285.87,
+          "victim": "gold"
+        },
+        {
+          "time": 4294.058,
+          "victim": "blue"
+        },
+        {
+          "time": 4305.2,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701066,
+      "title": "Game 1701066: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 4340.766,
+      "end_time": 4562.628,
+      "duration": 221.86200000000008,
+      "hivemind_url": "https://kqhivemind.com/game/1701066",
+      "set_number": 6,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 4347.934,
+          "victim": "blue"
+        },
+        {
+          "time": 4410.54,
+          "victim": "blue"
+        },
+        {
+          "time": 4436.016,
+          "victim": "gold"
+        },
+        {
+          "time": 4472.248,
+          "victim": "gold"
+        },
+        {
+          "time": 4562.628,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701068,
+      "title": "Game 1701068: Twilight",
+      "map": "Twilight",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 4590.183,
+      "end_time": 4683.049,
+      "duration": 92.86599999999999,
+      "hivemind_url": "https://kqhivemind.com/game/1701068",
+      "set_number": 6,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 4608.093,
+          "victim": "blue"
+        },
+        {
+          "time": 4634.674,
+          "victim": "gold"
+        },
+        {
+          "time": 4646.269,
+          "victim": "blue"
+        },
+        {
+          "time": 4683.049,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701080,
+      "title": "Game 1701080: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 5361.751,
+      "end_time": 5494.045,
+      "duration": 132.29399999999987,
+      "hivemind_url": "https://kqhivemind.com/game/1701080",
+      "set_number": 7,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 5381.985,
+          "victim": "gold"
+        },
+        {
+          "time": 5385.406,
+          "victim": "blue"
+        },
+        {
+          "time": 5404.592,
+          "victim": "blue"
+        },
+        {
+          "time": 5411.649,
+          "victim": "gold"
+        },
+        {
+          "time": 5494.045,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701084,
+      "title": "Game 1701084: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 5519.196,
+      "end_time": 5578.798,
+      "duration": 59.60199999999986,
+      "hivemind_url": "https://kqhivemind.com/game/1701084",
+      "set_number": 7,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 5545.896,
+          "victim": "blue"
+        },
+        {
+          "time": 5567.595,
+          "victim": "blue"
+        },
+        {
+          "time": 5578.797,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701087,
+      "title": "Game 1701087: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 5614.233,
+      "end_time": 5656.204,
+      "duration": 41.97099999999955,
+      "hivemind_url": "https://kqhivemind.com/game/1701087",
+      "set_number": 7,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 5619.211,
+          "victim": "gold"
+        },
+        {
+          "time": 5622.953,
+          "victim": "blue"
+        },
+        {
+          "time": 5628.99,
+          "victim": "gold"
+        },
+        {
+          "time": 5641.973,
+          "victim": "blue"
+        },
+        {
+          "time": 5656.157,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701089,
+      "title": "Game 1701089: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "economic",
+      "start_time": 5682.658,
+      "end_time": 5778.792,
+      "duration": 96.13400000000001,
+      "hivemind_url": "https://kqhivemind.com/game/1701089",
+      "set_number": 7,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 5702.372,
+          "victim": "gold"
+        },
+        {
+          "time": 5742.833,
+          "victim": "blue"
+        },
+        {
+          "time": 5756.778,
+          "victim": "gold"
+        },
+        {
+          "time": 5764.852,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701092,
+      "title": "Game 1701092: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 5855.667,
+      "end_time": 5947.501,
+      "duration": 91.83399999999983,
+      "hivemind_url": "https://kqhivemind.com/game/1701092",
+      "set_number": 7,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 5868.119,
+          "victim": "blue"
+        },
+        {
+          "time": 5894.964,
+          "victim": "blue"
+        },
+        {
+          "time": 5925.507,
+          "victim": "gold"
+        },
+        {
+          "time": 5947.5,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701093,
+      "title": "Game 1701093: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 5969.77,
+      "end_time": 6307.534,
+      "duration": 337.7639999999992,
+      "hivemind_url": "https://kqhivemind.com/game/1701093",
+      "set_number": 7,
+      "game_in_set": 6,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 6010.926,
+          "victim": "gold"
+        },
+        {
+          "time": 6051.718,
+          "victim": "gold"
+        },
+        {
+          "time": 6081.544,
+          "victim": "blue"
+        },
+        {
+          "time": 6196.239,
+          "victim": "blue"
+        },
+        {
+          "time": 6307.534,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701096,
+      "title": "Game 1701096: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 6335.185,
+      "end_time": 6456.188,
+      "duration": 121.0029999999997,
+      "hivemind_url": "https://kqhivemind.com/game/1701096",
+      "set_number": 7,
+      "game_in_set": 7,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 6341.504,
+          "victim": "blue"
+        },
+        {
+          "time": 6379.46,
+          "victim": "gold"
+        },
+        {
+          "time": 6389.084,
+          "victim": "gold"
+        },
+        {
+          "time": 6456.188,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701097,
+      "title": "Game 1701097: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 6482.456,
+      "end_time": 6527.488,
+      "duration": 45.03200000000015,
+      "hivemind_url": "https://kqhivemind.com/game/1701097",
+      "set_number": 7,
+      "game_in_set": 8,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 6509.009,
+          "victim": "gold"
+        },
+        {
+          "time": 6521.065,
+          "victim": "gold"
+        },
+        {
+          "time": 6527.488,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701100,
+      "title": "Game 1701100: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 6738.815,
+      "end_time": 6814.203,
+      "duration": 75.38800000000083,
+      "hivemind_url": "https://kqhivemind.com/game/1701100",
+      "set_number": 8,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 6764.703,
+          "victim": "gold"
+        },
+        {
+          "time": 6783.21,
+          "victim": "blue"
+        },
+        {
+          "time": 6802.211,
+          "victim": "blue"
+        },
+        {
+          "time": 6814.203,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701101,
+      "title": "Game 1701101: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 6837.843,
+      "end_time": 6911.189,
+      "duration": 73.34600000000046,
+      "hivemind_url": "https://kqhivemind.com/game/1701101",
+      "set_number": 8,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 6865.943,
+          "victim": "blue"
+        },
+        {
+          "time": 6878.162,
+          "victim": "gold"
+        },
+        {
+          "time": 6905.227,
+          "victim": "gold"
+        },
+        {
+          "time": 6911.189,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701103,
+      "title": "Game 1701103: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "snail",
+      "start_time": 6938.063,
+      "end_time": 7007.833,
+      "duration": 69.76999999999953,
+      "hivemind_url": "https://kqhivemind.com/game/1701103",
+      "set_number": 8,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 6958.606,
+          "victim": "blue"
+        },
+        {
+          "time": 6968.379,
+          "victim": "blue"
+        },
+        {
+          "time": 6992.996,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701105,
+      "title": "Game 1701105: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 7035.508,
+      "end_time": 7072.961,
+      "duration": 37.45300000000043,
+      "hivemind_url": "https://kqhivemind.com/game/1701105",
+      "set_number": 8,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 7037.444,
+          "victim": "blue"
+        },
+        {
+          "time": 7046.119,
+          "victim": "blue"
+        },
+        {
+          "time": 7072.961,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701106,
+      "title": "Game 1701106: Twilight",
+      "map": "Twilight",
+      "winner": "gold",
+      "win_condition": "economic",
+      "start_time": 7096.899,
+      "end_time": 7225.187,
+      "duration": 128.28799999999956,
+      "hivemind_url": "https://kqhivemind.com/game/1701106",
+      "set_number": 8,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 7108.602,
+          "victim": "gold"
+        },
+        {
+          "time": 7119.566,
+          "victim": "gold"
+        },
+        {
+          "time": 7138.485,
+          "victim": "blue"
+        },
+        {
+          "time": 7219.483,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701110,
+      "title": "Game 1701110: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 7420.778,
+      "end_time": 7487.244,
+      "duration": 66.46599999999944,
+      "hivemind_url": "https://kqhivemind.com/game/1701110",
+      "set_number": 9,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 7446.438,
+          "victim": "gold"
+        },
+        {
+          "time": 7467.294,
+          "victim": "gold"
+        },
+        {
+          "time": 7487.244,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701111,
+      "title": "Game 1701111: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 7511.222,
+      "end_time": 7626.09,
+      "duration": 114.8680000000004,
+      "hivemind_url": "https://kqhivemind.com/game/1701111",
+      "set_number": 9,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 7513.282,
+          "victim": "gold"
+        },
+        {
+          "time": 7576.141,
+          "victim": "gold"
+        },
+        {
+          "time": 7578.0,
+          "victim": "blue"
+        },
+        {
+          "time": 7626.051,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701113,
+      "title": "Game 1701113: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 7648.833,
+      "end_time": 7735.689,
+      "duration": 86.85600000000068,
+      "hivemind_url": "https://kqhivemind.com/game/1701113",
+      "set_number": 9,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 7657.772,
+          "victim": "blue"
+        },
+        {
+          "time": 7668.724,
+          "victim": "gold"
+        },
+        {
+          "time": 7694.078,
+          "victim": "gold"
+        },
+        {
+          "time": 7702.472,
+          "victim": "blue"
+        },
+        {
+          "time": 7735.689,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701114,
+      "title": "Game 1701114: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 7758.583,
+      "end_time": 7830.868,
+      "duration": 72.28500000000076,
+      "hivemind_url": "https://kqhivemind.com/game/1701114",
+      "set_number": 9,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 7796.542,
+          "victim": "gold"
+        },
+        {
+          "time": 7806.867,
+          "victim": "gold"
+        },
+        {
+          "time": 7830.866,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701117,
+      "title": "Game 1701117: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 7929.887,
+      "end_time": 8020.883,
+      "duration": 90.9960000000001,
+      "hivemind_url": "https://kqhivemind.com/game/1701117",
+      "set_number": 10,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 7939.37,
+          "victim": "blue"
+        },
+        {
+          "time": 7944.276,
+          "victim": "gold"
+        },
+        {
+          "time": 7981.418,
+          "victim": "blue"
+        },
+        {
+          "time": 7995.334,
+          "victim": "gold"
+        },
+        {
+          "time": 8020.882,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701118,
+      "title": "Game 1701118: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 8045.625,
+      "end_time": 8080.048,
+      "duration": 34.422999999999774,
+      "hivemind_url": "https://kqhivemind.com/game/1701118",
+      "set_number": 10,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 8060.809,
+          "victim": "blue"
+        },
+        {
+          "time": 8069.676,
+          "victim": "blue"
+        },
+        {
+          "time": 8080.048,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701119,
+      "title": "Game 1701119: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 8104.845,
+      "end_time": 8167.549,
+      "duration": 62.70399999999972,
+      "hivemind_url": "https://kqhivemind.com/game/1701119",
+      "set_number": 10,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 8121.966,
+          "victim": "gold"
+        },
+        {
+          "time": 8154.865,
+          "victim": "gold"
+        },
+        {
+          "time": 8167.549,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701120,
+      "title": "Game 1701120: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 8194.389,
+      "end_time": 8308.813,
+      "duration": 114.42400000000089,
+      "hivemind_url": "https://kqhivemind.com/game/1701120",
+      "set_number": 10,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 8198.07,
+          "victim": "blue"
+        },
+        {
+          "time": 8219.21,
+          "victim": "gold"
+        },
+        {
+          "time": 8232.246,
+          "victim": "blue"
+        },
+        {
+          "time": 8245.219,
+          "victim": "gold"
+        },
+        {
+          "time": 8308.812,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701123,
+      "title": "Game 1701123: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 8549.293,
+      "end_time": 8646.303,
+      "duration": 97.01000000000022,
+      "hivemind_url": "https://kqhivemind.com/game/1701123",
+      "set_number": 11,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 8576.801,
+          "victim": "blue"
+        },
+        {
+          "time": 8606.655,
+          "victim": "blue"
+        },
+        {
+          "time": 8646.303,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701126,
+      "title": "Game 1701126: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 8670.796,
+      "end_time": 8768.952,
+      "duration": 98.15599999999904,
+      "hivemind_url": "https://kqhivemind.com/game/1701126",
+      "set_number": 11,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 8681.514,
+          "victim": "gold"
+        },
+        {
+          "time": 8696.519,
+          "victim": "blue"
+        },
+        {
+          "time": 8715.34,
+          "victim": "gold"
+        },
+        {
+          "time": 8768.952,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701129,
+      "title": "Game 1701129: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 8801.931,
+      "end_time": 8884.549,
+      "duration": 82.6180000000004,
+      "hivemind_url": "https://kqhivemind.com/game/1701129",
+      "set_number": 11,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 8803.928,
+          "victim": "gold"
+        },
+        {
+          "time": 8813.13,
+          "victim": "blue"
+        },
+        {
+          "time": 8824.478,
+          "victim": "gold"
+        },
+        {
+          "time": 8878.9,
+          "victim": "blue"
+        },
+        {
+          "time": 8884.548,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701131,
+      "title": "Game 1701131: Twilight",
+      "map": "Twilight",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 8908.182,
+      "end_time": 9026.348,
+      "duration": 118.16599999999926,
+      "hivemind_url": "https://kqhivemind.com/game/1701131",
+      "set_number": 11,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 8928.477,
+          "victim": "blue"
+        },
+        {
+          "time": 8951.815,
+          "victim": "gold"
+        },
+        {
+          "time": 8965.396,
+          "victim": "blue"
+        },
+        {
+          "time": 8989.384,
+          "victim": "gold"
+        },
+        {
+          "time": 9026.31,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701135,
+      "title": "Game 1701135: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 9170.541,
+      "end_time": 9325.198,
+      "duration": 154.65700000000106,
+      "hivemind_url": "https://kqhivemind.com/game/1701135",
+      "set_number": 12,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 9216.969,
+          "victim": "blue"
+        },
+        {
+          "time": 9241.704,
+          "victim": "blue"
+        },
+        {
+          "time": 9251.877,
+          "victim": "gold"
+        },
+        {
+          "time": 9325.198,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701139,
+      "title": "Game 1701139: Night",
+      "map": "Night",
+      "winner": "gold",
+      "win_condition": "economic",
+      "start_time": 9349.13,
+      "end_time": 9484.432,
+      "duration": 135.3020000000015,
+      "hivemind_url": "https://kqhivemind.com/game/1701139",
+      "set_number": 12,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 9419.526,
+          "victim": "blue"
+        },
+        {
+          "time": 9442.44,
+          "victim": "gold"
+        },
+        {
+          "time": 9475.456,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701143,
+      "title": "Game 1701143: Dusk",
+      "map": "Dusk",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 9507.487,
+      "end_time": 9575.199,
+      "duration": 67.71200000000135,
+      "hivemind_url": "https://kqhivemind.com/game/1701143",
+      "set_number": 12,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 9513.203,
+          "victim": "gold"
+        },
+        {
+          "time": 9552.931,
+          "victim": "gold"
+        },
+        {
+          "time": 9575.198,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701146,
+      "title": "Game 1701146: Twilight",
+      "map": "Twilight",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 9606.783,
+      "end_time": 9693.882,
+      "duration": 87.09900000000016,
+      "hivemind_url": "https://kqhivemind.com/game/1701146",
+      "set_number": 12,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 9648.005,
+          "victim": "blue"
+        },
+        {
+          "time": 9649.925,
+          "victim": "gold"
+        },
+        {
+          "time": 9660.93,
+          "victim": "blue"
+        },
+        {
+          "time": 9693.881,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701152,
+      "title": "Game 1701152: Day",
+      "map": "Day",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 10263.217,
+      "end_time": 10319.194,
+      "duration": 55.97699999999895,
+      "hivemind_url": "https://kqhivemind.com/game/1701152",
+      "set_number": 13,
+      "game_in_set": 1,
+      "is_set_start": true,
+      "queen_kills": [
+        {
+          "time": 10271.308,
+          "victim": "blue"
+        },
+        {
+          "time": 10279.029,
+          "victim": "gold"
+        },
+        {
+          "time": 10293.184,
+          "victim": "gold"
+        },
+        {
+          "time": 10294.84,
+          "victim": "blue"
+        },
+        {
+          "time": 10319.194,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701153,
+      "title": "Game 1701153: Night",
+      "map": "Night",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 10343.019,
+      "end_time": 10425.763,
+      "duration": 82.7440000000006,
+      "hivemind_url": "https://kqhivemind.com/game/1701153",
+      "set_number": 13,
+      "game_in_set": 2,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 10365.525,
+          "victim": "gold"
+        },
+        {
+          "time": 10410.892,
+          "victim": "gold"
+        },
+        {
+          "time": 10425.763,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701154,
+      "title": "Game 1701154: Dusk",
+      "map": "Dusk",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 10453.047,
+      "end_time": 10544.465,
+      "duration": 91.41799999999967,
+      "hivemind_url": "https://kqhivemind.com/game/1701154",
+      "set_number": 13,
+      "game_in_set": 3,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 10457.632,
+          "victim": "gold"
+        },
+        {
+          "time": 10471.295,
+          "victim": "gold"
+        },
+        {
+          "time": 10490.485,
+          "victim": "blue"
+        },
+        {
+          "time": 10518.985,
+          "victim": "blue"
+        },
+        {
+          "time": 10544.464,
+          "victim": "blue"
+        }
+      ]
+    },
+    {
+      "game_id": 1701156,
+      "title": "Game 1701156: Twilight",
+      "map": "Twilight",
+      "winner": "blue",
+      "win_condition": "military",
+      "start_time": 10571.958,
+      "end_time": 10649.513,
+      "duration": 77.55500000000029,
+      "hivemind_url": "https://kqhivemind.com/game/1701156",
+      "set_number": 13,
+      "game_in_set": 4,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 10591.992,
+          "victim": "gold"
+        },
+        {
+          "time": 10604.413,
+          "victim": "blue"
+        },
+        {
+          "time": 10622.672,
+          "victim": "gold"
+        },
+        {
+          "time": 10633.704,
+          "victim": "blue"
+        },
+        {
+          "time": 10649.513,
+          "victim": "gold"
+        }
+      ]
+    },
+    {
+      "game_id": 1701158,
+      "title": "Game 1701158: Day",
+      "map": "Day",
+      "winner": "gold",
+      "win_condition": "military",
+      "start_time": 10673.993,
+      "end_time": 10895.541,
+      "duration": 221.54799999999886,
+      "hivemind_url": "https://kqhivemind.com/game/1701158",
+      "set_number": 13,
+      "game_in_set": 5,
+      "is_set_start": false,
+      "queen_kills": [
+        {
+          "time": 10861.174,
+          "victim": "gold"
+        },
+        {
+          "time": 10871.879,
+          "victim": "blue"
+        },
+        {
+          "time": 10883.556,
+          "victim": "gold"
+        },
+        {
+          "time": 10885.182,
+          "victim": "blue"
+        },
+        {
+          "time": 10895.541,
+          "victim": "blue"
+        }
+      ]
+    }
+  ]
+}
