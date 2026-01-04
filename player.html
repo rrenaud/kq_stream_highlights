@@ -216,9 +216,11 @@
         }
 
         .keyboard-hints {
-            font-size: 12px;
-            color: #666;
+            font-size: 15px;
+            font-weight: 600;
+            color: #aaa;
             margin-top: 10px;
+            line-height: 1.8;
         }
 
         .keyboard-hints kbd {
@@ -566,24 +568,33 @@
             if (queenKills.length === 0) return;
 
             const currentTime = getCurrentTime();
-            let prevIndex;
 
-            // If we're near the last jumped-to kill, go to the previous one
-            if (lastQueenKillIndex > 0) {
+            // If we have a last jumped-to kill, check if we should replay it or go back
+            if (lastQueenKillIndex >= 0) {
                 const lastKillTime = queenKills[lastQueenKillIndex].time;
-                if (Math.abs(currentTime - (lastKillTime - 1)) < 3) {
-                    prevIndex = lastQueenKillIndex - 1;
+                const targetTime = lastKillTime - 1;
+
+                // If we're past the kill moment, replay this kill
+                if (currentTime > lastKillTime - 0.5) {
+                    seekTo(targetTime);
+                    if (player) player.playVideo();
+                    return;
+                }
+
+                // If we're near the start (within 2s), go to previous kill
+                if (Math.abs(currentTime - targetTime) < 2 && lastQueenKillIndex > 0) {
+                    lastQueenKillIndex = lastQueenKillIndex - 1;
+                    seekTo(queenKills[lastQueenKillIndex].time - 1);
+                    if (player) player.playVideo();
+                    return;
                 }
             }
 
             // Otherwise find based on current time
-            if (prevIndex === undefined) {
-                prevIndex = findQueenKillIndexAtTime(currentTime - 2);
-            }
-
-            if (prevIndex >= 0) {
-                lastQueenKillIndex = prevIndex;
-                seekTo(queenKills[prevIndex].time - 1);
+            const idx = findQueenKillIndexAtTime(currentTime);
+            if (idx >= 0) {
+                lastQueenKillIndex = idx;
+                seekTo(queenKills[idx].time - 1);
                 if (player) player.playVideo();
             }
         }
