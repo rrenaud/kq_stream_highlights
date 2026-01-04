@@ -2,6 +2,8 @@
 
 A tool for navigating Killer Queen arcade league night gameplay videos with chapter markers synced to [KQHiveMind](https://kqhivemind.com) game data.
 
+**[Try it live](https://rrenaud.github.io/kq_stream_highlights/player.html)**
+
 ![Screenshot](UI_screenshot.png)
 
 ## Features
