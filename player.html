@@ -381,15 +381,56 @@
                 background: rgba(255, 255, 255, 0.3);
             }
 
-            /* Landscape: flush left/right */
+            /* Landscape: side controls */
             @media (orientation: landscape) {
+                .mobile-controls {
+                    top: 0;
+                    background: transparent;
+                    padding: 0;
+                    pointer-events: none;
+                }
+
+                .mobile-controls.visible {
+                    transform: none;
+                }
+
                 .mobile-nav-row {
-                    justify-content: space-between;
+                    position: static;
+                    pointer-events: none;
+                }
+
+                .nav-group-left {
+                    position: fixed;
+                    left: 8px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    flex-direction: column;
+                    gap: 8px;
+                    pointer-events: auto;
+                }
+
+                .nav-group-right {
+                    position: fixed;
+                    right: 8px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    flex-direction: column;
+                    gap: 8px;
+                    pointer-events: auto;
                 }
 
                 .mobile-position-row {
-                    max-width: 50%;
-                    margin: 0 auto;
+                    position: fixed;
+                    bottom: 8px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    pointer-events: auto;
+                    margin: 0;
+                }
+
+                .mobile-toggle {
+                    top: 8px;
+                    bottom: auto;
                 }
             }
 
