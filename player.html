@@ -357,31 +357,18 @@
 
             .mobile-nav-row {
                 display: flex;
+                justify-content: center;
                 gap: 8px;
                 margin-bottom: 10px;
             }
 
-            /* Landscape: spread buttons to edges */
-            @media (orientation: landscape) {
-                .mobile-nav-row {
-                    justify-content: space-between;
-                    gap: 4px;
-                }
-
-                .mobile-nav-row button {
-                    flex: 0 1 auto;
-                    padding: 10px 12px;
-                }
-
-                .mobile-position-row {
-                    max-width: 50%;
-                    margin: 0 auto;
-                }
+            .nav-group-left, .nav-group-right {
+                display: flex;
+                gap: 6px;
             }
 
             .mobile-nav-row button {
-                flex: 1;
-                padding: 10px 6px;
+                padding: 10px 10px;
                 font-size: 13px;
                 background: rgba(255, 255, 255, 0.15);
                 border: 1px solid rgba(255, 255, 255, 0.2);
@@ -392,6 +379,18 @@
 
             .mobile-nav-row button:active {
                 background: rgba(255, 255, 255, 0.3);
+            }
+
+            /* Landscape: flush left/right */
+            @media (orientation: landscape) {
+                .mobile-nav-row {
+                    justify-content: space-between;
+                }
+
+                .mobile-position-row {
+                    max-width: 50%;
+                    margin: 0 auto;
+                }
             }
 
             .mobile-position-row {
@@ -487,12 +486,16 @@
     <!-- Mobile control bar -->
     <div class="mobile-controls visible" id="mobileControls">
         <div class="mobile-nav-row">
-            <button id="mPrevSet">◀◀ S</button>
-            <button id="mPrevGame">◀ G</button>
-            <button id="mPrevHighlight">◀ H</button>
-            <button id="mNextHighlight">H ▶</button>
-            <button id="mNextGame">G ▶</button>
-            <button id="mNextSet">S ▶▶</button>
+            <div class="nav-group-left">
+                <button id="mPrevSet">◀◀ S</button>
+                <button id="mPrevGame">◀ G</button>
+                <button id="mPrevHighlight">◀ H</button>
+            </div>
+            <div class="nav-group-right">
+                <button id="mNextHighlight">H ▶</button>
+                <button id="mNextGame">G ▶</button>
+                <button id="mNextSet">S ▶▶</button>
+            </div>
         </div>
         <div class="mobile-position-row">
             <select id="mobilePositionSelect">
