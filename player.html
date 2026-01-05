@@ -450,11 +450,6 @@
                 border-radius: 6px;
             }
 
-            .mobile-position-row span {
-                color: #e94560;
-                font-weight: 600;
-                font-size: 14px;
-            }
         }
 
         /* Hide mobile elements on desktop (non-touch devices above 768px) */
@@ -533,9 +528,9 @@
                 <button id="mPrevHighlight">◀ H</button>
             </div>
             <div class="nav-group-right">
-                <button id="mNextHighlight">H ▶</button>
-                <button id="mNextGame">G ▶</button>
                 <button id="mNextSet">S ▶▶</button>
+                <button id="mNextGame">G ▶</button>
+                <button id="mNextHighlight">H ▶</button>
             </div>
         </div>
         <div class="mobile-position-row">
@@ -552,7 +547,6 @@
                 <option value="5">9 - Gold Abs</option>
                 <option value="3">0 - Gold Stripes</option>
             </select>
-            <span id="mobileHighlightCount"></span>
         </div>
     </div>
 
@@ -1247,8 +1241,6 @@
             renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
             // Sync mobile selector
             document.getElementById('mobilePositionSelect').value = selectedPosition;
-            document.getElementById('mobileHighlightCount').textContent =
-                playerHighlights.length ? `${playerHighlights.length} highlights` : '';
         });
 
         // Mobile controls
@@ -1273,8 +1265,6 @@
             document.getElementById('positionSelect').value = selectedPosition;
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);
-            document.getElementById('mobileHighlightCount').textContent =
-                playerHighlights.length ? `${playerHighlights.length} highlights` : '';
         });
 
         // File loading (hidden input, kept for flexibility)
@@ -1368,8 +1358,6 @@
                     renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
                     // Sync mobile selector
                     document.getElementById('mobilePositionSelect').value = selectedPosition;
-                    document.getElementById('mobileHighlightCount').textContent =
-                        playerHighlights.length ? `${playerHighlights.length} highlights` : '';
                     break;
             }
         });
