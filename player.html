@@ -291,6 +291,118 @@
             border-radius: 3px;
             margin: 0 2px;
         }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .chapter-sidebar {
+                display: none;
+            }
+
+            .video-section {
+                height: 100vh;
+                padding: 10px;
+            }
+
+            .keyboard-hints {
+                display: none;
+            }
+
+            .controls {
+                display: none;
+            }
+
+            .current-chapter {
+                display: none;
+            }
+
+            .mobile-toggle {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: #e94560;
+                color: white;
+                font-size: 24px;
+                border: none;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+
+            .mobile-controls {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: #16213e;
+                padding: 15px;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
+                z-index: 99;
+            }
+
+            .mobile-controls.visible {
+                transform: translateY(0);
+            }
+
+            .mobile-nav-row {
+                display: flex;
+                gap: 8px;
+                margin-bottom: 10px;
+            }
+
+            .mobile-nav-row button {
+                flex: 1;
+                padding: 12px 8px;
+                font-size: 14px;
+                background: #0f3460;
+                border: none;
+                color: white;
+                border-radius: 6px;
+                cursor: pointer;
+            }
+
+            .mobile-nav-row button:active {
+                background: #e94560;
+            }
+
+            .mobile-position-row {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .mobile-position-row select {
+                flex: 1;
+                padding: 10px;
+                font-size: 16px;
+                background: #1a1a2e;
+                color: white;
+                border: none;
+                border-radius: 6px;
+            }
+
+            .mobile-position-row span {
+                color: #e94560;
+                font-weight: 600;
+                font-size: 14px;
+            }
+        }
+
+        /* Hide mobile elements on desktop */
+        @media (min-width: 769px) {
+            .mobile-toggle, .mobile-controls {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -351,6 +463,35 @@
         </div>
     </div>
 
+    <!-- Mobile toggle button -->
+    <button class="mobile-toggle" id="mobileToggle">☰</button>
+
+    <!-- Mobile control bar -->
+    <div class="mobile-controls" id="mobileControls">
+        <div class="mobile-nav-row">
+            <button id="mPrevHighlight">◀◀ H</button>
+            <button id="mPrevGame">◀ Game</button>
+            <button id="mNextGame">Game ▶</button>
+            <button id="mNextHighlight">H ▶▶</button>
+        </div>
+        <div class="mobile-position-row">
+            <select id="mobilePositionSelect">
+                <option value="">All</option>
+                <option value="10">1 - Blue Checkers</option>
+                <option value="8">2 - Blue Skull</option>
+                <option value="2">3 - Blue Queen</option>
+                <option value="9">4 - Blue Abs</option>
+                <option value="7">5 - Blue Stripes</option>
+                <option value="6">6 - Gold Checkers</option>
+                <option value="4">7 - Gold Skull</option>
+                <option value="1">8 - Gold Queen</option>
+                <option value="5">9 - Gold Abs</option>
+                <option value="3">0 - Gold Stripes</option>
+            </select>
+            <span id="mobileHighlightCount"></span>
+        </div>
+    </div>
+
     <input type="file" id="chaptersInput" accept=".json" style="display: none;">
 
     <!-- YouTube IFrame API -->
@@ -374,6 +515,9 @@
         let selectedPosition = null;
         let playerHighlights = [];  // Filtered events for selected position
         let lastHighlightIndex = -1;
+
+        // Seconds to seek before a highlight event
+        const HIGHLIGHT_SEEK_BUFFER = 2.5;
 
         // YouTube video ID
         const VIDEO_ID = 'UmxLa4CW9cY';
@@ -937,7 +1081,7 @@
             // If near last highlight, go to next
             if (lastHighlightIndex >= 0 && lastHighlightIndex < playerHighlights.length - 1) {
                 const lastTime = playerHighlights[lastHighlightIndex].time;
-                if (Math.abs(currentTime - (lastTime - 1)) < 3) {
+                if (Math.abs(currentTime - (lastTime - HIGHLIGHT_SEEK_BUFFER)) < 3) {
                     nextIndex = lastHighlightIndex + 1;
                 }
             }
@@ -954,7 +1098,7 @@
 
             if (nextIndex !== undefined && nextIndex < playerHighlights.length) {
                 lastHighlightIndex = nextIndex;
-                seekTo(playerHighlights[nextIndex].time - 1);
+                seekTo(playerHighlights[nextIndex].time - HIGHLIGHT_SEEK_BUFFER);
                 if (player) player.playVideo();
             }
         }
@@ -970,15 +1114,15 @@
 
                 // If past the event, replay it
                 if (currentTime > lastTime - 0.5) {
-                    seekTo(lastTime - 1);
+                    seekTo(lastTime - HIGHLIGHT_SEEK_BUFFER);
                     if (player) player.playVideo();
                     return;
                 }
 
                 // If near the start, go to previous
-                if (Math.abs(currentTime - (lastTime - 1)) < 2 && lastHighlightIndex > 0) {
+                if (Math.abs(currentTime - (lastTime - HIGHLIGHT_SEEK_BUFFER)) < 2 && lastHighlightIndex > 0) {
                     lastHighlightIndex--;
-                    seekTo(playerHighlights[lastHighlightIndex].time - 1);
+                    seekTo(playerHighlights[lastHighlightIndex].time - HIGHLIGHT_SEEK_BUFFER);
                     if (player) player.playVideo();
                     return;
                 }
@@ -988,7 +1132,7 @@
             for (let i = playerHighlights.length - 1; i >= 0; i--) {
                 if (playerHighlights[i].time < currentTime - 1) {
                     lastHighlightIndex = i;
-                    seekTo(playerHighlights[i].time - 1);
+                    seekTo(playerHighlights[i].time - HIGHLIGHT_SEEK_BUFFER);
                     if (player) player.playVideo();
                     return;
                 }
@@ -1037,6 +1181,34 @@
             selectedPosition = e.target.value;
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
+            // Sync mobile selector
+            document.getElementById('mobilePositionSelect').value = selectedPosition;
+            document.getElementById('mobileHighlightCount').textContent =
+                playerHighlights.length ? `${playerHighlights.length} highlights` : '';
+        });
+
+        // Mobile controls
+        let mobileControlsVisible = false;
+
+        document.getElementById('mobileToggle').addEventListener('click', () => {
+            mobileControlsVisible = !mobileControlsVisible;
+            document.getElementById('mobileControls').classList.toggle('visible', mobileControlsVisible);
+            document.getElementById('mobileToggle').textContent = mobileControlsVisible ? '✕' : '☰';
+        });
+
+        document.getElementById('mPrevGame').addEventListener('click', prevChapter);
+        document.getElementById('mNextGame').addEventListener('click', nextChapter);
+        document.getElementById('mPrevHighlight').addEventListener('click', prevHighlight);
+        document.getElementById('mNextHighlight').addEventListener('click', nextHighlight);
+
+        document.getElementById('mobilePositionSelect').addEventListener('change', (e) => {
+            selectedPosition = e.target.value;
+            // Sync desktop selector
+            document.getElementById('positionSelect').value = selectedPosition;
+            updatePlayerHighlights();
+            renderChapters(chapterFilter.value);
+            document.getElementById('mobileHighlightCount').textContent =
+                playerHighlights.length ? `${playerHighlights.length} highlights` : '';
         });
 
         // File loading
@@ -1132,6 +1304,10 @@
                     selectedPosition = keyToPosition[e.key];
                     updatePlayerHighlights();
                     renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
+                    // Sync mobile selector
+                    document.getElementById('mobilePositionSelect').value = selectedPosition;
+                    document.getElementById('mobileHighlightCount').textContent =
+                        playerHighlights.length ? `${playerHighlights.length} highlights` : '';
                     break;
             }
         });
