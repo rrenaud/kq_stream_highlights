@@ -120,6 +120,53 @@
             font-size: 14px;
         }
 
+        .position-selector {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .position-selector label {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .position-selector select {
+            flex: 1;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 5px;
+            background: #1a1a2e;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        #highlightCount {
+            font-size: 12px;
+            color: #e94560;
+            font-weight: 600;
+        }
+
+        .win-prob-plot {
+            width: 100%;
+            height: 40px;
+            margin-top: 6px;
+            background: #1a1a2e;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .win-prob-plot:hover {
+            background: #252545;
+        }
+
+        .win-prob-plot svg {
+            width: 100%;
+            height: 100%;
+        }
+
         .chapter-list {
             padding: 10px;
         }
@@ -210,6 +257,21 @@
         .chapter-meta .gold { color: #ffd700; }
         .chapter-meta .blue { color: #4a90d9; }
 
+        .kd-stats {
+            color: #e94560;
+            font-weight: 600;
+        }
+
+        .good-prob {
+            color: #4caf50;
+            font-weight: 600;
+        }
+
+        .bad-prob {
+            color: #f44336;
+            font-weight: 600;
+        }
+
         .load-section {
             padding: 20px;
             text-align: center;
@@ -248,8 +310,6 @@
             </div>
 
             <div class="current-chapter" id="currentChapterInfo">
-                <h3>No chapter loaded</h3>
-                <p>Load chapters.json to begin</p>
             </div>
 
             <div class="keyboard-hints">
@@ -258,7 +318,9 @@
                 <kbd>Space</kbd> Play/Pause<br>
                 <kbd>G</kbd> Game (Shift: prev) &nbsp;
                 <kbd>S</kbd> Set (Shift: prev) &nbsp;
-                <kbd>E</kbd> Egg/queen kill (Shift: prev)
+                <kbd>E</kbd> Egg/queen kill (Shift: prev)<br>
+                <kbd>1</kbd>-<kbd>0</kbd> Select position &nbsp;
+                <kbd>H</kbd> Player highlight (Shift: prev)
             </div>
         </div>
 
@@ -266,15 +328,25 @@
             <div class="sidebar-header">
                 <h2>Chapters</h2>
                 <input type="text" id="chapterFilter" placeholder="Filter by map, winner...">
+                <div class="position-selector">
+                    <label for="positionSelect">Position:</label>
+                    <select id="positionSelect">
+                        <option value="">All</option>
+                        <option value="10">1 - Blue Checkers</option>
+                        <option value="8">2 - Blue Skull</option>
+                        <option value="2">3 - Blue Queen</option>
+                        <option value="9">4 - Blue Abs</option>
+                        <option value="7">5 - Blue Stripes</option>
+                        <option value="6">6 - Gold Checkers</option>
+                        <option value="4">7 - Gold Skull</option>
+                        <option value="1">8 - Gold Queen</option>
+                        <option value="5">9 - Gold Abs</option>
+                        <option value="3">0 - Gold Stripes</option>
+                    </select>
+                    <span id="highlightCount"></span>
+                </div>
             </div>
             <div class="chapter-list" id="chapterList">
-                <div class="load-section">
-                    <p>No chapters loaded</p>
-                    <p style="font-size: 12px; color: #666; margin-top: 10px;">
-                        Generate chapters with:<br>
-                        <code>python generate_chapters.py video.mkv cabinet_url</code>
-                    </p>
-                </div>
             </div>
         </div>
     </div>
@@ -297,6 +369,11 @@
         let currentChapterIndex = -1;
         let lastQueenKillIndex = -1;  // Track last navigated queen kill
         let timeUpdateInterval;
+
+        // Player highlight state
+        let selectedPosition = null;
+        let playerHighlights = [];  // Filtered events for selected position
+        let lastHighlightIndex = -1;
 
         // YouTube video ID
         const VIDEO_ID = 'UmxLa4CW9cY';
@@ -418,6 +495,148 @@
             timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(getDuration())}`;
         }
 
+        // Calculate net win probability change for a player in a chapter
+        function calculateNetWinProb(ch, positionId) {
+            if (!positionId || !ch.player_events) return null;
+            const pos = parseInt(positionId);
+            let netDelta = 0;
+
+            for (const evt of ch.player_events) {
+                if (evt.positions && evt.positions.includes(pos)) {
+                    netDelta += evt.delta;
+                }
+            }
+
+            return netDelta;
+        }
+
+        // Find high-impact time ranges for a player in a chapter
+        function findHighImpactRanges(ch, positionId) {
+            if (!positionId || !ch.player_events) return [];
+            const pos = parseInt(positionId);
+
+            // Get all events for this player sorted by time
+            const playerEvents = ch.player_events
+                .filter(evt => evt.positions && evt.positions.includes(pos) && Math.abs(evt.delta) >= 0.05)
+                .sort((a, b) => a.time - b.time);
+
+            if (playerEvents.length === 0) return [];
+
+            // Cluster nearby events (within 5 seconds)
+            const ranges = [];
+            let rangeStart = null;
+            let rangeEnd = null;
+            let rangeDelta = 0;
+
+            for (const evt of playerEvents) {
+                if (rangeStart === null) {
+                    rangeStart = evt.time;
+                    rangeEnd = evt.time;
+                    rangeDelta = evt.delta;
+                } else if (evt.time - rangeEnd <= 5) {
+                    rangeEnd = evt.time;
+                    rangeDelta += evt.delta;
+                } else {
+                    if (Math.abs(rangeDelta) >= 0.10) {
+                        ranges.push({ start: rangeStart, end: rangeEnd, delta: rangeDelta });
+                    }
+                    rangeStart = evt.time;
+                    rangeEnd = evt.time;
+                    rangeDelta = evt.delta;
+                }
+            }
+            // Don't forget the last range
+            if (rangeStart !== null && Math.abs(rangeDelta) >= 0.10) {
+                ranges.push({ start: rangeStart, end: rangeEnd, delta: rangeDelta });
+            }
+
+            return ranges;
+        }
+
+        // Calculate K/D stats for a chapter and selected position
+        function calculateKD(ch, positionId) {
+            if (!positionId || !ch.kill_events) return null;
+            const pos = parseInt(positionId);
+            let kills = 0;
+            let deaths = 0;
+
+            for (const evt of ch.kill_events) {
+                if (evt.killer === pos) kills++;
+                if (evt.victim === pos) deaths++;
+            }
+
+            return { kills, deaths };
+        }
+
+        // Check if a position is on the gold team
+        function isGoldTeam(positionId) {
+            const pos = parseInt(positionId);
+            // Gold: position 1 (queen), 3, 4, 5, 6 (workers)
+            // Blue: position 2 (queen), 7, 8, 9, 10 (workers)
+            return pos === 1 || (pos >= 3 && pos <= 6);
+        }
+
+        // Render win probability plot for a chapter
+        function renderWinProbPlot(ch, index) {
+            if (!ch.win_timeline || ch.win_timeline.length < 2) return '';
+
+            const width = 280;
+            const height = 36;
+            const padding = 2;
+
+            const timeline = ch.win_timeline;
+            const startTime = ch.start_time;
+            const endTime = ch.end_time;
+            const duration = endTime - startTime;
+
+            // Determine if we need to flip perspective for gold team
+            const flipForGold = selectedPosition && isGoldTeam(selectedPosition);
+
+            // Find high-impact ranges for selected player
+            const highImpactRanges = selectedPosition ? findHighImpactRanges(ch, selectedPosition) : [];
+
+            // Create highlight rectangles for high-impact ranges
+            // Green = good for player's team, Red = bad for player's team
+            const highlightsHtml = highImpactRanges.map(range => {
+                const x1 = padding + ((range.start - startTime) / duration) * (width - 2 * padding);
+                const x2 = padding + ((range.end - startTime) / duration) * (width - 2 * padding);
+                const rangeWidth = Math.max(x2 - x1, 6); // Minimum width of 6px
+                // For blue player: positive delta = good (green)
+                // For gold player: negative delta = good (green) because delta is from blue's perspective
+                const isGoodForPlayer = flipForGold ? range.delta < 0 : range.delta > 0;
+                const color = isGoodForPlayer ? 'rgba(76, 175, 80, 0.4)' : 'rgba(244, 67, 54, 0.4)';
+                return `<rect x="${x1 - 2}" y="0" width="${rangeWidth + 4}" height="${height}" fill="${color}"/>`;
+            }).join('');
+
+            // Build SVG path for win probability line
+            let pathD = '';
+
+            for (let i = 0; i < timeline.length; i++) {
+                const pt = timeline[i];
+                const x = padding + ((pt.t - startTime) / duration) * (width - 2 * padding);
+                // Flip probability for gold team perspective
+                const prob = flipForGold ? (1 - pt.p) : pt.p;
+                const y = height - padding - (prob * (height - 2 * padding));
+
+                if (i === 0) {
+                    pathD += `M ${x} ${y}`;
+                } else {
+                    pathD += ` L ${x} ${y}`;
+                }
+            }
+
+            return `
+                <div class="win-prob-plot" data-chapter="${index}">
+                    <svg viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
+                        ${highlightsHtml}
+                        <line x1="${padding}" y1="${height/2}" x2="${width-padding}" y2="${height/2}"
+                              stroke="#333" stroke-width="1" stroke-dasharray="2,2"/>
+                        <path d="${pathD}" fill="none" stroke="#888" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            `;
+        }
+
         // Render chapter list
         function renderChapters(filter = '') {
             const filterLower = filter.toLowerCase();
@@ -437,6 +656,22 @@
                     const setClass = ch.is_set_start ? 'set-start' : 'in-set';
                     const setLabel = ch.is_set_start ? `<div class="set-label">Set ${ch.set_number}</div>` : '';
 
+                    const plotHtml = renderWinProbPlot(ch, i);
+
+                    // Calculate K/D and net win prob for selected position
+                    let statsHtml = '';
+                    if (selectedPosition) {
+                        const kd = calculateKD(ch, selectedPosition);
+                        const netProb = calculateNetWinProb(ch, selectedPosition);
+                        if (kd) {
+                            // Flip net prob for gold team (delta is from blue's perspective)
+                            const playerNetProb = isGoldTeam(selectedPosition) ? -netProb : netProb;
+                            const netProbStr = playerNetProb !== null ?
+                                `<span class="${playerNetProb >= 0 ? 'good-prob' : 'bad-prob'}">${playerNetProb >= 0 ? '+' : ''}${(playerNetProb * 100).toFixed(0)}%</span>` : '';
+                            statsHtml = `<span class="kd-stats">${kd.kills}/${kd.deaths}</span> ${netProbStr}`;
+                        }
+                    }
+
                     return `
                         <div class="chapter-item ${winnerClass} ${activeClass} ${setClass}" data-index="${i}">
                             ${setLabel}
@@ -445,17 +680,35 @@
                             <div class="chapter-meta">
                                 <span class="winner ${ch.winner}">${ch.winner}</span> ${ch.win_condition}
                                 &nbsp;|&nbsp; ${formatTime(ch.duration)}
+                                ${statsHtml ? '&nbsp;|&nbsp;' + statsHtml : ''}
                             </div>
+                            ${plotHtml}
                         </div>
                     `;
                 })
                 .join('');
 
-            // Add click handlers
+            // Add click handlers for chapter items (not on plot)
             document.querySelectorAll('.chapter-item').forEach(el => {
-                el.addEventListener('click', () => {
+                el.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on plot
+                    if (e.target.closest('.win-prob-plot')) return;
                     const index = parseInt(el.dataset.index);
                     jumpToChapter(index);
+                });
+            });
+
+            // Add click handlers for plots (seek to specific time)
+            document.querySelectorAll('.win-prob-plot').forEach(plot => {
+                plot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const chapterIndex = parseInt(plot.dataset.chapter);
+                    const ch = chapters[chapterIndex];
+                    const rect = plot.getBoundingClientRect();
+                    const clickX = (e.clientX - rect.left) / rect.width;
+                    const targetTime = ch.start_time + clickX * (ch.end_time - ch.start_time);
+                    seekTo(targetTime);
+                    if (player) player.playVideo();
                 });
             });
         }
@@ -599,6 +852,149 @@
             }
         }
 
+        // Player highlight functions
+        function updatePlayerHighlights() {
+            const pos = parseInt(selectedPosition);
+            playerHighlights = [];
+            lastHighlightIndex = -1;
+
+            if (!pos) {
+                document.getElementById('highlightCount').textContent = '';
+                return;
+            }
+
+            // Queen positions have higher thresholds (bigger swings are normal)
+            const isQueen = (pos === 1 || pos === 2);
+            const baseThreshold = isQueen ? 0.20 : 0.15;
+
+            // Collect all events for this position
+            let allEvents = [];
+            for (const ch of chapters) {
+                if (ch.player_events) {
+                    for (const evt of ch.player_events) {
+                        if (evt.positions && evt.positions.includes(pos)) {
+                            allEvents.push({
+                                time: evt.time,
+                                delta: evt.delta,
+                                type: evt.type,
+                                game_id: ch.game_id,
+                                set_number: ch.set_number
+                            });
+                        }
+                    }
+                }
+            }
+
+            // Sort by time
+            allEvents.sort((a, b) => a.time - b.time);
+
+            // Calculate impact score with clustering bonus
+            // Events within 5 seconds of other impactful events get boosted
+            const windowSize = 5; // seconds
+            for (let i = 0; i < allEvents.length; i++) {
+                let clusterScore = Math.abs(allEvents[i].delta);
+
+                // Look for nearby events and sum their impact
+                for (let j = 0; j < allEvents.length; j++) {
+                    if (i !== j && Math.abs(allEvents[i].time - allEvents[j].time) < windowSize) {
+                        clusterScore += Math.abs(allEvents[j].delta) * 0.3; // 30% bonus for nearby events
+                    }
+                }
+                allEvents[i].score = clusterScore;
+            }
+
+            // Filter by threshold and take top events per set
+            const targetPerSet = 4;
+            const eventsBySet = {};
+
+            for (const evt of allEvents) {
+                if (evt.score >= baseThreshold) {
+                    if (!eventsBySet[evt.set_number]) {
+                        eventsBySet[evt.set_number] = [];
+                    }
+                    eventsBySet[evt.set_number].push(evt);
+                }
+            }
+
+            // Take top N per set by score
+            for (const setNum in eventsBySet) {
+                eventsBySet[setNum].sort((a, b) => b.score - a.score);
+                const topEvents = eventsBySet[setNum].slice(0, targetPerSet);
+                playerHighlights.push(...topEvents);
+            }
+
+            // Sort final list by time for navigation
+            playerHighlights.sort((a, b) => a.time - b.time);
+            document.getElementById('highlightCount').textContent = `${playerHighlights.length} highlights`;
+        }
+
+        function nextHighlight() {
+            if (playerHighlights.length === 0) return;
+
+            const currentTime = getCurrentTime();
+            let nextIndex;
+
+            // If near last highlight, go to next
+            if (lastHighlightIndex >= 0 && lastHighlightIndex < playerHighlights.length - 1) {
+                const lastTime = playerHighlights[lastHighlightIndex].time;
+                if (Math.abs(currentTime - (lastTime - 1)) < 3) {
+                    nextIndex = lastHighlightIndex + 1;
+                }
+            }
+
+            // Otherwise find based on current time
+            if (nextIndex === undefined) {
+                for (let i = 0; i < playerHighlights.length; i++) {
+                    if (playerHighlights[i].time > currentTime + 0.5) {
+                        nextIndex = i;
+                        break;
+                    }
+                }
+            }
+
+            if (nextIndex !== undefined && nextIndex < playerHighlights.length) {
+                lastHighlightIndex = nextIndex;
+                seekTo(playerHighlights[nextIndex].time - 1);
+                if (player) player.playVideo();
+            }
+        }
+
+        function prevHighlight() {
+            if (playerHighlights.length === 0) return;
+
+            const currentTime = getCurrentTime();
+
+            // If near last highlight, replay or go to previous
+            if (lastHighlightIndex >= 0) {
+                const lastTime = playerHighlights[lastHighlightIndex].time;
+
+                // If past the event, replay it
+                if (currentTime > lastTime - 0.5) {
+                    seekTo(lastTime - 1);
+                    if (player) player.playVideo();
+                    return;
+                }
+
+                // If near the start, go to previous
+                if (Math.abs(currentTime - (lastTime - 1)) < 2 && lastHighlightIndex > 0) {
+                    lastHighlightIndex--;
+                    seekTo(playerHighlights[lastHighlightIndex].time - 1);
+                    if (player) player.playVideo();
+                    return;
+                }
+            }
+
+            // Otherwise find based on current time
+            for (let i = playerHighlights.length - 1; i >= 0; i--) {
+                if (playerHighlights[i].time < currentTime - 1) {
+                    lastHighlightIndex = i;
+                    seekTo(playerHighlights[i].time - 1);
+                    if (player) player.playVideo();
+                    return;
+                }
+            }
+        }
+
         // Load chapters from JSON
         function loadChaptersFromJSON(data) {
             chapters = data.chapters || [];
@@ -634,6 +1030,13 @@
 
         chapterFilter.addEventListener('input', (e) => {
             renderChapters(e.target.value);
+        });
+
+        // Position selector
+        document.getElementById('positionSelect').addEventListener('change', (e) => {
+            selectedPosition = e.target.value;
+            updatePlayerHighlights();
+            renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
         });
 
         // File loading
@@ -702,6 +1105,33 @@
                     break;
                 case 'E':
                     prevQueenKill();
+                    break;
+                case 'h':
+                    nextHighlight();
+                    break;
+                case 'H':
+                    prevHighlight();
+                    break;
+                case '1': case '2': case '3': case '4': case '5':
+                case '6': case '7': case '8': case '9': case '0':
+                    // Map keyboard to internal position IDs (viewer perspective)
+                    const keyToPosition = {
+                        '1': '10',  // Blue Checkers
+                        '2': '8',   // Blue Skull
+                        '3': '2',   // Blue Queen
+                        '4': '9',   // Blue Abs
+                        '5': '7',   // Blue Stripes
+                        '6': '6',   // Gold Checkers
+                        '7': '4',   // Gold Skull
+                        '8': '1',   // Gold Queen
+                        '9': '5',   // Gold Abs
+                        '0': '3',   // Gold Stripes
+                    };
+                    const posSelect = document.getElementById('positionSelect');
+                    posSelect.value = keyToPosition[e.key];
+                    selectedPosition = keyToPosition[e.key];
+                    updatePlayerHighlights();
+                    renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
                     break;
             }
         });

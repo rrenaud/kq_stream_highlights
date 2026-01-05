@@ -30,6 +30,135 @@ def extract_queen_kills(events, video_start_utc) -> list[dict]:
     return queen_kills
 
 
+def extract_positions_from_event(event) -> list[int]:
+    """Extract position IDs involved in an event."""
+    values = event.values
+    positions = []
+
+    try:
+        if event.event_type == 'playerKill':
+            # values: [x, y, killer_pos, victim_pos, unit_type]
+            if len(values) >= 4:
+                positions = [int(values[2]), int(values[3])]
+        elif event.event_type == 'snailEat':
+            # values: [x, snail_id, rider_pos, victim_pos]
+            if len(values) >= 4:
+                positions = [int(values[2]), int(values[3])]
+        elif event.event_type == 'berryDeposit':
+            # values: [x, y, position_id]
+            if len(values) >= 3:
+                positions = [int(values[2])]
+        elif event.event_type == 'useMaiden':
+            # values: [x, y, maiden_type, position_id]
+            if len(values) >= 4:
+                positions = [int(values[3])]
+        elif event.event_type in ('getOnSnail', 'getOffSnail', 'snailEscape'):
+            # values: [x, snail_id, position_id, ...]
+            if len(values) >= 3:
+                positions = [int(values[2])]
+        elif event.event_type == 'carryFood':
+            # values: [position_id]
+            if len(values) >= 1:
+                positions = [int(values[0])]
+    except (ValueError, IndexError):
+        pass
+
+    return positions
+
+
+def extract_player_events(events, video_start_utc) -> list[dict]:
+    """Extract events with win probability changes per position."""
+    player_events = []
+    prev_prob = 0.5
+
+    for event in events:
+        if event.win_probability is None:
+            continue
+
+        try:
+            curr_prob = float(event.win_probability)
+        except (ValueError, TypeError):
+            continue
+
+        delta = curr_prob - prev_prob  # Keep sign for direction
+
+        # Get positions involved in this event
+        positions = extract_positions_from_event(event)
+
+        if positions and abs(delta) > 0.01:  # Threshold for significance
+            video_time = (event.timestamp - video_start_utc).total_seconds()
+            player_events.append({
+                'time': video_time,
+                'type': event.event_type,
+                'positions': positions,
+                'delta': round(delta, 4),
+            })
+
+        prev_prob = curr_prob
+
+    return player_events
+
+
+def extract_kill_events(events, video_start_utc) -> list[dict]:
+    """Extract all kill events (playerKill and snailEat) for K/D tracking."""
+    kill_events = []
+
+    for event in events:
+        if event.event_type not in ('playerKill', 'snailEat'):
+            continue
+
+        values = event.values
+        if len(values) < 4:
+            continue
+
+        try:
+            if event.event_type == 'playerKill':
+                # values: [x, y, killer_pos, victim_pos, unit_type]
+                killer = int(values[2])
+                victim = int(values[3])
+            else:  # snailEat
+                # values: [x, snail_id, rider_pos, victim_pos]
+                killer = int(values[2])
+                victim = int(values[3])
+        except (ValueError, TypeError):
+            continue
+
+        video_time = (event.timestamp - video_start_utc).total_seconds()
+        kill_events.append({
+            'time': round(video_time, 2),
+            'type': event.event_type,
+            'killer': killer,
+            'victim': victim,
+        })
+
+    return kill_events
+
+
+def extract_win_prob_timeline(events, video_start_utc) -> list[dict]:
+    """Extract win probability timeline for plotting."""
+    timeline = []
+
+    for event in events:
+        if event.win_probability is None:
+            continue
+
+        try:
+            prob = float(event.win_probability)
+        except (ValueError, TypeError):
+            continue
+
+        video_time = (event.timestamp - video_start_utc).total_seconds()
+        positions = extract_positions_from_event(event)
+
+        timeline.append({
+            't': round(video_time, 2),
+            'p': round(prob, 3),
+            'pos': positions if positions else [],
+        })
+
+    return timeline
+
+
 def generate_chapters(
     video_path: str,
     cabinet_url: str,
@@ -80,7 +209,7 @@ def generate_chapters(
 
     if verbose:
         print(f"\nStep 5: Generating chapters for {len(games)} games...")
-        print("  Fetching queen kills for each game...")
+        print("  Fetching events for each game...")
 
     chapters = []
     set_number = 1
@@ -130,9 +259,12 @@ def generate_chapters(
         # Start 1 second earlier to not miss the beginning
         adjusted_start = max(0, start_seconds - 1)
 
-        # Fetch queen kills for this game
+        # Fetch events for this game
         game_events = fetch_game_events(game.id, verbose=False)
         queen_kills = extract_queen_kills(game_events, offset.video_start_utc)
+        player_events = extract_player_events(game_events, offset.video_start_utc)
+        kill_events = extract_kill_events(game_events, offset.video_start_utc)
+        win_prob_timeline = extract_win_prob_timeline(game_events, offset.video_start_utc)
 
         chapter = {
             "game_id": game.id,
@@ -148,6 +280,9 @@ def generate_chapters(
             "game_in_set": game_in_set,
             "is_set_start": is_set_start,
             "queen_kills": queen_kills,
+            "player_events": player_events,
+            "kill_events": kill_events,
+            "win_timeline": win_prob_timeline,
         }
         chapters.append(chapter)
 
