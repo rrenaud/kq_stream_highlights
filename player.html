@@ -292,8 +292,8 @@
             margin: 0 2px;
         }
 
-        /* Mobile styles */
-        @media (max-width: 768px) {
+        /* Mobile styles - use pointer:coarse to detect touch devices */
+        @media (pointer: coarse), (max-width: 768px) {
             .container {
                 flex-direction: column;
             }
@@ -397,8 +397,8 @@
             }
         }
 
-        /* Hide mobile elements on desktop */
-        @media (min-width: 769px) {
+        /* Hide mobile elements on desktop (non-touch devices above 768px) */
+        @media (pointer: fine) and (min-width: 769px) {
             .mobile-toggle, .mobile-controls {
                 display: none !important;
             }
@@ -417,8 +417,6 @@
                 <button id="nextChapter" title="Next chapter">Next ⏭</button>
                 <button id="playPause">▶ Play</button>
                 <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
-                <div style="flex: 1;"></div>
-                <button id="loadChapters">Load Chapters</button>
             </div>
 
             <div class="current-chapter" id="currentChapterInfo">
@@ -443,7 +441,7 @@
                 <div class="position-selector">
                     <label for="positionSelect">Position:</label>
                     <select id="positionSelect">
-                        <option value="">All</option>
+                        <option value="">Select player...</option>
                         <option value="10">1 - Blue Checkers</option>
                         <option value="8">2 - Blue Skull</option>
                         <option value="2">3 - Blue Queen</option>
@@ -464,10 +462,10 @@
     </div>
 
     <!-- Mobile toggle button -->
-    <button class="mobile-toggle" id="mobileToggle">☰</button>
+    <button class="mobile-toggle" id="mobileToggle">✕</button>
 
     <!-- Mobile control bar -->
-    <div class="mobile-controls" id="mobileControls">
+    <div class="mobile-controls visible" id="mobileControls">
         <div class="mobile-nav-row">
             <button id="mPrevHighlight">◀◀ H</button>
             <button id="mPrevGame">◀ Game</button>
@@ -476,7 +474,7 @@
         </div>
         <div class="mobile-position-row">
             <select id="mobilePositionSelect">
-                <option value="">All</option>
+                <option value="">Select player...</option>
                 <option value="10">1 - Blue Checkers</option>
                 <option value="8">2 - Blue Skull</option>
                 <option value="2">3 - Blue Queen</option>
@@ -1188,7 +1186,7 @@
         });
 
         // Mobile controls
-        let mobileControlsVisible = false;
+        let mobileControlsVisible = true;
 
         document.getElementById('mobileToggle').addEventListener('click', () => {
             mobileControlsVisible = !mobileControlsVisible;
@@ -1211,11 +1209,7 @@
                 playerHighlights.length ? `${playerHighlights.length} highlights` : '';
         });
 
-        // File loading
-        document.getElementById('loadChapters').addEventListener('click', () => {
-            document.getElementById('chaptersInput').click();
-        });
-
+        // File loading (hidden input, kept for flexibility)
         document.getElementById('chaptersInput').addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
