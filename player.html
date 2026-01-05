@@ -361,6 +361,24 @@
                 margin-bottom: 10px;
             }
 
+            /* Landscape: spread buttons to edges */
+            @media (orientation: landscape) {
+                .mobile-nav-row {
+                    justify-content: space-between;
+                    gap: 4px;
+                }
+
+                .mobile-nav-row button {
+                    flex: 0 1 auto;
+                    padding: 10px 12px;
+                }
+
+                .mobile-position-row {
+                    max-width: 50%;
+                    margin: 0 auto;
+                }
+            }
+
             .mobile-nav-row button {
                 flex: 1;
                 padding: 10px 6px;
@@ -469,14 +487,12 @@
     <!-- Mobile control bar -->
     <div class="mobile-controls visible" id="mobileControls">
         <div class="mobile-nav-row">
-            <button id="mPrevSet">◀ Set</button>
-            <button id="mPrevGame">◀ Game</button>
-            <button id="mNextGame">Game ▶</button>
-            <button id="mNextSet">Set ▶</button>
-        </div>
-        <div class="mobile-nav-row">
-            <button id="mPrevHighlight">◀◀ H</button>
-            <button id="mNextHighlight">H ▶▶</button>
+            <button id="mPrevSet">◀◀ S</button>
+            <button id="mPrevGame">◀ G</button>
+            <button id="mPrevHighlight">◀ H</button>
+            <button id="mNextHighlight">H ▶</button>
+            <button id="mNextGame">G ▶</button>
+            <button id="mNextSet">S ▶▶</button>
         </div>
         <div class="mobile-position-row">
             <select id="mobilePositionSelect">
