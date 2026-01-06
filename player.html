@@ -467,6 +467,16 @@
                 background: rgba(255, 255, 255, 0.3);
             }
 
+            .mobile-select {
+                padding: 10px;
+                font-size: 14px;
+                background: rgba(255, 255, 255, 0.15);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                color: white;
+                border-radius: 6px;
+                max-width: 120px;
+            }
+
             /* Landscape: side controls */
             @media (orientation: landscape) {
                 .mobile-controls {
@@ -505,40 +515,10 @@
                     pointer-events: auto;
                 }
 
-                .mobile-position-row {
-                    position: fixed;
-                    bottom: 8px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    pointer-events: auto;
-                    margin: 0;
-                }
-
                 .mobile-toggle {
                     top: 8px;
                     bottom: auto;
                 }
-            }
-
-            .mobile-position-row {
-                display: flex;
-                gap: 10px;
-                align-items: center;
-                background: rgba(0, 0, 0, 0.3);
-                backdrop-filter: blur(4px);
-                -webkit-backdrop-filter: blur(4px);
-                padding: 8px;
-                border-radius: 8px;
-            }
-
-            .mobile-position-row select {
-                flex: 1;
-                padding: 10px;
-                font-size: 16px;
-                background: rgba(255, 255, 255, 0.15);
-                border: 1px solid rgba(255, 255, 255, 0.2);
-                color: white;
-                border-radius: 6px;
             }
 
         }
@@ -626,30 +606,28 @@
                 <button id="mPrevSet">◀◀ S</button>
                 <button id="mPrevGame">◀ G</button>
                 <button id="mPrevHighlight">◀ H</button>
+                <select id="mobilePlayerSelect" class="mobile-select">
+                    <option value="">Player...</option>
+                </select>
             </div>
             <div class="nav-group-right">
                 <button id="mNextSet">S ▶▶</button>
                 <button id="mNextGame">G ▶</button>
                 <button id="mNextHighlight">H ▶</button>
+                <select id="mobilePositionSelect" class="mobile-select">
+                    <option value="">Position...</option>
+                    <option value="10">1 - Blue Checkers</option>
+                    <option value="8">2 - Blue Skull</option>
+                    <option value="2">3 - Blue Queen</option>
+                    <option value="9">4 - Blue Abs</option>
+                    <option value="7">5 - Blue Stripes</option>
+                    <option value="6">6 - Gold Checkers</option>
+                    <option value="4">7 - Gold Skull</option>
+                    <option value="1">8 - Gold Queen</option>
+                    <option value="5">9 - Gold Abs</option>
+                    <option value="3">0 - Gold Stripes</option>
+                </select>
             </div>
-        </div>
-        <div class="mobile-position-row">
-            <select id="mobilePlayerSelect">
-                <option value="">Select player...</option>
-            </select>
-            <select id="mobilePositionSelect">
-                <option value="">Or position...</option>
-                <option value="10">1 - Blue Checkers</option>
-                <option value="8">2 - Blue Skull</option>
-                <option value="2">3 - Blue Queen</option>
-                <option value="9">4 - Blue Abs</option>
-                <option value="7">5 - Blue Stripes</option>
-                <option value="6">6 - Gold Checkers</option>
-                <option value="4">7 - Gold Skull</option>
-                <option value="1">8 - Gold Queen</option>
-                <option value="5">9 - Gold Abs</option>
-                <option value="3">0 - Gold Stripes</option>
-            </select>
         </div>
     </div>
 
@@ -1474,7 +1452,7 @@
             const playerSelect = document.getElementById('playerSelect');
             const mobilePlayerSelect = document.getElementById('mobilePlayerSelect');
             playerSelect.innerHTML = '<option value="">Select player...</option>';
-            mobilePlayerSelect.innerHTML = '<option value="">Select player...</option>';
+            mobilePlayerSelect.innerHTML = '<option value="">Player...</option>';
             const sortedUsers = Object.entries(users)
                 .sort((a, b) => a[1].name.toLowerCase().localeCompare(b[1].name.toLowerCase()));
             for (const [userId, userInfo] of sortedUsers) {
