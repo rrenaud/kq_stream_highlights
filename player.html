@@ -630,8 +630,11 @@
             </div>
         </div>
         <div class="mobile-position-row">
-            <select id="mobilePositionSelect">
+            <select id="mobilePlayerSelect">
                 <option value="">Select player...</option>
+            </select>
+            <select id="mobilePositionSelect">
+                <option value="">Or position...</option>
                 <option value="10">1 - Blue Checkers</option>
                 <option value="8">2 - Blue Skull</option>
                 <option value="2">3 - Blue Queen</option>
@@ -1463,9 +1466,11 @@
             // Sort by time (should already be sorted, but ensure it)
             queenKills.sort((a, b) => a.time - b.time);
 
-            // Populate player dropdown
+            // Populate player dropdowns (desktop and mobile)
             const playerSelect = document.getElementById('playerSelect');
+            const mobilePlayerSelect = document.getElementById('mobilePlayerSelect');
             playerSelect.innerHTML = '<option value="">Select player...</option>';
+            mobilePlayerSelect.innerHTML = '<option value="">Select player...</option>';
             const sortedUsers = Object.entries(users)
                 .sort((a, b) => a[1].name.toLowerCase().localeCompare(b[1].name.toLowerCase()));
             for (const [userId, userInfo] of sortedUsers) {
@@ -1473,6 +1478,8 @@
                 option.value = userId;
                 option.textContent = userInfo.name;
                 playerSelect.appendChild(option);
+                // Clone for mobile
+                mobilePlayerSelect.appendChild(option.cloneNode(true));
             }
 
             renderChapters();
@@ -1503,10 +1510,10 @@
             return null;
         }
 
-        // Player selector (by name)
-        document.getElementById('playerSelect').addEventListener('change', (e) => {
-            selectedUserId = e.target.value;
-            // Clear position selector when using player selector
+        // Player selector (by name) - shared handler for desktop and mobile
+        function handlePlayerSelect(userId) {
+            selectedUserId = userId;
+            // Clear position selectors when using player selector
             document.getElementById('positionSelect').value = '';
             document.getElementById('mobilePositionSelect').value = '';
 
@@ -1520,6 +1527,18 @@
 
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);
+        }
+
+        document.getElementById('playerSelect').addEventListener('change', (e) => {
+            handlePlayerSelect(e.target.value);
+            // Sync mobile selector
+            document.getElementById('mobilePlayerSelect').value = e.target.value;
+        });
+
+        document.getElementById('mobilePlayerSelect').addEventListener('change', (e) => {
+            handlePlayerSelect(e.target.value);
+            // Sync desktop selector
+            document.getElementById('playerSelect').value = e.target.value;
         });
 
         // Position selector
@@ -1527,6 +1546,7 @@
             selectedPosition = e.target.value;
             selectedUserId = null;  // Clear user selection when using position
             document.getElementById('playerSelect').value = '';
+            document.getElementById('mobilePlayerSelect').value = '';
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
             // Sync mobile selector
@@ -1551,8 +1571,11 @@
 
         document.getElementById('mobilePositionSelect').addEventListener('change', (e) => {
             selectedPosition = e.target.value;
-            // Sync desktop selector
+            selectedUserId = null;  // Clear user selection when using position
+            // Sync desktop selectors and clear player selectors
             document.getElementById('positionSelect').value = selectedPosition;
+            document.getElementById('playerSelect').value = '';
+            document.getElementById('mobilePlayerSelect').value = '';
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);
         });
