@@ -51,6 +51,7 @@
             background: #242424;
             border-radius: 8px;
             margin-top: 10px;
+            flex-wrap: wrap;
         }
 
         .controls button {
@@ -77,6 +78,19 @@
             font-family: monospace;
             font-size: 14px;
             color: #aaa;
+        }
+
+        .nav-group {
+            display: inline-flex;
+            gap: 2px;
+            background: #333;
+            border-radius: 5px;
+            padding: 2px;
+        }
+
+        .nav-group button {
+            padding: 8px 12px;
+            font-size: 12px;
         }
 
         .current-chapter {
@@ -539,10 +553,24 @@
             </div>
 
             <div class="controls">
-                <button id="prevChapter" title="Previous chapter">⏮ Prev</button>
-                <button id="nextChapter" title="Next chapter">Next ⏭</button>
                 <button id="playPause">▶ Play</button>
                 <span class="time-display" id="timeDisplay">0:00 / 0:00</span>
+                <span class="nav-group">
+                    <button id="prevSet" title="Previous set (Shift+S)">◀Set</button>
+                    <button id="nextSet" title="Next set (S)">Set▶</button>
+                </span>
+                <span class="nav-group">
+                    <button id="prevChapter" title="Previous game (Shift+G)">◀Game</button>
+                    <button id="nextChapter" title="Next game (G)">Game▶</button>
+                </span>
+                <span class="nav-group">
+                    <button id="prevEgg" title="Previous queen kill (Shift+E)">◀Egg</button>
+                    <button id="nextEgg" title="Next queen kill (E)">Egg▶</button>
+                </span>
+                <span class="nav-group">
+                    <button id="prevHighlightBtn" title="Previous highlight (Shift+H)">◀HL</button>
+                    <button id="nextHighlightBtn" title="Next highlight (H)">HL▶</button>
+                </span>
             </div>
 
             <div class="current-chapter" id="currentChapterInfo">
@@ -1488,6 +1516,12 @@
         // Event listeners
         document.getElementById('prevChapter').addEventListener('click', prevChapter);
         document.getElementById('nextChapter').addEventListener('click', nextChapter);
+        document.getElementById('prevSet').addEventListener('click', prevSet);
+        document.getElementById('nextSet').addEventListener('click', nextSet);
+        document.getElementById('prevEgg').addEventListener('click', prevQueenKill);
+        document.getElementById('nextEgg').addEventListener('click', nextQueenKill);
+        document.getElementById('prevHighlightBtn').addEventListener('click', prevHighlight);
+        document.getElementById('nextHighlightBtn').addEventListener('click', nextHighlight);
         playPauseBtn.addEventListener('click', togglePlayPause);
 
         chapterFilter.addEventListener('input', (e) => {
