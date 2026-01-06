@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1712706,
+    "map_name": "Day",
+    "start_time": "2026-01-03T21:23:07.546000Z",
+    "end_time": "2026-01-03T21:24:50.527000Z",
+    "winning_team": "blue",
+    "win_condition": "military"
+  },
+  {
+    "id": 1712711,
+    "map_name": "Day",
+    "start_time": "2026-01-03T21:25:24.588000Z",
+    "end_time": "2026-01-03T21:27:19.894000Z",
+    "winning_team": "blue",
+    "win_condition": "snail"
+  }
+]

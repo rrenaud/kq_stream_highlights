@@ -88,10 +88,12 @@ def extract_player_events(events, video_start_utc) -> list[dict]:
         if positions and abs(delta) > 0.01:  # Threshold for significance
             video_time = (event.timestamp - video_start_utc).total_seconds()
             player_events.append({
+                'id': event.id,
                 'time': video_time,
                 'type': event.event_type,
                 'positions': positions,
                 'delta': round(delta, 4),
+                'values': event.values,
             })
 
         prev_prob = curr_prob

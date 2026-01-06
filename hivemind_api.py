@@ -184,6 +184,107 @@ def fetch_game_events(
     return events
 
 
+# Additional cache directories
+GAME_DETAIL_CACHE_DIR = Path(__file__).parent / "cache" / "game_detail"
+USER_CACHE_DIR = Path(__file__).parent / "cache" / "user"
+
+
+def fetch_game_detail(
+    game_id: int,
+    use_cache: bool = True,
+    verbose: bool = True
+) -> dict:
+    """
+    Fetch game detail including user sign-ins.
+
+    Args:
+        game_id: The HiveMind game ID
+        use_cache: Whether to use cached data if available
+        verbose: Print progress
+
+    Returns:
+        Dict with game details including 'users' array with position mappings
+    """
+    cache_path = GAME_DETAIL_CACHE_DIR / f"{game_id}.json"
+
+    # Check cache first
+    if use_cache and cache_path.exists():
+        if verbose:
+            print(f"  Loading game detail from cache: {cache_path}")
+        with open(cache_path, 'r') as f:
+            return json.load(f)
+
+    url = f"{BASE_URL}/game/game/{game_id}/"
+
+    if verbose:
+        print(f"  Fetching game detail for {game_id}...")
+
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+    except requests.RequestException as e:
+        raise RuntimeError(f"Failed to fetch game detail: {e}")
+
+    # Save to cache
+    if use_cache:
+        GAME_DETAIL_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        with open(cache_path, 'w') as f:
+            json.dump(data, f, indent=2)
+        if verbose:
+            print(f"  Saved game detail to cache: {cache_path}")
+
+    return data
+
+
+def fetch_user_public_data(
+    user_id: int,
+    use_cache: bool = True,
+    verbose: bool = True
+) -> dict:
+    """
+    Fetch public user data (name, scene, etc).
+
+    Args:
+        user_id: The HiveMind user ID
+        use_cache: Whether to use cached data if available
+        verbose: Print progress
+
+    Returns:
+        Dict with user info including 'name' field
+    """
+    cache_path = USER_CACHE_DIR / f"{user_id}.json"
+
+    # Check cache first
+    if use_cache and cache_path.exists():
+        if verbose:
+            print(f"  Loading user from cache: {cache_path}")
+        with open(cache_path, 'r') as f:
+            return json.load(f)
+
+    url = f"{BASE_URL}/user/user/{user_id}/public-data/"
+
+    if verbose:
+        print(f"  Fetching user {user_id}...")
+
+    try:
+        resp = requests.get(url, headers=HEADERS, timeout=30)
+        resp.raise_for_status()
+        data = resp.json()
+    except requests.RequestException as e:
+        raise RuntimeError(f"Failed to fetch user data: {e}")
+
+    # Save to cache
+    if use_cache:
+        USER_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        with open(cache_path, 'w') as f:
+            json.dump(data, f, indent=2)
+        if verbose:
+            print(f"  Saved user to cache: {cache_path}")
+
+    return data
+
+
 def get_game_duration(events: list[GameEvent]) -> tuple[datetime, datetime, float]:
     """
     Get the start time, end time, and duration of a game from its events.

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1712718,
+    "map_name": "Day",
+    "start_time": "2026-01-03T21:30:03.349000Z",
+    "end_time": "2026-01-03T21:34:03.963000Z",
+    "winning_team": "gold",
+    "win_condition": "military"
+  },
+  {
+    "id": 1712727,
+    "map_name": "Twilight",
+    "start_time": "2026-01-03T21:35:32.909000Z",
+    "end_time": "2026-01-03T21:36:24.267000Z",
+    "winning_team": "gold",
+    "win_condition": "military"
+  }
+]

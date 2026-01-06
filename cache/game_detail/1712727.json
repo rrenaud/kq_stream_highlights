@@ -1,0 +1,92 @@
+{
+  "id": 1712727,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 29,
+    "name": "wonderville",
+    "display_name": "Wonderville",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 81731,
+    "last_game_time": "2026-01-05T05:26:57.938000Z",
+    "client_status": "offline",
+    "twitch_channel_name": "wondervillenyc"
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87617,
+    "last_game_time": "2026-01-05T05:26:57.938000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1195425,
+      "player_id": 1,
+      "user": 1533,
+      "game": 1712727,
+      "play_session": 87727
+    },
+    {
+      "id": 1195427,
+      "player_id": 3,
+      "user": 2704,
+      "game": 1712727,
+      "play_session": 87723
+    },
+    {
+      "id": 1195428,
+      "player_id": 4,
+      "user": 1620,
+      "game": 1712727,
+      "play_session": 87729
+    },
+    {
+      "id": 1195429,
+      "player_id": 6,
+      "user": 1660,
+      "game": 1712727,
+      "play_session": 87731
+    },
+    {
+      "id": 1195430,
+      "player_id": 8,
+      "user": 520,
+      "game": 1712727,
+      "play_session": 87732
+    },
+    {
+      "id": 1195431,
+      "player_id": 10,
+      "user": 1653,
+      "game": 1712727,
+      "play_session": 87725
+    },
+    {
+      "id": 1195426,
+      "player_id": 2,
+      "user": 1443,
+      "game": 1712727,
+      "play_session": 87721
+    }
+  ],
+  "start_time": "2026-01-03T21:35:32.909000Z",
+  "end_time": "2026-01-03T21:36:24.267000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 21,
+  "cabinet_version": "20.13",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 14117,
+  "whiteboard_match": null
+}

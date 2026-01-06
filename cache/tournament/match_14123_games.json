@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1712838,
+    "map_name": "Day",
+    "start_time": "2026-01-03T22:36:16.129000Z",
+    "end_time": "2026-01-03T22:38:01.625000Z",
+    "winning_team": "blue",
+    "win_condition": "military"
+  },
+  {
+    "id": 1712846,
+    "map_name": "Dusk",
+    "start_time": "2026-01-03T22:39:10.888000Z",
+    "end_time": "2026-01-03T22:43:52.325000Z",
+    "winning_team": "gold",
+    "win_condition": "military"
+  },
+  {
+    "id": 1712855,
+    "map_name": "Night",
+    "start_time": "2026-01-03T22:45:06.641000Z",
+    "end_time": "2026-01-03T22:47:08.602000Z",
+    "winning_team": "blue",
+    "win_condition": "economic"
+  },
+  {
+    "id": 1712864,
+    "map_name": "Twilight",
+    "start_time": "2026-01-03T22:48:55.250000Z",
+    "end_time": "2026-01-03T22:50:38.642000Z",
+    "winning_team": "blue",
+    "win_condition": "economic"
+  }
+]

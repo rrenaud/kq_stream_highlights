@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a2e;
+            background: #1a1a1a;
             color: #eee;
             min-height: 100vh;
         }
@@ -48,13 +48,13 @@
             align-items: center;
             gap: 10px;
             padding: 15px;
-            background: #16213e;
+            background: #242424;
             border-radius: 8px;
             margin-top: 10px;
         }
 
         .controls button {
-            background: #0f3460;
+            background: #3d3d3d;
             border: none;
             color: #fff;
             padding: 10px 20px;
@@ -81,7 +81,7 @@
 
         .current-chapter {
             padding: 10px 15px;
-            background: #16213e;
+            background: #242424;
             border-radius: 8px;
             margin-top: 10px;
         }
@@ -93,14 +93,14 @@
 
         .chapter-sidebar {
             width: 350px;
-            background: #16213e;
+            background: #242424;
             overflow-y: auto;
-            border-left: 1px solid #0f3460;
+            border-left: 1px solid #333333;
         }
 
         .sidebar-header {
             padding: 20px;
-            background: #0f3460;
+            background: #2d2d2d;
             position: sticky;
             top: 0;
             z-index: 10;
@@ -115,7 +115,7 @@
             padding: 8px 12px;
             border: none;
             border-radius: 5px;
-            background: #1a1a2e;
+            background: #1a1a1a;
             color: #fff;
             font-size: 14px;
         }
@@ -137,7 +137,7 @@
             padding: 6px 10px;
             border: none;
             border-radius: 5px;
-            background: #1a1a2e;
+            background: #1a1a1a;
             color: #fff;
             font-size: 13px;
             cursor: pointer;
@@ -153,7 +153,7 @@
             width: 100%;
             height: 40px;
             margin-top: 6px;
-            background: #1a1a2e;
+            background: #1a1a1a;
             border-radius: 4px;
             cursor: pointer;
         }
@@ -181,11 +181,11 @@
         }
 
         .chapter-item:hover {
-            background: #0f3460;
+            background: #383838;
         }
 
         .chapter-item.active {
-            background: #0f3460;
+            background: #383838;
             border-left-color: #e94560;
         }
 
@@ -194,14 +194,14 @@
         }
 
         .chapter-item.blue-win {
-            border-right: 3px solid #4a90d9;
+            border-right: 3px solid #5ba3ec;
         }
 
         /* Set styling */
         .chapter-item.set-start {
             margin-top: 16px;
             padding: 14px;
-            background: #0f3460;
+            background: #2d2d2d;
             border-left: 3px solid #e94560;
         }
 
@@ -254,8 +254,8 @@
             font-weight: 600;
         }
 
-        .chapter-meta .gold { color: #ffd700; }
-        .chapter-meta .blue { color: #4a90d9; }
+        .chapter-meta .gold, .set-label .gold { color: #ffd700; }
+        .chapter-meta .blue, .set-label .blue { color: #5ba3ec; }
 
         .kd-stats {
             color: #e94560;
@@ -290,6 +290,86 @@
             padding: 2px 6px;
             border-radius: 3px;
             margin: 0 2px;
+        }
+
+        .highlight-debug {
+            margin-top: 15px;
+            padding: 12px;
+            background: #242424;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .highlight-debug h4 {
+            margin: 0 0 10px 0;
+            color: #e94560;
+            font-size: 14px;
+        }
+
+        .highlight-debug-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 8px;
+            margin-bottom: 4px;
+            background: #1a1a1a;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .highlight-debug-item:hover {
+            background: #333;
+        }
+
+        .highlight-debug-item.active {
+            background: #3d3d3d;
+            border-left: 3px solid #e94560;
+            padding-left: 5px;
+        }
+
+        .highlight-debug-time {
+            font-family: monospace;
+            color: #5ba3ec;
+            min-width: 60px;
+        }
+
+        .highlight-debug-delta {
+            font-weight: 600;
+            min-width: 50px;
+        }
+
+        .highlight-debug-delta.positive {
+            color: #4caf50;
+        }
+
+        .highlight-debug-delta.negative {
+            color: #f44336;
+        }
+
+        .highlight-debug-type {
+            color: #aaa;
+            font-size: 12px;
+        }
+
+        .highlight-debug-game {
+            color: #888;
+            font-size: 11px;
+            margin-left: auto;
+        }
+
+        .highlight-debug-empty {
+            color: #666;
+            font-style: italic;
+        }
+
+        .highlight-debug-values {
+            font-family: monospace;
+            font-size: 11px;
+            color: #888;
+            padding: 2px 8px 6px 68px;
+            margin-top: -4px;
+            margin-bottom: 4px;
         }
 
         /* Mobile styles - use pointer:coarse to detect touch devices */
@@ -494,6 +574,9 @@
                 <kbd>1</kbd>-<kbd>0</kbd> Select position &nbsp;
                 <kbd>H</kbd> Player highlight (Shift: prev)
             </div>
+
+            <div class="highlight-debug" id="highlightDebug">
+            </div>
         </div>
 
         <div class="chapter-sidebar">
@@ -501,9 +584,15 @@
                 <h2>Chapters</h2>
                 <input type="text" id="chapterFilter" placeholder="Filter by map, winner...">
                 <div class="position-selector">
+                    <label for="playerSelect">Player:</label>
+                    <select id="playerSelect">
+                        <option value="">Select player...</option>
+                    </select>
+                </div>
+                <div class="position-selector">
                     <label for="positionSelect">Position:</label>
                     <select id="positionSelect">
-                        <option value="">Select player...</option>
+                        <option value="">Or by position...</option>
                         <option value="10">1 - Blue Checkers</option>
                         <option value="8">2 - Blue Skull</option>
                         <option value="2">3 - Blue Queen</option>
@@ -581,11 +670,15 @@
         let playerHighlights = [];  // Filtered events for selected position
         let lastHighlightIndex = -1;
 
-        // Seconds to seek before a highlight event
-        const HIGHLIGHT_SEEK_BUFFER = 2.5;
+        // Tournament user data
+        let users = {};  // user_id -> {name, scene}
+        let selectedUserId = null;  // Currently selected user
 
-        // YouTube video ID
-        const VIDEO_ID = 'UmxLa4CW9cY';
+        // Seconds to seek before a highlight event
+        const HIGHLIGHT_SEEK_BUFFER = 4.5;
+
+        // YouTube video ID (tournament 842)
+        const VIDEO_ID = 'poN_dKYug5U';
 
         // Initialize YouTube player
         function onYouTubeIframeAPIReady() {
@@ -674,6 +767,12 @@
 
             if (newIndex !== currentChapterIndex) {
                 currentChapterIndex = newIndex;
+
+                // If user is selected, update selectedPosition for this chapter
+                if (selectedUserId && currentChapterIndex >= 0) {
+                    const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
+                    selectedPosition = pos ? String(pos) : null;
+                }
 
                 // Update sidebar highlighting
                 document.querySelectorAll('.chapter-item').forEach((el, i) => {
@@ -780,9 +879,9 @@
         // Check if a position is on the gold team
         function isGoldTeam(positionId) {
             const pos = parseInt(positionId);
-            // Gold: position 1 (queen), 3, 4, 5, 6 (workers)
-            // Blue: position 2 (queen), 7, 8, 9, 10 (workers)
-            return pos === 1 || (pos >= 3 && pos <= 6);
+            // Gold: odd positions (1, 3, 5, 7, 9)
+            // Blue: even positions (2, 4, 6, 8, 10)
+            return pos % 2 === 1;
         }
 
         // Render win probability plot for a chapter
@@ -798,11 +897,18 @@
             const endTime = ch.end_time;
             const duration = endTime - startTime;
 
+            // Get position for this chapter (may vary if user is selected)
+            let chapterPosition = selectedPosition;
+            if (selectedUserId) {
+                const pos = getUserPositionInChapter(selectedUserId, ch);
+                chapterPosition = pos ? String(pos) : null;
+            }
+
             // Determine if we need to flip perspective for gold team
-            const flipForGold = selectedPosition && isGoldTeam(selectedPosition);
+            const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
 
             // Find high-impact ranges for selected player
-            const highImpactRanges = selectedPosition ? findHighImpactRanges(ch, selectedPosition) : [];
+            const highImpactRanges = chapterPosition ? findHighImpactRanges(ch, chapterPosition) : [];
 
             // Create highlight rectangles for high-impact ranges
             // Green = good for player's team, Red = bad for player's team
@@ -852,7 +958,19 @@
 
             chapterList.innerHTML = chapters
                 .map((ch, i) => {
-                    // Filter
+                    // Calculate player's position in this chapter first (needed for filtering)
+                    let chapterPosition = selectedPosition;
+                    if (selectedUserId) {
+                        const pos = getUserPositionInChapter(selectedUserId, ch);
+                        chapterPosition = pos ? String(pos) : null;
+                    }
+
+                    // Filter by selected player - skip games they're not in
+                    if (selectedUserId && !chapterPosition) {
+                        return '';
+                    }
+
+                    // Filter by text search
                     if (filter) {
                         const searchText = `${ch.map} ${ch.winner} ${ch.win_condition} ${ch.game_id}`.toLowerCase();
                         if (!searchText.includes(filterLower)) {
@@ -863,18 +981,19 @@
                     const winnerClass = ch.winner === 'gold' ? 'gold-win' : 'blue-win';
                     const activeClass = i === currentChapterIndex ? 'active' : '';
                     const setClass = ch.is_set_start ? 'set-start' : 'in-set';
-                    const setLabel = ch.is_set_start ? `<div class="set-label">Set ${ch.set_number}</div>` : '';
+                    const setLabel = ch.is_set_start && ch.match_info ?
+                        `<div class="set-label"><span class="blue">${ch.match_info.blue}</span> vs <span class="gold">${ch.match_info.gold}</span></div>` : '';
 
                     const plotHtml = renderWinProbPlot(ch, i);
 
-                    // Calculate K/D and net win prob for selected position
+                    // Calculate K/D and net win prob for selected player
                     let statsHtml = '';
-                    if (selectedPosition) {
-                        const kd = calculateKD(ch, selectedPosition);
-                        const netProb = calculateNetWinProb(ch, selectedPosition);
+                    if (chapterPosition) {
+                        const kd = calculateKD(ch, chapterPosition);
+                        const netProb = calculateNetWinProb(ch, chapterPosition);
                         if (kd) {
                             // Flip net prob for gold team (delta is from blue's perspective)
-                            const playerNetProb = isGoldTeam(selectedPosition) ? -netProb : netProb;
+                            const playerNetProb = isGoldTeam(chapterPosition) ? -netProb : netProb;
                             const netProbStr = playerNetProb !== null ?
                                 `<span class="${playerNetProb >= 0 ? 'good-prob' : 'bad-prob'}">${playerNetProb >= 0 ? '+' : ''}${(playerNetProb * 100).toFixed(0)}%</span>` : '';
                             statsHtml = `<span class="kd-stats">${kd.kills}/${kd.deaths}</span> ${netProbStr}`;
@@ -884,7 +1003,6 @@
                     return `
                         <div class="chapter-item ${winnerClass} ${activeClass} ${setClass}" data-index="${i}">
                             ${setLabel}
-                            <div class="chapter-time">${formatTime(ch.start_time)} - ${formatTime(ch.end_time)}</div>
                             <div class="chapter-title">${ch.title}</div>
                             <div class="chapter-meta">
                                 <span class="winner ${ch.winner}">${ch.winner}</span> ${ch.win_condition}
@@ -1063,22 +1181,32 @@
 
         // Player highlight functions
         function updatePlayerHighlights() {
-            const pos = parseInt(selectedPosition);
             playerHighlights = [];
             lastHighlightIndex = -1;
 
-            if (!pos) {
-                document.getElementById('highlightCount').textContent = '';
+            // If user is selected, collect events from all their positions across chapters
+            // If position is selected, use fixed position
+            if (!selectedUserId && !selectedPosition) {
+                document.getElementById('highlightCount').innerHTML = '';
                 return;
             }
 
-            // Queen positions have higher thresholds (bigger swings are normal)
-            const isQueen = (pos === 1 || pos === 2);
-            const baseThreshold = isQueen ? 0.20 : 0.15;
-
-            // Collect all events for this position
+            // Collect all events for this player
             let allEvents = [];
+            let anyQueen = false;
+
             for (const ch of chapters) {
+                // Determine position for this chapter
+                let pos;
+                if (selectedUserId) {
+                    pos = getUserPositionInChapter(selectedUserId, ch);
+                    if (!pos) continue;  // User not in this chapter
+                } else {
+                    pos = parseInt(selectedPosition);
+                }
+
+                if (pos === 1 || pos === 2) anyQueen = true;
+
                 if (ch.player_events) {
                     for (const evt of ch.player_events) {
                         if (evt.positions && evt.positions.includes(pos)) {
@@ -1087,12 +1215,18 @@
                                 delta: evt.delta,
                                 type: evt.type,
                                 game_id: ch.game_id,
-                                set_number: ch.set_number
+                                set_number: ch.set_number,
+                                event_id: evt.id,
+                                values: evt.values,
+                                position: pos  // Store position for team-based delta display
                             });
                         }
                     }
                 }
             }
+
+            // Queen positions have higher thresholds (bigger swings are normal)
+            const baseThreshold = anyQueen ? 0.20 : 0.15;
 
             // Sort by time
             allEvents.sort((a, b) => a.time - b.time);
@@ -1134,7 +1268,108 @@
 
             // Sort final list by time for navigation
             playerHighlights.sort((a, b) => a.time - b.time);
-            document.getElementById('highlightCount').textContent = `${playerHighlights.length} highlights`;
+
+            // Count highlights (good for player) vs lowlights (bad for player)
+            let highlightCount = 0;
+            let lowlightCount = 0;
+            for (const h of playerHighlights) {
+                const isGold = h.position && isGoldTeam(h.position);
+                const displayDelta = isGold ? -h.delta : h.delta;
+                if (displayDelta >= 0) {
+                    highlightCount++;
+                } else {
+                    lowlightCount++;
+                }
+            }
+            document.getElementById('highlightCount').innerHTML =
+                `<span class="good-prob">${highlightCount}</span> / <span class="bad-prob">${lowlightCount}</span>`;
+
+            // Update debug UI
+            renderHighlightDebug();
+        }
+
+        // Render the highlight debug panel
+        function renderHighlightDebug() {
+            const debugEl = document.getElementById('highlightDebug');
+
+            if (!selectedUserId && !selectedPosition) {
+                debugEl.innerHTML = '';
+                return;
+            }
+
+            if (playerHighlights.length === 0) {
+                debugEl.innerHTML = '<p class="highlight-debug-empty">No highlights found for this player</p>';
+                return;
+            }
+
+            // Get player name for header
+            let playerName = 'Selected Player';
+            if (selectedUserId && users[selectedUserId]) {
+                playerName = users[selectedUserId].name;
+            } else if (selectedPosition) {
+                const posNames = {
+                    '1': 'Gold Queen', '2': 'Blue Queen',
+                    '3': 'Gold Stripes', '4': 'Gold Skull', '5': 'Gold Abs', '6': 'Gold Checkers',
+                    '7': 'Blue Stripes', '8': 'Blue Skull', '9': 'Blue Abs', '10': 'Blue Checkers'
+                };
+                playerName = posNames[selectedPosition] || `Position ${selectedPosition}`;
+            }
+
+            // Count highlights vs lowlights and build items HTML
+            let highlightCount = 0;
+            let lowlightCount = 0;
+            const itemsHtml = playerHighlights.map((h, idx) => {
+                // Check if player is on gold team for this specific event
+                const isGold = h.position && isGoldTeam(h.position);
+                // For gold players, flip the delta since it's from blue's perspective
+                const displayDelta = isGold ? -h.delta : h.delta;
+                const deltaClass = displayDelta >= 0 ? 'positive' : 'negative';
+                if (displayDelta >= 0) highlightCount++; else lowlightCount++;
+                const deltaStr = (displayDelta >= 0 ? '+' : '') + (displayDelta * 100).toFixed(0) + '%';
+                const scoreStr = h.score ? `(${(h.score * 100).toFixed(0)})` : '';
+                const valuesStr = h.values ? h.values.join(', ') : '';
+                const eventIdStr = h.event_id ? `#${h.event_id}` : '';
+
+                return `
+                    <div class="highlight-debug-item" data-highlight-index="${idx}">
+                        <span class="highlight-debug-time">${formatTime(h.time)}</span>
+                        <span class="highlight-debug-delta ${deltaClass}">${deltaStr}</span>
+                        <span class="highlight-debug-type">${h.type || 'event'} ${scoreStr}</span>
+                        <span class="highlight-debug-game">Game ${h.game_id} ${eventIdStr}</span>
+                    </div>
+                    ${valuesStr ? `<div class="highlight-debug-values">[${valuesStr}]</div>` : ''}
+                `;
+            }).join('');
+
+            debugEl.innerHTML = `
+                <h4>${playerName} - <span class="good-prob">${highlightCount}</span> / <span class="bad-prob">${lowlightCount}</span></h4>
+                ${itemsHtml}
+            `;
+
+            // Add click handlers
+            debugEl.querySelectorAll('.highlight-debug-item').forEach(el => {
+                el.addEventListener('click', () => {
+                    const idx = parseInt(el.dataset.highlightIndex);
+                    lastHighlightIndex = idx;
+                    updateDebugActiveHighlight();
+                    seekTo(playerHighlights[idx].time - HIGHLIGHT_SEEK_BUFFER);
+                    if (player) player.playVideo();
+                });
+            });
+        }
+
+        // Update which debug item is marked as active
+        function updateDebugActiveHighlight() {
+            const debugEl = document.getElementById('highlightDebug');
+            debugEl.querySelectorAll('.highlight-debug-item').forEach(el => {
+                const idx = parseInt(el.dataset.highlightIndex);
+                el.classList.toggle('active', idx === lastHighlightIndex);
+            });
+            // Scroll active item into view
+            const activeEl = debugEl.querySelector('.highlight-debug-item.active');
+            if (activeEl) {
+                activeEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
         }
 
         function nextHighlight() {
@@ -1163,6 +1398,7 @@
 
             if (nextIndex !== undefined && nextIndex < playerHighlights.length) {
                 lastHighlightIndex = nextIndex;
+                updateDebugActiveHighlight();
                 seekTo(playerHighlights[nextIndex].time - HIGHLIGHT_SEEK_BUFFER);
                 if (player) player.playVideo();
             }
@@ -1187,6 +1423,7 @@
                 // If near the start, go to previous
                 if (Math.abs(currentTime - (lastTime - HIGHLIGHT_SEEK_BUFFER)) < 2 && lastHighlightIndex > 0) {
                     lastHighlightIndex--;
+                    updateDebugActiveHighlight();
                     seekTo(playerHighlights[lastHighlightIndex].time - HIGHLIGHT_SEEK_BUFFER);
                     if (player) player.playVideo();
                     return;
@@ -1197,6 +1434,7 @@
             for (let i = playerHighlights.length - 1; i >= 0; i--) {
                 if (playerHighlights[i].time < currentTime - 1) {
                     lastHighlightIndex = i;
+                    updateDebugActiveHighlight();
                     seekTo(playerHighlights[i].time - HIGHLIGHT_SEEK_BUFFER);
                     if (player) player.playVideo();
                     return;
@@ -1207,6 +1445,7 @@
         // Load chapters from JSON
         function loadChaptersFromJSON(data) {
             chapters = data.chapters || [];
+            users = data.users || {};
 
             // Build flat list of queen kills from all chapters
             queenKills = [];
@@ -1224,9 +1463,21 @@
             // Sort by time (should already be sorted, but ensure it)
             queenKills.sort((a, b) => a.time - b.time);
 
+            // Populate player dropdown
+            const playerSelect = document.getElementById('playerSelect');
+            playerSelect.innerHTML = '<option value="">Select player...</option>';
+            const sortedUsers = Object.entries(users)
+                .sort((a, b) => a[1].name.toLowerCase().localeCompare(b[1].name.toLowerCase()));
+            for (const [userId, userInfo] of sortedUsers) {
+                const option = document.createElement('option');
+                option.value = userId;
+                option.textContent = userInfo.name;
+                playerSelect.appendChild(option);
+            }
+
             renderChapters();
             updateCurrentChapter();
-            console.log(`Loaded ${chapters.length} chapters with ${queenKills.length} queen kills`);
+            console.log(`Loaded ${chapters.length} chapters with ${queenKills.length} queen kills and ${Object.keys(users).length} users`);
             if (chapters.length > 0) {
                 console.log(`First chapter at ${chapters[0].start_time}s, last at ${chapters[chapters.length-1].start_time}s`);
             }
@@ -1241,9 +1492,41 @@
             renderChapters(e.target.value);
         });
 
+        // Helper: get user's position in a chapter
+        function getUserPositionInChapter(userId, chapter) {
+            if (!chapter.users) return null;
+            for (const [pos, uid] of Object.entries(chapter.users)) {
+                if (String(uid) === String(userId)) {
+                    return parseInt(pos);
+                }
+            }
+            return null;
+        }
+
+        // Player selector (by name)
+        document.getElementById('playerSelect').addEventListener('change', (e) => {
+            selectedUserId = e.target.value;
+            // Clear position selector when using player selector
+            document.getElementById('positionSelect').value = '';
+            document.getElementById('mobilePositionSelect').value = '';
+
+            if (selectedUserId && currentChapterIndex >= 0) {
+                // Find this user's position in the current chapter
+                const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
+                selectedPosition = pos ? String(pos) : null;
+            } else {
+                selectedPosition = null;
+            }
+
+            updatePlayerHighlights();
+            renderChapters(chapterFilter.value);
+        });
+
         // Position selector
         document.getElementById('positionSelect').addEventListener('change', (e) => {
             selectedPosition = e.target.value;
+            selectedUserId = null;  // Clear user selection when using position
+            document.getElementById('playerSelect').value = '';
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
             // Sync mobile selector
@@ -1369,11 +1652,11 @@
             }
         });
 
-        // Try to auto-load chapters.json from same directory
-        fetch('chapters.json')
+        // Try to auto-load tournament_chapters.json from same directory
+        fetch('tournament_chapters.json')
             .then(r => r.json())
             .then(loadChaptersFromJSON)
-            .catch(() => console.log('No chapters.json found, load manually'));
+            .catch(() => console.log('No tournament_chapters.json found, load manually'));
     </script>
 </body>
 </html>
