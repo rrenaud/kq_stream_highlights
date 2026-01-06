@@ -9,6 +9,7 @@ from pathlib import Path
 from fetch_games import fetch_games_for_day, Game
 from hivemind_api import fetch_game_events
 from video_align import find_first_qr, calculate_video_offset, VideoOffset
+from chapter_utils import collect_users_for_games, build_output_data
 
 
 def extract_queen_kills(events, video_start_utc) -> list[dict]:
@@ -165,6 +166,9 @@ def generate_chapters(
     video_path: str,
     cabinet_url: str,
     output_path: str | None = None,
+    cab_id: str | None = None,
+    video_id: str | None = None,
+    include_users: bool = True,
     verbose: bool = True
 ) -> list[dict]:
     """
@@ -173,7 +177,10 @@ def generate_chapters(
     Args:
         video_path: Path to the video file
         cabinet_url: Cabinet URL (e.g., https://kqhivemind.com/cabinet/sf/sf)
-        output_path: Path to save JSON output (optional)
+        output_path: Path to save JSON output (optional, auto-generated if None and cab_id provided)
+        cab_id: Cabinet ID for auto-generating output path (e.g., "sf")
+        video_id: YouTube video ID for the stream
+        include_users: Fetch HiveMind user sign-ins (default True)
         verbose: Print progress
 
     Returns:
@@ -209,8 +216,19 @@ def generate_chapters(
 
     games = fetch_games_for_day(cabinet_url, target_date, verbose=verbose)
 
+    # Step 5: Fetch user data if requested
+    users_dict = None
+    game_users_map = {}
+    if include_users:
+        if verbose:
+            print(f"\nStep 5: Fetching user sign-ins...")
+        game_ids = [g.id for g in games]
+        users_dict, game_users_map = collect_users_for_games(game_ids, verbose=verbose)
+        if verbose:
+            print(f"  Found {len(users_dict)} unique users")
+
     if verbose:
-        print(f"\nStep 5: Generating chapters for {len(games)} games...")
+        print(f"\nStep 6: Generating chapters for {len(games)} games...")
         print("  Fetching events for each game...")
 
     chapters = []
@@ -286,20 +304,32 @@ def generate_chapters(
             "kill_events": kill_events,
             "win_timeline": win_prob_timeline,
         }
+        # Add user mapping if available
+        if game.id in game_users_map:
+            chapter["users"] = game_users_map[game.id]
         chapters.append(chapter)
 
     if verbose:
         print(f"  Generated {len(chapters)} chapters")
 
-    # Save to file if requested
+    # Auto-generate output path if cab_id provided but no output_path
+    if output_path is None and cab_id:
+        date_str = target_date.strftime("%Y-%m-%d")
+        output_path = str(Path(__file__).parent / "chapters" / "league_nights" / f"{cab_id}-{date_str}.json")
+        if verbose:
+            print(f"  Auto-generated output path: {output_path}")
+
+    # Save to file if we have a path
     if output_path:
-        output_data = {
-            "video_path": video_path,
-            "cabinet_url": cabinet_url,
-            "video_start_utc": offset.video_start_utc.isoformat(),
-            "fps": offset.fps,
-            "chapters": chapters,
-        }
+        output_data = build_output_data(
+            video_id=video_id,
+            video_start_utc=offset.video_start_utc,
+            chapters=chapters,
+            users=users_dict,
+            video_path=video_path,
+            cabinet_url=cabinet_url,
+            fps=offset.fps,
+        )
         with open(output_path, 'w') as f:
             json.dump(output_data, f, indent=2)
         if verbose:
@@ -310,17 +340,24 @@ def generate_chapters(
 
 if __name__ == "__main__":
     import sys
+    import re
 
-    if len(sys.argv) < 3:
-        print("Usage: python generate_chapters.py <video_file> <cabinet_url> [output.json]")
-        print("Example: python generate_chapters.py sf_12_15_2025.mkv https://kqhivemind.com/cabinet/sf/sf chapters.json")
+    if len(sys.argv) < 4:
+        print("Usage: python generate_chapters.py <video_file> <cabinet_url> <video_id> [output.json]")
+        print("Example: python generate_chapters.py sf_12_15_2025.mkv https://kqhivemind.com/cabinet/sf/sf UmxLa4CW9cY")
+        print("Output defaults to: chapters/league_nights/{cab_id}-{YYYY-MM-DD}.json")
         sys.exit(1)
 
     video_path = sys.argv[1]
     cabinet_url = sys.argv[2]
-    output_path = sys.argv[3] if len(sys.argv) > 3 else "chapters.json"
+    video_id = sys.argv[3]
+    output_path = sys.argv[4] if len(sys.argv) > 4 else None
 
-    chapters = generate_chapters(video_path, cabinet_url, output_path)
+    # Extract cabinet ID from URL (e.g., "sf" from "https://kqhivemind.com/cabinet/sf/sf")
+    cab_match = re.search(r'/cabinet/([^/]+)', cabinet_url)
+    cab_id = cab_match.group(1) if cab_match else "unknown"
+
+    chapters = generate_chapters(video_path, cabinet_url, output_path, cab_id=cab_id, video_id=video_id)
 
     print(f"\nChapters:")
     for ch in chapters[:10]:

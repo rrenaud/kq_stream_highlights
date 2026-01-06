@@ -13,7 +13,8 @@ from tournament_api import (
     fetch_all_tournament_games,
 )
 from tournament_video import fetch_tournament_videos, TournamentVideo
-from hivemind_api import fetch_game_events, fetch_game_detail, fetch_user_public_data
+from hivemind_api import fetch_game_events
+from chapter_utils import collect_users_for_games, build_output_data
 from generate_chapters import (
     extract_queen_kills,
     extract_kill_events,
@@ -89,44 +90,20 @@ def generate_tournament_chapters(
         if isinstance(game.get('start_time'), str):
             game['start_time'] = date_parser.isoparse(game['start_time'])
 
-    # Step 5: Fetch game details and collect user IDs
+    # Step 5: Fetch game details and user data
     if verbose:
-        print(f"\nStep 5: Fetching game details for {len(games)} games...")
+        print(f"\nStep 5: Fetching game details and user data...")
 
-    all_user_ids = set()
-    game_details = {}
-
-    for i, game in enumerate(games):
-        game_id = game['id']
-        if verbose:
-            print(f"  Fetching game detail {i+1}/{len(games)}: {game_id}")
-
-        detail = fetch_game_detail(game_id, verbose=False)
-        game_details[game_id] = detail
-
-        # Collect user IDs from this game
-        for user_entry in detail.get('users', []):
-            user_id = user_entry.get('user')
-            if user_id:
-                all_user_ids.add(user_id)
-
-    # Step 6: Fetch user names
+    game_ids = [g['id'] for g in games]
+    users, game_users_map, game_details = collect_users_for_games(
+        game_ids, verbose=verbose, return_game_details=True
+    )
     if verbose:
-        print(f"\nStep 6: Fetching {len(all_user_ids)} user profiles...")
+        print(f"  Found {len(users)} unique users")
 
-    users = {}
-    for i, user_id in enumerate(sorted(all_user_ids)):
-        if verbose:
-            print(f"  Fetching user {i+1}/{len(all_user_ids)}: {user_id}")
-        user_data = fetch_user_public_data(user_id, verbose=False)
-        users[str(user_id)] = {
-            'name': user_data.get('name', f'User {user_id}'),
-            'scene': user_data.get('scene'),
-        }
-
-    # Step 7: Process each game into chapters
+    # Step 6: Process each game into chapters
     if verbose:
-        print(f"\nStep 7: Processing {len(games)} games into chapters...")
+        print(f"\nStep 6: Processing {len(games)} games into chapters...")
 
     chapters = []
 
@@ -138,14 +115,8 @@ def generate_tournament_chapters(
         # Fetch game events
         events = fetch_game_events(game_id, verbose=False)
 
-        # Build user mapping for this game (position -> user_id)
-        detail = game_details[game_id]
-        game_users = {}
-        for user_entry in detail.get('users', []):
-            pos = user_entry.get('player_id')
-            user_id = user_entry.get('user')
-            if pos and user_id:
-                game_users[pos] = user_id
+        # Get user mapping for this game (already built by collect_users_for_games)
+        game_users = game_users_map.get(game_id, {})
 
         # Calculate video timestamps (apply calibration offset)
         video_start = (game['start_time'] - video.start_time).total_seconds() - offset_seconds
@@ -204,15 +175,15 @@ def generate_tournament_chapters(
     # Build output data
     # Use adjusted video start time in output
     adjusted_video_start_utc = video.start_time + timedelta(seconds=offset_seconds)
-    output_data = {
-        'tournament_id': tournament_id,
-        'tournament_name': tournament_info.get('name', ''),
-        'video_id': video.video_id,
-        'video_start_utc': adjusted_video_start_utc.isoformat(),
-        'offset_seconds': offset_seconds,  # Include for reference
-        'users': users,  # user_id -> {name, scene}
-        'chapters': chapters,
-    }
+    output_data = build_output_data(
+        video_id=video.video_id,
+        video_start_utc=adjusted_video_start_utc,
+        chapters=chapters,
+        users=users,
+        tournament_id=tournament_id,
+        tournament_name=tournament_info.get('name', ''),
+        offset_seconds=offset_seconds,
+    )
 
     # Save to file if requested
     if output_path:
@@ -234,7 +205,10 @@ if __name__ == "__main__":
     import sys
 
     tournament_id = int(sys.argv[1]) if len(sys.argv) > 1 else 842
-    output_path = sys.argv[2] if len(sys.argv) > 2 else "tournament_chapters.json"
+
+    # Default output path: chapters/tournaments/{tournament_id}.json
+    default_output = Path(__file__).parent / "chapters" / "tournaments" / f"{tournament_id}.json"
+    output_path = sys.argv[2] if len(sys.argv) > 2 else str(default_output)
 
     data = generate_tournament_chapters(tournament_id, output_path)
 

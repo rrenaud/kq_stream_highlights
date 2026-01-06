@@ -1,91 +1,6 @@
 {
-  "tournament_id": 842,
-  "tournament_name": "January 2026 BYOT",
   "video_id": "poN_dKYug5U",
   "video_start_utc": "2026-01-03T20:07:48.679000+00:00",
-  "offset_seconds": 9.0,
-  "users": {
-    "3": {
-      "name": "tyler13",
-      "scene": "NYC"
-    },
-    "7": {
-      "name": "Von Ghoul",
-      "scene": null
-    },
-    "95": {
-      "name": "DAPH",
-      "scene": "NYC"
-    },
-    "520": {
-      "name": "Pete The Heat",
-      "scene": "NYC"
-    },
-    "588": {
-      "name": "Anthony",
-      "scene": null
-    },
-    "608": {
-      "name": "BerryInn",
-      "scene": "NYC"
-    },
-    "617": {
-      "name": "maddawg",
-      "scene": "NYC"
-    },
-    "638": {
-      "name": "Kunal",
-      "scene": "NYC"
-    },
-    "787": {
-      "name": "Jojo",
-      "scene": "PHL"
-    },
-    "910": {
-      "name": "Krispy",
-      "scene": "CLT"
-    },
-    "973": {
-      "name": "Sheep Man \ud83d\udc0f\ud83d\udcbf\ud83c\udf08",
-      "scene": "NYC"
-    },
-    "1050": {
-      "name": "Billy",
-      "scene": "PHL"
-    },
-    "1064": {
-      "name": "hp",
-      "scene": "NYC"
-    },
-    "1078": {
-      "name": "callison",
-      "scene": "NYC"
-    },
-    "1443": {
-      "name": "Leo",
-      "scene": "NYC"
-    },
-    "1533": {
-      "name": "marnie milky",
-      "scene": "NYC"
-    },
-    "1620": {
-      "name": "bl\ud83d\udd25ze",
-      "scene": "NYC"
-    },
-    "1653": {
-      "name": "Will",
-      "scene": "NYC"
-    },
-    "1660": {
-      "name": "Linalee",
-      "scene": "NYC"
-    },
-    "2704": {
-      "name": "Miles",
-      "scene": null
-    }
-  },
   "chapters": [
     {
       "game_id": 1712595,
@@ -144842,5 +144757,90 @@
       ],
       "hivemind_url": "https://kqhivemind.com/game/1712982"
     }
-  ]
+  ],
+  "users": {
+    "3": {
+      "name": "tyler13",
+      "scene": "NYC"
+    },
+    "7": {
+      "name": "Von Ghoul",
+      "scene": null
+    },
+    "95": {
+      "name": "DAPH",
+      "scene": "NYC"
+    },
+    "520": {
+      "name": "Pete The Heat",
+      "scene": "NYC"
+    },
+    "588": {
+      "name": "Anthony",
+      "scene": null
+    },
+    "608": {
+      "name": "BerryInn",
+      "scene": "NYC"
+    },
+    "617": {
+      "name": "maddawg",
+      "scene": "NYC"
+    },
+    "638": {
+      "name": "Kunal",
+      "scene": "NYC"
+    },
+    "787": {
+      "name": "Jojo",
+      "scene": "PHL"
+    },
+    "910": {
+      "name": "Krispy",
+      "scene": "CLT"
+    },
+    "973": {
+      "name": "Sheep Man \ud83d\udc0f\ud83d\udcbf\ud83c\udf08",
+      "scene": "NYC"
+    },
+    "1050": {
+      "name": "Billy",
+      "scene": "PHL"
+    },
+    "1064": {
+      "name": "hp",
+      "scene": "NYC"
+    },
+    "1078": {
+      "name": "callison",
+      "scene": "NYC"
+    },
+    "1443": {
+      "name": "Leo",
+      "scene": "NYC"
+    },
+    "1533": {
+      "name": "marnie milky",
+      "scene": "NYC"
+    },
+    "1620": {
+      "name": "bl\ud83d\udd25ze",
+      "scene": "NYC"
+    },
+    "1653": {
+      "name": "Will",
+      "scene": "NYC"
+    },
+    "1660": {
+      "name": "Linalee",
+      "scene": "NYC"
+    },
+    "2704": {
+      "name": "Miles",
+      "scene": null
+    }
+  },
+  "tournament_id": 842,
+  "tournament_name": "January 2026 BYOT",
+  "offset_seconds": 9.0
 }

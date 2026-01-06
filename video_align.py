@@ -17,8 +17,12 @@ from pyzbar.pyzbar import decode
 from tqdm import tqdm
 
 
-# Hardcoded delay between game end (victory event) and QR code appearance on stats screen
-QR_DELAY_SECONDS = 18.3
+# Delay between game end (victory event) and QR code appearance on stats screen
+# This varies depending on whether an instant replay is shown:
+#   No replay: ~7 seconds after victory
+#   With replay: ~18.3 seconds after victory
+QR_DELAY_SECONDS = 7.0
+# QR_DELAY_SECONDS_WITH_REPLAY = 18.3
 
 # Cache directory for QR detection results
 QR_CACHE_DIR = Path(__file__).parent / "cache" / "qr_detections"
@@ -260,6 +264,7 @@ def binary_search_qr_start(
 def find_first_qr(
     video_path: str,
     coarse_interval_sec: float = 5.0,
+    min_start_seconds: float = 20.0,
     use_cache: bool = True,
     verbose: bool = True
 ) -> QRDetection | None:
@@ -274,6 +279,7 @@ def find_first_qr(
     Args:
         video_path: Path to the video file
         coarse_interval_sec: Seconds between coarse scan samples (default 5s)
+        min_start_seconds: Skip this many seconds at start to avoid stale QR codes (default 20s)
         use_cache: Whether to use cached results if available
         verbose: Print progress information
 
@@ -294,13 +300,17 @@ def find_first_qr(
     fps = cap.get(cv2.CAP_PROP_FPS)
     coarse_interval = int(coarse_interval_sec * fps)
 
+    # Calculate start frame to skip stale QR codes at video start
+    start_frame = int(min_start_seconds * fps)
+
     if verbose:
         duration_mins = total_frames / fps / 60
         print(f"Video: {total_frames} frames, {fps:.1f} fps, {duration_mins:.1f} minutes")
         print(f"Coarse scan every {coarse_interval_sec}s ({coarse_interval} frames)")
+        print(f"Starting scan at {min_start_seconds}s (frame {start_frame}) to skip stale QR codes")
 
-    # Phase 1: Coarse scan to find any QR code
-    frame_indices = range(0, total_frames, coarse_interval)
+    # Phase 1: Coarse scan to find any QR code (skipping first min_start_seconds)
+    frame_indices = range(start_frame, total_frames, coarse_interval)
     pbar = tqdm(frame_indices, desc="Coarse scan", disable=not verbose, unit="samples")
 
     found_frame = None
