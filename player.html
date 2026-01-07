@@ -721,21 +721,22 @@
         };
 
         // SVG icons for each position type (allows colored images)
-        const GOLD_COLOR = '%23ffc107';  // URL-encoded #ffc107
-        const BLUE_COLOR = '%232196f3';  // URL-encoded #2196f3
+        const GOLD_COLOR = '#ffc107';
+        const BLUE_COLOR = '#2196f3';
+        const DARK_BG = '#1a1a1a';
 
-        // SVG templates for each character type
+        // SVG templates for each character type (using encodeURIComponent for proper encoding)
         const SVG_TEMPLATES = {
             // Crown for queens
-            crown: (color) => `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`,
+            crown: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`)}`,
             // Horizontal stripes
-            stripes: (color) => `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><rect x="3" y="4" width="18" height="3" rx="1"/><rect x="3" y="10" width="18" height="3" rx="1"/><rect x="3" y="16" width="18" height="3" rx="1"/></svg>`,
+            stripes: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><rect x="3" y="4" width="18" height="3" rx="1"/><rect x="3" y="10" width="18" height="3" rx="1"/><rect x="3" y="16" width="18" height="3" rx="1"/></svg>`)}`,
             // Skull
-            skull: (color) => `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M12 2C6.5 2 2 6.5 2 12v3.5c0 1.4 1.1 2.5 2.5 2.5H6v-3h2v4h3v-4h2v4h3v-4h2v3h1.5c1.4 0 2.5-1.1 2.5-2.5V12c0-5.5-4.5-10-10-10zm-3 12a2 2 0 110-4 2 2 0 010 4zm6 0a2 2 0 110-4 2 2 0 010 4z"/></svg>`,
+            skull: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M12 2C6.5 2 2 6.5 2 12v3.5c0 1.4 1.1 2.5 2.5 2.5H6v-3h2v4h3v-4h2v4h3v-4h2v3h1.5c1.4 0 2.5-1.1 2.5-2.5V12c0-5.5-4.5-10-10-10zm-3 12a2 2 0 110-4 2 2 0 010 4zm6 0a2 2 0 110-4 2 2 0 010 4z"/></svg>`)}`,
             // Abs/muscular figure
-            abs: (color) => `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><ellipse cx="12" cy="5" rx="4" ry="3"/><path d="M8 9h8v13H8V9z"/><rect x="9" y="10" width="2.5" height="3" fill="%231a1a1a"/><rect x="12.5" y="10" width="2.5" height="3" fill="%231a1a1a"/><rect x="9" y="14" width="2.5" height="3" fill="%231a1a1a"/><rect x="12.5" y="14" width="2.5" height="3" fill="%231a1a1a"/><rect x="9" y="18" width="2.5" height="2.5" fill="%231a1a1a"/><rect x="12.5" y="18" width="2.5" height="2.5" fill="%231a1a1a"/></svg>`,
+            abs: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><ellipse cx="12" cy="5" rx="4" ry="3"/><path d="M8 9h8v13H8V9z"/><rect x="9" y="10" width="2.5" height="3" fill="${DARK_BG}"/><rect x="12.5" y="10" width="2.5" height="3" fill="${DARK_BG}"/><rect x="9" y="14" width="2.5" height="3" fill="${DARK_BG}"/><rect x="12.5" y="14" width="2.5" height="3" fill="${DARK_BG}"/><rect x="9" y="18" width="2.5" height="2.5" fill="${DARK_BG}"/><rect x="12.5" y="18" width="2.5" height="2.5" fill="${DARK_BG}"/></svg>`)}`,
             // Checkerboard pattern
-            checkers: (color) => `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="${color}"/><rect x="0" y="0" width="6" height="6" fill="%231a1a1a"/><rect x="12" y="0" width="6" height="6" fill="%231a1a1a"/><rect x="6" y="6" width="6" height="6" fill="%231a1a1a"/><rect x="18" y="6" width="6" height="6" fill="%231a1a1a"/><rect x="0" y="12" width="6" height="6" fill="%231a1a1a"/><rect x="12" y="12" width="6" height="6" fill="%231a1a1a"/><rect x="6" y="18" width="6" height="6" fill="%231a1a1a"/><rect x="18" y="18" width="6" height="6" fill="%231a1a1a"/></svg>`
+            checkers: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="${color}"/><rect x="0" y="0" width="6" height="6" fill="${DARK_BG}"/><rect x="12" y="0" width="6" height="6" fill="${DARK_BG}"/><rect x="6" y="6" width="6" height="6" fill="${DARK_BG}"/><rect x="18" y="6" width="6" height="6" fill="${DARK_BG}"/><rect x="0" y="12" width="6" height="6" fill="${DARK_BG}"/><rect x="12" y="12" width="6" height="6" fill="${DARK_BG}"/><rect x="6" y="18" width="6" height="6" fill="${DARK_BG}"/><rect x="18" y="18" width="6" height="6" fill="${DARK_BG}"/></svg>`)}`
         };
 
         // SVG data URLs for each position
