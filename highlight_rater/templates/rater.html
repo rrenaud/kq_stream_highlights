@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating: {{ chapters_file }}</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #eee;
+            min-height: 100vh;
+        }
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        .video-section {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .video-wrapper {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            flex-shrink: 0;
+        }
+        #player {
+            width: 100%;
+            height: 100%;
+        }
+        .event-info {
+            margin-top: 20px;
+            padding: 20px;
+            background: #242424;
+            border-radius: 8px;
+        }
+        .event-info h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+        }
+        .event-meta {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .meta-item {
+            padding: 10px;
+            background: #1a1a1a;
+            border-radius: 6px;
+        }
+        .meta-item label {
+            display: block;
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 4px;
+        }
+        .meta-item .value {
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .delta-positive { color: #4caf50; }
+        .delta-negative { color: #f44336; }
+        .sidebar {
+            width: 350px;
+            background: #242424;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid #333;
+        }
+        .header {
+            margin-bottom: 20px;
+        }
+        .header h2 {
+            color: #e94560;
+            font-size: 18px;
+        }
+        .header .rater-info {
+            color: #888;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            margin: 15px 0;
+            overflow: hidden;
+        }
+        .progress-bar .fill {
+            height: 100%;
+            background: #e94560;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+        .rating-section {
+            margin-top: auto;
+        }
+        .rating-section h4 {
+            color: #aaa;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        .rating-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .rating-btn {
+            padding: 20px 15px;
+            border: 2px solid #333;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #eee;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .rating-btn:hover {
+            border-color: #e94560;
+            background: #2d2d2d;
+        }
+        .rating-btn:active {
+            transform: scale(0.98);
+        }
+        .rating-btn .rating-value {
+            font-size: 24px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .rating-btn .rating-label {
+            font-size: 12px;
+            color: #888;
+        }
+        .rating-btn .key-hint {
+            font-size: 10px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .rating-btn[data-rating="0"] { border-color: #666; }
+        .rating-btn[data-rating="1"] { border-color: #ff9800; }
+        .rating-btn[data-rating="2"] { border-color: #4caf50; }
+        .rating-btn[data-rating="3"] { border-color: #e94560; }
+        .rating-btn[data-rating="0"]:hover { background: rgba(102, 102, 102, 0.2); }
+        .rating-btn[data-rating="1"]:hover { background: rgba(255, 152, 0, 0.2); }
+        .rating-btn[data-rating="2"]:hover { background: rgba(76, 175, 80, 0.2); }
+        .rating-btn[data-rating="3"]:hover { background: rgba(233, 69, 96, 0.2); }
+        .skip-btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            background: #333;
+            border: none;
+            border-radius: 6px;
+            color: #888;
+            cursor: pointer;
+        }
+        .skip-btn:hover {
+            background: #444;
+            color: #eee;
+        }
+        .complete-message {
+            text-align: center;
+            padding: 40px;
+        }
+        .complete-message h2 {
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        .complete-message a {
+            color: #5ba3ec;
+            text-decoration: none;
+        }
+        .keyboard-hints {
+            margin-top: 20px;
+            padding: 15px;
+            background: #1a1a1a;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #666;
+        }
+        .keyboard-hints kbd {
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="video-section">
+            <div class="video-wrapper">
+                <div id="player"></div>
+            </div>
+
+            <div class="event-info" id="eventInfo">
+                <h3>Event Details</h3>
+                <div class="event-meta">
+                    <div class="meta-item">
+                        <label>Time</label>
+                        <div class="value" id="eventTime">--:--</div>
+                    </div>
+                    <div class="meta-item">
+                        <label>Type</label>
+                        <div class="value" id="eventType">-</div>
+                    </div>
+                    <div class="meta-item">
+                        <label>Delta (Win Prob Change)</label>
+                        <div class="value" id="eventDelta">-</div>
+                    </div>
+                    <div class="meta-item">
+                        <label>Position(s)</label>
+                        <div class="value" id="eventPositions">-</div>
+                    </div>
+                    <div class="meta-item">
+                        <label>Game</label>
+                        <div class="value" id="eventGame">-</div>
+                    </div>
+                    <div class="meta-item">
+                        <label>Map / Winner</label>
+                        <div class="value" id="eventMapWinner">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="header">
+                <h2>Highlight Rater</h2>
+                <div class="rater-info">{{ rater_name }} - {{ chapters_file }}</div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="progress-text" id="progressText">Loading...</div>
+
+            <div class="rating-section" id="ratingSection">
+                <h4>Rate this highlight</h4>
+                <div class="rating-buttons">
+                    <button class="rating-btn" data-rating="0">
+                        <span class="rating-value">0</span>
+                        <span class="rating-label">Not a highlight</span>
+                        <span class="key-hint">Press 0</span>
+                    </button>
+                    <button class="rating-btn" data-rating="1">
+                        <span class="rating-value">1</span>
+                        <span class="rating-label">Minor</span>
+                        <span class="key-hint">Press 1</span>
+                    </button>
+                    <button class="rating-btn" data-rating="2">
+                        <span class="rating-value">2</span>
+                        <span class="rating-label">Good</span>
+                        <span class="key-hint">Press 2</span>
+                    </button>
+                    <button class="rating-btn" data-rating="3">
+                        <span class="rating-value">3</span>
+                        <span class="rating-label">Excellent</span>
+                        <span class="key-hint">Press 3</span>
+                    </button>
+                </div>
+
+                <div class="keyboard-hints">
+                    <kbd>0-3</kbd> Rate event &nbsp;
+                    <kbd>Space</kbd> Play/Pause &nbsp;
+                    <kbd>R</kbd> Replay from event
+                </div>
+            </div>
+
+            <div class="complete-message" id="completeMessage" style="display: none;">
+                <h2>All Done!</h2>
+                <p>You've rated all events in this file.</p>
+                <p><a href="/">Return to home</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sessionId = {{ session_id }};
+        const positionNames = {{ position_names | tojson }};
+
+        let player;
+        let currentEvent = null;
+        let ratingStartTime = null;
+        let videoId = null;
+
+        // YouTube API
+        function onYouTubeIframeAPIReady() {
+            console.log('YouTube API ready');
+        }
+
+        function initPlayer(videoId) {
+            player = new YT.Player('player', {
+                videoId: videoId,
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 1,
+                    'rel': 0,
+                    'modestbranding': 1,
+                },
+                events: {
+                    'onReady': () => console.log('Player ready'),
+                }
+            });
+        }
+
+        // Load YouTube API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+
+        // Fetch next event
+        async function loadNextEvent() {
+            const response = await fetch(`/api/sessions/${sessionId}/next`);
+            const data = await response.json();
+
+            if (data.complete) {
+                showComplete(data);
+                return;
+            }
+
+            currentEvent = data.event;
+            ratingStartTime = Date.now();
+
+            // Initialize player if needed
+            if (!player && data.video_id) {
+                videoId = data.video_id;
+                initPlayer(videoId);
+            }
+
+            // Update UI
+            updateEventDisplay(data);
+            updateProgress(data.progress);
+
+            // Seek to event time (with 4s buffer)
+            if (player && player.seekTo) {
+                const seekTime = Math.max(0, currentEvent.time - 4);
+                player.seekTo(seekTime, true);
+                player.playVideo();
+            }
+        }
+
+        function updateEventDisplay(data) {
+            const event = data.event;
+            const game = data.game;
+
+            document.getElementById('eventTime').textContent = data.formatted_time;
+            document.getElementById('eventType').textContent = event.type;
+
+            const deltaEl = document.getElementById('eventDelta');
+            const deltaPercent = (event.delta * 100).toFixed(1);
+            deltaEl.textContent = (event.delta >= 0 ? '+' : '') + deltaPercent + '%';
+            deltaEl.className = 'value ' + (event.delta >= 0 ? 'delta-positive' : 'delta-negative');
+
+            // Position display with user names
+            const positions = event.positions || [];
+            const posDisplay = positions.map(p => {
+                const name = positionNames[p] || `P${p}`;
+                const user = data.position_users[String(p)];
+                return user ? `${name} (${user})` : name;
+            }).join(', ');
+            document.getElementById('eventPositions').textContent = posDisplay || '-';
+
+            if (game) {
+                document.getElementById('eventGame').textContent = `Game ${game.game_id}`;
+                document.getElementById('eventMapWinner').textContent = `${game.map} / ${game.winner} (${game.win_condition})`;
+            }
+        }
+
+        function updateProgress(progress) {
+            const percent = (progress.rated / progress.total * 100).toFixed(0);
+            document.getElementById('progressFill').style.width = percent + '%';
+            document.getElementById('progressText').textContent =
+                `${progress.rated} of ${progress.total} rated (${progress.remaining} remaining)`;
+        }
+
+        function showComplete(data) {
+            document.getElementById('ratingSection').style.display = 'none';
+            document.getElementById('completeMessage').style.display = 'block';
+            document.getElementById('progressFill').style.width = '100%';
+            document.getElementById('progressText').textContent =
+                `${data.total} of ${data.total} rated - Complete!`;
+        }
+
+        // Submit rating
+        async function submitRating(rating) {
+            if (!currentEvent) return;
+
+            const responseTime = Date.now() - ratingStartTime;
+
+            await fetch(`/api/sessions/${sessionId}/ratings`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event_id: currentEvent.id,
+                    game_id: currentEvent.game_id,
+                    rating: rating,
+                    response_time_ms: responseTime,
+                }),
+            });
+
+            // Load next event
+            loadNextEvent();
+        }
+
+        // Event handlers
+        document.querySelectorAll('.rating-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rating = parseInt(btn.dataset.rating);
+                submitRating(rating);
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Don't trigger if typing in an input
+            if (e.target.tagName === 'INPUT') return;
+
+            if (e.key >= '0' && e.key <= '3') {
+                submitRating(parseInt(e.key));
+            } else if (e.key === ' ') {
+                e.preventDefault();
+                if (player) {
+                    const state = player.getPlayerState();
+                    if (state === 1) player.pauseVideo();
+                    else player.playVideo();
+                }
+            } else if (e.key.toLowerCase() === 'r') {
+                if (player && currentEvent) {
+                    const seekTime = Math.max(0, currentEvent.time - 4);
+                    player.seekTo(seekTime, true);
+                    player.playVideo();
+                }
+            }
+        });
+
+        // Start
+        loadNextEvent();
+    </script>
+</body>
+</html>
