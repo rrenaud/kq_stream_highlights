@@ -305,18 +305,33 @@
         const positionNames = {{ position_names | tojson }};
 
         let player;
+        let playerReady = false;
         let currentEvent = null;
         let ratingStartTime = null;
         let videoId = null;
+        let youtubeApiReady = false;
+        let pendingVideoId = null;
+        let pendingSeekTime = null;
 
-        // YouTube API
+        // YouTube API callback - called when API is loaded
         function onYouTubeIframeAPIReady() {
             console.log('YouTube API ready');
+            youtubeApiReady = true;
+            // If we have a pending video to load, do it now
+            if (pendingVideoId) {
+                initPlayer(pendingVideoId);
+            }
         }
 
-        function initPlayer(videoId) {
+        function initPlayer(vid) {
+            if (!youtubeApiReady) {
+                // Queue it for when API is ready
+                pendingVideoId = vid;
+                return;
+            }
+            videoId = vid;
             player = new YT.Player('player', {
-                videoId: videoId,
+                videoId: vid,
                 playerVars: {
                     'autoplay': 0,
                     'controls': 1,
@@ -324,9 +339,31 @@
                     'modestbranding': 1,
                 },
                 events: {
-                    'onReady': () => console.log('Player ready'),
+                    'onReady': onPlayerReady,
                 }
             });
+        }
+
+        function onPlayerReady() {
+            console.log('Player ready');
+            playerReady = true;
+            // If we had a pending seek, do it now
+            if (pendingSeekTime !== null) {
+                player.seekTo(pendingSeekTime, true);
+                player.playVideo();
+                pendingSeekTime = null;
+            }
+        }
+
+        function seekToEvent(time) {
+            const seekTime = Math.max(0, time - 4);
+            if (player && playerReady) {
+                player.seekTo(seekTime, true);
+                player.playVideo();
+            } else {
+                // Queue for when player is ready
+                pendingSeekTime = seekTime;
+            }
         }
 
         // Load YouTube API
@@ -349,8 +386,7 @@
 
             // Initialize player if needed
             if (!player && data.video_id) {
-                videoId = data.video_id;
-                initPlayer(videoId);
+                initPlayer(data.video_id);
             }
 
             // Update UI
@@ -358,11 +394,7 @@
             updateProgress(data.progress);
 
             // Seek to event time (with 4s buffer)
-            if (player && player.seekTo) {
-                const seekTime = Math.max(0, currentEvent.time - 4);
-                player.seekTo(seekTime, true);
-                player.playVideo();
-            }
+            seekToEvent(currentEvent.time);
         }
 
         function updateEventDisplay(data) {
@@ -451,10 +483,8 @@
                     else player.playVideo();
                 }
             } else if (e.key.toLowerCase() === 'r') {
-                if (player && currentEvent) {
-                    const seekTime = Math.max(0, currentEvent.time - 4);
-                    player.seekTo(seekTime, true);
-                    player.playVideo();
+                if (currentEvent) {
+                    seekToEvent(currentEvent.time);
                 }
             }
         });
