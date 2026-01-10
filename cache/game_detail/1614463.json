@@ -1,0 +1,106 @@
+{
+  "id": 1614463,
+  "map_name": "Day",
+  "cabinet": {
+    "id": 96,
+    "name": "coro3",
+    "display_name": "Coronation Cab 3",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 534,
+    "last_game_time": "2025-08-07T19:12:12.117000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1132865,
+      "player_id": 2,
+      "user": 39,
+      "game": 1614463,
+      "play_session": 81030
+    },
+    {
+      "id": 1132866,
+      "player_id": 3,
+      "user": 1112,
+      "game": 1614463,
+      "play_session": 81084
+    },
+    {
+      "id": 1132867,
+      "player_id": 4,
+      "user": 1067,
+      "game": 1614463,
+      "play_session": 81038
+    },
+    {
+      "id": 1132868,
+      "player_id": 5,
+      "user": 225,
+      "game": 1614463,
+      "play_session": 81085
+    },
+    {
+      "id": 1132869,
+      "player_id": 6,
+      "user": 182,
+      "game": 1614463,
+      "play_session": 81036
+    },
+    {
+      "id": 1132870,
+      "player_id": 7,
+      "user": 3,
+      "game": 1614463,
+      "play_session": 81086
+    },
+    {
+      "id": 1132871,
+      "player_id": 8,
+      "user": 12,
+      "game": 1614463,
+      "play_session": 81034
+    },
+    {
+      "id": 1132872,
+      "player_id": 9,
+      "user": 656,
+      "game": 1614463,
+      "play_session": 81087
+    },
+    {
+      "id": 1132873,
+      "player_id": 10,
+      "user": 431,
+      "game": 1614463,
+      "play_session": 81032
+    }
+  ],
+  "start_time": "2025-08-07T17:44:49.930000Z",
+  "end_time": "2025-08-07T17:46:29.296000Z",
+  "status": "complete",
+  "win_condition": "snail",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 19,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12666,
+  "whiteboard_match": null
+}

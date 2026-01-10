@@ -1,0 +1,64 @@
+{
+  "id": 1714348,
+  "map_name": "Night",
+  "cabinet": {
+    "id": 3,
+    "name": "sf",
+    "display_name": "Detour (GDC 90s Cab 2)",
+    "scene": 3,
+    "address": "",
+    "description": "The Detour cab",
+    "time_zone": "US/Pacific",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 19732,
+    "last_game_time": "2026-01-06T05:31:28.431000Z",
+    "client_status": "offline",
+    "twitch_channel_name": "kqsf"
+  },
+  "scene": {
+    "id": 3,
+    "name": "sf",
+    "display_name": "San Francisco",
+    "description": "The SF scene. League nights on Monday at the Detour, Wed (and Fri sometimes) nights at Emporium, and Sat at Speakeasy.",
+    "total_games": 38921,
+    "last_game_time": "2026-01-06T05:31:28.431000Z",
+    "background_color": "#fd5a1e"
+  },
+  "users": [
+    {
+      "id": 1195733,
+      "player_id": 2,
+      "user": 1392,
+      "game": 1714348,
+      "play_session": null
+    },
+    {
+      "id": 1195732,
+      "player_id": 1,
+      "user": 505,
+      "game": 1714348,
+      "play_session": 87741
+    },
+    {
+      "id": 1195734,
+      "player_id": 9,
+      "user": 2,
+      "game": 1714348,
+      "play_session": 87744
+    }
+  ],
+  "start_time": "2026-01-06T04:37:54.564000Z",
+  "end_time": "2026-01-06T04:38:24.001000Z",
+  "status": "error",
+  "win_condition": "military",
+  "winning_team": "blue",
+  "player_count": 10,
+  "berries_used": 10,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": null,
+  "whiteboard_match": null
+}

@@ -1,0 +1,99 @@
+{
+  "id": 1636696,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 29,
+    "name": "wonderville",
+    "display_name": "Wonderville",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 81881,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "client_status": "offline",
+    "twitch_channel_name": "wondervillenyc"
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1151692,
+      "player_id": 1,
+      "user": 256,
+      "game": 1636696,
+      "play_session": 82465
+    },
+    {
+      "id": 1151693,
+      "player_id": 2,
+      "user": 392,
+      "game": 1636696,
+      "play_session": 82477
+    },
+    {
+      "id": 1151694,
+      "player_id": 3,
+      "user": 1967,
+      "game": 1636696,
+      "play_session": 82485
+    },
+    {
+      "id": 1151695,
+      "player_id": 5,
+      "user": 95,
+      "game": 1636696,
+      "play_session": 82482
+    },
+    {
+      "id": 1151696,
+      "player_id": 6,
+      "user": 3,
+      "game": 1636696,
+      "play_session": 82478
+    },
+    {
+      "id": 1151697,
+      "player_id": 7,
+      "user": 608,
+      "game": 1636696,
+      "play_session": 82483
+    },
+    {
+      "id": 1151698,
+      "player_id": 8,
+      "user": 1533,
+      "game": 1636696,
+      "play_session": 82484
+    },
+    {
+      "id": 1151699,
+      "player_id": 9,
+      "user": 225,
+      "game": 1636696,
+      "play_session": 82486
+    }
+  ],
+  "start_time": "2025-09-06T19:47:56.504000Z",
+  "end_time": "2025-09-06T19:50:38.311000Z",
+  "status": "complete",
+  "win_condition": "economic",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 48,
+  "cabinet_version": "20.13",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12985,
+  "whiteboard_match": null
+}

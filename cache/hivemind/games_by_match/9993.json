@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1486395,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059521,
+        "player_id": 2,
+        "user": 973,
+        "game": 1486395,
+        "play_session": 73143
+      },
+      {
+        "id": 1059522,
+        "player_id": 6,
+        "user": 1253,
+        "game": 1486395,
+        "play_session": 73145
+      },
+      {
+        "id": 1059523,
+        "player_id": 8,
+        "user": 1533,
+        "game": 1486395,
+        "play_session": 73146
+      },
+      {
+        "id": 1059524,
+        "player_id": 1,
+        "user": 95,
+        "game": 1486395,
+        "play_session": 73132
+      },
+      {
+        "id": 1059525,
+        "player_id": 5,
+        "user": 81,
+        "game": 1486395,
+        "play_session": 86464
+      }
+    ],
+    "start_time": "2025-03-20T02:16:56.448000Z",
+    "end_time": "2025-03-20T02:18:31.671000Z",
+    "status": "error",
+    "win_condition": "economic",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 36,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9993,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1486403,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059528,
+        "player_id": 2,
+        "user": 973,
+        "game": 1486403,
+        "play_session": 73143
+      },
+      {
+        "id": 1059529,
+        "player_id": 6,
+        "user": 1253,
+        "game": 1486403,
+        "play_session": 73145
+      },
+      {
+        "id": 1059530,
+        "player_id": 8,
+        "user": 1533,
+        "game": 1486403,
+        "play_session": 73146
+      },
+      {
+        "id": 1059531,
+        "player_id": 1,
+        "user": 95,
+        "game": 1486403,
+        "play_session": 73132
+      },
+      {
+        "id": 1059532,
+        "player_id": 5,
+        "user": 81,
+        "game": 1486403,
+        "play_session": 86464
+      }
+    ],
+    "start_time": "2025-03-20T02:19:14.497000Z",
+    "end_time": "2025-03-20T02:20:21.433000Z",
+    "status": "error",
+    "win_condition": "economic",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 34,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9993,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1486407,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059537,
+        "player_id": 8,
+        "user": 1533,
+        "game": 1486407,
+        "play_session": 73146
+      },
+      {
+        "id": 1059538,
+        "player_id": 1,
+        "user": 95,
+        "game": 1486407,
+        "play_session": 73132
+      },
+      {
+        "id": 1059536,
+        "player_id": 6,
+        "user": 1253,
+        "game": 1486407,
+        "play_session": 73145
+      },
+      {
+        "id": 1059535,
+        "player_id": 2,
+        "user": 973,
+        "game": 1486407,
+        "play_session": 73143
+      },
+      {
+        "id": 1059539,
+        "player_id": 5,
+        "user": 81,
+        "game": 1486407,
+        "play_session": 86464
+      }
+    ],
+    "start_time": "2025-03-20T02:20:58.799000Z",
+    "end_time": "2025-03-20T02:22:39.820000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 35,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9993,
+    "whiteboard_match": null
+  }
+]

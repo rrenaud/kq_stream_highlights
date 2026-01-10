@@ -1,0 +1,99 @@
+{
+  "id": 1612979,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 96,
+    "name": "coro3",
+    "display_name": "Coronation Cab 3",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 534,
+    "last_game_time": "2025-08-07T19:12:12.117000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1131279,
+      "player_id": 8,
+      "user": 563,
+      "game": 1612979,
+      "play_session": 80942
+    },
+    {
+      "id": 1131277,
+      "player_id": 6,
+      "user": 317,
+      "game": 1612979,
+      "play_session": 80943
+    },
+    {
+      "id": 1131275,
+      "player_id": 4,
+      "user": 1533,
+      "game": 1612979,
+      "play_session": 80945
+    },
+    {
+      "id": 1131280,
+      "player_id": 9,
+      "user": 656,
+      "game": 1612979,
+      "play_session": 80936
+    },
+    {
+      "id": 1131274,
+      "player_id": 3,
+      "user": 1112,
+      "game": 1612979,
+      "play_session": 80933
+    },
+    {
+      "id": 1131276,
+      "player_id": 5,
+      "user": 225,
+      "game": 1612979,
+      "play_session": 80934
+    },
+    {
+      "id": 1131278,
+      "player_id": 7,
+      "user": 3,
+      "game": 1612979,
+      "play_session": 80935
+    },
+    {
+      "id": 1131273,
+      "player_id": 1,
+      "user": 910,
+      "game": 1612979,
+      "play_session": 80931
+    }
+  ],
+  "start_time": "2025-08-09T19:30:52.003000Z",
+  "end_time": "2025-08-09T19:32:20.202000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 33,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12600,
+  "whiteboard_match": null
+}

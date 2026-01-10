@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1465438,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1048157,
+        "player_id": 2,
+        "user": 973,
+        "game": 1465438,
+        "play_session": 72126
+      },
+      {
+        "id": 1048159,
+        "player_id": 5,
+        "user": 1660,
+        "game": 1465438,
+        "play_session": 72130
+      },
+      {
+        "id": 1048158,
+        "player_id": 6,
+        "user": 1078,
+        "game": 1465438,
+        "play_session": 72137
+      }
+    ],
+    "start_time": "2025-02-27T01:40:39.104000Z",
+    "end_time": "2025-02-27T01:43:05.068000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 38,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9760,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1465445,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1048168,
+        "player_id": 2,
+        "user": 973,
+        "game": 1465445,
+        "play_session": 72126
+      },
+      {
+        "id": 1048169,
+        "player_id": 6,
+        "user": 1078,
+        "game": 1465445,
+        "play_session": 72137
+      },
+      {
+        "id": 1048170,
+        "player_id": 5,
+        "user": 1660,
+        "game": 1465445,
+        "play_session": 72130
+      }
+    ],
+    "start_time": "2025-02-27T01:44:37.852000Z",
+    "end_time": "2025-02-27T01:46:37.404000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 36,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9760,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1465455,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1048177,
+        "player_id": 6,
+        "user": 1078,
+        "game": 1465455,
+        "play_session": 72137
+      },
+      {
+        "id": 1048176,
+        "player_id": 2,
+        "user": 973,
+        "game": 1465455,
+        "play_session": 72126
+      },
+      {
+        "id": 1048178,
+        "player_id": 5,
+        "user": 1660,
+        "game": 1465455,
+        "play_session": 72130
+      }
+    ],
+    "start_time": "2025-02-27T01:48:15.719000Z",
+    "end_time": "2025-02-27T01:49:15.410000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 23,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9760,
+    "whiteboard_match": null
+  }
+]

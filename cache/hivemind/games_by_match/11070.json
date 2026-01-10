@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1534585,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1093603,
+        "player_id": 6,
+        "user": 1533,
+        "game": 1534585,
+        "play_session": 77292
+      },
+      {
+        "id": 1093604,
+        "player_id": 5,
+        "user": 1253,
+        "game": 1534585,
+        "play_session": 77293
+      }
+    ],
+    "start_time": "2025-05-29T01:07:27.632000Z",
+    "end_time": "2025-05-29T01:09:28.116000Z",
+    "status": "complete",
+    "win_condition": "economic",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 35,
+    "cabinet_version": "20.12",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 11070,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1534592,
+    "map_name": "Night",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1093608,
+        "player_id": 5,
+        "user": 1253,
+        "game": 1534592,
+        "play_session": 77293
+      },
+      {
+        "id": 1093607,
+        "player_id": 6,
+        "user": 1533,
+        "game": 1534592,
+        "play_session": 77292
+      }
+    ],
+    "start_time": "2025-05-29T01:10:10.862000Z",
+    "end_time": "2025-05-29T01:12:16.256000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 36,
+    "cabinet_version": "20.12",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 11070,
+    "whiteboard_match": null
+  }
+]

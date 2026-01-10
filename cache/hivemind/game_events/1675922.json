@@ -1,0 +1,3740 @@
+[
+  {
+    "id": 180212304,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:15.996000Z",
+    "event_type": "enteredGameScreen",
+    "values": [],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212305,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.043000Z",
+    "event_type": "mapstart",
+    "values": [
+      "map_day",
+      "True",
+      "0",
+      "False",
+      "20.13"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212306,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.044000Z",
+    "event_type": "spawn",
+    "values": [
+      "1",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212307,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.044000Z",
+    "event_type": "spawn",
+    "values": [
+      "2",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212308,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.045000Z",
+    "event_type": "spawn",
+    "values": [
+      "8",
+      "True"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212310,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.112000Z",
+    "event_type": "spawn",
+    "values": [
+      "7",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212311,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.145000Z",
+    "event_type": "spawn",
+    "values": [
+      "10",
+      "True"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212315,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.444000Z",
+    "event_type": "spawn",
+    "values": [
+      "10",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212316,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.478000Z",
+    "event_type": "spawn",
+    "values": [
+      "4",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212319,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.713000Z",
+    "event_type": "spawn",
+    "values": [
+      "5",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212320,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.742000Z",
+    "event_type": "spawn",
+    "values": [
+      "6",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212321,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:16.809000Z",
+    "event_type": "spawn",
+    "values": [
+      "8",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212331,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:17.325000Z",
+    "event_type": "spawn",
+    "values": [
+      "3",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212333,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:17.508000Z",
+    "event_type": "spawn",
+    "values": [
+      "9",
+      "True"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212366,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:20.896000Z",
+    "event_type": "spawn",
+    "values": [
+      "9",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212371,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:21.162000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Blue"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212386,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:22.965000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "410",
+      "860",
+      "Red"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212400,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:25.017000Z",
+    "event_type": "gamestart",
+    "values": [
+      "map_day",
+      "True",
+      "0",
+      "False",
+      "20.13"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212414,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:25.682000Z",
+    "event_type": "carryFood",
+    "values": [
+      "7"
+    ],
+    "win_probability": "0.4662",
+    "game": 1675922
+  },
+  {
+    "id": 180212415,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:25.687000Z",
+    "event_type": "carryFood",
+    "values": [
+      "8"
+    ],
+    "win_probability": "0.4822",
+    "game": 1675922
+  },
+  {
+    "id": 180212422,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.259000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.4439",
+    "game": 1675922
+  },
+  {
+    "id": 180212423,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.291000Z",
+    "event_type": "carryFood",
+    "values": [
+      "5"
+    ],
+    "win_probability": "0.3720",
+    "game": 1675922
+  },
+  {
+    "id": 180212424,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.294000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.4139",
+    "game": 1675922
+  },
+  {
+    "id": 180212425,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.310000Z",
+    "event_type": "carryFood",
+    "values": [
+      "6"
+    ],
+    "win_probability": "0.4790",
+    "game": 1675922
+  },
+  {
+    "id": 180212429,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.529000Z",
+    "event_type": "playerKill",
+    "values": [
+      "983",
+      "764",
+      "1",
+      "2",
+      "Queen"
+    ],
+    "win_probability": "0.3114",
+    "game": 1675922
+  },
+  {
+    "id": 180212430,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.628000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.3033",
+    "game": 1675922
+  },
+  {
+    "id": 180212431,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:26.657000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.3252",
+    "game": 1675922
+  },
+  {
+    "id": 180212435,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:27.123000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "960",
+      "500",
+      "3"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212436,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:27.275000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1510",
+      "860",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212437,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:27.303000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212438,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:27.336000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "560",
+      "260",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212439,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:27.354000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "410",
+      "860",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212448,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:27.932000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.2802",
+    "game": 1675922
+  },
+  {
+    "id": 180212456,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:29.658000Z",
+    "event_type": "getOnSnail",
+    "values": [
+      "960",
+      "11",
+      "9"
+    ],
+    "win_probability": "0.2648",
+    "game": 1675922
+  },
+  {
+    "id": 180212457,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:29.825000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1032",
+      "923",
+      "10"
+    ],
+    "win_probability": "0.2724",
+    "game": 1675922
+  },
+  {
+    "id": 180212459,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:30.197000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "960",
+      "500",
+      "maiden_wings",
+      "3"
+    ],
+    "win_probability": "0.2387",
+    "game": 1675922
+  },
+  {
+    "id": 180212460,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:30.364000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1510",
+      "860",
+      "maiden_speed",
+      "8"
+    ],
+    "win_probability": "0.2870",
+    "game": 1675922
+  },
+  {
+    "id": 180212461,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:30.375000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1360",
+      "260",
+      "maiden_wings",
+      "6"
+    ],
+    "win_probability": "0.3358",
+    "game": 1675922
+  },
+  {
+    "id": 180212462,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:30.395000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "560",
+      "260",
+      "maiden_wings",
+      "5"
+    ],
+    "win_probability": "0.3230",
+    "game": 1675922
+  },
+  {
+    "id": 180212463,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:30.412000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "410",
+      "860",
+      "maiden_speed",
+      "7"
+    ],
+    "win_probability": "0.2909",
+    "game": 1675922
+  },
+  {
+    "id": 180212465,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:30.494000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1119",
+      "908",
+      "4"
+    ],
+    "win_probability": "0.2962",
+    "game": 1675922
+  },
+  {
+    "id": 180212480,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:32.184000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.2665",
+    "game": 1675922
+  },
+  {
+    "id": 180212485,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:32.470000Z",
+    "event_type": "carryFood",
+    "values": [
+      "7"
+    ],
+    "win_probability": "0.2643",
+    "game": 1675922
+  },
+  {
+    "id": 180212487,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:32.916000Z",
+    "event_type": "carryFood",
+    "values": [
+      "8"
+    ],
+    "win_probability": "0.2658",
+    "game": 1675922
+  },
+  {
+    "id": 180212488,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:32.921000Z",
+    "event_type": "getOffSnail",
+    "values": [
+      "895",
+      "11",
+      "",
+      "9"
+    ],
+    "win_probability": "0.2680",
+    "game": 1675922
+  },
+  {
+    "id": 180212489,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:32.922000Z",
+    "event_type": "playerKill",
+    "values": [
+      "895",
+      "11",
+      "6",
+      "9",
+      "Worker"
+    ],
+    "win_probability": "0.2810",
+    "game": 1675922
+  },
+  {
+    "id": 180212492,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:33.310000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "560",
+      "260",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212494,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:33.545000Z",
+    "event_type": "glance",
+    "values": [
+      "1308",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212496,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:33.811000Z",
+    "event_type": "glance",
+    "values": [
+      "804",
+      "55",
+      "6",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212497,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:33.841000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212503,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:34.689000Z",
+    "event_type": "glance",
+    "values": [
+      "1308",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212504,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:34.739000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.2917",
+    "game": 1675922
+  },
+  {
+    "id": 180212512,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:35.923000Z",
+    "event_type": "glance",
+    "values": [
+      "1283",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212513,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:35.953000Z",
+    "event_type": "glance",
+    "values": [
+      "868",
+      "55",
+      "6",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212518,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:36.387000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.2910",
+    "game": 1675922
+  },
+  {
+    "id": 180212519,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:36.400000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "560",
+      "260",
+      "maiden_wings",
+      "7"
+    ],
+    "win_probability": "0.3063",
+    "game": 1675922
+  },
+  {
+    "id": 180212523,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:36.934000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1360",
+      "260",
+      "maiden_wings",
+      "8"
+    ],
+    "win_probability": "0.3162",
+    "game": 1675922
+  },
+  {
+    "id": 180212524,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:37.285000Z",
+    "event_type": "glance",
+    "values": [
+      "1245",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212531,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:38.424000Z",
+    "event_type": "glance",
+    "values": [
+      "1243",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212545,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:39.585000Z",
+    "event_type": "glance",
+    "values": [
+      "1272",
+      "1015",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212546,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:39.591000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1411",
+      "762",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.3041",
+    "game": 1675922
+  },
+  {
+    "id": 180212550,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:40.725000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1119",
+      "936",
+      "4"
+    ],
+    "win_probability": "0.3155",
+    "game": 1675922
+  },
+  {
+    "id": 180212551,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:40.728000Z",
+    "event_type": "glance",
+    "values": [
+      "1272",
+      "1015",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212561,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:42.232000Z",
+    "event_type": "glance",
+    "values": [
+      "1158",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212573,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:43.486000Z",
+    "event_type": "glance",
+    "values": [
+      "1128",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212580,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:44.649000Z",
+    "event_type": "glance",
+    "values": [
+      "1157",
+      "1015",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212582,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:45.078000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.3401",
+    "game": 1675922
+  },
+  {
+    "id": 180212584,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:45.208000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1822",
+      "620",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.3155",
+    "game": 1675922
+  },
+  {
+    "id": 180212587,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:45.805000Z",
+    "event_type": "glance",
+    "values": [
+      "1157",
+      "1015",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212595,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:46.950000Z",
+    "event_type": "glance",
+    "values": [
+      "1157",
+      "1014",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212597,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:47.412000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.3101",
+    "game": 1675922
+  },
+  {
+    "id": 180212601,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:48.008000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.3347",
+    "game": 1675922
+  },
+  {
+    "id": 180212607,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:49.084000Z",
+    "event_type": "glance",
+    "values": [
+      "1106",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212617,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:50.825000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1249",
+      "845",
+      "7",
+      "4",
+      "Worker"
+    ],
+    "win_probability": "0.3101",
+    "game": 1675922
+  },
+  {
+    "id": 180212619,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:51.038000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.2991",
+    "game": 1675922
+  },
+  {
+    "id": 180212620,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:51.069000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.3210",
+    "game": 1675922
+  },
+  {
+    "id": 180212624,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:52.249000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.3091",
+    "game": 1675922
+  },
+  {
+    "id": 180212625,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:52.279000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1440",
+      "620",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.2752",
+    "game": 1675922
+  },
+  {
+    "id": 180212629,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:52.660000Z",
+    "event_type": "glance",
+    "values": [
+      "895",
+      "55",
+      "6",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212636,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:53.224000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "410",
+      "860",
+      "Blue"
+    ],
+    "win_probability": "0.2784",
+    "game": 1675922
+  },
+  {
+    "id": 180212637,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:53.422000Z",
+    "event_type": "getOnSnail",
+    "values": [
+      "895",
+      "11",
+      "9"
+    ],
+    "win_probability": "0.2760",
+    "game": 1675922
+  },
+  {
+    "id": 180212641,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:53.771000Z",
+    "event_type": "getOffSnail",
+    "values": [
+      "889",
+      "11",
+      "",
+      "9"
+    ],
+    "win_probability": "0.2784",
+    "game": 1675922
+  },
+  {
+    "id": 180212642,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:53.774000Z",
+    "event_type": "playerKill",
+    "values": [
+      "889",
+      "11",
+      "6",
+      "9",
+      "Worker"
+    ],
+    "win_probability": "0.2943",
+    "game": 1675922
+  },
+  {
+    "id": 180212643,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:53.800000Z",
+    "event_type": "glance",
+    "values": [
+      "870",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212647,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:54.078000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.3067",
+    "game": 1675922
+  },
+  {
+    "id": 180212651,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:54.296000Z",
+    "event_type": "glance",
+    "values": [
+      "1306",
+      "1015",
+      "3",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212656,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:54.965000Z",
+    "event_type": "glance",
+    "values": [
+      "870",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212658,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:55.327000Z",
+    "event_type": "glance",
+    "values": [
+      "1260",
+      "1015",
+      "8",
+      "3"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212663,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:56.140000Z",
+    "event_type": "glance",
+    "values": [
+      "870",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212665,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:56.325000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.3390",
+    "game": 1675922
+  },
+  {
+    "id": 180212668,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:56.451000Z",
+    "event_type": "glance",
+    "values": [
+      "1453",
+      "1013",
+      "7",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212669,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:56.522000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "560",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.3266",
+    "game": 1675922
+  },
+  {
+    "id": 180212671,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:56.884000Z",
+    "event_type": "glance",
+    "values": [
+      "1298",
+      "1015",
+      "8",
+      "3"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212674,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:57.284000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.3151",
+    "game": 1675922
+  },
+  {
+    "id": 180212675,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:57.290000Z",
+    "event_type": "glance",
+    "values": [
+      "870",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212685,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:58.268000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1440",
+      "894",
+      "7",
+      "4",
+      "Worker"
+    ],
+    "win_probability": "0.2850",
+    "game": 1675922
+  },
+  {
+    "id": 180212686,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:58.318000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.3151",
+    "game": 1675922
+  },
+  {
+    "id": 180212688,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:58.448000Z",
+    "event_type": "glance",
+    "values": [
+      "870",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212691,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:58.814000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1407",
+      "882",
+      "8",
+      "7",
+      "Soldier"
+    ],
+    "win_probability": "0.4268",
+    "game": 1675922
+  },
+  {
+    "id": 180212697,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:59.226000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.4382",
+    "game": 1675922
+  },
+  {
+    "id": 180212698,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:36:59.611000Z",
+    "event_type": "glance",
+    "values": [
+      "871",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212707,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:00.699000Z",
+    "event_type": "glance",
+    "values": [
+      "1124",
+      "1015",
+      "3",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212718,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:01.731000Z",
+    "event_type": "playerKill",
+    "values": [
+      "856",
+      "20",
+      "6",
+      "9",
+      "Worker"
+    ],
+    "win_probability": "0.4382",
+    "game": 1675922
+  },
+  {
+    "id": 180212719,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:02.028000Z",
+    "event_type": "glance",
+    "values": [
+      "827",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212729,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:02.890000Z",
+    "event_type": "carryFood",
+    "values": [
+      "7"
+    ],
+    "win_probability": "0.4349",
+    "game": 1675922
+  },
+  {
+    "id": 180212741,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:04.276000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "560",
+      "260",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212743,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:04.442000Z",
+    "event_type": "glance",
+    "values": [
+      "1374",
+      "820",
+      "1",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212748,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:04.546000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1061",
+      "908",
+      "10"
+    ],
+    "win_probability": "0.4469",
+    "game": 1675922
+  },
+  {
+    "id": 180212750,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:04.874000Z",
+    "event_type": "berryKickIn",
+    "values": [
+      "1090",
+      "950",
+      "10",
+      "True"
+    ],
+    "win_probability": "0.5061",
+    "game": 1675922
+  },
+  {
+    "id": 180212766,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:07.029000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.4981",
+    "game": 1675922
+  },
+  {
+    "id": 180212768,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:07.278000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.5176",
+    "game": 1675922
+  },
+  {
+    "id": 180212770,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:07.357000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "560",
+      "260",
+      "maiden_wings",
+      "7"
+    ],
+    "win_probability": "0.4537",
+    "game": 1675922
+  },
+  {
+    "id": 180212774,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:07.759000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1169",
+      "775",
+      "2",
+      "5",
+      "Soldier"
+    ],
+    "win_probability": "0.4981",
+    "game": 1675922
+  },
+  {
+    "id": 180212775,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:07.821000Z",
+    "event_type": "glance",
+    "values": [
+      "1181",
+      "774",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212781,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:09.261000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Blue"
+    ],
+    "win_probability": "0.5504",
+    "game": 1675922
+  },
+  {
+    "id": 180212783,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:09.429000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.5644",
+    "game": 1675922
+  },
+  {
+    "id": 180212793,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:10.589000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.5784",
+    "game": 1675922
+  },
+  {
+    "id": 180212794,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:10.723000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "801",
+      "908",
+      "9"
+    ],
+    "win_probability": "0.6322",
+    "game": 1675922
+  },
+  {
+    "id": 180212798,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:11.071000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1407",
+      "500",
+      "1",
+      "4",
+      "Worker"
+    ],
+    "win_probability": "0.6063",
+    "game": 1675922
+  },
+  {
+    "id": 180212804,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:11.517000Z",
+    "event_type": "glance",
+    "values": [
+      "1085",
+      "53",
+      "3",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212811,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:12.049000Z",
+    "event_type": "carryFood",
+    "values": [
+      "5"
+    ],
+    "win_probability": "0.6066",
+    "game": 1675922
+  },
+  {
+    "id": 180212823,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:13.193000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "560",
+      "260",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212824,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:13.422000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.6161",
+    "game": 1675922
+  },
+  {
+    "id": 180212830,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:13.885000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.5940",
+    "game": 1675922
+  },
+  {
+    "id": 180212838,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:14.899000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "560",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.6088",
+    "game": 1675922
+  },
+  {
+    "id": 180212852,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:16.207000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.6095",
+    "game": 1675922
+  },
+  {
+    "id": 180212853,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:16.211000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1241",
+      "837",
+      "3",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.5887",
+    "game": 1675922
+  },
+  {
+    "id": 180212854,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:16.276000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "560",
+      "260",
+      "maiden_wings",
+      "5"
+    ],
+    "win_probability": "0.4942",
+    "game": 1675922
+  },
+  {
+    "id": 180212860,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:16.502000Z",
+    "event_type": "glance",
+    "values": [
+      "1206",
+      "419",
+      "7",
+      "4"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212865,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:17.134000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.4778",
+    "game": 1675922
+  },
+  {
+    "id": 180212871,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:17.947000Z",
+    "event_type": "glance",
+    "values": [
+      "836",
+      "55",
+      "6",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212877,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:18.924000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.5242",
+    "game": 1675922
+  },
+  {
+    "id": 180212881,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:19.090000Z",
+    "event_type": "glance",
+    "values": [
+      "810",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212889,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:19.922000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.5531",
+    "game": 1675922
+  },
+  {
+    "id": 180212891,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:20.171000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.5858",
+    "game": 1675922
+  },
+  {
+    "id": 180212892,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:20.311000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "4"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212898,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:20.442000Z",
+    "event_type": "unreserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "",
+      "4"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212899,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:20.904000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1090",
+      "923",
+      "10"
+    ],
+    "win_probability": "0.6303",
+    "game": 1675922
+  },
+  {
+    "id": 180212903,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:21.297000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "801",
+      "936",
+      "9"
+    ],
+    "win_probability": "0.6502",
+    "game": 1675922
+  },
+  {
+    "id": 180212909,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:21.467000Z",
+    "event_type": "glance",
+    "values": [
+      "898",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212910,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:21.496000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.6324",
+    "game": 1675922
+  },
+  {
+    "id": 180212919,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:22.275000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "4"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212921,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:22.577000Z",
+    "event_type": "glance",
+    "values": [
+      "913",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180212931,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:23.523000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.6144",
+    "game": 1675922
+  },
+  {
+    "id": 180212938,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:24.846000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Blue"
+    ],
+    "win_probability": "0.6229",
+    "game": 1675922
+  },
+  {
+    "id": 180212945,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:25.343000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1360",
+      "260",
+      "maiden_wings",
+      "4"
+    ],
+    "win_probability": "0.6241",
+    "game": 1675922
+  },
+  {
+    "id": 180212959,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:26.779000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.6192",
+    "game": 1675922
+  },
+  {
+    "id": 180212964,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:27.386000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.6521",
+    "game": 1675922
+  },
+  {
+    "id": 180212970,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:30.455000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "830",
+      "950",
+      "9"
+    ],
+    "win_probability": "0.6772",
+    "game": 1675922
+  },
+  {
+    "id": 180212975,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:31.368000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1482",
+      "620",
+      "1",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.6380",
+    "game": 1675922
+  },
+  {
+    "id": 180213000,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:35.805000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.6176",
+    "game": 1675922
+  },
+  {
+    "id": 180213008,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:36.646000Z",
+    "event_type": "getOnSnail",
+    "values": [
+      "889",
+      "11",
+      "9"
+    ],
+    "win_probability": "0.6136",
+    "game": 1675922
+  },
+  {
+    "id": 180213012,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:37.474000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.6461",
+    "game": 1675922
+  },
+  {
+    "id": 180213017,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:38.025000Z",
+    "event_type": "glance",
+    "values": [
+      "1208",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213024,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:38.938000Z",
+    "event_type": "getOffSnail",
+    "values": [
+      "855",
+      "11",
+      "",
+      "9"
+    ],
+    "win_probability": "0.6514",
+    "game": 1675922
+  },
+  {
+    "id": 180213025,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:38.942000Z",
+    "event_type": "playerKill",
+    "values": [
+      "855",
+      "11",
+      "4",
+      "9",
+      "Worker"
+    ],
+    "win_probability": "0.6671",
+    "game": 1675922
+  },
+  {
+    "id": 180213026,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:39.004000Z",
+    "event_type": "glance",
+    "values": [
+      "1163",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213036,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:40.163000Z",
+    "event_type": "glance",
+    "values": [
+      "1135",
+      "1015",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213043,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:41.237000Z",
+    "event_type": "glance",
+    "values": [
+      "966",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213047,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:42.075000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1811",
+      "919",
+      "3",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.6273",
+    "game": 1675922
+  },
+  {
+    "id": 180213048,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:42.298000Z",
+    "event_type": "glance",
+    "values": [
+      "1024",
+      "55",
+      "6",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213059,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:43.427000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1710",
+      "777",
+      "2",
+      "3",
+      "Soldier"
+    ],
+    "win_probability": "0.6873",
+    "game": 1675922
+  },
+  {
+    "id": 180213060,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:43.456000Z",
+    "event_type": "glance",
+    "values": [
+      "996",
+      "55",
+      "5",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213061,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:43.524000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1316",
+      "866",
+      "1",
+      "8",
+      "Soldier"
+    ],
+    "win_probability": "0.6152",
+    "game": 1675922
+  },
+  {
+    "id": 180213065,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:44.292000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.6110",
+    "game": 1675922
+  },
+  {
+    "id": 180213076,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:45.700000Z",
+    "event_type": "playerKill",
+    "values": [
+      "597",
+      "356",
+      "5",
+      "4",
+      "Soldier"
+    ],
+    "win_probability": "0.5433",
+    "game": 1675922
+  },
+  {
+    "id": 180213077,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:46.148000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.5207",
+    "game": 1675922
+  },
+  {
+    "id": 180213082,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:47.342000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.5074",
+    "game": 1675922
+  },
+  {
+    "id": 180213084,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:47.587000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.5263",
+    "game": 1675922
+  },
+  {
+    "id": 180213085,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:47.619000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.5178",
+    "game": 1675922
+  },
+  {
+    "id": 180213087,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:48.135000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "859",
+      "908",
+      "9"
+    ],
+    "win_probability": "0.4931",
+    "game": 1675922
+  },
+  {
+    "id": 180213088,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:48.330000Z",
+    "event_type": "carryFood",
+    "values": [
+      "8"
+    ],
+    "win_probability": "0.5331",
+    "game": 1675922
+  },
+  {
+    "id": 180213097,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:49.375000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1511",
+      "860",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.4931",
+    "game": 1675922
+  },
+  {
+    "id": 180213098,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:49.464000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213106,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:50.871000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "830",
+      "923",
+      "3"
+    ],
+    "win_probability": "0.4766",
+    "game": 1675922
+  },
+  {
+    "id": 180213107,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:50.903000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.5014",
+    "game": 1675922
+  },
+  {
+    "id": 180213120,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:52.531000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1360",
+      "260",
+      "maiden_wings",
+      "8"
+    ],
+    "win_probability": "0.5708",
+    "game": 1675922
+  },
+  {
+    "id": 180213121,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:52.900000Z",
+    "event_type": "playerKill",
+    "values": [
+      "656",
+      "705",
+      "5",
+      "6",
+      "Soldier"
+    ],
+    "win_probability": "0.4766",
+    "game": 1675922
+  },
+  {
+    "id": 180213126,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:53.242000Z",
+    "event_type": "glance",
+    "values": [
+      "1223",
+      "739",
+      "4",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213128,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:53.502000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.4513",
+    "game": 1675922
+  },
+  {
+    "id": 180213131,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:54.349000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "410",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.3896",
+    "game": 1675922
+  },
+  {
+    "id": 180213132,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:54.479000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.4347",
+    "game": 1675922
+  },
+  {
+    "id": 180213136,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:54.765000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1283",
+      "754",
+      "7",
+      "4",
+      "Worker"
+    ],
+    "win_probability": "0.4220",
+    "game": 1675922
+  },
+  {
+    "id": 180213139,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:54.946000Z",
+    "event_type": "playerKill",
+    "values": [
+      "868",
+      "754",
+      "8",
+      "5",
+      "Soldier"
+    ],
+    "win_probability": "0.4881",
+    "game": 1675922
+  },
+  {
+    "id": 180213141,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:55.228000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.5088",
+    "game": 1675922
+  },
+  {
+    "id": 180213147,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:56.689000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.4647",
+    "game": 1675922
+  },
+  {
+    "id": 180213148,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:57.104000Z",
+    "event_type": "carryFood",
+    "values": [
+      "6"
+    ],
+    "win_probability": "0.5054",
+    "game": 1675922
+  },
+  {
+    "id": 180213149,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:57.170000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.4570",
+    "game": 1675922
+  },
+  {
+    "id": 180213151,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:57.749000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "859",
+      "964",
+      "9"
+    ],
+    "win_probability": "0.3573",
+    "game": 1675922
+  },
+  {
+    "id": 180213155,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:58.165000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213160,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:37:59.242000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1412",
+      "927",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.3344",
+    "game": 1675922
+  },
+  {
+    "id": 180213165,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:00.485000Z",
+    "event_type": "carryFood",
+    "values": [
+      "5"
+    ],
+    "win_probability": "0.3044",
+    "game": 1675922
+  },
+  {
+    "id": 180213168,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:01.063000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.3392",
+    "game": 1675922
+  },
+  {
+    "id": 180213170,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:01.226000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1360",
+      "260",
+      "maiden_wings",
+      "6"
+    ],
+    "win_probability": "0.4153",
+    "game": 1675922
+  },
+  {
+    "id": 180213174,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:01.560000Z",
+    "event_type": "glance",
+    "values": [
+      "1416",
+      "1015",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213176,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:01.991000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "410",
+      "860",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213179,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:02.637000Z",
+    "event_type": "glance",
+    "values": [
+      "1377",
+      "1015",
+      "1",
+      "2"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213180,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:02.783000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.3886",
+    "game": 1675922
+  },
+  {
+    "id": 180213184,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:03.215000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.4093",
+    "game": 1675922
+  },
+  {
+    "id": 180213185,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:03.218000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1447",
+      "639",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.3886",
+    "game": 1675922
+  },
+  {
+    "id": 180213190,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:03.694000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Blue"
+    ],
+    "win_probability": "0.4113",
+    "game": 1675922
+  },
+  {
+    "id": 180213193,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:05.023000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.3886",
+    "game": 1675922
+  },
+  {
+    "id": 180213194,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:05.053000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "410",
+      "860",
+      "maiden_speed",
+      "5"
+    ],
+    "win_probability": "0.3713",
+    "game": 1675922
+  },
+  {
+    "id": 180213199,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:06.366000Z",
+    "event_type": "playerKill",
+    "values": [
+      "575",
+      "740",
+      "6",
+      "3",
+      "Worker"
+    ],
+    "win_probability": "0.3976",
+    "game": 1675922
+  },
+  {
+    "id": 180213201,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:07.198000Z",
+    "event_type": "glance",
+    "values": [
+      "1206",
+      "970",
+      "4",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213202,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:07.260000Z",
+    "event_type": "carryFood",
+    "values": [
+      "5"
+    ],
+    "win_probability": "0.3866",
+    "game": 1675922
+  },
+  {
+    "id": 180213203,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:07.328000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.4347",
+    "game": 1675922
+  },
+  {
+    "id": 180213205,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:07.428000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1148",
+      "950",
+      "4"
+    ],
+    "win_probability": "0.5211",
+    "game": 1675922
+  },
+  {
+    "id": 180213206,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:07.808000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.5526",
+    "game": 1675922
+  },
+  {
+    "id": 180213207,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:07.938000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.5194",
+    "game": 1675922
+  },
+  {
+    "id": 180213210,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:08.454000Z",
+    "event_type": "playerKill",
+    "values": [
+      "675",
+      "864",
+      "8",
+      "9",
+      "Worker"
+    ],
+    "win_probability": "0.5361",
+    "game": 1675922
+  },
+  {
+    "id": 180213221,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:10.849000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "410",
+      "860",
+      "Blue"
+    ],
+    "win_probability": "0.6043",
+    "game": 1675922
+  },
+  {
+    "id": 180213223,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:11.768000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "960",
+      "500",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213226,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:12.453000Z",
+    "event_type": "playerKill",
+    "values": [
+      "725",
+      "732",
+      "1",
+      "6",
+      "Soldier"
+    ],
+    "win_probability": "0.5093",
+    "game": 1675922
+  },
+  {
+    "id": 180213228,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:12.837000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.5350",
+    "game": 1675922
+  },
+  {
+    "id": 180213231,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:13.464000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.5188",
+    "game": 1675922
+  },
+  {
+    "id": 180213232,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:13.534000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "560",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.5144",
+    "game": 1675922
+  },
+  {
+    "id": 180213235,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:14.080000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.5379",
+    "game": 1675922
+  },
+  {
+    "id": 180213237,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:14.244000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.5120",
+    "game": 1675922
+  },
+  {
+    "id": 180213241,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:14.828000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "960",
+      "500",
+      "maiden_wings",
+      "5"
+    ],
+    "win_probability": "0.4146",
+    "game": 1675922
+  },
+  {
+    "id": 180213243,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:15.042000Z",
+    "event_type": "glance",
+    "values": [
+      "411",
+      "921",
+      "3",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213252,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:16.830000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "410",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.4020",
+    "game": 1675922
+  },
+  {
+    "id": 180213253,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:16.967000Z",
+    "event_type": "playerKill",
+    "values": [
+      "580",
+      "740",
+      "8",
+      "3",
+      "Worker"
+    ],
+    "win_probability": "0.4186",
+    "game": 1675922
+  },
+  {
+    "id": 180213255,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:17.308000Z",
+    "event_type": "glance",
+    "values": [
+      "1300",
+      "1002",
+      "4",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213258,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:17.902000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "888",
+      "923",
+      "9"
+    ],
+    "win_probability": "0.3196",
+    "game": 1675922
+  },
+  {
+    "id": 180213260,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:18.281000Z",
+    "event_type": "carryFood",
+    "values": [
+      "6"
+    ],
+    "win_probability": "0.3560",
+    "game": 1675922
+  },
+  {
+    "id": 180213261,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:18.314000Z",
+    "event_type": "glance",
+    "values": [
+      "1251",
+      "922",
+      "4",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213262,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:18.711000Z",
+    "event_type": "playerKill",
+    "values": [
+      "770",
+      "861",
+      "1",
+      "8",
+      "Soldier"
+    ],
+    "win_probability": "0.2598",
+    "game": 1675922
+  },
+  {
+    "id": 180213265,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:19.492000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1206",
+      "881",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.2434",
+    "game": 1675922
+  },
+  {
+    "id": 180213269,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:19.971000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "6"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213270,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:20.037000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1262",
+      "748",
+      "7",
+      "4",
+      "Worker"
+    ],
+    "win_probability": "0.2312",
+    "game": 1675922
+  },
+  {
+    "id": 180213277,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:20.759000Z",
+    "event_type": "playerKill",
+    "values": [
+      "395",
+      "1006",
+      "1",
+      "2",
+      "Queen"
+    ],
+    "win_probability": "0.1551",
+    "game": 1675922
+  },
+  {
+    "id": 180213291,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:22.144000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.1418",
+    "game": 1675922
+  },
+  {
+    "id": 180213295,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:23.038000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1360",
+      "260",
+      "maiden_wings",
+      "6"
+    ],
+    "win_probability": "0.1811",
+    "game": 1675922
+  },
+  {
+    "id": 180213304,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:24.120000Z",
+    "event_type": "carryFood",
+    "values": [
+      "9"
+    ],
+    "win_probability": "0.1734",
+    "game": 1675922
+  },
+  {
+    "id": 180213310,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:25.077000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.1617",
+    "game": 1675922
+  },
+  {
+    "id": 180213313,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:25.228000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "888",
+      "950",
+      "3"
+    ],
+    "win_probability": "0.1108",
+    "game": 1675922
+  },
+  {
+    "id": 180213316,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:25.692000Z",
+    "event_type": "carryFood",
+    "values": [
+      "8"
+    ],
+    "win_probability": "0.1118",
+    "game": 1675922
+  },
+  {
+    "id": 180213320,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:25.927000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Blue"
+    ],
+    "win_probability": "0.1043",
+    "game": 1675922
+  },
+  {
+    "id": 180213328,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:27.214000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.0904",
+    "game": 1675922
+  },
+  {
+    "id": 180213331,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:27.568000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.1061",
+    "game": 1675922
+  },
+  {
+    "id": 180213334,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:28.344000Z",
+    "event_type": "carryFood",
+    "values": [
+      "4"
+    ],
+    "win_probability": "0.1136",
+    "game": 1675922
+  },
+  {
+    "id": 180213350,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:30.739000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.1089",
+    "game": 1675922
+  },
+  {
+    "id": 180213356,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:31.401000Z",
+    "event_type": "glance",
+    "values": [
+      "1749",
+      "418",
+      "5",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213357,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:31.750000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1677",
+      "415",
+      "2",
+      "5",
+      "Soldier"
+    ],
+    "win_probability": "0.1521",
+    "game": 1675922
+  },
+  {
+    "id": 180213365,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:32.942000Z",
+    "event_type": "glance",
+    "values": [
+      "1716",
+      "415",
+      "1",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213386,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:35.086000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "560",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.1658",
+    "game": 1675922
+  },
+  {
+    "id": 180213387,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:35.216000Z",
+    "event_type": "playerKill",
+    "values": [
+      "770",
+      "862",
+      "6",
+      "3",
+      "Worker"
+    ],
+    "win_probability": "0.1864",
+    "game": 1675922
+  },
+  {
+    "id": 180213398,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:37.025000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1510",
+      "860",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213399,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:37.045000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.2345",
+    "game": 1675922
+  },
+  {
+    "id": 180213400,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:37.137000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "560",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.2071",
+    "game": 1675922
+  },
+  {
+    "id": 180213402,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:37.207000Z",
+    "event_type": "carryFood",
+    "values": [
+      "5"
+    ],
+    "win_probability": "0.1938",
+    "game": 1675922
+  },
+  {
+    "id": 180213421,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:38.946000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.1521",
+    "game": 1675922
+  },
+  {
+    "id": 180213423,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:39.078000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "410",
+      "860",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213429,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:40.072000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "1510",
+      "860",
+      "maiden_speed",
+      "8"
+    ],
+    "win_probability": "0.1829",
+    "game": 1675922
+  },
+  {
+    "id": 180213430,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:40.362000Z",
+    "event_type": "glance",
+    "values": [
+      "913",
+      "775",
+      "2",
+      "1"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213438,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:41.404000Z",
+    "event_type": "carryFood",
+    "values": [
+      "3"
+    ],
+    "win_probability": "0.1730",
+    "game": 1675922
+  },
+  {
+    "id": 180213441,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:42.150000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "410",
+      "860",
+      "maiden_speed",
+      "5"
+    ],
+    "win_probability": "0.1725",
+    "game": 1675922
+  },
+  {
+    "id": 180213442,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:42.346000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1230",
+      "863",
+      "7",
+      "10",
+      "Worker"
+    ],
+    "win_probability": "0.1636",
+    "game": 1675922
+  },
+  {
+    "id": 180213446,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:42.746000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.1970",
+    "game": 1675922
+  },
+  {
+    "id": 180213454,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:44.238000Z",
+    "event_type": "carryFood",
+    "values": [
+      "8"
+    ],
+    "win_probability": "0.1992",
+    "game": 1675922
+  },
+  {
+    "id": 180213455,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:44.299000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Red"
+    ],
+    "win_probability": "0.1655",
+    "game": 1675922
+  },
+  {
+    "id": 180213456,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:44.308000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.1568",
+    "game": 1675922
+  },
+  {
+    "id": 180213459,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:44.499000Z",
+    "event_type": "carryFood",
+    "values": [
+      "5"
+    ],
+    "win_probability": "0.1553",
+    "game": 1675922
+  },
+  {
+    "id": 180213463,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:45.382000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "560",
+      "260",
+      "5"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213464,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:45.800000Z",
+    "event_type": "glance",
+    "values": [
+      "1257",
+      "931",
+      "4",
+      "7"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213467,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:46.019000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213468,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:46.116000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.1629",
+    "game": 1675922
+  },
+  {
+    "id": 180213469,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:46.119000Z",
+    "event_type": "unreserveMaiden",
+    "values": [
+      "1360",
+      "260",
+      "",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213470,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:46.119000Z",
+    "event_type": "playerKill",
+    "values": [
+      "1360",
+      "260",
+      "1",
+      "8",
+      "Worker"
+    ],
+    "win_probability": "0.1085",
+    "game": 1675922
+  },
+  {
+    "id": 180213475,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:46.483000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.1104",
+    "game": 1675922
+  },
+  {
+    "id": 180213476,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:46.648000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "1061",
+      "936",
+      "4"
+    ],
+    "win_probability": "0.1814",
+    "game": 1675922
+  },
+  {
+    "id": 180213481,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:47.393000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1360",
+      "260",
+      "Red"
+    ],
+    "win_probability": "0.1858",
+    "game": 1675922
+  },
+  {
+    "id": 180213484,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:47.974000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "960",
+      "500",
+      "Blue"
+    ],
+    "win_probability": "0.1957",
+    "game": 1675922
+  },
+  {
+    "id": 180213486,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:48.438000Z",
+    "event_type": "useMaiden",
+    "values": [
+      "560",
+      "260",
+      "maiden_wings",
+      "5"
+    ],
+    "win_probability": "0.1336",
+    "game": 1675922
+  },
+  {
+    "id": 180213492,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:49.683000Z",
+    "event_type": "carryFood",
+    "values": [
+      "10"
+    ],
+    "win_probability": "0.1314",
+    "game": 1675922
+  },
+  {
+    "id": 180213498,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:50.292000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "859",
+      "936",
+      "3"
+    ],
+    "win_probability": "0.1031",
+    "game": 1675922
+  },
+  {
+    "id": 180213500,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:51.174000Z",
+    "event_type": "berryDeposit",
+    "values": [
+      "772",
+      "923",
+      "9"
+    ],
+    "win_probability": "0.0887",
+    "game": 1675922
+  },
+  {
+    "id": 180213501,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:51.337000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "560",
+      "260",
+      "Blue"
+    ],
+    "win_probability": "0.0810",
+    "game": 1675922
+  },
+  {
+    "id": 180213502,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:51.437000Z",
+    "event_type": "playerKill",
+    "values": [
+      "819",
+      "1006",
+      "5",
+      "6",
+      "Soldier"
+    ],
+    "win_probability": "0.0558",
+    "game": 1675922
+  },
+  {
+    "id": 180213503,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:51.536000Z",
+    "event_type": "blessMaiden",
+    "values": [
+      "1510",
+      "860",
+      "Red"
+    ],
+    "win_probability": "0.0631",
+    "game": 1675922
+  },
+  {
+    "id": 180213506,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:52.682000Z",
+    "event_type": "carryFood",
+    "values": [
+      "8"
+    ],
+    "win_probability": "0.0653",
+    "game": 1675922
+  },
+  {
+    "id": 180213516,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:54.355000Z",
+    "event_type": "reserveMaiden",
+    "values": [
+      "560",
+      "260",
+      "8"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213524,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:55.763000Z",
+    "event_type": "playerKill",
+    "values": [
+      "520",
+      "591",
+      "5",
+      "2",
+      "Queen"
+    ],
+    "win_probability": "0.0008",
+    "game": 1675922
+  },
+  {
+    "id": 180213525,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:55.792000Z",
+    "event_type": "gameend",
+    "values": [
+      "map_day",
+      "True",
+      "150.7435",
+      "False"
+    ],
+    "win_probability": null,
+    "game": 1675922
+  },
+  {
+    "id": 180213526,
+    "game_uuid": "55f5e541-9080-40da-9fcc-7dbcd2047998",
+    "timestamp": "2025-11-06T02:38:55.792000Z",
+    "event_type": "victory",
+    "values": [
+      "Gold",
+      "military"
+    ],
+    "win_probability": "0.0008",
+    "game": 1675922
+  }
+]

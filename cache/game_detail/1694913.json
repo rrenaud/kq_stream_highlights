@@ -1,0 +1,85 @@
+{
+  "id": 1694913,
+  "map_name": "Night",
+  "cabinet": {
+    "id": 139,
+    "name": "mac2",
+    "display_name": "MAC Cab 2",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 179,
+    "last_game_time": "2025-12-07T05:04:21.972000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1186993,
+      "player_id": 3,
+      "user": 1660,
+      "game": 1694913,
+      "play_session": 86985
+    },
+    {
+      "id": 1186995,
+      "player_id": 7,
+      "user": 1443,
+      "game": 1694913,
+      "play_session": 86983
+    },
+    {
+      "id": 1186997,
+      "player_id": 9,
+      "user": 1653,
+      "game": 1694913,
+      "play_session": 86970
+    },
+    {
+      "id": 1186992,
+      "player_id": 2,
+      "user": 973,
+      "game": 1694913,
+      "play_session": 86991
+    },
+    {
+      "id": 1186996,
+      "player_id": 8,
+      "user": 95,
+      "game": 1694913,
+      "play_session": 86992
+    },
+    {
+      "id": 1186994,
+      "player_id": 4,
+      "user": 1078,
+      "game": 1694913,
+      "play_session": 86972
+    }
+  ],
+  "start_time": "2025-12-06T20:47:58.118000Z",
+  "end_time": "2025-12-06T20:48:42.019000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "blue",
+  "player_count": 10,
+  "berries_used": 16,
+  "cabinet_version": "19.1",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 14010,
+  "whiteboard_match": null
+}

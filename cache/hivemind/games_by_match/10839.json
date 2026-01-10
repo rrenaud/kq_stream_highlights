@@ -1,0 +1,236 @@
+[
+  {
+    "id": 1523180,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 78,
+      "name": "dtbk",
+      "display_name": "Downtown Brooklyn",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 3073,
+      "last_game_time": "2026-01-06T02:31:49.270000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "kqnyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1086542,
+        "player_id": 1,
+        "user": 886,
+        "game": 1523180,
+        "play_session": 76167
+      },
+      {
+        "id": 1086543,
+        "player_id": 4,
+        "user": 1091,
+        "game": 1523180,
+        "play_session": 76174
+      },
+      {
+        "id": 1086544,
+        "player_id": 7,
+        "user": 688,
+        "game": 1523180,
+        "play_session": 76170
+      },
+      {
+        "id": 1086545,
+        "player_id": 8,
+        "user": 608,
+        "game": 1523180,
+        "play_session": 76169
+      },
+      {
+        "id": 1086546,
+        "player_id": 9,
+        "user": 1620,
+        "game": 1523180,
+        "play_session": 76168
+      }
+    ],
+    "start_time": "2025-05-13T00:54:40.204000Z",
+    "end_time": "2025-05-13T00:55:31.734000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 14,
+    "cabinet_version": "20.9",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10839,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1523181,
+    "map_name": "Night",
+    "cabinet": {
+      "id": 78,
+      "name": "dtbk",
+      "display_name": "Downtown Brooklyn",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 3073,
+      "last_game_time": "2026-01-06T02:31:49.270000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "kqnyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1086547,
+        "player_id": 1,
+        "user": 886,
+        "game": 1523181,
+        "play_session": 76167
+      },
+      {
+        "id": 1086548,
+        "player_id": 4,
+        "user": 1091,
+        "game": 1523181,
+        "play_session": 76174
+      },
+      {
+        "id": 1086549,
+        "player_id": 7,
+        "user": 688,
+        "game": 1523181,
+        "play_session": 76170
+      },
+      {
+        "id": 1086550,
+        "player_id": 8,
+        "user": 608,
+        "game": 1523181,
+        "play_session": 76169
+      },
+      {
+        "id": 1086551,
+        "player_id": 9,
+        "user": 1620,
+        "game": 1523181,
+        "play_session": 76168
+      }
+    ],
+    "start_time": "2025-05-13T00:56:05.756000Z",
+    "end_time": "2025-05-13T00:57:32.416000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 23,
+    "cabinet_version": "20.9",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10839,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1523182,
+    "map_name": "Dusk",
+    "cabinet": {
+      "id": 78,
+      "name": "dtbk",
+      "display_name": "Downtown Brooklyn",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 3073,
+      "last_game_time": "2026-01-06T02:31:49.270000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "kqnyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1086553,
+        "player_id": 4,
+        "user": 1091,
+        "game": 1523182,
+        "play_session": 76174
+      },
+      {
+        "id": 1086556,
+        "player_id": 9,
+        "user": 1620,
+        "game": 1523182,
+        "play_session": 76168
+      },
+      {
+        "id": 1086555,
+        "player_id": 8,
+        "user": 608,
+        "game": 1523182,
+        "play_session": 76169
+      },
+      {
+        "id": 1086552,
+        "player_id": 1,
+        "user": 886,
+        "game": 1523182,
+        "play_session": 76167
+      },
+      {
+        "id": 1086554,
+        "player_id": 7,
+        "user": 688,
+        "game": 1523182,
+        "play_session": 76170
+      }
+    ],
+    "start_time": "2025-05-13T00:57:59.090000Z",
+    "end_time": "2025-05-13T00:59:50.519000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 28,
+    "cabinet_version": "20.9",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10839,
+    "whiteboard_match": null
+  }
+]

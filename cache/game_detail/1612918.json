@@ -1,0 +1,106 @@
+{
+  "id": 1612918,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 94,
+    "name": "coro1",
+    "display_name": "Coronation Cab 1",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 440,
+    "last_game_time": "2025-08-10T21:07:19.837000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1130979,
+      "player_id": 7,
+      "user": 608,
+      "game": 1612918,
+      "play_session": 80926
+    },
+    {
+      "id": 1130976,
+      "player_id": 3,
+      "user": 258,
+      "game": 1612918,
+      "play_session": 80938
+    },
+    {
+      "id": 1130975,
+      "player_id": 2,
+      "user": 432,
+      "game": 1612918,
+      "play_session": 80918
+    },
+    {
+      "id": 1130982,
+      "player_id": 10,
+      "user": 713,
+      "game": 1612918,
+      "play_session": 80919
+    },
+    {
+      "id": 1130980,
+      "player_id": 8,
+      "user": 146,
+      "game": 1612918,
+      "play_session": 80920
+    },
+    {
+      "id": 1130977,
+      "player_id": 4,
+      "user": 1078,
+      "game": 1612918,
+      "play_session": 80921
+    },
+    {
+      "id": 1130981,
+      "player_id": 9,
+      "user": 556,
+      "game": 1612918,
+      "play_session": 80927
+    },
+    {
+      "id": 1130978,
+      "player_id": 5,
+      "user": 76,
+      "game": 1612918,
+      "play_session": 80925
+    },
+    {
+      "id": 1130974,
+      "player_id": 1,
+      "user": 617,
+      "game": 1612918,
+      "play_session": 80922
+    }
+  ],
+  "start_time": "2025-08-09T18:38:13.139000Z",
+  "end_time": "2025-08-09T18:41:19.826000Z",
+  "status": "complete",
+  "win_condition": "economic",
+  "winning_team": "blue",
+  "player_count": 10,
+  "berries_used": 52,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12576,
+  "whiteboard_match": null
+}

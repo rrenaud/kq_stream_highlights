@@ -1,0 +1,71 @@
+{
+  "id": 1613505,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 94,
+    "name": "coro1",
+    "display_name": "Coronation Cab 1",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 440,
+    "last_game_time": "2025-08-10T21:07:19.837000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1132062,
+      "player_id": 2,
+      "user": 1580,
+      "game": 1613505,
+      "play_session": 80962
+    },
+    {
+      "id": 1132065,
+      "player_id": 10,
+      "user": 1245,
+      "game": 1613505,
+      "play_session": 80963
+    },
+    {
+      "id": 1132064,
+      "player_id": 8,
+      "user": 649,
+      "game": 1613505,
+      "play_session": 80965
+    },
+    {
+      "id": 1132063,
+      "player_id": 7,
+      "user": 575,
+      "game": 1613505,
+      "play_session": 80984
+    }
+  ],
+  "start_time": "2025-08-09T23:51:38.857000Z",
+  "end_time": "2025-08-09T23:52:00.959000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "blue",
+  "player_count": 10,
+  "berries_used": 14,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12633,
+  "whiteboard_match": null
+}

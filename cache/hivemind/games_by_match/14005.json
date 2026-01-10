@@ -1,0 +1,257 @@
+[
+  {
+    "id": 1694973,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 139,
+      "name": "mac2",
+      "display_name": "MAC Cab 2",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 179,
+      "last_game_time": "2025-12-07T05:04:21.972000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187089,
+        "player_id": 1,
+        "user": 1273,
+        "game": 1694973,
+        "play_session": null
+      },
+      {
+        "id": 1187091,
+        "player_id": 3,
+        "user": 9,
+        "game": 1694973,
+        "play_session": null
+      },
+      {
+        "id": 1187090,
+        "player_id": 2,
+        "user": 81,
+        "game": 1694973,
+        "play_session": 86998
+      },
+      {
+        "id": 1187094,
+        "player_id": 10,
+        "user": 2704,
+        "game": 1694973,
+        "play_session": 86971
+      },
+      {
+        "id": 1187092,
+        "player_id": 5,
+        "user": 39,
+        "game": 1694973,
+        "play_session": 86989
+      },
+      {
+        "id": 1187093,
+        "player_id": 7,
+        "user": 887,
+        "game": 1694973,
+        "play_session": 87004
+      }
+    ],
+    "start_time": "2025-12-06T21:27:44.188000Z",
+    "end_time": "2025-12-06T21:30:50.636000Z",
+    "status": "error",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 35,
+    "cabinet_version": "19.1",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14005,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1694978,
+    "map_name": "Night",
+    "cabinet": {
+      "id": 139,
+      "name": "mac2",
+      "display_name": "MAC Cab 2",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 179,
+      "last_game_time": "2025-12-07T05:04:21.972000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187095,
+        "player_id": 1,
+        "user": 1273,
+        "game": 1694978,
+        "play_session": null
+      },
+      {
+        "id": 1187097,
+        "player_id": 3,
+        "user": 9,
+        "game": 1694978,
+        "play_session": null
+      },
+      {
+        "id": 1187096,
+        "player_id": 2,
+        "user": 81,
+        "game": 1694978,
+        "play_session": 86998
+      },
+      {
+        "id": 1187100,
+        "player_id": 10,
+        "user": 2704,
+        "game": 1694978,
+        "play_session": 86971
+      },
+      {
+        "id": 1187098,
+        "player_id": 5,
+        "user": 39,
+        "game": 1694978,
+        "play_session": 86989
+      },
+      {
+        "id": 1187099,
+        "player_id": 7,
+        "user": 887,
+        "game": 1694978,
+        "play_session": 87004
+      }
+    ],
+    "start_time": "2025-12-06T21:31:54.566000Z",
+    "end_time": "2025-12-06T21:34:24.980000Z",
+    "status": "error",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 28,
+    "cabinet_version": "19.1",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14005,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1694982,
+    "map_name": "Dusk",
+    "cabinet": {
+      "id": 139,
+      "name": "mac2",
+      "display_name": "MAC Cab 2",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 179,
+      "last_game_time": "2025-12-07T05:04:21.972000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187113,
+        "player_id": 1,
+        "user": 1273,
+        "game": 1694982,
+        "play_session": null
+      },
+      {
+        "id": 1187115,
+        "player_id": 3,
+        "user": 9,
+        "game": 1694982,
+        "play_session": null
+      },
+      {
+        "id": 1187114,
+        "player_id": 2,
+        "user": 81,
+        "game": 1694982,
+        "play_session": 86998
+      },
+      {
+        "id": 1187118,
+        "player_id": 10,
+        "user": 2704,
+        "game": 1694982,
+        "play_session": 86971
+      },
+      {
+        "id": 1187116,
+        "player_id": 5,
+        "user": 39,
+        "game": 1694982,
+        "play_session": 86989
+      },
+      {
+        "id": 1187117,
+        "player_id": 7,
+        "user": 887,
+        "game": 1694982,
+        "play_session": 87004
+      }
+    ],
+    "start_time": "2025-12-06T21:35:28.913000Z",
+    "end_time": "2025-12-06T21:44:42.180000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 66,
+    "cabinet_version": "19.1",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14005,
+    "whiteboard_match": null
+  }
+]

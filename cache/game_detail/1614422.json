@@ -1,0 +1,99 @@
+{
+  "id": 1614422,
+  "map_name": "Day",
+  "cabinet": {
+    "id": 94,
+    "name": "coro1",
+    "display_name": "Coronation Cab 1",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 440,
+    "last_game_time": "2025-08-10T21:07:19.837000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1132665,
+      "player_id": 1,
+      "user": 1443,
+      "game": 1614422,
+      "play_session": 81013
+    },
+    {
+      "id": 1132666,
+      "player_id": 2,
+      "user": 617,
+      "game": 1614422,
+      "play_session": 81040
+    },
+    {
+      "id": 1132667,
+      "player_id": 3,
+      "user": 1620,
+      "game": 1614422,
+      "play_session": 81028
+    },
+    {
+      "id": 1132668,
+      "player_id": 4,
+      "user": 556,
+      "game": 1614422,
+      "play_session": 81041
+    },
+    {
+      "id": 1132669,
+      "player_id": 6,
+      "user": 76,
+      "game": 1614422,
+      "play_session": 81042
+    },
+    {
+      "id": 1132670,
+      "player_id": 8,
+      "user": 608,
+      "game": 1614422,
+      "play_session": 81043
+    },
+    {
+      "id": 1132671,
+      "player_id": 9,
+      "user": 1653,
+      "game": 1614422,
+      "play_session": 81029
+    },
+    {
+      "id": 1132672,
+      "player_id": 10,
+      "user": 258,
+      "game": 1614422,
+      "play_session": 81044
+    }
+  ],
+  "start_time": "2025-08-10T17:11:04.318000Z",
+  "end_time": "2025-08-10T17:13:34.872000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 30,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12654,
+  "whiteboard_match": null
+}

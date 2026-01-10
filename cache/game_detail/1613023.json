@@ -1,0 +1,99 @@
+{
+  "id": 1613023,
+  "map_name": "Dusk",
+  "cabinet": {
+    "id": 95,
+    "name": "coro2",
+    "display_name": "Coronation Cab 2",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 441,
+    "last_game_time": "2025-08-10T21:13:27.868000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1131336,
+      "player_id": 1,
+      "user": 349,
+      "game": 1613023,
+      "play_session": 80959
+    },
+    {
+      "id": 1131337,
+      "player_id": 3,
+      "user": 637,
+      "game": 1613023,
+      "play_session": 80968
+    },
+    {
+      "id": 1131338,
+      "player_id": 4,
+      "user": 82,
+      "game": 1613023,
+      "play_session": 80964
+    },
+    {
+      "id": 1131339,
+      "player_id": 5,
+      "user": 1064,
+      "game": 1613023,
+      "play_session": 80957
+    },
+    {
+      "id": 1131340,
+      "player_id": 6,
+      "user": 67,
+      "game": 1613023,
+      "play_session": 80966
+    },
+    {
+      "id": 1131341,
+      "player_id": 7,
+      "user": 392,
+      "game": 1613023,
+      "play_session": 80961
+    },
+    {
+      "id": 1131342,
+      "player_id": 8,
+      "user": 94,
+      "game": 1613023,
+      "play_session": 80967
+    },
+    {
+      "id": 1131343,
+      "player_id": 9,
+      "user": 551,
+      "game": 1613023,
+      "play_session": 80960
+    }
+  ],
+  "start_time": "2025-08-09T20:06:46.598000Z",
+  "end_time": "2025-08-09T20:08:09.072000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 23,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12609,
+  "whiteboard_match": null
+}

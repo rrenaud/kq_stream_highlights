@@ -1,0 +1,257 @@
+[
+  {
+    "id": 1420386,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1016529,
+        "player_id": 10,
+        "user": 1078,
+        "game": 1420386,
+        "play_session": 69118
+      },
+      {
+        "id": 1016530,
+        "player_id": 7,
+        "user": 608,
+        "game": 1420386,
+        "play_session": 69115
+      },
+      {
+        "id": 1016531,
+        "player_id": 6,
+        "user": 638,
+        "game": 1420386,
+        "play_session": 69119
+      },
+      {
+        "id": 1016532,
+        "player_id": 1,
+        "user": 617,
+        "game": 1420386,
+        "play_session": 69120
+      },
+      {
+        "id": 1016533,
+        "player_id": 5,
+        "user": 7,
+        "game": 1420386,
+        "play_session": 69121
+      },
+      {
+        "id": 1016534,
+        "player_id": 9,
+        "user": 1245,
+        "game": 1420386,
+        "play_session": 69122
+      }
+    ],
+    "start_time": "2025-01-04T19:55:31.407000Z",
+    "end_time": "2025-01-04T19:57:14.341000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 16,
+    "cabinet_version": "20.9",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9255,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1420387,
+    "map_name": "Dusk",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1016535,
+        "player_id": 10,
+        "user": 1078,
+        "game": 1420387,
+        "play_session": 69118
+      },
+      {
+        "id": 1016536,
+        "player_id": 7,
+        "user": 608,
+        "game": 1420387,
+        "play_session": 69115
+      },
+      {
+        "id": 1016537,
+        "player_id": 6,
+        "user": 638,
+        "game": 1420387,
+        "play_session": 69119
+      },
+      {
+        "id": 1016538,
+        "player_id": 1,
+        "user": 617,
+        "game": 1420387,
+        "play_session": 69120
+      },
+      {
+        "id": 1016539,
+        "player_id": 5,
+        "user": 7,
+        "game": 1420387,
+        "play_session": 69121
+      },
+      {
+        "id": 1016540,
+        "player_id": 9,
+        "user": 1245,
+        "game": 1420387,
+        "play_session": 69122
+      }
+    ],
+    "start_time": "2025-01-04T19:57:59.910000Z",
+    "end_time": "2025-01-04T19:59:35.003000Z",
+    "status": "complete",
+    "win_condition": "economic",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 26,
+    "cabinet_version": "20.9",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9255,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1420389,
+    "map_name": "Night",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1016541,
+        "player_id": 10,
+        "user": 1078,
+        "game": 1420389,
+        "play_session": 69118
+      },
+      {
+        "id": 1016544,
+        "player_id": 1,
+        "user": 617,
+        "game": 1420389,
+        "play_session": 69120
+      },
+      {
+        "id": 1016542,
+        "player_id": 7,
+        "user": 608,
+        "game": 1420389,
+        "play_session": 69115
+      },
+      {
+        "id": 1016546,
+        "player_id": 9,
+        "user": 1245,
+        "game": 1420389,
+        "play_session": 69122
+      },
+      {
+        "id": 1016545,
+        "player_id": 5,
+        "user": 7,
+        "game": 1420389,
+        "play_session": 69121
+      },
+      {
+        "id": 1016543,
+        "player_id": 6,
+        "user": 638,
+        "game": 1420389,
+        "play_session": 69119
+      }
+    ],
+    "start_time": "2025-01-04T20:00:43.241000Z",
+    "end_time": "2025-01-04T20:02:18.438000Z",
+    "status": "complete",
+    "win_condition": "economic",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 30,
+    "cabinet_version": "20.9",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 9255,
+    "whiteboard_match": null
+  }
+]

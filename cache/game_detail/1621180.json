@@ -1,0 +1,92 @@
+{
+  "id": 1621180,
+  "map_name": "Day",
+  "cabinet": {
+    "id": 29,
+    "name": "wonderville",
+    "display_name": "Wonderville",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 81881,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "client_status": "offline",
+    "twitch_channel_name": "wondervillenyc"
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1144550,
+      "player_id": 1,
+      "user": 3,
+      "game": 1621180,
+      "play_session": 81843
+    },
+    {
+      "id": 1144551,
+      "player_id": 2,
+      "user": 471,
+      "game": 1621180,
+      "play_session": 81836
+    },
+    {
+      "id": 1144552,
+      "player_id": 3,
+      "user": 1253,
+      "game": 1621180,
+      "play_session": 81844
+    },
+    {
+      "id": 1144553,
+      "player_id": 5,
+      "user": 1064,
+      "game": 1621180,
+      "play_session": 81845
+    },
+    {
+      "id": 1144554,
+      "player_id": 6,
+      "user": 1091,
+      "game": 1621180,
+      "play_session": 81838
+    },
+    {
+      "id": 1144555,
+      "player_id": 8,
+      "user": 638,
+      "game": 1621180,
+      "play_session": 81831
+    },
+    {
+      "id": 1144556,
+      "player_id": 10,
+      "user": 1660,
+      "game": 1621180,
+      "play_session": 81840
+    }
+  ],
+  "start_time": "2025-08-21T02:36:30.128000Z",
+  "end_time": "2025-08-21T02:45:16.024000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "blue",
+  "player_count": 10,
+  "berries_used": 65,
+  "cabinet_version": "20.13",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12749,
+  "whiteboard_match": null
+}

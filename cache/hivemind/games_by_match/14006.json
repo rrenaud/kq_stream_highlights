@@ -1,0 +1,186 @@
+[
+  {
+    "id": 1694989,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 138,
+      "name": "mac1",
+      "display_name": "MAC Cab 1",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": false,
+      "allow_tournament_player": false,
+      "total_games": 166,
+      "last_game_time": "2025-12-07T05:06:10.187000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187119,
+        "player_id": 1,
+        "user": 910,
+        "game": 1694989,
+        "play_session": 86993
+      },
+      {
+        "id": 1187120,
+        "player_id": 3,
+        "user": 1064,
+        "game": 1694989,
+        "play_session": 86997
+      },
+      {
+        "id": 1187121,
+        "player_id": 4,
+        "user": 569,
+        "game": 1694989,
+        "play_session": 86999
+      },
+      {
+        "id": 1187122,
+        "player_id": 5,
+        "user": 3,
+        "game": 1694989,
+        "play_session": 86995
+      },
+      {
+        "id": 1187123,
+        "player_id": 7,
+        "user": 225,
+        "game": 1694989,
+        "play_session": 86996
+      },
+      {
+        "id": 1187124,
+        "player_id": 8,
+        "user": 896,
+        "game": 1694989,
+        "play_session": 86988
+      },
+      {
+        "id": 1187125,
+        "player_id": 9,
+        "user": 638,
+        "game": 1694989,
+        "play_session": 86994
+      }
+    ],
+    "start_time": "2025-12-06T21:43:27.208000Z",
+    "end_time": "2025-12-06T21:45:02.371000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 24,
+    "cabinet_version": "17.26",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14006,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1694991,
+    "map_name": "Night",
+    "cabinet": {
+      "id": 138,
+      "name": "mac1",
+      "display_name": "MAC Cab 1",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": false,
+      "allow_tournament_player": false,
+      "total_games": 166,
+      "last_game_time": "2025-12-07T05:06:10.187000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187126,
+        "player_id": 1,
+        "user": 910,
+        "game": 1694991,
+        "play_session": 86993
+      },
+      {
+        "id": 1187132,
+        "player_id": 9,
+        "user": 638,
+        "game": 1694991,
+        "play_session": 86994
+      },
+      {
+        "id": 1187129,
+        "player_id": 5,
+        "user": 3,
+        "game": 1694991,
+        "play_session": 86995
+      },
+      {
+        "id": 1187130,
+        "player_id": 7,
+        "user": 225,
+        "game": 1694991,
+        "play_session": 86996
+      },
+      {
+        "id": 1187127,
+        "player_id": 3,
+        "user": 1064,
+        "game": 1694991,
+        "play_session": 86997
+      },
+      {
+        "id": 1187128,
+        "player_id": 4,
+        "user": 569,
+        "game": 1694991,
+        "play_session": 86999
+      },
+      {
+        "id": 1187131,
+        "player_id": 8,
+        "user": 896,
+        "game": 1694991,
+        "play_session": 86988
+      }
+    ],
+    "start_time": "2025-12-06T21:46:21.591000Z",
+    "end_time": "2025-12-06T21:47:40.120000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 14,
+    "cabinet_version": "17.26",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14006,
+    "whiteboard_match": null
+  }
+]

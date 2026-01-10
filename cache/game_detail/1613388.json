@@ -1,0 +1,99 @@
+{
+  "id": 1613388,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 97,
+    "name": "coro4",
+    "display_name": "Coronation Cab 4",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 678,
+    "last_game_time": "2025-08-10T23:33:00.822000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1131865,
+      "player_id": 7,
+      "user": 107,
+      "game": 1613388,
+      "play_session": null
+    },
+    {
+      "id": 1131864,
+      "player_id": 6,
+      "user": 284,
+      "game": 1613388,
+      "play_session": 80915
+    },
+    {
+      "id": 1131866,
+      "player_id": 8,
+      "user": 318,
+      "game": 1613388,
+      "play_session": 80950
+    },
+    {
+      "id": 1131862,
+      "player_id": 4,
+      "user": 293,
+      "game": 1613388,
+      "play_session": 80914
+    },
+    {
+      "id": 1131867,
+      "player_id": 10,
+      "user": 1008,
+      "game": 1613388,
+      "play_session": 80916
+    },
+    {
+      "id": 1131861,
+      "player_id": 2,
+      "user": 337,
+      "game": 1613388,
+      "play_session": 80913
+    },
+    {
+      "id": 1131860,
+      "player_id": 1,
+      "user": 592,
+      "game": 1613388,
+      "play_session": 80897
+    },
+    {
+      "id": 1131863,
+      "player_id": 5,
+      "user": 590,
+      "game": 1613388,
+      "play_session": 80900
+    }
+  ],
+  "start_time": "2025-08-09T23:02:04.877000Z",
+  "end_time": "2025-08-09T23:05:42.212000Z",
+  "status": "complete",
+  "win_condition": "economic",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 53,
+  "cabinet_version": "19.1",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12627,
+  "whiteboard_match": null
+}

@@ -1,0 +1,113 @@
+{
+  "id": 1612961,
+  "map_name": "Dusk",
+  "cabinet": {
+    "id": 97,
+    "name": "coro4",
+    "display_name": "Coronation Cab 4",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 678,
+    "last_game_time": "2025-08-10T23:33:00.822000Z",
+    "client_status": "offline",
+    "twitch_channel_name": null
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 87822,
+    "last_game_time": "2026-01-09T04:07:04.578000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 1131195,
+      "player_id": 1,
+      "user": 1074,
+      "game": 1612961,
+      "play_session": 80939
+    },
+    {
+      "id": 1131196,
+      "player_id": 2,
+      "user": 39,
+      "game": 1612961,
+      "play_session": 80940
+    },
+    {
+      "id": 1131197,
+      "player_id": 3,
+      "user": 505,
+      "game": 1612961,
+      "play_session": 80946
+    },
+    {
+      "id": 1131198,
+      "player_id": 4,
+      "user": 1067,
+      "game": 1612961,
+      "play_session": 80955
+    },
+    {
+      "id": 1131199,
+      "player_id": 5,
+      "user": 95,
+      "game": 1612961,
+      "play_session": 80947
+    },
+    {
+      "id": 1131200,
+      "player_id": 6,
+      "user": 182,
+      "game": 1612961,
+      "play_session": 80952
+    },
+    {
+      "id": 1131201,
+      "player_id": 7,
+      "user": 192,
+      "game": 1612961,
+      "play_session": 80948
+    },
+    {
+      "id": 1131202,
+      "player_id": 8,
+      "user": 12,
+      "game": 1612961,
+      "play_session": 80944
+    },
+    {
+      "id": 1131203,
+      "player_id": 9,
+      "user": 246,
+      "game": 1612961,
+      "play_session": 80949
+    },
+    {
+      "id": 1131204,
+      "player_id": 10,
+      "user": 431,
+      "game": 1612961,
+      "play_session": 80951
+    }
+  ],
+  "start_time": "2025-08-09T19:17:22.816000Z",
+  "end_time": "2025-08-09T19:19:33.225000Z",
+  "status": "complete",
+  "win_condition": "snail",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 30,
+  "cabinet_version": "19.1",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 12599,
+  "whiteboard_match": null
+}

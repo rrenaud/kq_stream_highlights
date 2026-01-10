@@ -1,0 +1,322 @@
+[
+  {
+    "id": 1486454,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059570,
+        "player_id": 4,
+        "user": 1653,
+        "game": 1486454,
+        "play_session": 73125
+      },
+      {
+        "id": 1059571,
+        "player_id": 2,
+        "user": 608,
+        "game": 1486454,
+        "play_session": 73126
+      },
+      {
+        "id": 1059572,
+        "player_id": 7,
+        "user": 1078,
+        "game": 1486454,
+        "play_session": 73151
+      }
+    ],
+    "start_time": "2025-03-20T02:38:33.849000Z",
+    "end_time": "2025-03-20T02:40:37.478000Z",
+    "status": "complete",
+    "win_condition": "economic",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 29,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10006,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1486458,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059575,
+        "player_id": 4,
+        "user": 1653,
+        "game": 1486458,
+        "play_session": 73125
+      },
+      {
+        "id": 1059576,
+        "player_id": 2,
+        "user": 608,
+        "game": 1486458,
+        "play_session": 73126
+      },
+      {
+        "id": 1059577,
+        "player_id": 7,
+        "user": 1078,
+        "game": 1486458,
+        "play_session": 73151
+      }
+    ],
+    "start_time": "2025-03-20T02:42:09.184000Z",
+    "end_time": "2025-03-20T02:43:48.828000Z",
+    "status": "complete",
+    "win_condition": "economic",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 30,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10006,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1486464,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059581,
+        "player_id": 4,
+        "user": 1653,
+        "game": 1486464,
+        "play_session": 73125
+      },
+      {
+        "id": 1059582,
+        "player_id": 2,
+        "user": 608,
+        "game": 1486464,
+        "play_session": 73126
+      },
+      {
+        "id": 1059583,
+        "player_id": 7,
+        "user": 1078,
+        "game": 1486464,
+        "play_session": 73151
+      }
+    ],
+    "start_time": "2025-03-20T02:44:59.781000Z",
+    "end_time": "2025-03-20T02:48:38.365000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 44,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10006,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1486479,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059592,
+        "player_id": 4,
+        "user": 1653,
+        "game": 1486479,
+        "play_session": 73125
+      },
+      {
+        "id": 1059593,
+        "player_id": 2,
+        "user": 608,
+        "game": 1486479,
+        "play_session": 73126
+      },
+      {
+        "id": 1059594,
+        "player_id": 7,
+        "user": 1078,
+        "game": 1486479,
+        "play_session": 73151
+      }
+    ],
+    "start_time": "2025-03-20T02:51:26.272000Z",
+    "end_time": "2025-03-20T02:52:29.148000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 15,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10006,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1486486,
+    "map_name": "Beginner",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 81881,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "client_status": "offline",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1059607,
+        "player_id": 4,
+        "user": 1653,
+        "game": 1486486,
+        "play_session": 73125
+      },
+      {
+        "id": 1059608,
+        "player_id": 2,
+        "user": 608,
+        "game": 1486486,
+        "play_session": 73126
+      },
+      {
+        "id": 1059609,
+        "player_id": 7,
+        "user": 1078,
+        "game": 1486486,
+        "play_session": 73151
+      }
+    ],
+    "start_time": "2025-03-20T02:53:56.312000Z",
+    "end_time": "2025-03-20T02:57:54.712000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 47,
+    "cabinet_version": "",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 10006,
+    "whiteboard_match": null
+  }
+]

@@ -1,0 +1,172 @@
+[
+  {
+    "id": 1694976,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 138,
+      "name": "mac1",
+      "display_name": "MAC Cab 1",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": false,
+      "allow_tournament_player": false,
+      "total_games": 166,
+      "last_game_time": "2025-12-07T05:06:10.187000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187101,
+        "player_id": 2,
+        "user": 848,
+        "game": 1694976,
+        "play_session": 86974
+      },
+      {
+        "id": 1187102,
+        "player_id": 5,
+        "user": 896,
+        "game": 1694976,
+        "play_session": 86988
+      },
+      {
+        "id": 1187103,
+        "player_id": 6,
+        "user": 1533,
+        "game": 1694976,
+        "play_session": 86976
+      },
+      {
+        "id": 1187104,
+        "player_id": 8,
+        "user": 886,
+        "game": 1694976,
+        "play_session": 86977
+      },
+      {
+        "id": 1187105,
+        "player_id": 9,
+        "user": 569,
+        "game": 1694976,
+        "play_session": 86999
+      },
+      {
+        "id": 1187106,
+        "player_id": 10,
+        "user": 1091,
+        "game": 1694976,
+        "play_session": 86978
+      }
+    ],
+    "start_time": "2025-12-06T21:30:50.761000Z",
+    "end_time": "2025-12-06T21:34:28.490000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 37,
+    "cabinet_version": "17.26",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14004,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1694981,
+    "map_name": "Night",
+    "cabinet": {
+      "id": 138,
+      "name": "mac1",
+      "display_name": "MAC Cab 1",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": false,
+      "allow_tournament_player": false,
+      "total_games": 166,
+      "last_game_time": "2025-12-07T05:06:10.187000Z",
+      "client_status": "offline",
+      "twitch_channel_name": null
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 87822,
+      "last_game_time": "2026-01-09T04:07:04.578000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 1187111,
+        "player_id": 9,
+        "user": 569,
+        "game": 1694981,
+        "play_session": 86999
+      },
+      {
+        "id": 1187108,
+        "player_id": 5,
+        "user": 896,
+        "game": 1694981,
+        "play_session": 86988
+      },
+      {
+        "id": 1187107,
+        "player_id": 2,
+        "user": 848,
+        "game": 1694981,
+        "play_session": 86974
+      },
+      {
+        "id": 1187112,
+        "player_id": 10,
+        "user": 1091,
+        "game": 1694981,
+        "play_session": 86978
+      },
+      {
+        "id": 1187110,
+        "player_id": 8,
+        "user": 886,
+        "game": 1694981,
+        "play_session": 86977
+      },
+      {
+        "id": 1187109,
+        "player_id": 6,
+        "user": 1533,
+        "game": 1694981,
+        "play_session": 86976
+      }
+    ],
+    "start_time": "2025-12-06T21:35:27.851000Z",
+    "end_time": "2025-12-06T21:39:14.946000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "gold",
+    "player_count": 10,
+    "berries_used": 54,
+    "cabinet_version": "17.26",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 14004,
+    "whiteboard_match": null
+  }
+]
