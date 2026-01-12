@@ -427,10 +427,10 @@
                             <div class="rating-panel">
                                 <div class="rating-label">Rate this highlight:</div>
                                 <div class="rating-buttons">
-                                    <button class="rating-btn great ${currentRating === 'great' ? 'selected' : ''}" onclick="rateClip('great')">Great</button>
-                                    <button class="rating-btn good ${currentRating === 'good' ? 'selected' : ''}" onclick="rateClip('good')">Good</button>
-                                    <button class="rating-btn meh ${currentRating === 'meh' ? 'selected' : ''}" onclick="rateClip('meh')">Meh</button>
-                                    <button class="rating-btn bad ${currentRating === 'bad' ? 'selected' : ''}" onclick="rateClip('bad')">Bad</button>
+                                    <button class="rating-btn great ${currentRating === 4 ? 'selected' : ''}" onclick="rateClip(4)">4 - Great</button>
+                                    <button class="rating-btn good ${currentRating === 3 ? 'selected' : ''}" onclick="rateClip(3)">3 - Good</button>
+                                    <button class="rating-btn meh ${currentRating === 2 ? 'selected' : ''}" onclick="rateClip(2)">2 - Meh</button>
+                                    <button class="rating-btn bad ${currentRating === 1 ? 'selected' : ''}" onclick="rateClip(1)">1 - Bad</button>
                                 </div>
                                 ${ratingDisplay}
                             </div>
@@ -581,14 +581,14 @@
                 loadClip(currentIndex - 1, -1);
             } else if (e.key === 'ArrowRight' || e.key === 'n') {
                 loadClip(currentIndex + 1, 1);
-            } else if (e.key === '1') {
-                rateClip('great');
-            } else if (e.key === '2') {
-                rateClip('good');
-            } else if (e.key === '3') {
-                rateClip('meh');
             } else if (e.key === '4') {
-                rateClip('bad');
+                rateClip(4);
+            } else if (e.key === '3') {
+                rateClip(3);
+            } else if (e.key === '2') {
+                rateClip(2);
+            } else if (e.key === '1') {
+                rateClip(1);
             }
         });
 
