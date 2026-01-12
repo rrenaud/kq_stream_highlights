@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Video Alignment</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a2e;
+            color: #eee;
+        }
+        h1 { color: #00d4ff; margin-bottom: 5px; }
+        .progress { color: #888; margin-bottom: 20px; }
+        .panel {
+            background: #16213e;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .tournament-name {
+            font-size: 1.3em;
+            color: #00d4ff;
+            margin-bottom: 15px;
+        }
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            margin-bottom: 20px;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border-radius: 8px;
+        }
+        .game-info {
+            background: #0f3460;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .game-info h3 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+        }
+        .game-info .row {
+            display: flex;
+            margin: 8px 0;
+        }
+        .game-info .label {
+            color: #888;
+            width: 120px;
+        }
+        .game-info .value {
+            color: #eee;
+        }
+        .game-info a {
+            color: #00d4ff;
+        }
+        .team-blue { color: #4a9eff; }
+        .team-gold { color: #ffd700; }
+        .teams-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding: 10px 0;
+        }
+        .team-side {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .team-side.gold { text-align: left; }
+        .team-side.blue { text-align: right; }
+        .buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .btn-aligned {
+            background: #00ff88;
+            color: #000;
+        }
+        .btn-aligned:hover { background: #00cc6a; }
+        .btn-aligned:disabled {
+            background: #555;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .btn-skip {
+            background: #555;
+            color: #eee;
+        }
+        .btn-skip:hover { background: #666; }
+        .current-time {
+            font-size: 1.5em;
+            color: #00d4ff;
+            margin: 15px 0;
+        }
+        .status-aligned {
+            background: #1a4a3a;
+            border: 1px solid #00ff88;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .status-aligned h3 {
+            color: #00ff88;
+            margin: 0 0 10px 0;
+        }
+        .no-game {
+            color: #ff6b6b;
+            padding: 20px;
+            background: #3a1a1a;
+            border-radius: 6px;
+        }
+        .cabinet-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .cabinet-btn {
+            padding: 10px 20px;
+            border: 2px solid #555;
+            border-radius: 6px;
+            background: #0f3460;
+            color: #eee;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .cabinet-btn:hover {
+            border-color: #00d4ff;
+        }
+        .cabinet-btn.selected {
+            border-color: #00ff88;
+            background: #1a4a3a;
+        }
+        .cabinet-label {
+            color: #888;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tournament Video Alignment</h1>
+    <div class="progress" id="progress">Loading...</div>
+
+    <div id="main-content">
+        <div class="panel">
+            <p style="color: #888;">Loading tournaments...</p>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script>
+        let tournaments = [];
+        let currentIndex = 0;
+        let currentTournament = null;
+        let selectedCabinetIndex = 0;
+        let player = null;
+
+        // Load YouTube IFrame API
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        function onYouTubeIframeAPIReady() {
+            // API ready, load tournaments
+            loadTournaments();
+        }
+
+        async function loadTournaments() {
+            const resp = await fetch('/api/tournaments');
+            tournaments = await resp.json();
+            updateProgress();
+            if (tournaments.length > 0) {
+                loadTournament(0);
+            }
+        }
+
+        function updateProgress() {
+            const aligned = tournaments.filter(t => t.aligned).length;
+            document.getElementById('progress').textContent =
+                `${aligned} of ${tournaments.length} tournaments aligned | Current: ${currentIndex + 1}/${tournaments.length}`;
+        }
+
+        async function loadTournament(index) {
+            // Skip already aligned tournaments and videos without tournament_id
+            while (index < tournaments.length &&
+                   (tournaments[index].aligned || !tournaments[index].tournament_id)) {
+                index++;
+            }
+            currentIndex = index;
+            if (index >= tournaments.length) {
+                document.getElementById('main-content').innerHTML = `
+                    <div class="panel">
+                        <p style="color: #00ff88;">All tournaments aligned!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const t = tournaments[index];
+            const resp = await fetch(`/api/tournament/${t.tournament_id}`);
+            currentTournament = await resp.json();
+            renderTournament();
+            updateProgress();
+        }
+
+        function detectCabinetFromTitle(title, cabinetOptions) {
+            // Try to match "Cab 1", "[Cab 1]", "- Cab 1", etc.
+            const match = title.match(/\[?[Cc]ab(?:inet)?\s*(\d+)\]?/);
+            if (match) {
+                const cabNum = match[1];
+                // Find cabinet option that contains this number
+                for (let i = 0; i < cabinetOptions.length; i++) {
+                    if (cabinetOptions[i].cabinet_name.includes(cabNum)) {
+                        return i;
+                    }
+                }
+            }
+            return 0;
+        }
+
+        function renderTournament() {
+            const t = currentTournament;
+            const videoId = t.video_id;
+            const cabinetOptions = t.cabinet_options || [];
+
+            // Auto-detect cabinet from video title
+            selectedCabinetIndex = detectCabinetFromTitle(t.video_title || '', cabinetOptions);
+
+            let alignmentHtml = '';
+            if (t.alignment) {
+                const seconds = t.alignment.video_timestamp_seconds;
+                const timeStr = formatTime(seconds);
+                alignmentHtml = `
+                    <div class="status-aligned">
+                        <h3>Already Aligned</h3>
+                        <div>Video timestamp: <strong>${timeStr}</strong> (${seconds.toFixed(1)}s)</div>
+                        <div>Game start UTC: ${t.alignment.gamestart_utc}</div>
+                    </div>
+                `;
+            }
+
+            // Cabinet selector (only if multiple cabinets)
+            let cabinetSelectorHtml = '';
+            if (cabinetOptions.length > 1) {
+                cabinetSelectorHtml = `
+                    <div class="cabinet-label">Select cabinet for this video:</div>
+                    <div class="cabinet-selector">
+                        ${cabinetOptions.map((cab, i) => `
+                            <button class="cabinet-btn ${i === selectedCabinetIndex ? 'selected' : ''}"
+                                    onclick="selectCabinet(${i})">
+                                ${cab.cabinet_name}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            let teamsHtml = '';
+            let gameInfoHtml = '';
+            if (cabinetOptions.length > 0) {
+                const g = cabinetOptions[selectedCabinetIndex];
+                teamsHtml = `
+                    <div class="teams-row">
+                        <div class="team-side gold team-gold">${g.gold_team}</div>
+                        <div class="team-side blue team-blue">${g.blue_team}</div>
+                    </div>
+                `;
+                gameInfoHtml = `
+                    <div class="game-info" id="game-info">
+                        <h3>First Game on ${g.cabinet_name}</h3>
+                        <div class="row">
+                            <span class="label">Game ID:</span>
+                            <span class="value">${g.game_id}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">Map:</span>
+                            <span class="value">${g.map_name}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">Game Start:</span>
+                            <span class="value">${g.gamestart_utc || g.start_time}</span>
+                        </div>
+                        <div class="row">
+                            <span class="label">Hivemind:</span>
+                            <span class="value"><a href="${g.hivemind_url}" target="_blank">${g.hivemind_url}</a></span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                const cache = t.cache_info || {};
+                const lastBefore = cache.last_before;
+                const firstAfter = cache.first_after;
+                gameInfoHtml = `
+                    <div class="no-game">
+                        <strong>No games found for this tournament in local cache.</strong>
+                        <div style="margin-top: 15px; color: #ccc;">
+                            <div style="margin-bottom: 8px;">
+                                <span style="color: #888;">Video date:</span> ${t.video_start_time || 'Unknown'}
+                            </div>
+                            <div style="margin-bottom: 8px;">
+                                <span style="color: #888;">Last cached game before:</span>
+                                ${lastBefore ? `Game ${lastBefore.game_id} @ ${lastBefore.start_time}` : 'None'}
+                            </div>
+                            <div>
+                                <span style="color: #888;">First cached game after:</span>
+                                ${firstAfter ? `Game ${firstAfter.game_id} @ ${firstAfter.start_time}` : 'None'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('main-content').innerHTML = `
+                <div class="panel">
+                    <div class="tournament-name">${t.tournament_name || t.video_title || 'Tournament ' + t.tournament_id}</div>
+                    <div style="color: #888; margin-bottom: 15px;">
+                        Tournament ID: ${t.tournament_id}
+                        ${t.video_title && t.tournament_name ? ` | Video: ${t.video_title}` : ''}
+                    </div>
+                    ${alignmentHtml}
+                    <div class="video-container">
+                        <div id="player"></div>
+                    </div>
+                    ${cabinetSelectorHtml}
+                    ${teamsHtml}
+                    <div class="current-time">Current time: <span id="current-time-display">0:00</span></div>
+                    ${gameInfoHtml}
+                    <div class="buttons">
+                        <button class="btn-aligned" id="btn-aligned" onclick="saveAlignment()" ${cabinetOptions.length === 0 ? 'disabled' : ''}>
+                            Aligned
+                        </button>
+                        <button class="btn-skip" onclick="skipTournament()">Skip</button>
+                    </div>
+                </div>
+            `;
+
+            // Create YouTube player
+            player = new YT.Player('player', {
+                videoId: videoId,
+                playerVars: {
+                    'enablejsapi': 1,
+                    'origin': window.location.origin
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function selectCabinet(index) {
+            selectedCabinetIndex = index;
+            const cabinetOptions = currentTournament.cabinet_options || [];
+
+            // Update button states
+            document.querySelectorAll('.cabinet-btn').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === index);
+            });
+
+            // Update game info
+            if (cabinetOptions.length > 0) {
+                const g = cabinetOptions[index];
+                document.getElementById('game-info').innerHTML = `
+                    <h3>First Game on ${g.cabinet_name}</h3>
+                    <div class="row">
+                        <span class="label">Game ID:</span>
+                        <span class="value">${g.game_id}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Map:</span>
+                        <span class="value">${g.map_name}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Game Start:</span>
+                        <span class="value">${g.gamestart_utc || g.start_time}</span>
+                    </div>
+                    <div class="row">
+                        <span class="label">Hivemind:</span>
+                        <span class="value"><a href="${g.hivemind_url}" target="_blank">${g.hivemind_url}</a></span>
+                    </div>
+                `;
+
+                // Update teams
+                document.querySelector('.teams-row').innerHTML = `
+                    <div class="team-side gold team-gold">${g.gold_team}</div>
+                    <div class="team-side blue team-blue">${g.blue_team}</div>
+                `;
+            }
+        }
+
+        function onPlayerReady(event) {
+            // Update time display periodically
+            setInterval(updateTimeDisplay, 100);
+        }
+
+        function updateTimeDisplay() {
+            if (player && player.getCurrentTime) {
+                try {
+                    const seconds = player.getCurrentTime();
+                    document.getElementById('current-time-display').textContent = formatTime(seconds);
+                } catch (e) {
+                    // Player not ready
+                }
+            }
+        }
+
+        function formatTime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = Math.floor(seconds % 60);
+            if (h > 0) {
+                return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+            }
+            return `${m}:${s.toString().padStart(2, '0')}`;
+        }
+
+        async function saveAlignment() {
+            if (!player || !currentTournament) return;
+
+            const cabinetOptions = currentTournament.cabinet_options || [];
+            if (cabinetOptions.length === 0) return;
+
+            const selectedCabinet = cabinetOptions[selectedCabinetIndex];
+            const seconds = player.getCurrentTime();
+
+            const resp = await fetch(`/api/tournament/${currentTournament.tournament_id}/align`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    video_timestamp_seconds: seconds,
+                    game_id: selectedCabinet.game_id,
+                    cabinet_id: selectedCabinet.cabinet_id
+                })
+            });
+
+            const result = await resp.json();
+            if (result.success) {
+                // Update local state
+                tournaments[currentIndex].aligned = true;
+                // Move to next
+                loadTournament(currentIndex + 1);
+            }
+        }
+
+        function skipTournament() {
+            loadTournament(currentIndex + 1);
+        }
+    </script>
+</body>
+</html>

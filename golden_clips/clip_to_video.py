@@ -26,6 +26,7 @@ class ClipInfo:
     start_seconds: float
     end_seconds: float
     duration: float
+    upload_date: str  # YYYYMMDD format from yt-dlp
 
 
 def extract_clip_info(clip_url: str) -> ClipInfo:
@@ -75,6 +76,7 @@ def extract_clip_info(clip_url: str) -> ClipInfo:
         start_seconds=start,
         end_seconds=end,
         duration=end - start,
+        upload_date=info.get('upload_date', ''),
     )
 
 

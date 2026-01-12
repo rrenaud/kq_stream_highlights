@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1194027,
+    "map_name": "Day",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 82033,
+      "last_game_time": "2026-01-11T01:52:22.186000Z",
+      "client_status": "online",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 88002,
+      "last_game_time": "2026-01-11T01:52:22.186000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 864240,
+        "player_id": 5,
+        "user": 1078,
+        "game": 1194027,
+        "play_session": 53685
+      },
+      {
+        "id": 864241,
+        "player_id": 3,
+        "user": 81,
+        "game": 1194027,
+        "play_session": 86394
+      }
+    ],
+    "start_time": "2024-04-18T02:06:17.212000Z",
+    "end_time": "2024-04-18T02:08:27.070000Z",
+    "status": "error",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 21,
+    "cabinet_version": "17.26",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 5627,
+    "whiteboard_match": null
+  },
+  {
+    "id": 1194035,
+    "map_name": "Dusk",
+    "cabinet": {
+      "id": 29,
+      "name": "wonderville",
+      "display_name": "Wonderville",
+      "scene": 15,
+      "address": "",
+      "description": "",
+      "time_zone": "America/New_York",
+      "allow_qr_signin": true,
+      "allow_nfc_signin": true,
+      "allow_tournament_player": false,
+      "total_games": 82033,
+      "last_game_time": "2026-01-11T01:52:22.186000Z",
+      "client_status": "online",
+      "twitch_channel_name": "wondervillenyc"
+    },
+    "scene": {
+      "id": 15,
+      "name": "nyc",
+      "display_name": "New York",
+      "description": "",
+      "total_games": 88002,
+      "last_game_time": "2026-01-11T01:52:22.186000Z",
+      "background_color": "#003884"
+    },
+    "users": [
+      {
+        "id": 864246,
+        "player_id": 5,
+        "user": 1078,
+        "game": 1194035,
+        "play_session": 53685
+      },
+      {
+        "id": 864247,
+        "player_id": 3,
+        "user": 81,
+        "game": 1194035,
+        "play_session": 86394
+      }
+    ],
+    "start_time": "2024-04-18T02:09:24.883000Z",
+    "end_time": "2024-04-18T02:10:22.196000Z",
+    "status": "complete",
+    "win_condition": "military",
+    "winning_team": "blue",
+    "player_count": 10,
+    "berries_used": 19,
+    "cabinet_version": "17.26",
+    "match": null,
+    "qp_match": null,
+    "tournament_match": 5627,
+    "whiteboard_match": null
+  }
+]

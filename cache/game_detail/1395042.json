@@ -1,0 +1,85 @@
+{
+  "id": 1395042,
+  "map_name": "Day",
+  "cabinet": {
+    "id": 29,
+    "name": "wonderville",
+    "display_name": "Wonderville",
+    "scene": 15,
+    "address": "",
+    "description": "",
+    "time_zone": "America/New_York",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 82061,
+    "last_game_time": "2026-01-11T02:05:05.119000Z",
+    "client_status": "online",
+    "twitch_channel_name": "wondervillenyc"
+  },
+  "scene": {
+    "id": 15,
+    "name": "nyc",
+    "display_name": "New York",
+    "description": "",
+    "total_games": 88010,
+    "last_game_time": "2026-01-11T02:05:05.119000Z",
+    "background_color": "#003884"
+  },
+  "users": [
+    {
+      "id": 995187,
+      "player_id": 7,
+      "user": 1078,
+      "game": 1395042,
+      "play_session": 67887
+    },
+    {
+      "id": 995188,
+      "player_id": 9,
+      "user": 1653,
+      "game": 1395042,
+      "play_session": 67886
+    },
+    {
+      "id": 995189,
+      "player_id": 6,
+      "user": 1245,
+      "game": 1395042,
+      "play_session": 67894
+    },
+    {
+      "id": 995190,
+      "player_id": 2,
+      "user": 3,
+      "game": 1395042,
+      "play_session": 67895
+    },
+    {
+      "id": 995191,
+      "player_id": 4,
+      "user": 1967,
+      "game": 1395042,
+      "play_session": 67896
+    },
+    {
+      "id": 995192,
+      "player_id": 8,
+      "user": 8,
+      "game": 1395042,
+      "play_session": 67897
+    }
+  ],
+  "start_time": "2024-12-05T03:07:03.123000Z",
+  "end_time": "2024-12-05T03:08:07.276000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "blue",
+  "player_count": 10,
+  "berries_used": 28,
+  "cabinet_version": "20.9",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": 8822,
+  "whiteboard_match": null
+}
