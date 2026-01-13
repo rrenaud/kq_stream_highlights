@@ -8,7 +8,6 @@
         * { box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             background: #1a1a2e;
@@ -18,8 +17,8 @@
         .progress { color: #888; margin-bottom: 20px; }
         .main-layout {
             display: grid;
-            grid-template-columns: 1fr 350px;
-            gap: 20px;
+            grid-template-columns: 1fr 280px 280px;
+            gap: 15px;
         }
         .panel {
             background: #16213e;
@@ -192,6 +191,15 @@
             margin-top: 10px;
             color: #00ff88;
         }
+        .predicted-rating {
+            margin-top: 5px;
+            color: #888;
+            font-size: 0.9em;
+        }
+        .predicted-rating .value {
+            color: #ffd93d;
+            font-weight: bold;
+        }
         .clip-link {
             color: #00d4ff;
             text-decoration: none;
@@ -240,7 +248,148 @@
         .debug-panel .warn {
             color: #ffd93d;
         }
-        @media (max-width: 900px) {
+        .mode-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .mode-btn {
+            padding: 10px 20px;
+            border: 2px solid #555;
+            border-radius: 6px;
+            background: #16213e;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.2s;
+        }
+        .mode-btn:hover {
+            border-color: #00d4ff;
+            color: #eee;
+        }
+        .mode-btn.active {
+            border-color: #00d4ff;
+            background: #0f3460;
+            color: #00d4ff;
+        }
+        .trigger-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .trigger-badge.victory { background: #1a4a3a; color: #00ff88; }
+        .trigger-badge.queen_kill { background: #4a1a1a; color: #ff6b6b; }
+        .trigger-badge.snail_eat, .trigger-badge.snail_escape { background: #4a3a1a; color: #ffd93d; }
+        .trigger-badge.combat_burst { background: #4a1a3a; color: #ff6bff; }
+        .trigger-badge.win_prob_spike { background: #1a3a4a; color: #6bffff; }
+        .candidate-meta {
+            color: #888;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+        .events-pane {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .events-pane h3 {
+            margin: 0 0 10px 0;
+            font-size: 1em;
+            border-bottom: 1px solid #333;
+            padding-bottom: 8px;
+        }
+        .events-pane h3.kills { color: #ff6b6b; }
+        .events-pane h3.other { color: #6bcb77; }
+        .events-pane .event-item {
+            font-size: 0.85em;
+            padding: 6px 8px;
+        }
+        .events-pane .event-time {
+            min-width: 45px;
+            font-size: 0.85em;
+        }
+        .events-pane .event-type {
+            min-width: 60px;
+            font-size: 0.85em;
+        }
+        .events-pane .event-details {
+            font-size: 0.85em;
+        }
+        .time-adjust-panel {
+            background: #0f3460;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .time-adjust-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .time-adjust-row:last-child {
+            margin-bottom: 0;
+        }
+        .time-adjust-label {
+            color: #888;
+            min-width: 50px;
+            font-size: 0.9em;
+        }
+        .time-adjust-value {
+            color: #00d4ff;
+            font-family: monospace;
+            min-width: 70px;
+            font-size: 0.95em;
+        }
+        .time-adjust-value.changed {
+            color: #ffd93d;
+        }
+        .time-adjust-btn {
+            padding: 4px 8px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: #16213e;
+            color: #ccc;
+            cursor: pointer;
+            font-size: 0.85em;
+            transition: all 0.2s;
+        }
+        .time-adjust-btn:hover:not(:disabled) {
+            border-color: #00d4ff;
+            color: #fff;
+        }
+        .time-adjust-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .time-adjust-duration {
+            color: #888;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 5px;
+        }
+        .time-adjust-duration .value {
+            color: #00ff88;
+            font-weight: bold;
+        }
+        .time-adjust-reset {
+            display: block;
+            margin: 10px auto 0;
+            padding: 6px 16px;
+            border: 1px solid #555;
+            border-radius: 4px;
+            background: transparent;
+            color: #888;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .time-adjust-reset:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        @media (max-width: 1100px) {
             .main-layout {
                 grid-template-columns: 1fr;
             }
@@ -249,6 +398,10 @@
 </head>
 <body>
     <h1>Highlight Rater</h1>
+    <div class="mode-toggle">
+        <button class="mode-btn active" id="mode-clips" onclick="switchMode('clips')">Curated Clips</button>
+        <button class="mode-btn" id="mode-candidates" onclick="switchMode('candidates')">ML Candidates</button>
+    </div>
     <div class="progress" id="progress">Loading...</div>
 
     <div id="main-content">
@@ -275,17 +428,81 @@
         }
     </script>
     <script>
+        // Mode: 'clips' or 'candidates'
+        let currentMode = 'clips';
+
+        // Clips mode state
         let clips = [];
         let currentIndex = 0;
         let currentClip = null;
+
+        // Candidates mode state
+        let candidates = [];
+        let candidateIndex = 0;
+        let currentCandidate = null;
+
+        // Shared
         let player = null;
         let updateInterval = null;
+
+        // Time adjustment state (for candidates only)
+        let adjustedStart = null;
+        let adjustedEnd = null;
+        let originalStart = null;
+        let originalEnd = null;
+        const MIN_DURATION = 3; // Minimum clip duration in seconds
+
+        // Dual rating state - track ratings for original and adjusted separately
+        let originalRating = null;  // Rating for original times
+        let adjustedRating = null;  // Rating for adjusted times
+        let hasAdjustments = false; // Whether user has made any adjustments
+
+        function switchMode(mode) {
+            if (mode === currentMode) return;
+            currentMode = mode;
+
+            // Update toggle buttons
+            document.getElementById('mode-clips').classList.toggle('active', mode === 'clips');
+            document.getElementById('mode-candidates').classList.toggle('active', mode === 'candidates');
+
+            // Clear player
+            if (player) {
+                player.destroy();
+                player = null;
+            }
+            if (updateInterval) {
+                clearInterval(updateInterval);
+                updateInterval = null;
+            }
+
+            // Load appropriate content
+            if (mode === 'clips') {
+                currentClip = null;
+                if (clips.length > 0) {
+                    loadClip(currentIndex, 1);
+                } else {
+                    loadClips();
+                }
+            } else {
+                currentCandidate = null;
+                if (candidates.length > 0) {
+                    loadCandidate(candidateIndex, 1);
+                } else {
+                    loadCandidates();
+                }
+            }
+        }
 
         async function loadClips() {
             const resp = await fetch('/api/clips');
             clips = await resp.json();
             updateProgress();
             if (clips.length > 0) {
+                // Check if all clips are rated - if so, switch to candidates
+                if (clips.every(c => c.has_rating)) {
+                    switchMode('candidates');
+                    return;
+                }
                 loadClip(0);
             } else {
                 document.getElementById('main-content').innerHTML = `
@@ -362,20 +579,8 @@
             const c = currentClip;
             const clipInfo = clips[currentIndex];
 
-            // Build events HTML with data-time for scroll tracking
-            let eventsHtml = '';
-            if (c.events && c.events.length > 0) {
-                eventsHtml = c.events.map((e, i) => `
-                    <div class="event-item future" data-time="${e.relative_seconds}" data-index="${i}" onclick="seekToEvent(${e.relative_seconds})">
-                        <span class="event-time">${e.time_str}</span>
-                        <span class="event-type ${getEventTypeClass(e.event_type)}">${formatEventType(e.event_type)}</span>
-                        <span class="event-details">${e.details}</span>
-                        ${e.win_probability ? `<span class="win-prob">${(parseFloat(e.win_probability) * 100).toFixed(0)}%</span>` : ''}
-                    </div>
-                `).join('');
-            } else {
-                eventsHtml = '<div class="no-events">No events found in this clip</div>';
-            }
+            // Build split events HTML
+            const eventsHtml = buildSplitEventsHtml(c.events, 'seekToEvent');
 
             // Build debug info HTML
             const debug = c.debug || {};
@@ -403,8 +608,11 @@
 
             // Current rating display
             const currentRating = clipInfo.rating || c.rating;
+            const predictedRating = clipInfo.predicted_rating || c.predicted_rating;
             const ratingDisplay = currentRating ?
                 `<div class="current-rating">Current rating: <strong>${currentRating}</strong></div>` : '';
+            const predictedDisplay = predictedRating ?
+                `<div class="predicted-rating">ML Predicted: <span class="value">${predictedRating.toFixed(2)}</span></div>` : '';
 
             document.getElementById('main-content').innerHTML = `
                 <div class="main-layout">
@@ -433,23 +641,17 @@
                                     <button class="rating-btn bad ${currentRating === 1 ? 'selected' : ''}" onclick="rateClip(1)">1 - Bad</button>
                                 </div>
                                 ${ratingDisplay}
+                                ${predictedDisplay}
                             </div>
                             <div class="nav-buttons">
                                 <button class="nav-btn prev" onclick="loadClip(currentIndex - 1, -1)">Previous</button>
                                 <button class="nav-btn next" onclick="loadClip(currentIndex + 1, 1)">Next</button>
                             </div>
-                        </div>
-                    </div>
-                    <div class="right-column">
-                        <div class="panel events-panel">
-                            <div class="events-header">
-                                <h3>Game Events</h3>
-                                <span class="event-count">${c.event_count} events</span>
-                            </div>
-                            ${eventsHtml}
                             ${debugHtml}
                         </div>
                     </div>
+                    ${eventsHtml.killsPane}
+                    ${eventsHtml.otherPane}
                 </div>
             `;
 
@@ -575,20 +777,559 @@
             }
         }
 
+        // ========== Candidate Mode Functions ==========
+
+        async function loadCandidates() {
+            const resp = await fetch('/api/candidates');
+            candidates = await resp.json();
+            updateCandidateProgress();
+            if (candidates.length > 0) {
+                loadCandidate(0, 1);
+            } else {
+                document.getElementById('main-content').innerHTML = `
+                    <div class="panel">
+                        <p style="color: #ff6b6b;">No candidates found. Run generate_candidates.py first.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function updateCandidateProgress() {
+            const rated = candidates.filter(c => c.has_rating).length;
+            document.getElementById('progress').textContent =
+                `${rated} of ${candidates.length} candidates rated | Current: ${candidateIndex + 1}/${candidates.length}`;
+        }
+
+        async function loadCandidate(index, direction = 1) {
+            // Skip already rated candidates
+            while (index >= 0 && index < candidates.length && candidates[index].has_rating) {
+                index += direction;
+            }
+
+            if (index < 0 || index >= candidates.length) {
+                if (candidates.every(c => c.has_rating)) {
+                    document.getElementById('main-content').innerHTML = `
+                        <div class="panel">
+                            <p style="color: #00ff88;">All candidates have been rated!</p>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            candidateIndex = index;
+            updateCandidateProgress();
+
+            const candInfo = candidates[index];
+            const resp = await fetch(`/api/candidate/${candInfo.candidate_id}`);
+            currentCandidate = await resp.json();
+            renderCandidate();
+        }
+
+        function formatTriggerType(triggerType) {
+            const typeMap = {
+                'victory': 'Victory',
+                'queen_kill': 'Queen Kill',
+                'snail_eat': 'Snail Eat',
+                'snail_escape': 'Snail Escape',
+                'combat_burst': 'Combat Burst',
+                'win_prob_spike': 'Win Prob Spike'
+            };
+            return typeMap[triggerType] || triggerType;
+        }
+
+        function formatSecondsToHMS(totalSeconds) {
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = Math.floor(totalSeconds % 60);
+            if (hours > 0) {
+                return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Time adjustment functions
+        function canAdjustStart(delta) {
+            if (adjustedStart === null || adjustedEnd === null) return false;
+            const newStart = adjustedStart + delta;
+            return newStart >= 0 && (adjustedEnd - newStart) >= MIN_DURATION;
+        }
+
+        function canAdjustEnd(delta) {
+            if (adjustedStart === null || adjustedEnd === null) return false;
+            const newEnd = adjustedEnd + delta;
+            return (newEnd - adjustedStart) >= MIN_DURATION;
+        }
+
+        function adjustStart(delta) {
+            if (!canAdjustStart(delta)) return;
+            adjustedStart += delta;
+            checkForAdjustments();
+            updateTimeAdjustDisplay();
+            // Seek to new start position
+            if (player && player.seekTo) {
+                player.seekTo(adjustedStart, true);
+            }
+        }
+
+        function adjustEnd(delta) {
+            if (!canAdjustEnd(delta)) return;
+            adjustedEnd += delta;
+            checkForAdjustments();
+            updateTimeAdjustDisplay();
+            // Seek to new end position to preview
+            if (player && player.seekTo) {
+                player.seekTo(Math.max(adjustedStart, adjustedEnd - 2), true);
+            }
+        }
+
+        function checkForAdjustments() {
+            const startChanged = Math.abs(adjustedStart - originalStart) > 0.5;
+            const endChanged = Math.abs(adjustedEnd - originalEnd) > 0.5;
+            const wasAdjusted = hasAdjustments;
+            hasAdjustments = startChanged || endChanged;
+            // Re-render rating panel if adjustment state changed
+            if (hasAdjustments !== wasAdjusted) {
+                updateRatingPanel();
+            }
+        }
+
+        function resetAdjustments() {
+            if (originalStart === null || originalEnd === null) return;
+            adjustedStart = originalStart;
+            adjustedEnd = originalEnd;
+            checkForAdjustments();
+            updateTimeAdjustDisplay();
+            if (player && player.seekTo) {
+                player.seekTo(adjustedStart, true);
+            }
+        }
+
+        function updateTimeAdjustDisplay() {
+            const startEl = document.getElementById('adjust-start-value');
+            const endEl = document.getElementById('adjust-end-value');
+            const durationEl = document.getElementById('adjust-duration');
+
+            if (startEl && adjustedStart !== null) {
+                startEl.textContent = formatSecondsToHMS(adjustedStart);
+                startEl.classList.toggle('changed', Math.abs(adjustedStart - originalStart) > 0.5);
+            }
+            if (endEl && adjustedEnd !== null) {
+                endEl.textContent = formatSecondsToHMS(adjustedEnd);
+                endEl.classList.toggle('changed', Math.abs(adjustedEnd - originalEnd) > 0.5);
+            }
+            if (durationEl && adjustedStart !== null && adjustedEnd !== null) {
+                durationEl.textContent = (adjustedEnd - adjustedStart).toFixed(1);
+            }
+
+            // Update button states
+            document.querySelectorAll('.time-adjust-btn').forEach(btn => {
+                const type = btn.dataset.type;
+                const delta = parseFloat(btn.dataset.delta);
+                if (type === 'start') {
+                    btn.disabled = !canAdjustStart(delta);
+                } else if (type === 'end') {
+                    btn.disabled = !canAdjustEnd(delta);
+                }
+            });
+        }
+
+        function getRatingButtonsHtml(rating, onClickFn, prefix = '') {
+            return `
+                <div class="rating-buttons">
+                    <button class="rating-btn great ${rating === 4 ? 'selected' : ''}" onclick="${onClickFn}(4)">4 - Great</button>
+                    <button class="rating-btn good ${rating === 3 ? 'selected' : ''}" onclick="${onClickFn}(3)">3 - Good</button>
+                    <button class="rating-btn meh ${rating === 2 ? 'selected' : ''}" onclick="${onClickFn}(2)">2 - Meh</button>
+                    <button class="rating-btn bad ${rating === 1 ? 'selected' : ''}" onclick="${onClickFn}(1)">1 - Bad</button>
+                </div>
+            `;
+        }
+
+        function updateRatingPanel() {
+            const container = document.getElementById('rating-container');
+            if (!container || !currentCandidate) return;
+
+            const predictedScore = currentCandidate.predicted_score;
+            const predictedDisplay = `<div class="predicted-rating">ML Predicted: <span class="value">${predictedScore.toFixed(2)}</span></div>`;
+
+            if (hasAdjustments) {
+                // Show two rating sections: Original and Adjusted
+                const originalDisplay = originalRating ?
+                    `<div class="current-rating">Rated: <strong>${originalRating}</strong></div>` : '';
+                const adjustedDisplay = adjustedRating ?
+                    `<div class="current-rating">Rated: <strong>${adjustedRating}</strong></div>` : '';
+
+                container.innerHTML = `
+                    <div class="rating-panel" style="border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px;">
+                        <div class="rating-label" style="color: #888;">Rate ORIGINAL clip:</div>
+                        ${getRatingButtonsHtml(originalRating, 'rateOriginal')}
+                        ${originalDisplay}
+                    </div>
+                    <div class="rating-panel">
+                        <div class="rating-label" style="color: #ffd93d;">Rate ADJUSTED clip:</div>
+                        ${getRatingButtonsHtml(adjustedRating, 'rateAdjusted')}
+                        ${adjustedDisplay}
+                        ${predictedDisplay}
+                    </div>
+                `;
+            } else {
+                // Show single rating section (rating goes to original)
+                const ratingDisplay = originalRating ?
+                    `<div class="current-rating">Current rating: <strong>${originalRating}</strong></div>` : '';
+
+                container.innerHTML = `
+                    <div class="rating-panel">
+                        <div class="rating-label">Rate this highlight:</div>
+                        ${getRatingButtonsHtml(originalRating, 'rateOriginal')}
+                        ${ratingDisplay}
+                        ${predictedDisplay}
+                    </div>
+                `;
+            }
+        }
+
+        async function rateOriginal(rating) {
+            if (!currentCandidate) return;
+
+            const resp = await fetch(`/api/candidate/${currentCandidate.candidate_id}/rate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ rating })
+            });
+
+            const result = await resp.json();
+            if (result.success) {
+                originalRating = rating;
+                candidates[candidateIndex].has_rating = true;
+                candidates[candidateIndex].rating = rating;
+                updateCandidateProgress();
+                updateRatingPanel();
+
+                // Auto-advance only if no adjustments have been made
+                if (!hasAdjustments) {
+                    loadCandidate(candidateIndex + 1, 1);
+                }
+            }
+        }
+
+        async function rateAdjusted(rating) {
+            if (!currentCandidate) return;
+
+            // Use a separate ID for adjusted ratings
+            const adjustedId = currentCandidate.candidate_id + '_adjusted';
+
+            const body = {
+                rating,
+                adjusted_video_start: adjustedStart,
+                adjusted_video_end: adjustedEnd,
+                original_video_start: originalStart,
+                original_video_end: originalEnd
+            };
+
+            const resp = await fetch(`/api/candidate/${adjustedId}/rate`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+
+            const result = await resp.json();
+            if (result.success) {
+                adjustedRating = rating;
+                candidates[candidateIndex].adjusted_rating = rating;
+                updateRatingPanel();
+
+                // Auto-advance after rating the adjusted clip
+                loadCandidate(candidateIndex + 1, 1);
+            }
+        }
+
+        function seekToStart() {
+            if (!player || !player.seekTo || adjustedStart === null) return;
+            player.seekTo(adjustedStart, true);
+        }
+
+        function isNonWorkerKill(event) {
+            // Check if this is a kill on a non-worker unit (queen or warrior)
+            if (event.event_type !== 'playerKill') return false;
+            const details = event.details || '';
+            return details.includes('Queen') || details.includes('Warrior');
+        }
+
+        function renderEventItem(e, i, seekFn) {
+            return `
+                <div class="event-item future" data-time="${e.relative_seconds}" data-index="${i}" onclick="${seekFn}(${e.relative_seconds})">
+                    <span class="event-time">${e.time_str}</span>
+                    <span class="event-type ${getEventTypeClass(e.event_type)}">${formatEventType(e.event_type)}</span>
+                    <span class="event-details">${e.details}</span>
+                    ${e.win_probability ? `<span class="win-prob">${(parseFloat(e.win_probability) * 100).toFixed(0)}%</span>` : ''}
+                </div>
+            `;
+        }
+
+        function buildSplitEventsHtml(events, seekFn) {
+            const importantKills = [];
+            const otherEvents = [];
+
+            if (events && events.length > 0) {
+                events.forEach((e, i) => {
+                    if (isNonWorkerKill(e)) {
+                        importantKills.push({ event: e, index: i });
+                    } else {
+                        otherEvents.push({ event: e, index: i });
+                    }
+                });
+            }
+
+            const killsHtml = importantKills.length > 0
+                ? importantKills.map(({ event, index }) => renderEventItem(event, index, seekFn)).join('')
+                : '<div class="no-events" style="font-size: 0.85em;">No queen/warrior kills</div>';
+
+            const otherHtml = otherEvents.length > 0
+                ? otherEvents.map(({ event, index }) => renderEventItem(event, index, seekFn)).join('')
+                : '<div class="no-events" style="font-size: 0.85em;">No other events</div>';
+
+            return {
+                killsPane: `
+                    <div class="panel events-pane">
+                        <h3 class="kills">Kills (${importantKills.length})</h3>
+                        ${killsHtml}
+                    </div>
+                `,
+                otherPane: `
+                    <div class="panel events-pane">
+                        <h3 class="other">Other (${otherEvents.length})</h3>
+                        ${otherHtml}
+                    </div>
+                `
+            };
+        }
+
+        function renderCandidate() {
+            const c = currentCandidate;
+            const candInfo = candidates[candidateIndex];
+
+            // Initialize time adjustment state
+            originalStart = c.video_start_seconds;
+            originalEnd = c.video_end_seconds;
+            adjustedStart = originalStart;
+            adjustedEnd = originalEnd;
+            hasAdjustments = false;
+
+            // Initialize rating state - check for existing ratings
+            originalRating = candInfo.rating || null;
+            adjustedRating = candInfo.adjusted_rating || null;
+
+            // Build split events HTML
+            const eventsHtml = buildSplitEventsHtml(c.events, 'seekToEventCandidate');
+
+            // Store predicted score for rating panel
+            const predictedScore = c.predicted_score;
+
+            // Video info
+            const hasVideo = c.has_video && c.video_id;
+            let videoHtml = '';
+            let metaHtml = '';
+
+            const duration = c.duration_seconds || c.duration || 0;
+            let timeAdjustHtml = '';
+            if (hasVideo) {
+                videoHtml = `<div class="video-container"><div id="player"></div></div>`;
+                const startFormatted = formatSecondsToHMS(c.video_start_seconds);
+                const endFormatted = formatSecondsToHMS(c.video_end_seconds);
+                metaHtml = `
+                    Duration: ${duration.toFixed(1)}s |
+                    Video: <a href="#" onclick="seekToStart(); return false;" class="clip-link">${startFormatted}</a> - ${endFormatted}
+                `;
+                timeAdjustHtml = `
+                    <div class="time-adjust-panel">
+                        <div class="time-adjust-row">
+                            <span class="time-adjust-label">Start:</span>
+                            <button class="time-adjust-btn" data-type="start" data-delta="-5" onclick="adjustStart(-5)">◀ -5s</button>
+                            <button class="time-adjust-btn" data-type="start" data-delta="-1" onclick="adjustStart(-1)">◀ -1s</button>
+                            <span class="time-adjust-value" id="adjust-start-value">${startFormatted}</span>
+                            <button class="time-adjust-btn" data-type="start" data-delta="1" onclick="adjustStart(1)">+1s ▶</button>
+                            <button class="time-adjust-btn" data-type="start" data-delta="5" onclick="adjustStart(5)">+5s ▶</button>
+                        </div>
+                        <div class="time-adjust-row">
+                            <span class="time-adjust-label">End:</span>
+                            <button class="time-adjust-btn" data-type="end" data-delta="-5" onclick="adjustEnd(-5)">◀ -5s</button>
+                            <button class="time-adjust-btn" data-type="end" data-delta="-1" onclick="adjustEnd(-1)">◀ -1s</button>
+                            <span class="time-adjust-value" id="adjust-end-value">${endFormatted}</span>
+                            <button class="time-adjust-btn" data-type="end" data-delta="1" onclick="adjustEnd(1)">+1s ▶</button>
+                            <button class="time-adjust-btn" data-type="end" data-delta="5" onclick="adjustEnd(5)">+5s ▶</button>
+                        </div>
+                        <div class="time-adjust-duration">Duration: <span class="value" id="adjust-duration">${duration.toFixed(1)}</span>s</div>
+                        <button class="time-adjust-reset" onclick="resetAdjustments()">Reset to Original</button>
+                    </div>
+                `;
+            } else {
+                videoHtml = `<div class="panel" style="text-align: center; padding: 60px; background: #0a0a15;">
+                    <p style="color: #888;">No video available for this candidate</p>
+                    <p style="color: #666; font-size: 0.9em;">Game ID: ${c.game_id} | Tournament: ${c.tournament_id || 'Unknown'}</p>
+                </div>`;
+                metaHtml = `Duration: ${duration.toFixed(1)}s`;
+            }
+
+            document.getElementById('main-content').innerHTML = `
+                <div class="main-layout">
+                    <div class="left-column">
+                        <div class="panel">
+                            <div class="clip-title">
+                                Candidate #${candidateIndex + 1}
+                                <span class="trigger-badge ${c.trigger_type}">${formatTriggerType(c.trigger_type)}</span>
+                            </div>
+                            <div class="clip-meta">${metaHtml}</div>
+                            <div class="candidate-meta">
+                                Game ${c.game_id} | Tournament ${c.tournament_id || 'N/A'}
+                            </div>
+                            ${videoHtml}
+                            ${timeAdjustHtml}
+                            <div id="rating-container"></div>
+                            <div class="nav-buttons">
+                                <button class="nav-btn prev" onclick="loadCandidate(candidateIndex - 1, -1)">Previous</button>
+                                <button class="nav-btn next" onclick="loadCandidate(candidateIndex + 1, 1)">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    ${eventsHtml.killsPane}
+                    ${eventsHtml.otherPane}
+                </div>
+            `;
+
+            // Render initial rating panel
+            updateRatingPanel();
+
+            // Clear previous interval
+            if (updateInterval) {
+                clearInterval(updateInterval);
+                updateInterval = null;
+            }
+
+            // Create YouTube player if video available
+            if (hasVideo && ytApiReady) {
+                player = new YT.Player('player', {
+                    videoId: c.video_id,
+                    playerVars: {
+                        'start': Math.floor(c.video_start_seconds),
+                        'end': Math.ceil(c.video_end_seconds),
+                        'autoplay': 1,
+                        'enablejsapi': 1,
+                        'origin': window.location.origin
+                    },
+                    events: {
+                        'onReady': onPlayerReadyCandidate,
+                        'onStateChange': onPlayerStateChangeCandidate
+                    }
+                });
+            }
+        }
+
+        function onPlayerReadyCandidate(event) {
+            // Explicitly seek to start - playerVars.start isn't always reliable
+            if (currentCandidate && currentCandidate.video_start_seconds) {
+                player.seekTo(currentCandidate.video_start_seconds, true);
+                player.playVideo();
+            }
+            startEventTrackingCandidate();
+        }
+
+        function onPlayerStateChangeCandidate(event) {
+            if (event.data === 1) {
+                startEventTrackingCandidate();
+            } else if (event.data === 0) {
+                // Video ended - loop back to adjusted start
+                if (player && player.seekTo && adjustedStart !== null) {
+                    player.seekTo(adjustedStart, true);
+                    player.playVideo();
+                }
+            } else {
+                if (updateInterval) {
+                    clearInterval(updateInterval);
+                    updateInterval = null;
+                }
+            }
+        }
+
+        function startEventTrackingCandidate() {
+            if (updateInterval) return;
+            updateInterval = setInterval(updateEventHighlightCandidate, 100);
+        }
+
+        function seekToEventCandidate(relativeSeconds) {
+            if (!player || !player.seekTo || adjustedStart === null) return;
+            // Events are still relative to original start, so use original for seeking
+            const absoluteTime = originalStart + relativeSeconds;
+            player.seekTo(absoluteTime, true);
+        }
+
+        function updateEventHighlightCandidate() {
+            if (!player || !player.getCurrentTime || !currentCandidate) return;
+
+            try {
+                const currentTime = player.getCurrentTime();
+                const clipStartTime = currentCandidate.video_start_seconds;
+                const relativeTime = currentTime - clipStartTime;
+
+                const eventsPanel = document.querySelector('.events-panel');
+                const eventItems = document.querySelectorAll('.event-item');
+                let currentEventEl = null;
+
+                eventItems.forEach(el => {
+                    const eventTime = parseFloat(el.dataset.time);
+                    el.classList.remove('past', 'current', 'future');
+
+                    if (eventTime < relativeTime - 0.5) {
+                        el.classList.add('past');
+                    } else if (eventTime <= relativeTime + 1.0) {
+                        el.classList.add('current');
+                        currentEventEl = el;
+                    } else {
+                        el.classList.add('future');
+                    }
+                });
+
+                if (currentEventEl && eventsPanel) {
+                    const panelRect = eventsPanel.getBoundingClientRect();
+                    const elRect = currentEventEl.getBoundingClientRect();
+                    if (elRect.top < panelRect.top || elRect.bottom > panelRect.bottom) {
+                        currentEventEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                }
+            } catch (e) {
+                // Player not ready
+            }
+        }
+
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' || e.key === 'p') {
-                loadClip(currentIndex - 1, -1);
-            } else if (e.key === 'ArrowRight' || e.key === 'n') {
-                loadClip(currentIndex + 1, 1);
-            } else if (e.key === '4') {
-                rateClip(4);
-            } else if (e.key === '3') {
-                rateClip(3);
-            } else if (e.key === '2') {
-                rateClip(2);
-            } else if (e.key === '1') {
-                rateClip(1);
+            if (currentMode === 'clips') {
+                if (e.key === 'ArrowLeft' || e.key === 'p') {
+                    loadClip(currentIndex - 1, -1);
+                } else if (e.key === 'ArrowRight' || e.key === 'n') {
+                    loadClip(currentIndex + 1, 1);
+                } else if (e.key === '4') {
+                    rateClip(4);
+                } else if (e.key === '3') {
+                    rateClip(3);
+                } else if (e.key === '2') {
+                    rateClip(2);
+                } else if (e.key === '1') {
+                    rateClip(1);
+                }
+            } else {
+                if (e.key === 'ArrowLeft' || e.key === 'p') {
+                    loadCandidate(candidateIndex - 1, -1);
+                } else if (e.key === 'ArrowRight' || e.key === 'n') {
+                    loadCandidate(candidateIndex + 1, 1);
+                } else if (e.key === '4') {
+                    rateOriginal(4);
+                } else if (e.key === '3') {
+                    rateOriginal(3);
+                } else if (e.key === '2') {
+                    rateOriginal(2);
+                } else if (e.key === '1') {
+                    rateOriginal(1);
+                }
             }
         });
 

@@ -15,6 +15,13 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from flask import Flask, jsonify, request, send_file
 
+# Import ML prediction modules
+try:
+    from . import clip_features, train_rater
+    ML_AVAILABLE = True
+except ImportError:
+    ML_AVAILABLE = False
+
 app = Flask(__name__)
 
 # Paths
@@ -22,6 +29,8 @@ BASE_DIR = Path(__file__).parent.parent
 CLIP_INFO_FILE = Path(__file__).parent / "clip_info.jsonl"
 ALIGNMENTS_FILE = Path(__file__).parent / "tournament_alignments.jsonl"
 RATINGS_FILE = Path(__file__).parent / "highlight_ratings.jsonl"
+CANDIDATES_FILE = Path(__file__).parent / "clip_candidates.jsonl"
+CANDIDATE_RATINGS_FILE = Path(__file__).parent / "candidate_ratings.jsonl"
 GAME_EVENTS_DIR = BASE_DIR / "cache" / "game_events"
 GAME_DETAIL_DIR = BASE_DIR / "cache" / "game_detail"
 MATCHES_DIR = BASE_DIR / "cache" / "hivemind" / "matches_by_tournament"
@@ -29,8 +38,10 @@ UI_FILE = Path(__file__).parent / "highlight_rater_ui.html"
 
 # Global data
 clips = []  # List of clips from clip_info.jsonl
+candidates = []  # List of candidates from clip_candidates.jsonl
 alignments = {}  # video_id -> alignment data
 ratings = {}  # clip_id -> rating data
+candidate_ratings = {}  # candidate_id -> rating data
 game_events_cache = {}  # game_id -> list of events
 game_details = {}  # game_id -> game detail
 matches_by_id = {}  # match_id -> match data
@@ -83,6 +94,44 @@ def load_ratings():
     print(f"Loaded {len(ratings)} ratings")
 
 
+def load_candidates():
+    """Load clip candidates."""
+    global candidates
+    if not CANDIDATES_FILE.exists():
+        print(f"Warning: {CANDIDATES_FILE} not found")
+        return
+
+    with open(CANDIDATES_FILE) as f:
+        for line in f:
+            if line.strip():
+                candidates.append(json.loads(line))
+    print(f"Loaded {len(candidates)} candidates")
+
+
+def load_candidate_ratings():
+    """Load existing candidate ratings."""
+    global candidate_ratings
+    if not CANDIDATE_RATINGS_FILE.exists():
+        return
+
+    with open(CANDIDATE_RATINGS_FILE) as f:
+        for line in f:
+            if line.strip():
+                data = json.loads(line)
+                cid = data.get("candidate_id")
+                if cid:
+                    candidate_ratings[cid] = data
+    print(f"Loaded {len(candidate_ratings)} candidate ratings")
+
+
+def save_candidate_rating(candidate_id: str, rating_data: dict):
+    """Save a candidate rating."""
+    candidate_ratings[candidate_id] = rating_data
+    with open(CANDIDATE_RATINGS_FILE, "w") as f:
+        for data in candidate_ratings.values():
+            f.write(json.dumps(data) + "\n")
+
+
 def load_game_details():
     """Load all game details."""
     global game_details
@@ -130,6 +179,27 @@ def save_rating(clip_id: str, rating_data: dict):
     with open(RATINGS_FILE, "w") as f:
         for data in ratings.values():
             f.write(json.dumps(data) + "\n")
+
+
+def get_predicted_rating(clip: dict) -> float | None:
+    """Get ML-predicted rating for a clip."""
+    if not ML_AVAILABLE:
+        return None
+
+    try:
+        features = clip_features.extract_clip_features(
+            clip,
+            alignments,
+            game_details
+        )
+        if features is None:
+            return None
+        result = train_rater.predict_rating(features)
+        # Convert numpy float32 to Python float for JSON serialization
+        return float(result) if result is not None else None
+    except Exception as e:
+        print(f"Error predicting rating: {e}")
+        return None
 
 
 def get_game_events(game_id: int) -> list:
@@ -362,6 +432,9 @@ def get_clips():
         if not alignment:
             continue
 
+        # Get ML prediction
+        predicted = get_predicted_rating(clip)
+
         result.append({
             "clip_id": clip_id,
             "title": clip.get("title", ""),
@@ -372,6 +445,7 @@ def get_clips():
             "has_alignment": alignment is not None,
             "has_rating": rating is not None,
             "rating": rating.get("rating") if rating else None,
+            "predicted_rating": round(predicted, 2) if predicted else None,
         })
     return jsonify(result)
 
@@ -399,6 +473,9 @@ def get_clip_detail(clip_id: str):
         # Use the first game_id to get team names
         blue_team, gold_team = get_team_names_for_game(list(game_ids)[0])
 
+    # Get ML prediction
+    predicted = get_predicted_rating(clip)
+
     return jsonify({
         "clip_id": clip_id,
         "clip_url": clip.get("clip_url", ""),
@@ -416,6 +493,7 @@ def get_clip_detail(clip_id: str):
         "events": formatted_events,
         "event_count": len(formatted_events),
         "rating": ratings.get(clip_id, {}).get("rating"),
+        "predicted_rating": round(predicted, 2) if predicted else None,
         "blue_team": blue_team,
         "gold_team": gold_team,
         "debug": debug_info,
@@ -438,16 +516,144 @@ def rate_clip(clip_id: str):
     return jsonify({"success": True, "rating": rating_data})
 
 
+# Candidate routes
+
+@app.route("/api/candidates")
+def get_candidates():
+    """Get all candidates with rating status."""
+    result = []
+    for c in candidates:
+        cid = c.get("candidate_id", "")
+        rating = candidate_ratings.get(cid)
+
+        result.append({
+            "candidate_id": cid,
+            "game_id": c.get("game_id"),
+            "tournament_id": c.get("tournament_id"),
+            "trigger_type": c.get("trigger_type"),
+            "duration": c.get("duration_seconds", 0),
+            "predicted_score": c.get("predicted_score"),
+            "has_video": c.get("has_video", False),
+            "video_id": c.get("video_id"),
+            "video_start_seconds": c.get("video_start_seconds"),
+            "video_end_seconds": c.get("video_end_seconds"),
+            "has_rating": rating is not None,
+            "rating": rating.get("rating") if rating else None,
+        })
+    return jsonify(result)
+
+
+@app.route("/api/candidate/<candidate_id>")
+def get_candidate_detail(candidate_id: str):
+    """Get candidate details with events."""
+    # Find candidate
+    candidate = next((c for c in candidates if c.get("candidate_id") == candidate_id), None)
+    if not candidate:
+        return jsonify({"error": "Candidate not found"}), 404
+
+    game_id = candidate.get("game_id")
+    start_utc_str = candidate.get("start_utc")
+    end_utc_str = candidate.get("end_utc")
+
+    # Parse timestamps
+    start_utc = parse_timestamp(start_utc_str)
+    end_utc = parse_timestamp(end_utc_str)
+
+    # Load events for this game
+    events = get_game_events(game_id)
+    clip_events = []
+
+    for event in events:
+        event_ts = event.get("timestamp", "")
+        if not event_ts:
+            continue
+        try:
+            event_dt = parse_timestamp(event_ts)
+        except (ValueError, TypeError):
+            continue
+
+        if start_utc <= event_dt <= end_utc:
+            relative_seconds = (event_dt - start_utc).total_seconds()
+            event_with_time = {
+                **event,
+                "relative_seconds": relative_seconds,
+                "game_id": game_id,
+            }
+            clip_events.append(event_with_time)
+
+    clip_events.sort(key=lambda e: e.get("timestamp", ""))
+    formatted_events = [format_event_display(e) for e in clip_events]
+
+    # Get team names
+    blue_team, gold_team = get_team_names_for_game(game_id)
+
+    return jsonify({
+        "candidate_id": candidate_id,
+        "game_id": game_id,
+        "tournament_id": candidate.get("tournament_id"),
+        "trigger_type": candidate.get("trigger_type"),
+        "start_utc": start_utc_str,
+        "end_utc": end_utc_str,
+        "duration": candidate.get("duration_seconds", 0),
+        "predicted_score": candidate.get("predicted_score"),
+        "has_video": candidate.get("has_video", False),
+        "video_id": candidate.get("video_id"),
+        "video_start_seconds": candidate.get("video_start_seconds"),
+        "video_end_seconds": candidate.get("video_end_seconds"),
+        "events": formatted_events,
+        "event_count": len(formatted_events),
+        "rating": candidate_ratings.get(candidate_id, {}).get("rating"),
+        "blue_team": blue_team,
+        "gold_team": gold_team,
+    })
+
+
+@app.route("/api/candidate/<candidate_id>/rate", methods=["POST"])
+def rate_candidate(candidate_id: str):
+    """Save rating for a candidate, optionally with time adjustments."""
+    data = request.json
+    rating = data.get("rating")
+
+    # Look up candidate to get metadata (handle _adjusted suffix)
+    base_id = candidate_id.replace('_adjusted', '')
+    candidate = next((c for c in candidates if c.get("candidate_id") == base_id), None)
+
+    rating_data = {
+        "candidate_id": candidate_id,
+        "rating": rating,
+        "rated_at": datetime.now().isoformat(),
+    }
+
+    # Add metadata from candidate so training works after candidates regenerate
+    if candidate:
+        rating_data["game_id"] = candidate.get("game_id")
+        rating_data["start_utc"] = candidate.get("start_utc")
+        rating_data["end_utc"] = candidate.get("end_utc")
+
+    # Include time adjustments if provided
+    if "adjusted_video_start" in data:
+        rating_data["adjusted_video_start"] = data["adjusted_video_start"]
+        rating_data["adjusted_video_end"] = data["adjusted_video_end"]
+        rating_data["original_video_start"] = data["original_video_start"]
+        rating_data["original_video_end"] = data["original_video_end"]
+
+    save_candidate_rating(candidate_id, rating_data)
+    return jsonify({"success": True, "rating": rating_data})
+
+
 if __name__ == "__main__":
     load_clips()
     load_alignments()
     load_ratings()
+    load_candidates()
+    load_candidate_ratings()
     load_game_details()
     load_matches()
 
     # Count aligned clips
     aligned_count = sum(1 for c in clips if get_clip_alignment(c))
     print(f"\nClips with alignments: {aligned_count}/{len(clips)}")
+    print(f"Candidates: {len(candidates)} ({sum(1 for c in candidates if c.get('has_video'))} with video)")
 
     print(f"\nStarting highlight rater server...")
     print(f"Open http://localhost:5002 in your browser\n")

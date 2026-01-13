@@ -1,0 +1,318 @@
+[
+  {
+    "name": "kills_per_second",
+    "importance": 0.43636256070253354
+  },
+  {
+    "name": "win_prob_volatility",
+    "importance": 0.20859154218112938
+  },
+  {
+    "name": "state_delta_37",
+    "importance": 0.11993125440834272
+  },
+  {
+    "name": "win_prob_max_swing",
+    "importance": 0.07416200736825351
+  },
+  {
+    "name": "berry_kick_ins",
+    "importance": 0.04591071512517065
+  },
+  {
+    "name": "duration_seconds",
+    "importance": 0.019021704295772532
+  },
+  {
+    "name": "win_prob_start",
+    "importance": 0.014297704374008631
+  },
+  {
+    "name": "gold_warriors_start",
+    "importance": 0.014175504770794769
+  },
+  {
+    "name": "blue_eggs_start",
+    "importance": 0.01328028447558521
+  },
+  {
+    "name": "state_delta_43",
+    "importance": 0.009772195490799392
+  },
+  {
+    "name": "state_delta_2",
+    "importance": 0.006694438112974928
+  },
+  {
+    "name": "state_delta_40",
+    "importance": 0.005610804816240621
+  },
+  {
+    "name": "win_prob_delta",
+    "importance": 0.005100182975945369
+  },
+  {
+    "name": "state_delta_21",
+    "importance": 0.004975905541703839
+  },
+  {
+    "name": "blue_warriors_start",
+    "importance": 0.003726640357759834
+  },
+  {
+    "name": "state_delta_44",
+    "importance": 0.0026364829615786985
+  },
+  {
+    "name": "win_prob_max",
+    "importance": 0.002635936098941459
+  },
+  {
+    "name": "state_delta_49",
+    "importance": 0.002311822479947959
+  },
+  {
+    "name": "events_per_second",
+    "importance": 0.002192510570365214
+  },
+  {
+    "name": "blue_warriors_end",
+    "importance": 0.0017549471297513344
+  },
+  {
+    "name": "worker_kills",
+    "importance": 0.0016483787265578582
+  },
+  {
+    "name": "state_delta_41",
+    "importance": 0.001209983991234137
+  },
+  {
+    "name": "snail_escapes",
+    "importance": 0.0009144496889606026
+  },
+  {
+    "name": "maiden_uses",
+    "importance": 0.0008297581419821633
+  },
+  {
+    "name": "state_delta_25",
+    "importance": 0.0006537022755899776
+  },
+  {
+    "name": "state_delta_14",
+    "importance": 0.0005293453705117155
+  },
+  {
+    "name": "total_kills",
+    "importance": 0.0005241849591432243
+  },
+  {
+    "name": "state_delta_18",
+    "importance": 0.00042499136426340833
+  },
+  {
+    "name": "state_delta_3",
+    "importance": 6.517378825140297e-05
+  },
+  {
+    "name": "state_delta_0",
+    "importance": 5.488745590612461e-05
+  },
+  {
+    "name": "win_prob_end",
+    "importance": 0.0
+  },
+  {
+    "name": "win_prob_min",
+    "importance": 0.0
+  },
+  {
+    "name": "queen_kills",
+    "importance": 0.0
+  },
+  {
+    "name": "snail_eats",
+    "importance": 0.0
+  },
+  {
+    "name": "berry_deposits",
+    "importance": 0.0
+  },
+  {
+    "name": "victory_in_clip",
+    "importance": 0.0
+  },
+  {
+    "name": "gold_eggs_start",
+    "importance": 0.0
+  },
+  {
+    "name": "blue_eggs_end",
+    "importance": 0.0
+  },
+  {
+    "name": "gold_eggs_end",
+    "importance": 0.0
+  },
+  {
+    "name": "gold_warriors_end",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_1",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_4",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_5",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_6",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_7",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_8",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_9",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_10",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_11",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_12",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_13",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_15",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_16",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_17",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_19",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_20",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_22",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_23",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_24",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_26",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_27",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_28",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_29",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_30",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_31",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_32",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_33",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_34",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_35",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_36",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_38",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_39",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_42",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_45",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_46",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_47",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_48",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_50",
+    "importance": 0.0
+  },
+  {
+    "name": "state_delta_51",
+    "importance": 0.0
+  }
+]

@@ -12,6 +12,7 @@ Usage:
 
 import json
 import re
+import subprocess
 from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -46,6 +47,23 @@ def extract_video_id(video_id_or_url: str) -> str:
         if match:
             return match.group(1)
     return video_id_or_url
+
+
+def get_video_duration(video_id: str) -> float | None:
+    """Get video duration in seconds using yt-dlp."""
+    try:
+        result = subprocess.run(
+            ['yt-dlp', '--dump-json', '--no-download', f'https://www.youtube.com/watch?v={video_id}'],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        if result.returncode == 0:
+            info = json.loads(result.stdout)
+            return float(info.get('duration', 0))
+    except Exception as e:
+        print(f"Error getting video duration: {e}")
+    return None
 
 
 def load_tournament_videos():
@@ -395,13 +413,19 @@ def align_tournament(tournament_id: int):
         None
     )
 
+    video_id = video.get("source_video_id", "") if video else ""
+
+    # Fetch video duration from YouTube
+    video_duration = get_video_duration(video_id) if video_id else None
+
     alignment_data = {
         "tournament_id": tournament_id,
-        "video_id": video.get("source_video_id", "") if video else "",
+        "video_id": video_id,
         "cabinet_id": cabinet_id,
         "first_game_id": game_id,
         "gamestart_utc": gamestart_event["timestamp"],
         "video_timestamp_seconds": video_timestamp_seconds,
+        "video_duration_seconds": video_duration,
         "aligned_at": datetime.now().isoformat(),
     }
 
