@@ -17,7 +17,7 @@ from flask import Flask, jsonify, request, send_file
 
 # Import ML prediction modules
 try:
-    from . import clip_features, train_rater
+    from .scorer import get_scorer
     ML_AVAILABLE = True
 except ImportError:
     ML_AVAILABLE = False
@@ -186,20 +186,8 @@ def get_predicted_rating(clip: dict) -> float | None:
     if not ML_AVAILABLE:
         return None
 
-    try:
-        features = clip_features.extract_clip_features(
-            clip,
-            alignments,
-            game_details
-        )
-        if features is None:
-            return None
-        result = train_rater.predict_rating(features)
-        # Convert numpy float32 to Python float for JSON serialization
-        return float(result) if result is not None else None
-    except Exception as e:
-        print(f"Error predicting rating: {e}")
-        return None
+    result = get_scorer().score_clip(clip, alignments, game_details)
+    return result.score if result.success else None
 
 
 def get_game_events(game_id: int) -> list:

@@ -75,6 +75,17 @@
             cursor: not-allowed;
         }
 
+        .controls button.highlight-mode-active,
+        .mobile-nav-row button.highlight-mode-active {
+            background: #e94560 !important;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
         .time-display {
             font-family: monospace;
             font-size: 14px;
@@ -580,6 +591,7 @@
                     <button id="prevHighlightBtn" title="Previous highlight (Shift+H)">◀HL</button>
                     <button id="nextHighlightBtn" title="Next highlight (H)">HL▶</button>
                 </span>
+                <button id="highlightModeBtn" title="Auto-play highlights (A)">Auto HL</button>
             </div>
 
             <div class="current-chapter" id="currentChapterInfo">
@@ -593,7 +605,8 @@
                 <kbd>S</kbd> Set (Shift: prev) &nbsp;
                 <kbd>E</kbd> Egg/queen kill (Shift: prev)<br>
                 <kbd>1</kbd>-<kbd>0</kbd> Select position &nbsp;
-                <kbd>H</kbd> Player highlight (Shift: prev)
+                <kbd>H</kbd> Player highlight (Shift: prev) &nbsp;
+                <kbd>A</kbd> Auto-play highlights
             </div>
 
             <div class="highlight-debug" id="highlightDebug">
@@ -651,6 +664,7 @@
                 <button id="mNextSet">S ▶▶</button>
                 <button id="mNextGame">G ▶</button>
                 <button id="mNextHighlight">H ▶</button>
+                <button id="mHighlightMode">Auto</button>
                 <select id="mobilePositionSelect" class="mobile-select">
                     <option value="">Position...</option>
                     <option value="10">1 ▦ Blue Chk</option>
@@ -698,6 +712,10 @@
 
         // Seconds to seek before a highlight event
         const HIGHLIGHT_SEEK_BUFFER = 4.5;
+
+        // Highlight auto-play mode
+        let highlightModeEnabled = false;
+        const HIGHLIGHT_PLAY_DURATION = 6.0;  // Seconds to play each highlight before advancing
 
         // Position names and icons for each character
         const POSITION_NAMES = {
@@ -905,6 +923,9 @@
 
             // Update time display
             timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(getDuration())}`;
+
+            // Check for highlight auto-advance
+            checkHighlightAutoAdvance();
         }
 
         // Calculate net win probability change for a player in a chapter
@@ -1288,30 +1309,44 @@
             playerHighlights = [];
             lastHighlightIndex = -1;
 
-            // If user is selected, collect events from all their positions across chapters
-            // If position is selected, use fixed position
-            if (!selectedUserId && !selectedPosition) {
-                document.getElementById('highlightCount').innerHTML = '';
-                return;
-            }
-
-            // Collect all events for this player
+            // Collect events - either for selected player/position, or all high-impact events
             let allEvents = [];
             let anyQueen = false;
+            const noSelection = !selectedUserId && !selectedPosition;
 
             for (const ch of chapters) {
-                // Determine position for this chapter
-                let pos;
-                if (selectedUserId) {
-                    pos = getUserPositionInChapter(selectedUserId, ch);
-                    if (!pos) continue;  // User not in this chapter
+                if (!ch.player_events) continue;
+
+                if (noSelection) {
+                    // No selection - collect ALL high-impact events (prefer ML-scored)
+                    for (const evt of ch.player_events) {
+                        // Include if has ML score OR high delta
+                        if (evt.ml_score !== undefined || Math.abs(evt.delta) >= 0.10) {
+                            allEvents.push({
+                                time: evt.time,
+                                delta: evt.delta,
+                                type: evt.type,
+                                game_id: ch.game_id,
+                                set_number: ch.set_number,
+                                event_id: evt.id,
+                                values: evt.values,
+                                position: evt.positions ? evt.positions[0] : null,
+                                ml_score: evt.ml_score
+                            });
+                        }
+                    }
                 } else {
-                    pos = parseInt(selectedPosition);
-                }
+                    // User or position selected - filter by that
+                    let pos;
+                    if (selectedUserId) {
+                        pos = getUserPositionInChapter(selectedUserId, ch);
+                        if (!pos) continue;  // User not in this chapter
+                    } else {
+                        pos = parseInt(selectedPosition);
+                    }
 
-                if (pos === 1 || pos === 2) anyQueen = true;
+                    if (pos === 1 || pos === 2) anyQueen = true;
 
-                if (ch.player_events) {
                     for (const evt of ch.player_events) {
                         if (evt.positions && evt.positions.includes(pos)) {
                             allEvents.push({
@@ -1322,7 +1357,7 @@
                                 set_number: ch.set_number,
                                 event_id: evt.id,
                                 values: evt.values,
-                                position: pos  // Store position for team-based delta display
+                                position: pos
                             });
                         }
                     }
@@ -1335,27 +1370,35 @@
             // Sort by time
             allEvents.sort((a, b) => a.time - b.time);
 
-            // Calculate impact score with clustering bonus
-            // Events within 5 seconds of other impactful events get boosted
+            // Calculate impact score - prefer ML score when available
             const windowSize = 5; // seconds
             for (let i = 0; i < allEvents.length; i++) {
-                let clusterScore = Math.abs(allEvents[i].delta);
+                const evt = allEvents[i];
 
-                // Look for nearby events and sum their impact
-                for (let j = 0; j < allEvents.length; j++) {
-                    if (i !== j && Math.abs(allEvents[i].time - allEvents[j].time) < windowSize) {
-                        clusterScore += Math.abs(allEvents[j].delta) * 0.3; // 30% bonus for nearby events
+                // Use ML score if available (scale: 1-4, normalize to 0-1 range)
+                if (evt.ml_score !== undefined) {
+                    // ML score 1-4 -> normalized 0-0.75, plus clustering bonus
+                    evt.score = (evt.ml_score - 1) / 4;
+                } else {
+                    // Fallback: use delta with clustering bonus
+                    let clusterScore = Math.abs(evt.delta);
+                    for (let j = 0; j < allEvents.length; j++) {
+                        if (i !== j && Math.abs(evt.time - allEvents[j].time) < windowSize) {
+                            clusterScore += Math.abs(allEvents[j].delta) * 0.3;
+                        }
                     }
+                    evt.score = clusterScore;
                 }
-                allEvents[i].score = clusterScore;
             }
 
             // Filter by threshold and take top events per set
+            // Use lower threshold for ML-scored events (they're pre-filtered)
             const targetPerSet = 4;
             const eventsBySet = {};
 
             for (const evt of allEvents) {
-                if (evt.score >= baseThreshold) {
+                const threshold = evt.ml_score !== undefined ? 0.05 : baseThreshold;
+                if (evt.score >= threshold) {
                     if (!eventsBySet[evt.set_number]) {
                         eventsBySet[evt.set_number] = [];
                     }
@@ -1363,11 +1406,20 @@
                 }
             }
 
-            // Take top N per set by score
+            // Take top N per set by score, with deduplication of nearby events
+            const MIN_HIGHLIGHT_GAP = 10;  // Minimum seconds between highlights
             for (const setNum in eventsBySet) {
                 eventsBySet[setNum].sort((a, b) => b.score - a.score);
-                const topEvents = eventsBySet[setNum].slice(0, targetPerSet);
-                playerHighlights.push(...topEvents);
+                const selected = [];
+                for (const evt of eventsBySet[setNum]) {
+                    // Check if too close to an already-selected event
+                    const tooClose = selected.some(s => Math.abs(s.time - evt.time) < MIN_HIGHLIGHT_GAP);
+                    if (!tooClose) {
+                        selected.push(evt);
+                        if (selected.length >= targetPerSet) break;
+                    }
+                }
+                playerHighlights.push(...selected);
             }
 
             // Check if there are any positive highlights for this player
@@ -1579,6 +1631,68 @@
             }
         }
 
+        // Toggle highlight auto-play mode
+        function toggleHighlightMode() {
+            highlightModeEnabled = !highlightModeEnabled;
+
+            // Update button styling
+            const btn = document.getElementById('highlightModeBtn');
+            const mBtn = document.getElementById('mHighlightMode');
+            btn.classList.toggle('highlight-mode-active', highlightModeEnabled);
+            mBtn.classList.toggle('highlight-mode-active', highlightModeEnabled);
+            btn.textContent = highlightModeEnabled ? 'Stop' : 'Auto HL';
+            mBtn.textContent = highlightModeEnabled ? 'Stop' : 'Auto';
+
+            if (highlightModeEnabled) {
+                // Start from first highlight or current position
+                if (playerHighlights.length === 0) {
+                    highlightModeEnabled = false;
+                    btn.classList.remove('highlight-mode-active');
+                    mBtn.classList.remove('highlight-mode-active');
+                    btn.textContent = 'Auto HL';
+                    mBtn.textContent = 'Auto';
+                    return;
+                }
+
+                // Find the next highlight from current time
+                const currentTime = getCurrentTime();
+                let startIdx = 0;
+                for (let i = 0; i < playerHighlights.length; i++) {
+                    if (playerHighlights[i].time > currentTime) {
+                        startIdx = i;
+                        break;
+                    }
+                }
+
+                lastHighlightIndex = startIdx;
+                updateDebugActiveHighlight();
+                seekTo(playerHighlights[startIdx].time - HIGHLIGHT_SEEK_BUFFER);
+                if (player) player.playVideo();
+            }
+        }
+
+        // Check if we should auto-advance to next highlight
+        function checkHighlightAutoAdvance() {
+            if (!highlightModeEnabled || playerHighlights.length === 0) return;
+            if (lastHighlightIndex < 0) return;
+
+            const currentTime = getCurrentTime();
+            const currentHighlight = playerHighlights[lastHighlightIndex];
+
+            // Check if we've played past the highlight by HIGHLIGHT_PLAY_DURATION seconds
+            if (currentTime >= currentHighlight.time + HIGHLIGHT_PLAY_DURATION) {
+                // Move to next highlight
+                if (lastHighlightIndex < playerHighlights.length - 1) {
+                    lastHighlightIndex++;
+                    updateDebugActiveHighlight();
+                    seekTo(playerHighlights[lastHighlightIndex].time - HIGHLIGHT_SEEK_BUFFER);
+                } else {
+                    // End of highlights - disable mode
+                    toggleHighlightMode();
+                }
+            }
+        }
+
         // Load chapters from JSON
         function loadChaptersFromJSON(data) {
             chapters = data.chapters || [];
@@ -1633,6 +1747,9 @@
                 console.log(`First chapter at ${chapters[0].start_time}s, last at ${chapters[chapters.length-1].start_time}s`);
             }
 
+            // Initialize highlights (works even without position selection)
+            updatePlayerHighlights();
+
             // Initialize YouTube player now that we have the video ID
             initializePlayer();
         }
@@ -1646,6 +1763,7 @@
         document.getElementById('nextEgg').addEventListener('click', nextQueenKill);
         document.getElementById('prevHighlightBtn').addEventListener('click', prevHighlight);
         document.getElementById('nextHighlightBtn').addEventListener('click', nextHighlight);
+        document.getElementById('highlightModeBtn').addEventListener('click', toggleHighlightMode);
         playPauseBtn.addEventListener('click', togglePlayPause);
 
         chapterFilter.addEventListener('input', (e) => {
@@ -1732,6 +1850,7 @@
         document.getElementById('mNextGame').addEventListener('click', nextChapter);
         document.getElementById('mPrevHighlight').addEventListener('click', prevHighlight);
         document.getElementById('mNextHighlight').addEventListener('click', nextHighlight);
+        document.getElementById('mHighlightMode').addEventListener('click', toggleHighlightMode);
 
         document.getElementById('mobilePositionSelect').addEventListener('change', (e) => {
             selectedPosition = e.target.value;
@@ -1812,6 +1931,10 @@
                     break;
                 case 'H':
                     prevHighlight();
+                    break;
+                case 'a':
+                case 'A':
+                    toggleHighlightMode();
                     break;
                 case '1': case '2': case '3': case '4': case '5':
                 case '6': case '7': case '8': case '9': case '0':

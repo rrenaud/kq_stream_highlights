@@ -198,7 +198,7 @@
         function updateProgress() {
             const aligned = tournaments.filter(t => t.aligned).length;
             document.getElementById('progress').textContent =
-                `${aligned} of ${tournaments.length} tournaments aligned | Current: ${currentIndex + 1}/${tournaments.length}`;
+                `${aligned} of ${tournaments.length} videos aligned | Current: ${currentIndex + 1}/${tournaments.length}`;
         }
 
         async function loadTournament(index) {
@@ -280,12 +280,15 @@
             let gameInfoHtml = '';
             if (cabinetOptions.length > 0) {
                 const g = cabinetOptions[selectedCabinetIndex];
-                teamsHtml = `
-                    <div class="teams-row">
-                        <div class="team-side gold team-gold">${g.gold_team}</div>
-                        <div class="team-side blue team-blue">${g.blue_team}</div>
-                    </div>
-                `;
+                // Only show teams row for tournaments (not league nights)
+                if (g.gold_team && g.blue_team) {
+                    teamsHtml = `
+                        <div class="teams-row">
+                            <div class="team-side gold team-gold">${g.gold_team}</div>
+                            <div class="team-side blue team-blue">${g.blue_team}</div>
+                        </div>
+                    `;
+                }
                 gameInfoHtml = `
                     <div class="game-info" id="game-info">
                         <h3>First Game on ${g.cabinet_name}</h3>
@@ -299,7 +302,7 @@
                         </div>
                         <div class="row">
                             <span class="label">Game Start:</span>
-                            <span class="value">${g.gamestart_utc || g.start_time}</span>
+                            <span class="value">${formatLocalTime(g.gamestart_utc || g.start_time)}</span>
                         </div>
                         <div class="row">
                             <span class="label">Hivemind:</span>
@@ -392,7 +395,7 @@
                     </div>
                     <div class="row">
                         <span class="label">Game Start:</span>
-                        <span class="value">${g.gamestart_utc || g.start_time}</span>
+                        <span class="value">${formatLocalTime(g.gamestart_utc || g.start_time)}</span>
                     </div>
                     <div class="row">
                         <span class="label">Hivemind:</span>
@@ -400,11 +403,14 @@
                     </div>
                 `;
 
-                // Update teams
-                document.querySelector('.teams-row').innerHTML = `
-                    <div class="team-side gold team-gold">${g.gold_team}</div>
-                    <div class="team-side blue team-blue">${g.blue_team}</div>
-                `;
+                // Update teams (only if they exist)
+                const teamsRow = document.querySelector('.teams-row');
+                if (teamsRow && g.gold_team && g.blue_team) {
+                    teamsRow.innerHTML = `
+                        <div class="team-side gold team-gold">${g.gold_team}</div>
+                        <div class="team-side blue team-blue">${g.blue_team}</div>
+                    `;
+                }
             }
         }
 
@@ -432,6 +438,12 @@
                 return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
             }
             return `${m}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function formatLocalTime(utcString) {
+            if (!utcString) return 'Unknown';
+            const date = new Date(utcString);
+            return date.toLocaleString();
         }
 
         async function saveAlignment() {

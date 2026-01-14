@@ -13,10 +13,21 @@ Usage:
 import json
 import re
 import subprocess
+import sys
 from collections import defaultdict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from flask import Flask, jsonify, request, send_file
+
+# Add parent directory to path for imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from generate_chapters import (
+    CABINET_TO_YOUTUBE,
+    CABINET_TO_URL,
+    fetch_most_recent_video,
+)
+from fetch_games import fetch_games_for_day
+from hivemind_api import fetch_game_events
 
 app = Flask(__name__)
 
@@ -28,6 +39,8 @@ MATCHES_DIR = BASE_DIR / "cache" / "hivemind" / "matches_by_tournament"
 GAME_DETAIL_DIR = BASE_DIR / "cache" / "game_detail"
 GAME_EVENTS_DIR = BASE_DIR / "cache" / "game_events"
 ALIGNMENTS_FILE = Path(__file__).parent / "tournament_alignments.jsonl"
+LEAGUE_ALIGNMENTS_FILE = Path(__file__).parent / "league_alignments.jsonl"
+PENDING_LEAGUE_NIGHTS_FILE = Path(__file__).parent / "pending_league_nights.jsonl"
 UI_FILE = Path(__file__).parent / "tournament_align_ui.html"
 
 # Global data
@@ -37,6 +50,8 @@ tournaments_by_date = {}  # date string -> list of tournament_ids
 matches_by_tournament = {}  # tournament_id -> list of matches
 game_details = {}  # game_id -> game detail dict
 alignments = {}  # tournament_id -> alignment data
+league_alignments = {}  # cabinet_id_date -> alignment data
+pending_league_nights = {}  # cabinet_id_date -> pending league night data
 
 
 def extract_video_id(video_id_or_url: str) -> str:
@@ -151,6 +166,43 @@ def save_alignment(tournament_id: int, data: dict):
     with open(ALIGNMENTS_FILE, "w") as f:
         for d in alignments.values():
             f.write(json.dumps(d) + "\n")
+
+
+def load_league_alignments():
+    """Load saved league night alignments."""
+    global league_alignments
+    if not LEAGUE_ALIGNMENTS_FILE.exists():
+        return
+    with open(LEAGUE_ALIGNMENTS_FILE) as f:
+        for line in f:
+            if line.strip():
+                data = json.loads(line)
+                key = f"{data['cabinet_id']}_{data['date']}"
+                league_alignments[key] = data
+    print(f"Loaded {len(league_alignments)} league alignments")
+
+
+def save_league_alignment(cabinet_id: str, date: str, data: dict):
+    """Save a league night alignment."""
+    key = f"{cabinet_id}_{date}"
+    league_alignments[key] = data
+    with open(LEAGUE_ALIGNMENTS_FILE, "w") as f:
+        for d in league_alignments.values():
+            f.write(json.dumps(d) + "\n")
+
+
+def load_pending_league_nights():
+    """Load pending league nights from file."""
+    global pending_league_nights
+    if not PENDING_LEAGUE_NIGHTS_FILE.exists():
+        return
+    with open(PENDING_LEAGUE_NIGHTS_FILE) as f:
+        for line in f:
+            if line.strip():
+                data = json.loads(line)
+                key = f"{data['cabinet_id']}_{data['date']}"
+                pending_league_nights[key] = data
+    print(f"Loaded {len(pending_league_nights)} pending league nights")
 
 
 def get_first_game_for_tournament(tournament_id: int) -> dict | None:
@@ -307,6 +359,72 @@ def find_tournament_for_video(video: dict) -> int | None:
     return None
 
 
+def get_league_night_detail(league_id: str):
+    """Get league night details for alignment UI.
+
+    Args:
+        league_id: String like "league_sf_2026-01-13"
+
+    Returns:
+        JSON response with league night details
+    """
+    # Parse the league ID
+    parts = league_id.split("_", 2)
+    if len(parts) != 3 or parts[0] != "league":
+        return jsonify({"error": "Invalid league night ID"}), 400
+
+    cabinet_id = parts[1]
+    date = parts[2]
+    key = f"{cabinet_id}_{date}"
+
+    # Find the pending league night
+    league_night = pending_league_nights.get(key)
+    if not league_night:
+        return jsonify({"error": "League night not found"}), 404
+
+    # Get the first game's gamestart event and map name
+    first_game_id = league_night.get("first_game_id")
+    gamestart_utc = None
+    map_name = None
+
+    if first_game_id:
+        events = fetch_game_events(first_game_id, verbose=False)
+        gamestart_event = next(
+            (e for e in events if e.event_type == "gamestart"),
+            None
+        )
+        if gamestart_event:
+            gamestart_utc = gamestart_event.timestamp.isoformat()
+            # Extract map name from gamestart event values (first value is map name)
+            if gamestart_event.values:
+                raw_map = gamestart_event.values[0]
+                # Clean up map name (e.g., "map_day" -> "Day")
+                map_name = raw_map.replace("map_", "").title() if raw_map else None
+
+    # Check for existing alignment
+    existing_alignment = league_alignments.get(key)
+
+    return jsonify({
+        "tournament_id": league_id,
+        "tournament_name": f"League Night: {cabinet_id.upper()} - {date}",
+        "video_id": league_night.get("video_id", ""),
+        "video_title": league_night.get("title", ""),
+        "type": "league_night",
+        "cabinet_id": cabinet_id,
+        "date": date,
+        "cabinet_options": [{
+            "cabinet_id": cabinet_id,
+            "cabinet_name": cabinet_id.upper(),
+            "game_id": first_game_id,
+            "map_name": map_name,
+            "gamestart_utc": gamestart_utc,
+            "hivemind_url": f"https://kqhivemind.com/game/{first_game_id}" if first_game_id else None,
+        }],
+        "alignment": existing_alignment,
+        "games_count": league_night.get("games_count", 0),
+    })
+
+
 # Routes
 
 @app.route("/")
@@ -316,8 +434,10 @@ def index():
 
 @app.route("/api/tournaments")
 def get_tournaments():
-    """Get all videos with alignment status."""
+    """Get all videos with alignment status (tournaments + league nights)."""
     result = []
+
+    # Add tournament videos
     for video in tournament_videos:
         tournament_id = find_tournament_for_video(video)
         alignment = alignments.get(tournament_id) if tournament_id else None
@@ -327,13 +447,45 @@ def get_tournaments():
             "title": video.get("title", ""),
             "upload_date": video.get("upload_date", ""),
             "aligned": alignment is not None,
+            "type": "tournament",
         })
+
+    # Add pending league nights
+    for key, league_night in pending_league_nights.items():
+        # Check if already aligned
+        alignment = league_alignments.get(key)
+        # Use league_cabinet_date as the ID format
+        league_id = f"league_{league_night['cabinet_id']}_{league_night['date']}"
+        result.append({
+            "tournament_id": league_id,
+            "video_id": league_night.get("video_id", ""),
+            "title": league_night.get("title", ""),
+            "upload_date": league_night.get("upload_date", ""),
+            "aligned": alignment is not None,
+            "type": "league_night",
+            "cabinet_id": league_night.get("cabinet_id", ""),
+            "date": league_night.get("date", ""),
+        })
+
+    # Sort by upload_date (most recent first)
+    result.sort(key=lambda x: x.get("upload_date", ""), reverse=True)
+
     return jsonify(result)
 
 
-@app.route("/api/tournament/<int:tournament_id>")
-def get_tournament_detail(tournament_id: int):
-    """Get tournament details including first game info."""
+@app.route("/api/tournament/<tournament_id>")
+def get_tournament_detail(tournament_id):
+    """Get tournament/league night details including first game info."""
+    # Check if this is a league night ID
+    if isinstance(tournament_id, str) and tournament_id.startswith("league_"):
+        return get_league_night_detail(tournament_id)
+
+    # Convert to int for tournament lookup
+    try:
+        tournament_id = int(tournament_id)
+    except ValueError:
+        return jsonify({"error": "Invalid tournament ID"}), 400
+
     # Find the video for this tournament
     video = next(
         (v for v in tournament_videos if find_tournament_for_video(v) == tournament_id),
@@ -394,9 +546,19 @@ def get_tournament_detail(tournament_id: int):
     })
 
 
-@app.route("/api/tournament/<int:tournament_id>/align", methods=["POST"])
-def align_tournament(tournament_id: int):
-    """Save alignment for a tournament."""
+@app.route("/api/tournament/<tournament_id>/align", methods=["POST"])
+def align_tournament(tournament_id):
+    """Save alignment for a tournament or league night."""
+    # Check if this is a league night
+    if isinstance(tournament_id, str) and tournament_id.startswith("league_"):
+        return align_league_night(tournament_id)
+
+    # Convert to int for tournament
+    try:
+        tournament_id = int(tournament_id)
+    except ValueError:
+        return jsonify({"error": "Invalid tournament ID"}), 400
+
     data = request.json
     video_timestamp_seconds = float(data["video_timestamp_seconds"])
     game_id = int(data["game_id"])
@@ -434,11 +596,193 @@ def align_tournament(tournament_id: int):
     return jsonify({"success": True, "alignment": alignment_data})
 
 
+def align_league_night(league_id: str):
+    """Save alignment for a league night."""
+    # Parse the league ID
+    parts = league_id.split("_", 2)
+    if len(parts) != 3 or parts[0] != "league":
+        return jsonify({"error": "Invalid league night ID"}), 400
+
+    cabinet_id = parts[1]
+    date = parts[2]
+    key = f"{cabinet_id}_{date}"
+
+    # Find the pending league night
+    league_night = pending_league_nights.get(key)
+    if not league_night:
+        return jsonify({"error": "League night not found"}), 404
+
+    data = request.json
+    video_timestamp_seconds = float(data["video_timestamp_seconds"])
+    game_id = int(data["game_id"])
+
+    # Fetch gamestart event
+    events = fetch_game_events(game_id, verbose=False)
+    gamestart_event = next(
+        (e for e in events if e.event_type == "gamestart"),
+        None
+    )
+
+    if not gamestart_event:
+        return jsonify({"error": "No gamestart event found for game"}), 400
+
+    video_id = league_night.get("video_id", "")
+
+    # Fetch video duration
+    video_duration = get_video_duration(video_id) if video_id else None
+
+    alignment_data = {
+        "cabinet_id": cabinet_id,
+        "date": date,
+        "video_id": video_id,
+        "first_game_id": game_id,
+        "gamestart_utc": gamestart_event.timestamp.isoformat(),
+        "video_timestamp_seconds": video_timestamp_seconds,
+        "video_duration_seconds": video_duration,
+        "aligned_at": datetime.now().isoformat(),
+    }
+
+    save_league_alignment(cabinet_id, date, alignment_data)
+
+    return jsonify({"success": True, "alignment": alignment_data})
+
+
+# League night endpoints
+
+@app.route("/api/league/<cabinet_id>/recent")
+def get_league_recent(cabinet_id: str):
+    """Get the most recent video and games for a cabinet."""
+    if cabinet_id not in CABINET_TO_YOUTUBE:
+        return jsonify({
+            "error": f"Unknown cabinet: {cabinet_id}",
+            "known_cabinets": list(CABINET_TO_YOUTUBE.keys())
+        }), 404
+
+    try:
+        # Fetch most recent video
+        channel = CABINET_TO_YOUTUBE[cabinet_id]
+        video_info = fetch_most_recent_video(channel, verbose=False)
+
+        # Parse upload date
+        upload_date_str = video_info['upload_date']
+        if len(upload_date_str) == 8:
+            target_date = datetime.strptime(upload_date_str, "%Y%m%d")
+            target_date = target_date.replace(tzinfo=timezone.utc)
+        else:
+            return jsonify({"error": f"Invalid upload_date: {upload_date_str}"}), 400
+
+        # Fetch games for that day
+        cabinet_url = CABINET_TO_URL[cabinet_id]
+        games = fetch_games_for_day(cabinet_url, target_date, verbose=False)
+
+        date_str = target_date.strftime("%Y-%m-%d")
+        original_date = target_date
+
+        if not games:
+            # Try next day (evening Pacific = next day UTC)
+            next_date = original_date + timedelta(days=1)
+            games = fetch_games_for_day(cabinet_url, next_date, verbose=False)
+            if games:
+                date_str = next_date.strftime("%Y-%m-%d")
+
+        if not games:
+            # Try day before
+            prev_date = original_date - timedelta(days=1)
+            games = fetch_games_for_day(cabinet_url, prev_date, verbose=False)
+            if games:
+                date_str = prev_date.strftime("%Y-%m-%d")
+
+        if not games:
+            return jsonify({
+                "error": f"No games found for {cabinet_id} around {upload_date_str}",
+                "video_info": video_info,
+            }), 404
+
+        # Get first game info
+        first_game = games[0]
+
+        # Fetch gamestart event for the first game
+        events = fetch_game_events(first_game.id, verbose=False)
+        gamestart_event = next(
+            (e for e in events if e.event_type == "gamestart"),
+            None
+        )
+        gamestart_utc = gamestart_event.timestamp.isoformat() if gamestart_event else None
+
+        # Check for existing alignment
+        alignment_key = f"{cabinet_id}_{date_str}"
+        existing_alignment = league_alignments.get(alignment_key)
+
+        return jsonify({
+            "cabinet_id": cabinet_id,
+            "video_info": video_info,
+            "date": date_str,
+            "games_count": len(games),
+            "first_game": {
+                "game_id": first_game.id,
+                "map_name": first_game.map_name,
+                "start_time": first_game.start_time.isoformat(),
+                "hivemind_url": f"https://kqhivemind.com/game/{first_game.id}",
+                "gamestart_utc": gamestart_utc,
+            },
+            "alignment": existing_alignment,
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/league/<cabinet_id>/align", methods=["POST"])
+def align_league(cabinet_id: str):
+    """Save alignment for a league night video."""
+    if cabinet_id not in CABINET_TO_YOUTUBE:
+        return jsonify({
+            "error": f"Unknown cabinet: {cabinet_id}",
+            "known_cabinets": list(CABINET_TO_YOUTUBE.keys())
+        }), 404
+
+    data = request.json
+    video_timestamp_seconds = float(data["video_timestamp_seconds"])
+    game_id = int(data["game_id"])
+    date = data["date"]
+    video_id = data["video_id"]
+
+    # Fetch gamestart event
+    events = fetch_game_events(game_id, verbose=False)
+    gamestart_event = next(
+        (e for e in events if e.event_type == "gamestart"),
+        None
+    )
+
+    if not gamestart_event:
+        return jsonify({"error": "No gamestart event found for game"}), 400
+
+    # Fetch video duration
+    video_duration = get_video_duration(video_id) if video_id else None
+
+    alignment_data = {
+        "cabinet_id": cabinet_id,
+        "date": date,
+        "video_id": video_id,
+        "first_game_id": game_id,
+        "gamestart_utc": gamestart_event.timestamp.isoformat(),
+        "video_timestamp_seconds": video_timestamp_seconds,
+        "video_duration_seconds": video_duration,
+        "aligned_at": datetime.now().isoformat(),
+    }
+
+    save_league_alignment(cabinet_id, date, alignment_data)
+
+    return jsonify({"success": True, "alignment": alignment_data})
+
+
 if __name__ == "__main__":
     load_tournament_videos()
     load_matches()
     load_game_details()
     load_alignments()
+    load_league_alignments()
+    load_pending_league_nights()
 
     print(f"\nStarting tournament alignment server...")
     print(f"Open http://localhost:5001 in your browser\n")

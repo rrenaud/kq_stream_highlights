@@ -294,79 +294,15 @@ def score_candidate(
 
     Returns predicted score or None if scoring fails.
     """
-    # We need to create a synthetic clip-like structure for feature extraction
-    # The clip_features module expects clips with source_video_id for alignment lookup
-    # We'll work around this by directly extracting features from events
+    from .scorer import get_scorer
 
-    # Load events for this game
-    events = load_game_events(candidate.game_id)
-    if not events:
-        return None
-
-    # Filter events within candidate window
-    clip_events = []
-    for event in events:
-        ts_str = event.get("timestamp", "")
-        if not ts_str:
-            continue
-        try:
-            ts = parse_timestamp(ts_str)
-        except (ValueError, TypeError):
-            continue
-
-        if candidate.start_utc <= ts <= candidate.end_utc:
-            event["utc_datetime"] = ts
-            event["game_id"] = candidate.game_id
-            clip_events.append(event)
-
-    if not clip_events:
-        return None
-
-    # Extract features using the existing functions
-    wp_features = clip_features.extract_win_prob_features(clip_events)
-    event_counts = clip_features.count_events(clip_events)
-    state_features = clip_features.extract_game_state_features(clip_events)
-
-    duration = candidate.duration_seconds
-    events_per_second = len(clip_events) / duration if duration > 0 else 0
-    kills_per_second = event_counts["total_kills"] / duration if duration > 0 else 0
-
-    # Build ClipFeatures object
-    features = clip_features.ClipFeatures(
-        clip_id=candidate.candidate_id,
-        duration_seconds=duration,
-        win_prob_start=wp_features["win_prob_start"],
-        win_prob_end=wp_features["win_prob_end"],
-        win_prob_delta=wp_features["win_prob_delta"],
-        win_prob_max_swing=wp_features["win_prob_max_swing"],
-        win_prob_volatility=wp_features["win_prob_volatility"],
-        win_prob_min=wp_features["win_prob_min"],
-        win_prob_max=wp_features["win_prob_max"],
-        queen_kills=event_counts["queen_kills"],
-        worker_kills=event_counts["worker_kills"],
-        total_kills=event_counts["total_kills"],
-        snail_eats=event_counts["snail_eats"],
-        snail_escapes=event_counts["snail_escapes"],
-        berry_deposits=event_counts["berry_deposits"],
-        berry_kick_ins=event_counts["berry_kick_ins"],
-        maiden_uses=event_counts["maiden_uses"],
-        victory_in_clip=event_counts["victory_in_clip"],
-        events_per_second=events_per_second,
-        kills_per_second=kills_per_second,
-        state_vector_start=state_features["state_vector_start"],
-        state_vector_end=state_features["state_vector_end"],
-        state_vector_delta=state_features["state_vector_delta"],
-        blue_eggs_start=state_features["blue_eggs_start"],
-        gold_eggs_start=state_features["gold_eggs_start"],
-        blue_eggs_end=state_features["blue_eggs_end"],
-        gold_eggs_end=state_features["gold_eggs_end"],
-        blue_warriors_start=state_features["blue_warriors_start"],
-        gold_warriors_start=state_features["gold_warriors_start"],
-        blue_warriors_end=state_features["blue_warriors_end"],
-        gold_warriors_end=state_features["gold_warriors_end"],
+    result = get_scorer().score_game_window(
+        candidate.game_id,
+        candidate.start_utc,
+        candidate.end_utc,
     )
 
-    return train_rater.predict_rating(features)
+    return result.score if result.success else None
 
 
 def add_video_alignment(
