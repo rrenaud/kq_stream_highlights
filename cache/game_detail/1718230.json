@@ -1,0 +1,42 @@
+{
+  "id": 1718230,
+  "map_name": "Twilight",
+  "cabinet": {
+    "id": 3,
+    "name": "sf",
+    "display_name": "Detour (GDC 90s Cab 2)",
+    "scene": 3,
+    "address": "",
+    "description": "The Detour cab",
+    "time_zone": "US/Pacific",
+    "allow_qr_signin": true,
+    "allow_nfc_signin": true,
+    "allow_tournament_player": false,
+    "total_games": 19793,
+    "last_game_time": "2026-01-13T07:10:52.023000Z",
+    "client_status": "offline",
+    "twitch_channel_name": "kqsf"
+  },
+  "scene": {
+    "id": 3,
+    "name": "sf",
+    "display_name": "San Francisco",
+    "description": "The SF scene. League nights on Monday at the Detour, Wed (and Fri sometimes) nights at Emporium, and Sat at Speakeasy.",
+    "total_games": 38982,
+    "last_game_time": "2026-01-13T07:10:52.023000Z",
+    "background_color": "#fd5a1e"
+  },
+  "users": [],
+  "start_time": "2026-01-13T05:35:43.049000Z",
+  "end_time": "2026-01-13T05:37:01.587000Z",
+  "status": "complete",
+  "win_condition": "military",
+  "winning_team": "gold",
+  "player_count": 10,
+  "berries_used": 25,
+  "cabinet_version": "17.26",
+  "match": null,
+  "qp_match": null,
+  "tournament_match": null,
+  "whiteboard_match": null
+}
