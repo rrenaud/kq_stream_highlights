@@ -1,146 +1,198 @@
 [
   {
-    "name": "kills_per_second",
-    "importance": 0.43636256070253354
-  },
-  {
     "name": "win_prob_volatility",
-    "importance": 0.20859154218112938
-  },
-  {
-    "name": "state_delta_37",
-    "importance": 0.11993125440834272
+    "importance": 0.20128218978380155
   },
   {
     "name": "win_prob_max_swing",
-    "importance": 0.07416200736825351
-  },
-  {
-    "name": "berry_kick_ins",
-    "importance": 0.04591071512517065
-  },
-  {
-    "name": "duration_seconds",
-    "importance": 0.019021704295772532
-  },
-  {
-    "name": "win_prob_start",
-    "importance": 0.014297704374008631
-  },
-  {
-    "name": "gold_warriors_start",
-    "importance": 0.014175504770794769
-  },
-  {
-    "name": "blue_eggs_start",
-    "importance": 0.01328028447558521
-  },
-  {
-    "name": "state_delta_43",
-    "importance": 0.009772195490799392
-  },
-  {
-    "name": "state_delta_2",
-    "importance": 0.006694438112974928
-  },
-  {
-    "name": "state_delta_40",
-    "importance": 0.005610804816240621
+    "importance": 0.15114157047522242
   },
   {
     "name": "win_prob_delta",
-    "importance": 0.005100182975945369
-  },
-  {
-    "name": "state_delta_21",
-    "importance": 0.004975905541703839
-  },
-  {
-    "name": "blue_warriors_start",
-    "importance": 0.003726640357759834
-  },
-  {
-    "name": "state_delta_44",
-    "importance": 0.0026364829615786985
+    "importance": 0.08615193166098736
   },
   {
     "name": "win_prob_max",
-    "importance": 0.002635936098941459
-  },
-  {
-    "name": "state_delta_49",
-    "importance": 0.002311822479947959
+    "importance": 0.07503336292181371
   },
   {
     "name": "events_per_second",
-    "importance": 0.002192510570365214
+    "importance": 0.06169416726525791
   },
   {
-    "name": "blue_warriors_end",
-    "importance": 0.0017549471297513344
+    "name": "win_prob_start",
+    "importance": 0.06006460520038889
   },
   {
-    "name": "worker_kills",
-    "importance": 0.0016483787265578582
+    "name": "kills_per_second",
+    "importance": 0.04980452296841475
   },
   {
-    "name": "state_delta_41",
-    "importance": 0.001209983991234137
+    "name": "state_delta_49",
+    "importance": 0.040388445247683855
   },
   {
-    "name": "snail_escapes",
-    "importance": 0.0009144496889606026
+    "name": "blue_eggs_end",
+    "importance": 0.02623262753947946
   },
   {
-    "name": "maiden_uses",
-    "importance": 0.0008297581419821633
-  },
-  {
-    "name": "state_delta_25",
-    "importance": 0.0006537022755899776
-  },
-  {
-    "name": "state_delta_14",
-    "importance": 0.0005293453705117155
-  },
-  {
-    "name": "total_kills",
-    "importance": 0.0005241849591432243
-  },
-  {
-    "name": "state_delta_18",
-    "importance": 0.00042499136426340833
-  },
-  {
-    "name": "state_delta_3",
-    "importance": 6.517378825140297e-05
-  },
-  {
-    "name": "state_delta_0",
-    "importance": 5.488745590612461e-05
+    "name": "duration_seconds",
+    "importance": 0.023686348869145096
   },
   {
     "name": "win_prob_end",
-    "importance": 0.0
+    "importance": 0.020207011863780572
   },
   {
-    "name": "win_prob_min",
-    "importance": 0.0
+    "name": "total_kills",
+    "importance": 0.01795408502356791
+  },
+  {
+    "name": "gold_warriors_start",
+    "importance": 0.014060348041921909
+  },
+  {
+    "name": "state_delta_42",
+    "importance": 0.012486677609289721
+  },
+  {
+    "name": "worker_kills",
+    "importance": 0.011818159825629311
+  },
+  {
+    "name": "state_delta_43",
+    "importance": 0.011541204839424713
+  },
+  {
+    "name": "state_delta_33",
+    "importance": 0.011146212589139552
+  },
+  {
+    "name": "state_delta_22",
+    "importance": 0.011113067915004765
+  },
+  {
+    "name": "snail_escapes",
+    "importance": 0.010432508683209343
+  },
+  {
+    "name": "berry_kick_ins",
+    "importance": 0.009674942447311848
+  },
+  {
+    "name": "state_delta_35",
+    "importance": 0.007462781199485482
+  },
+  {
+    "name": "state_delta_41",
+    "importance": 0.0066240521865552305
+  },
+  {
+    "name": "state_delta_1",
+    "importance": 0.005999734774974094
+  },
+  {
+    "name": "state_delta_2",
+    "importance": 0.005709917230288411
+  },
+  {
+    "name": "state_delta_40",
+    "importance": 0.004874233347716282
   },
   {
     "name": "queen_kills",
-    "importance": 0.0
+    "importance": 0.004824895474692777
   },
   {
-    "name": "snail_eats",
-    "importance": 0.0
+    "name": "state_delta_38",
+    "importance": 0.004735543989367594
   },
   {
-    "name": "berry_deposits",
-    "importance": 0.0
+    "name": "state_delta_44",
+    "importance": 0.0045144121547125065
+  },
+  {
+    "name": "win_prob_min",
+    "importance": 0.0041523768847883365
+  },
+  {
+    "name": "state_delta_25",
+    "importance": 0.004037928705458473
+  },
+  {
+    "name": "state_delta_3",
+    "importance": 0.003771483462815704
+  },
+  {
+    "name": "state_delta_17",
+    "importance": 0.003668371294226308
+  },
+  {
+    "name": "state_delta_51",
+    "importance": 0.0035428140914597703
+  },
+  {
+    "name": "state_delta_18",
+    "importance": 0.0034026594063976613
+  },
+  {
+    "name": "state_delta_15",
+    "importance": 0.0032366899177168934
+  },
+  {
+    "name": "blue_warriors_end",
+    "importance": 0.00323215612305212
+  },
+  {
+    "name": "state_delta_50",
+    "importance": 0.0031099663360615003
+  },
+  {
+    "name": "state_delta_19",
+    "importance": 0.002859259843403467
+  },
+  {
+    "name": "maiden_uses",
+    "importance": 0.002593007108650341
+  },
+  {
+    "name": "state_delta_23",
+    "importance": 0.002394234335149259
+  },
+  {
+    "name": "state_delta_34",
+    "importance": 0.0019086161816033852
+  },
+  {
+    "name": "state_delta_37",
+    "importance": 0.0018567156417564781
+  },
+  {
+    "name": "state_delta_29",
+    "importance": 0.001770673224715646
   },
   {
     "name": "victory_in_clip",
+    "importance": 0.0016154012369836803
+  },
+  {
+    "name": "berry_deposits",
+    "importance": 0.0006035461921088101
+  },
+  {
+    "name": "state_delta_9",
+    "importance": 0.0005788179264180627
+  },
+  {
+    "name": "snail_eats",
+    "importance": 0.0005080953066092242
+  },
+  {
+    "name": "state_delta_13",
+    "importance": 0.0004976256523578916
+  },
+  {
+    "name": "blue_eggs_start",
     "importance": 0.0
   },
   {
@@ -148,11 +200,11 @@
     "importance": 0.0
   },
   {
-    "name": "blue_eggs_end",
+    "name": "gold_eggs_end",
     "importance": 0.0
   },
   {
-    "name": "gold_eggs_end",
+    "name": "blue_warriors_start",
     "importance": 0.0
   },
   {
@@ -160,7 +212,7 @@
     "importance": 0.0
   },
   {
-    "name": "state_delta_1",
+    "name": "state_delta_0",
     "importance": 0.0
   },
   {
@@ -184,10 +236,6 @@
     "importance": 0.0
   },
   {
-    "name": "state_delta_9",
-    "importance": 0.0
-  },
-  {
     "name": "state_delta_10",
     "importance": 0.0
   },
@@ -200,11 +248,7 @@
     "importance": 0.0
   },
   {
-    "name": "state_delta_13",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_15",
+    "name": "state_delta_14",
     "importance": 0.0
   },
   {
@@ -212,23 +256,11 @@
     "importance": 0.0
   },
   {
-    "name": "state_delta_17",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_19",
-    "importance": 0.0
-  },
-  {
     "name": "state_delta_20",
     "importance": 0.0
   },
   {
-    "name": "state_delta_22",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_23",
+    "name": "state_delta_21",
     "importance": 0.0
   },
   {
@@ -248,10 +280,6 @@
     "importance": 0.0
   },
   {
-    "name": "state_delta_29",
-    "importance": 0.0
-  },
-  {
     "name": "state_delta_30",
     "importance": 0.0
   },
@@ -264,31 +292,11 @@
     "importance": 0.0
   },
   {
-    "name": "state_delta_33",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_34",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_35",
-    "importance": 0.0
-  },
-  {
     "name": "state_delta_36",
     "importance": 0.0
   },
   {
-    "name": "state_delta_38",
-    "importance": 0.0
-  },
-  {
     "name": "state_delta_39",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_42",
     "importance": 0.0
   },
   {
@@ -305,14 +313,6 @@
   },
   {
     "name": "state_delta_48",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_50",
-    "importance": 0.0
-  },
-  {
-    "name": "state_delta_51",
     "importance": 0.0
   }
 ]

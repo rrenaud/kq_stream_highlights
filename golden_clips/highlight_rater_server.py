@@ -94,18 +94,19 @@ def load_ratings():
     print(f"Loaded {len(ratings)} ratings")
 
 
-def load_candidates():
+def load_candidates(candidates_file: Path = None):
     """Load clip candidates."""
     global candidates
-    if not CANDIDATES_FILE.exists():
-        print(f"Warning: {CANDIDATES_FILE} not found")
+    path = candidates_file or CANDIDATES_FILE
+    if not path.exists():
+        print(f"Warning: {path} not found")
         return
 
-    with open(CANDIDATES_FILE) as f:
+    with open(path) as f:
         for line in f:
             if line.strip():
                 candidates.append(json.loads(line))
-    print(f"Loaded {len(candidates)} candidates")
+    print(f"Loaded {len(candidates)} candidates from {path}")
 
 
 def load_candidate_ratings():
@@ -630,10 +631,16 @@ def rate_candidate(candidate_id: str):
 
 
 if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description='Highlight rater server')
+    parser.add_argument('--candidates', type=Path, help='Path to candidates JSONL file')
+    parser.add_argument('--port', type=int, default=5002, help='Port to run on')
+    args = parser.parse_args()
+
     load_clips()
     load_alignments()
     load_ratings()
-    load_candidates()
+    load_candidates(args.candidates)
     load_candidate_ratings()
     load_game_details()
     load_matches()
@@ -644,5 +651,5 @@ if __name__ == "__main__":
     print(f"Candidates: {len(candidates)} ({sum(1 for c in candidates if c.get('has_video'))} with video)")
 
     print(f"\nStarting highlight rater server...")
-    print(f"Open http://localhost:5002 in your browser\n")
-    app.run(debug=True, port=5002)
+    print(f"Open http://localhost:{args.port} in your browser\n")
+    app.run(debug=True, port=args.port)
