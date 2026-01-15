@@ -1718,26 +1718,39 @@
             // Populate player dropdowns (desktop and mobile)
             const playerSelect = document.getElementById('playerSelect');
             const mobilePlayerSelect = document.getElementById('mobilePlayerSelect');
-            playerSelect.innerHTML = '<option value="">Select player...</option>';
-            mobilePlayerSelect.innerHTML = '<option value="">Player...</option>';
             const sortedUsers = Object.entries(users)
                 .sort((a, b) => a[1].name.toLowerCase().localeCompare(b[1].name.toLowerCase()));
-            for (const [userId, userInfo] of sortedUsers) {
-                const option = document.createElement('option');
-                option.value = userId;
-                option.textContent = userInfo.name;
-                playerSelect.appendChild(option);
-                // Clone for mobile
-                mobilePlayerSelect.appendChild(option.cloneNode(true));
-            }
 
-            // Check URL for player param and select that player
-            const urlParams = new URLSearchParams(window.location.search);
-            const playerParam = urlParams.get('player');
-            if (playerParam && users[playerParam]) {
-                playerSelect.value = playerParam;
-                mobilePlayerSelect.value = playerParam;
-                handlePlayerSelect(playerParam, false);  // false = don't update URL again
+            if (sortedUsers.length === 0) {
+                // No users - replace dropdowns with message
+                const noUsersMsg = document.createElement('span');
+                noUsersMsg.style.color = '#888';
+                noUsersMsg.style.fontStyle = 'italic';
+                noUsersMsg.textContent = 'No logged in users';
+                playerSelect.parentNode.replaceChild(noUsersMsg, playerSelect);
+
+                // Hide mobile player selector
+                mobilePlayerSelect.style.display = 'none';
+            } else {
+                playerSelect.innerHTML = '<option value="">Select player...</option>';
+                mobilePlayerSelect.innerHTML = '<option value="">Player...</option>';
+                for (const [userId, userInfo] of sortedUsers) {
+                    const option = document.createElement('option');
+                    option.value = userId;
+                    option.textContent = userInfo.name;
+                    playerSelect.appendChild(option);
+                    // Clone for mobile
+                    mobilePlayerSelect.appendChild(option.cloneNode(true));
+                }
+
+                // Check URL for player param and select that player
+                const urlParams = new URLSearchParams(window.location.search);
+                const playerParam = urlParams.get('player');
+                if (playerParam && users[playerParam]) {
+                    playerSelect.value = playerParam;
+                    mobilePlayerSelect.value = playerParam;
+                    handlePlayerSelect(playerParam, false);  // false = don't update URL again
+                }
             }
 
             renderChapters();

@@ -1,0 +1,93 @@
+{
+  "chosen_alpha": 0.2,
+  "optimal_alpha_cv": 0.3393221771895326,
+  "lasso_indices": [
+    1,
+    5,
+    16,
+    18,
+    29,
+    30,
+    45,
+    52
+  ],
+  "symmetric_indices": [
+    1,
+    5,
+    16,
+    18,
+    29,
+    30,
+    32,
+    45,
+    49,
+    50,
+    52,
+    65
+  ],
+  "selected_features": [
+    {
+      "name": "win_prob_start",
+      "index": 1,
+      "from_lasso": true
+    },
+    {
+      "name": "win_prob_volatility",
+      "index": 5,
+      "from_lasso": true
+    },
+    {
+      "name": "victory_in_clip",
+      "index": 16,
+      "from_lasso": true
+    },
+    {
+      "name": "kills_per_second",
+      "index": 18,
+      "from_lasso": true
+    },
+    {
+      "name": "state_delta_2",
+      "index": 29,
+      "from_lasso": true
+    },
+    {
+      "name": "state_delta_3",
+      "index": 30,
+      "from_lasso": true
+    },
+    {
+      "name": "state_delta_5",
+      "index": 32,
+      "from_lasso": false
+    },
+    {
+      "name": "state_delta_18",
+      "index": 45,
+      "from_lasso": true
+    },
+    {
+      "name": "state_delta_22",
+      "index": 49,
+      "from_lasso": false
+    },
+    {
+      "name": "state_delta_23",
+      "index": 50,
+      "from_lasso": false
+    },
+    {
+      "name": "state_delta_25",
+      "index": 52,
+      "from_lasso": true
+    },
+    {
+      "name": "state_delta_38",
+      "index": 65,
+      "from_lasso": false
+    }
+  ],
+  "num_lasso_features": 8,
+  "num_symmetric_features": 12,
+  "total_features": 79
+}

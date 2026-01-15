@@ -82,6 +82,12 @@ class HighlightScorer:
 
         model = model_data["model"]
         X = features.to_feature_vector().reshape(1, -1)
+
+        # Use reduced feature set if model was trained with feature selection
+        if model_data.get("reduced_features") and "feature_indices" in model_data:
+            feature_indices = model_data["feature_indices"]
+            X = X[:, feature_indices]
+
         prediction = model.predict(X)[0]
 
         # Clip to valid range [1, 4]
