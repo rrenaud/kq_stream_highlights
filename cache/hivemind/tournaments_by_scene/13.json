@@ -1,0 +1,4653 @@
+[
+  {
+    "id": 863,
+    "name": "CampKQ 2026",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "campkq-2026",
+    "date": "2026-08-01",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2026-08-05",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      109,
+      26,
+      35
+    ],
+    "tidbit_prompt": "Tell us your favorite part of camping!",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 867,
+    "name": "March '26 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-26-cc",
+    "date": "2026-03-15",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 866,
+    "name": "March '26 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-26-mixer",
+    "date": "2026-03-02",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2026-03-03",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/61d651c9-3f25-45d2-b3ad-76824e1e56dc.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 864,
+    "name": "February '26 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-26-cc",
+    "date": "2026-02-15",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2026-02-16",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 844,
+    "name": "February '26 Mixer | \ud83d\udda4\ud83e\udd0dThe Monochrome Mixer\ud83e\udd0d\ud83d\udda4",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-26-mixer",
+    "date": "2026-02-02",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament! This month both cabinets will have their TVs turned to black&white for the duration of the event.",
+    "allow_registration": false,
+    "registration_close_date": "2026-02-03",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/21d29e4b-eef2-49f2-bf8c-ec92015faef3.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 839,
+    "name": "January '26 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-26-cc",
+    "date": "2026-01-25",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2026-01-26",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 838,
+    "name": "January '26 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-26-mixer",
+    "date": "2026-01-05",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2026-01-06",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/be87836d-1e4e-4dd1-8d33-2f1e8ce4414d.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 783,
+    "name": "December '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-2025-cc",
+    "date": "2025-12-21",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-12-22",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 782,
+    "name": "Self-Drafting December '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-2025-mixer",
+    "date": "2025-12-01",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-12-02",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/7d952155-f35a-41d9-99b4-660e1edfbf34.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 781,
+    "name": "November '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-2025-cc",
+    "date": "2025-11-16",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-11-17",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 780,
+    "name": "Nerf War \ud83d\udd2b | November '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-2025-mixer",
+    "date": "2025-11-03",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-11-04",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/a698b094-ea75-4968-a454-c8e647b6e9fd.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 779,
+    "name": "October '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "october-2025-cc",
+    "date": "2025-10-26",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-10-27",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 778,
+    "name": "October '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "october-2025-mixer",
+    "date": "2025-10-06",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-10-07",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/13271121-899c-46ad-96ed-7f1e9c13e953.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 749,
+    "name": "September '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-2025-cc",
+    "date": "2025-09-21",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-09-22",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 748,
+    "name": "September '25 Mixer [Newer Queens]",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-2025-mixer",
+    "date": "2025-09-01",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-09-02",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/e9b8b818-7440-4bf6-b60f-65c095a464a1.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 761,
+    "name": "Self Draft Tournament [Try 2]",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "self-draft-tournament-try-2",
+    "date": "2025-08-24",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/93af5f6d-4957-40d7-bae6-4bba7bc5b681.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      35
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 760,
+    "name": "Self Draft Tournament [Try 1]",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "self-draft-tournament",
+    "date": "2025-08-24",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/c0c615f5-d849-474e-91d5-5cb61e1b53a3.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      35
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 733,
+    "name": "August '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-2025-cc",
+    "date": "2025-08-17",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-08-18",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 732,
+    "name": "August '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-2025-mixer",
+    "date": "2025-08-04",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-08-05",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/5922dfcd-06d7-43a5-86ee-48465fa39710.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 731,
+    "name": "July '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-2025-cc",
+    "date": "2025-07-20",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-07-21",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 695,
+    "name": "July '25 Mixer [Fog of War]",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-2025-mixer",
+    "date": "2025-07-07",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-07-08",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/bda45bd2-5047-4d76-adf6-709fc9d524e8.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 694,
+    "name": "June '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-2025-cc",
+    "date": "2025-06-15",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-06-16",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 684,
+    "name": "June '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-2025-mixer",
+    "date": "2025-06-02",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-06-03",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/313426c5-6699-412b-8048-0ae1a6db9cbb.png",
+    "accept_payments": false,
+    "link_type": "hivemind",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 658,
+    "name": "May '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-2025-cc",
+    "date": "2025-05-18",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-05-19",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 675,
+    "name": "Mother's Day Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "mothers-day-mixer",
+    "date": "2025-05-11",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2025-05-12",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "hivemind",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 673,
+    "name": "West Circuit PDX 2025",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "west-circuit-pdx-2025",
+    "date": "2025-05-10",
+    "is_active": false,
+    "location": "",
+    "description": "Come grow your skills in our one day, full-round-robin intermediate tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-05-10",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/199583cf-f699-49ba-ac65-6be1f73316e8.png",
+    "accept_payments": true,
+    "link_type": "hivemind",
+    "registration_message": "Thanks for registering!",
+    "payment_message": "Please contact Kevin J (@lucidsheep) if you need an alternate payment method or would like to request fee assistance!",
+    "stripe_configured": true,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      109,
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 656,
+    "name": "May '25 Mixer [3 Queens]",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-2025-mixer",
+    "date": "2025-05-05",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-05-06",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/37389b41-d0e2-4db4-80f2-2f21daf74947.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 653,
+    "name": "League Season 4",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "league-season-4",
+    "date": "2025-05-01",
+    "is_active": false,
+    "location": "",
+    "description": "KQ League! Season 4!",
+    "allow_registration": true,
+    "registration_close_date": "2025-05-01",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "hivemind",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      109
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 640,
+    "name": "April '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "april-2025-cc",
+    "date": "2025-04-20",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-04-21",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 638,
+    "name": "April '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "april-2025-mixer",
+    "date": "2025-04-07",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-04-08",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/82ab7511-f0cc-473e-b47e-e579cca98166.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 631,
+    "name": "March '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-2025-cc",
+    "date": "2025-03-16",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-03-17",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 605,
+    "name": "March '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-2025-mixer",
+    "date": "2025-03-03",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-03-04",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/274c3663-6588-4c60-a0fc-59fe13bdecdb.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 604,
+    "name": "February '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-2025-cc",
+    "date": "2025-02-16",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": true,
+    "registration_close_date": "2025-02-17",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 580,
+    "name": "February '25 Mixer [Buddy Draft]",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-2025-mixer",
+    "date": "2025-02-03",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-02-04",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/d4ed4442-efbd-4405-8eef-dd1cb21ec6c7.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 586,
+    "name": "January '25 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-2025-cc",
+    "date": "2025-01-19",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Competitive Clash Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-01-20",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 577,
+    "name": "January '25 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-2025-mixer",
+    "date": "2025-01-06",
+    "is_active": false,
+    "location": "",
+    "description": "Join us for our monthly Mixer Tournament!",
+    "allow_registration": false,
+    "registration_close_date": "2025-01-07",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/874548c4-c64b-4f06-aa55-4ef087976c66.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 559,
+    "name": "December '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-2024-cc",
+    "date": "2024-12-08",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-12-09",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 558,
+    "name": "December '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-2024-mixer",
+    "date": "2024-12-02",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-12-03",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 275,
+    "name": "testing",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "testing-1",
+    "date": "2024-11-30",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2025-04-20",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "manual",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 554,
+    "name": "queue test",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "pdxqueuetest",
+    "date": "2024-11-27",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "hivemind",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 495,
+    "name": "November '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-24-cc",
+    "date": "2024-11-17",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2024-11-18",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 494,
+    "name": "November '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-24-mixer",
+    "date": "2024-11-04",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2024-11-05",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 496,
+    "name": "West Circuit PDX 2024",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "west-circuit-pdx-2024",
+    "date": "2024-10-19",
+    "is_active": false,
+    "location": "",
+    "description": "Welcome to the FINAL Pre-Bumblebash challenge!",
+    "allow_registration": true,
+    "registration_close_date": "2024-10-19",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/a44d0f82-3837-4e67-ac1e-f3b9ba708155.png",
+    "accept_payments": true,
+    "link_type": "challonge",
+    "registration_message": "Thanks for registering! Let's get ready to fight \ud83d\udd25",
+    "payment_message": "Please pay the registration fee with the form below. If you need assistance with payment, please reach out to Kevin J (@lucidsheep on Discord)!",
+    "stripe_configured": true,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 479,
+    "name": "October '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "october-24-mixer",
+    "date": "2024-10-07",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2024-10-08",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 478,
+    "name": "September '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-24-cc",
+    "date": "2024-09-15",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-09-16",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 477,
+    "name": "September '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-24-mixer",
+    "date": "2024-09-02",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2024-09-03",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 449,
+    "name": "August '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-24-cc",
+    "date": "2024-08-18",
+    "is_active": false,
+    "location": "",
+    "description": "https://challonge.com/kqpdx081824",
+    "allow_registration": true,
+    "registration_close_date": "2024-08-19",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 447,
+    "name": "August' 24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-24-mixer",
+    "date": "2024-08-05",
+    "is_active": false,
+    "location": "",
+    "description": "https://challonge.com/kqpdx080524",
+    "allow_registration": false,
+    "registration_close_date": "2024-08-06",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 431,
+    "name": "Camp KQ 2024",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "camp-kq-2024",
+    "date": "2024-07-27",
+    "is_active": false,
+    "location": "",
+    "description": "Camp KQ is back this year! National mixer tournament designed for players to have fun while raising money for charity and enjoy the PNW.\n\nResource sheet: \nhttps://docs.google.com/spreadsheets/d/1ngbupHudsfEvk63FJk9wxPcykyhxkyjos36jc70xVJY/edit?usp=drive_link\n\nTeams will be assigned SATURDAY morning of the tournament (so you can't cheat).",
+    "allow_registration": true,
+    "registration_close_date": "2024-07-28",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/a482ccca-c4ec-4d86-85c8-a25c2fd3263f.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "If you want a t-shirt ($20) please fill out registration BEFORE 11:59pm 7/11/2024.",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": true,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 414,
+    "name": "July '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-24-cc",
+    "date": "2024-07-21",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-07-22",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 413,
+    "name": "July '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-24-mixer",
+    "date": "2024-07-01",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2024-07-02",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "See you all at Ground Kontrol before 7pm!",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 391,
+    "name": "June '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-24-cc",
+    "date": "2024-06-16",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-06-17",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 390,
+    "name": "June '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-24-mixer",
+    "date": "2024-06-03",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-06-04",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      26
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 389,
+    "name": "May '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-24-cc",
+    "date": "2024-05-12",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-05-13",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 388,
+    "name": "May '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-24-mixer",
+    "date": "2024-05-06",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-05-07",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 441,
+    "name": "Camp KQ Test",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "camp-kq-test",
+    "date": "2024-05-01",
+    "is_active": false,
+    "location": "",
+    "description": "Shh ignore this",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 364,
+    "name": "April '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "april-24-cc",
+    "date": "2024-04-21",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-04-22",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 346,
+    "name": "April '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "april-24-mixer",
+    "date": "2024-04-01",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-04-02",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 345,
+    "name": "March '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-24-cc",
+    "date": "2024-03-17",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-03-18",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 344,
+    "name": "March '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-24-mixer",
+    "date": "2024-03-04",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-03-05",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 324,
+    "name": "February '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-24-cc",
+    "date": "2024-02-11",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-02-12",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 323,
+    "name": "February '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-24-mixer",
+    "date": "2024-02-05",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-02-06",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/d807cb1e-2aab-474a-8f23-93d0c9f295d2.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 299,
+    "name": "January '24 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-24-cc",
+    "date": "2024-01-21",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-01-22",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 298,
+    "name": "January '24 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-24-mixer",
+    "date": "2024-01-01",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2024-01-02",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 287,
+    "name": "December '23 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-23-cc",
+    "date": "2023-12-17",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2023-12-18",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 286,
+    "name": "December '23 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-23-mixer",
+    "date": "2023-12-04",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2023-12-05",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 274,
+    "name": "November '23 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-23-cc",
+    "date": "2023-11-19",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2023-11-20",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/d4b688ff-9f47-4051-94d9-bcc5b66789c3.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 273,
+    "name": "November '23 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-23-mixer",
+    "date": "2023-11-06",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2023-11-07",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/a77d6eab-91d3-4e65-a415-4c735d353dd4.png",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 233,
+    "name": "Portland West Circuit",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "portland-west-circuit",
+    "date": "2023-10-21",
+    "is_active": false,
+    "location": "",
+    "description": "Find a team sheet, housing & things to do here:\n\nhttps://bit.ly/WC2023-teams\n\nAll brackets will be posted here:\n\nhttps://challonge.com/events/pdxwc2023",
+    "allow_registration": true,
+    "registration_close_date": "2023-10-19",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/a5f5b237-a72b-4b0b-bc17-ec497b5ea459.jpg",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "We're so excited to see you! \u2728",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 263,
+    "name": "October '23 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "october-23-cc",
+    "date": "2023-10-15",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": "2023-10-16",
+    "registration_banner": "https://cdn.kqhivemind.com/prod/tournament/registration-banners/aa620db6-43c8-488f-acaa-0c05cc99705d.jpg",
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 259,
+    "name": "October '23 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "october-23-mixer",
+    "date": "2023-10-02",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": true,
+    "registration_close_date": "2023-10-03",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": true,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 266,
+    "name": "Registration / Queue Test",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "registration-queue-test",
+    "date": "2023-09-29",
+    "is_active": false,
+    "location": "",
+    "description": "shhhh ignore this",
+    "allow_registration": true,
+    "registration_close_date": "2023-10-01",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 258,
+    "name": "September '23 CC",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-23-cc",
+    "date": "2023-09-17",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 232,
+    "name": "September '23 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-23-mixer",
+    "date": "2023-09-04",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 198,
+    "name": "August '23 Competitive Clash",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-23-competitive-clash",
+    "date": "2023-08-13",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 197,
+    "name": "August '23 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-23-mixer",
+    "date": "2023-08-07",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 226,
+    "name": "Camp KQ 2023",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "camp-kq-2023",
+    "date": "2023-07-29",
+    "is_active": false,
+    "location": "",
+    "description": "Camp is back!",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": {
+      "awards": [
+        {
+          "title": "Most Games Played",
+          "values": [
+            {
+              "value": 131,
+              "user_id": 317,
+              "user_name": "Haramberto"
+            },
+            {
+              "value": 89,
+              "user_id": 507,
+              "user_name": "Jeff H [SEA]"
+            },
+            {
+              "value": 82,
+              "user_id": 105,
+              "user_name": "Good Girl \ud83d\ude18 [SF]"
+            },
+            {
+              "value": 81,
+              "user_id": 2,
+              "user_name": "Blue Chris [SF]"
+            },
+            {
+              "value": 79,
+              "user_id": 225,
+              "user_name": "Griner [CLT]"
+            }
+          ]
+        },
+        {
+          "title": "Most Kills",
+          "values": [
+            {
+              "value": 670,
+              "user_id": 317,
+              "user_name": "Haramberto"
+            },
+            {
+              "value": 587,
+              "user_id": 156,
+              "user_name": "Dylan Lee [PDX]"
+            },
+            {
+              "value": 581,
+              "user_id": 116,
+              "user_name": "MasterJoe [SFL]"
+            },
+            {
+              "value": 545,
+              "user_id": 105,
+              "user_name": "Good Girl \ud83d\ude18 [SF]"
+            },
+            {
+              "value": 414,
+              "user_id": 507,
+              "user_name": "Jeff H [SEA]"
+            }
+          ]
+        },
+        {
+          "title": "Most Queen Kills",
+          "values": [
+            {
+              "value": 129,
+              "user_id": 317,
+              "user_name": "Haramberto"
+            },
+            {
+              "value": 87,
+              "user_id": 156,
+              "user_name": "Dylan Lee [PDX]"
+            },
+            {
+              "value": 80,
+              "user_id": 116,
+              "user_name": "MasterJoe [SFL]"
+            },
+            {
+              "value": 71,
+              "user_id": 105,
+              "user_name": "Good Girl \ud83d\ude18 [SF]"
+            },
+            {
+              "value": 67,
+              "user_id": 507,
+              "user_name": "Jeff H [SEA]"
+            }
+          ]
+        },
+        {
+          "title": "Most Bump Assists",
+          "values": [
+            {
+              "value": 37,
+              "user_id": 317,
+              "user_name": "Haramberto"
+            },
+            {
+              "value": 35,
+              "user_id": 105,
+              "user_name": "Good Girl \ud83d\ude18 [SF]"
+            },
+            {
+              "value": 29,
+              "user_id": 310,
+              "user_name": "Stat Daddy Curtis Podracers [SLC]"
+            },
+            {
+              "value": 26,
+              "user_id": 225,
+              "user_name": "Griner [CLT]"
+            },
+            {
+              "value": 26,
+              "user_id": 507,
+              "user_name": "Jeff H [SEA]"
+            }
+          ]
+        },
+        {
+          "title": "Most Berries Deposited",
+          "values": [
+            {
+              "value": 142,
+              "user_id": 1220,
+              "user_name": "Brandon [PDX]"
+            },
+            {
+              "value": 122,
+              "user_id": 264,
+              "user_name": "Cat [SEA]"
+            },
+            {
+              "value": 114,
+              "user_id": 1287,
+              "user_name": "Trash"
+            },
+            {
+              "value": 111,
+              "user_id": 699,
+              "user_name": "Red Chris [PDX]"
+            },
+            {
+              "value": 93,
+              "user_id": 725,
+              "user_name": "Julie"
+            }
+          ]
+        },
+        {
+          "title": "Most Berries Kicked In",
+          "values": [
+            {
+              "value": 9,
+              "user_id": 116,
+              "user_name": "MasterJoe [SFL]"
+            },
+            {
+              "value": 9,
+              "user_id": 437,
+              "user_name": "Nubblet"
+            },
+            {
+              "value": 8,
+              "user_id": 1,
+              "user_name": "\u2728Abby \ud83c\udf08\ud83e\udd84\ud83e\udddc\u200d\u2640\ufe0f [BMOR]"
+            },
+            {
+              "value": 7,
+              "user_id": 530,
+              "user_name": "J4R3D"
+            },
+            {
+              "value": 6,
+              "user_id": 105,
+              "user_name": "Good Girl \ud83d\ude18 [SF]"
+            }
+          ]
+        },
+        {
+          "title": "Tastiest Drone",
+          "values": [
+            {
+              "value": 156,
+              "user_id": 180,
+              "user_name": "Breelzebub"
+            },
+            {
+              "value": 99,
+              "user_id": 538,
+              "user_name": "Jablonski [CHI]"
+            },
+            {
+              "value": 93,
+              "user_id": 286,
+              "user_name": "Alee [PDX]"
+            },
+            {
+              "value": 81,
+              "user_id": 246,
+              "user_name": "Tressa\u270c\ufe0f\ud83d\ude43\ud83d\udda4 [PDX]"
+            },
+            {
+              "value": 77,
+              "user_id": 264,
+              "user_name": "Cat [SEA]"
+            }
+          ]
+        }
+      ],
+      "end_date": "2023-07-31 12:00:00",
+      "start_date": "2023-07-29 07:00:00",
+      "achievements": [
+        {
+          "game_id": 812280,
+          "user_id": 201,
+          "user_name": "Alex Hogan [CBUS]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 105,
+          "user_name": "Good Girl \ud83d\ude18 [SF]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 225,
+          "user_name": "Griner [CLT]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 1249,
+          "user_name": "Nick B [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 163,
+          "user_name": "Imandra \ud83d\udc8b\ud83d\udd95 [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 504,
+          "user_name": "Sean [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 234,
+          "user_name": "\ud83d\udc96 \ud83d\udd2a Lizz \ud83d\udd2a \ud83d\udc96 [CHI]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 166,
+          "user_name": "Jason G [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 968,
+          "user_name": "Caroline",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 300,
+          "user_name": "Howl \ud83d\udef9 [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 1074,
+          "user_name": "dr00 [LAX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 275,
+          "user_name": "Johnmark",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 310,
+          "user_name": "Stat Daddy Curtis Podracers [SLC]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 1043,
+          "user_name": "Jessie \ud83c\udff3\ufe0f\u200d\u26a7\ufe0f\ud83d\udc31 [BMOR]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 457,
+          "user_name": "Matthew [SEA] [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 167,
+          "user_name": "\ud83d\udc41\ufe0f\ud83d\udc44\ud83d\udc41\ufe0fHeather T [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 162,
+          "user_name": "Matt A [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 180,
+          "user_name": "Breelzebub",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811829,
+          "user_id": 910,
+          "user_name": "Krispy [CLT]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 156,
+          "user_name": "Dylan Lee [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 1247,
+          "user_name": "Nate [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 674,
+          "user_name": "Cadsy baby [CHI]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 137,
+          "user_name": "\ud83d\udc7eJavan [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 315,
+          "user_name": "David Henry [PDX] [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 1067,
+          "user_name": "Kelly V [PHL]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 429,
+          "user_name": "Mo [SF]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 288,
+          "user_name": "Jeff C [SLC]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 250,
+          "user_name": "JohnnyKooch",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812061,
+          "user_id": 431,
+          "user_name": "Rachel [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 848,
+          "user_name": "Alice [NYC]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 268,
+          "user_name": "Gold Queen \ud83d\udc51 (Ben) [SLC]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 164,
+          "user_name": "Nick",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 246,
+          "user_name": "Tressa\u270c\ufe0f\ud83d\ude43\ud83d\udda4 [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 2,
+          "user_name": "Blue Chris [SF]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 308,
+          "user_name": "Marina [SLC]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 589,
+          "user_name": "Joelseph",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 316,
+          "user_name": "Richard [SEA] [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812271,
+          "user_id": 784,
+          "user_name": "rusty shackleford",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 189,
+          "user_name": "Ara [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 393,
+          "user_name": "Marsh\ud83d\udc0c [CHI]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 725,
+          "user_name": "Julie",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 505,
+          "user_name": "Joyce",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 437,
+          "user_name": "Nubblet",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812209,
+          "user_id": 1102,
+          "user_name": "Ty [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812209,
+          "user_id": 552,
+          "user_name": "Lex \ud83e\udd18\ud83d\udc80 [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812209,
+          "user_id": 652,
+          "user_name": "Shake n\u2019 Blake",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812209,
+          "user_id": 531,
+          "user_name": "\u00af\\_(\u30c4)_/\u00af [SEA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 812209,
+          "user_id": 1287,
+          "user_name": "Trash",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 813621,
+          "user_id": 544,
+          "user_name": "KEET [CHA]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 813621,
+          "user_id": 286,
+          "user_name": "Alee [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 813621,
+          "user_id": 7,
+          "user_name": "Von Ghoul",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 813621,
+          "user_id": 77,
+          "user_name": "BrianM",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 813621,
+          "user_id": 237,
+          "user_name": "Kevin J \ud83c\udf89 [PDX]",
+          "achievement": "AllLoggedIn"
+        },
+        {
+          "game_id": 811679,
+          "user_id": 553,
+          "user_name": "Lenore Dauterive [PDX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 811718,
+          "user_id": 544,
+          "user_name": "KEET [CHA]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812082,
+          "user_id": 156,
+          "user_name": "Dylan Lee [PDX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 811894,
+          "user_id": 1102,
+          "user_name": "Ty [SEA]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812104,
+          "user_id": 437,
+          "user_name": "Nubblet",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812277,
+          "user_id": 268,
+          "user_name": "Gold Queen \ud83d\udc51 (Ben) [SLC]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 811916,
+          "user_id": 674,
+          "user_name": "Cadsy baby [CHI]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 811942,
+          "user_id": 116,
+          "user_name": "MasterJoe [SFL]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812189,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812005,
+          "user_id": 94,
+          "user_name": "DRay [SF]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812035,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812347,
+          "user_id": 201,
+          "user_name": "Alex Hogan [CBUS]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812333,
+          "user_id": 433,
+          "user_name": "Mikio\ud83c\udf2f\ud83d\ude9b [PDX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812697,
+          "user_id": 530,
+          "user_name": "J4R3D",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812706,
+          "user_id": 67,
+          "user_name": "Dangief",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812892,
+          "user_id": 256,
+          "user_name": "",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 812913,
+          "user_id": 432,
+          "user_name": "Toshi [SEA]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813025,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813063,
+          "user_id": 105,
+          "user_name": "Good Girl \ud83d\ude18 [SF]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813072,
+          "user_id": 166,
+          "user_name": "Jason G [PDX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813102,
+          "user_id": 2,
+          "user_name": "Blue Chris [SF]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813115,
+          "user_id": 552,
+          "user_name": "Lex \ud83e\udd18\ud83d\udc80 [PDX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813549,
+          "user_id": 250,
+          "user_name": "JohnnyKooch",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813588,
+          "user_id": 275,
+          "user_name": "Johnmark",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 813652,
+          "user_id": 7,
+          "user_name": "Von Ghoul",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 814011,
+          "user_id": 162,
+          "user_name": "Matt A [PDX]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 814284,
+          "user_id": 164,
+          "user_name": "Nick",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 814261,
+          "user_id": 504,
+          "user_name": "Sean [SEA]",
+          "achievement": "HatTrick"
+        },
+        {
+          "game_id": 811654,
+          "user_id": 77,
+          "user_name": "BrianM",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 811732,
+          "user_id": 181,
+          "user_name": "NathanV [PDX]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 811930,
+          "user_id": 162,
+          "user_name": "Matt A [PDX]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 812302,
+          "user_id": 105,
+          "user_name": "Good Girl \ud83d\ude18 [SF]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 812468,
+          "user_id": 225,
+          "user_name": "Griner [CLT]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 812763,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813096,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813606,
+          "user_id": 275,
+          "user_name": "Johnmark",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813704,
+          "user_id": 67,
+          "user_name": "Dangief",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813728,
+          "user_id": 145,
+          "user_name": "Omaha Paulie E [MPLS]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813802,
+          "user_id": 315,
+          "user_name": "David Henry [PDX] [PDX]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813802,
+          "user_id": 156,
+          "user_name": "Dylan Lee [PDX]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813243,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813938,
+          "user_id": 116,
+          "user_name": "MasterJoe [SFL]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 813262,
+          "user_id": 552,
+          "user_name": "Lex \ud83e\udd18\ud83d\udc80 [PDX]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 814274,
+          "user_id": 910,
+          "user_name": "Krispy [CLT]",
+          "achievement": "GordieHowe"
+        },
+        {
+          "game_id": 811643,
+          "user_id": 544,
+          "user_name": "KEET [CHA]",
+          "achievement": "LastBerryKickIn"
+        },
+        {
+          "game_id": 813045,
+          "user_id": 310,
+          "user_name": "Stat Daddy Curtis Podracers [SLC]",
+          "achievement": "LastBerryKickIn"
+        },
+        {
+          "game_id": 813785,
+          "user_id": 501,
+          "user_name": "Coppola [CHI]",
+          "achievement": "LastBerryKickIn"
+        },
+        {
+          "game_id": 811786,
+          "user_id": 94,
+          "user_name": "DRay [SF]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 811786,
+          "user_id": 501,
+          "user_name": "Coppola [CHI]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 811786,
+          "user_id": 297,
+          "user_name": "McKilla [SLC]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812030,
+          "user_id": 1074,
+          "user_name": "dr00 [LAX]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812030,
+          "user_id": 180,
+          "user_name": "Breelzebub",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812030,
+          "user_id": 457,
+          "user_name": "Matthew [SEA] [SEA]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812030,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812030,
+          "user_id": 310,
+          "user_name": "Stat Daddy Curtis Podracers [SLC]",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812439,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "TwilightSnailVictory"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 105,
+          "user_name": "Good Girl \ud83d\ude18 [SF]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 163,
+          "user_name": "Imandra \ud83d\udc8b\ud83d\udd95 [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811623,
+          "user_id": 237,
+          "user_name": "Kevin J \ud83c\udf89 [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811649,
+          "user_id": 7,
+          "user_name": "Von Ghoul",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811646,
+          "user_id": 456,
+          "user_name": "KT",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811687,
+          "user_id": 171,
+          "user_name": "Bennett Smith",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811857,
+          "user_id": 275,
+          "user_name": "Johnmark",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812098,
+          "user_id": 578,
+          "user_name": "Meowlanie [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812098,
+          "user_id": 459,
+          "user_name": "Julebee [SEA]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811875,
+          "user_id": 437,
+          "user_name": "Nubblet",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812246,
+          "user_id": 589,
+          "user_name": "Joelseph",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812257,
+          "user_id": 2,
+          "user_name": "Blue Chris [SF]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812202,
+          "user_id": 300,
+          "user_name": "Howl \ud83d\udef9 [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812047,
+          "user_id": 189,
+          "user_name": "Ara [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 812300,
+          "user_id": 590,
+          "user_name": "Aaron G [CHI]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813115,
+          "user_id": 116,
+          "user_name": "MasterJoe [SFL]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813157,
+          "user_id": 1102,
+          "user_name": "Ty [SEA]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813192,
+          "user_id": 250,
+          "user_name": "JohnnyKooch",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813534,
+          "user_id": 305,
+          "user_name": "Mark [SLC]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813555,
+          "user_id": 36,
+          "user_name": "Dom Pham [BMOR]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813640,
+          "user_id": 77,
+          "user_name": "BrianM",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813716,
+          "user_id": 316,
+          "user_name": "Richard [SEA] [SEA]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813716,
+          "user_id": 784,
+          "user_name": "rusty shackleford",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813769,
+          "user_id": 164,
+          "user_name": "Nick",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 813922,
+          "user_id": 553,
+          "user_name": "Lenore Dauterive [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 814011,
+          "user_id": 167,
+          "user_name": "\ud83d\udc41\ufe0f\ud83d\udc44\ud83d\udc41\ufe0fHeather T [PDX]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 814072,
+          "user_id": 530,
+          "user_name": "J4R3D",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 814174,
+          "user_id": 432,
+          "user_name": "Toshi [SEA]",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 814174,
+          "user_id": 661,
+          "user_name": "waizy",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 814315,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "SaveTeammateFromSnail"
+        },
+        {
+          "game_id": 811707,
+          "user_id": 1,
+          "user_name": "\u2728Abby \ud83c\udf08\ud83e\udd84\ud83e\udddc\u200d\u2640\ufe0f [BMOR]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 811707,
+          "user_id": 1123,
+          "user_name": "Mat K [SLC]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 811707,
+          "user_id": 1198,
+          "user_name": "Bakonfat [PDX]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 811707,
+          "user_id": 456,
+          "user_name": "KT",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 811707,
+          "user_id": 649,
+          "user_name": "Melski [CHA]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 812717,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 812754,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 812785,
+          "user_id": 166,
+          "user_name": "Jason G [PDX]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 812785,
+          "user_id": 105,
+          "user_name": "Good Girl \ud83d\ude18 [SF]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 812785,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 814149,
+          "user_id": 201,
+          "user_name": "Alex Hogan [CBUS]",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 814149,
+          "user_id": 589,
+          "user_name": "Joelseph",
+          "achievement": "DayBerries"
+        },
+        {
+          "game_id": 813818,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "BuzzerBeater"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 116,
+          "user_name": "MasterJoe [SFL]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 530,
+          "user_name": "J4R3D",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 661,
+          "user_name": "waizy",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 459,
+          "user_name": "Julebee [SEA]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 538,
+          "user_name": "Jablonski [CHI]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 433,
+          "user_name": "Mikio\ud83c\udf2f\ud83d\ude9b [PDX]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 225,
+          "user_name": "Griner [CLT]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 2,
+          "user_name": "Blue Chris [SF]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 691,
+          "user_name": "Austin [ATX]",
+          "achievement": "FastSnailWin"
+        },
+        {
+          "game_id": 811681,
+          "user_id": 1123,
+          "user_name": "Mat K [SLC]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812069,
+          "user_id": 137,
+          "user_name": "\ud83d\udc7eJavan [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811889,
+          "user_id": 305,
+          "user_name": "Mark [SLC]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811889,
+          "user_id": 1043,
+          "user_name": "Jessie \ud83c\udff3\ufe0f\u200d\u26a7\ufe0f\ud83d\udc31 [BMOR]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812273,
+          "user_id": 163,
+          "user_name": "Imandra \ud83d\udc8b\ud83d\udd95 [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812139,
+          "user_id": 548,
+          "user_name": "Miranda [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811903,
+          "user_id": 1247,
+          "user_name": "Nate [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811910,
+          "user_id": 429,
+          "user_name": "Mo [SF]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811930,
+          "user_id": 725,
+          "user_name": "Julie",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811930,
+          "user_id": 910,
+          "user_name": "Krispy [CLT]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812184,
+          "user_id": 300,
+          "user_name": "Howl \ud83d\udef9 [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812005,
+          "user_id": 310,
+          "user_name": "Stat Daddy Curtis Podracers [SLC]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811994,
+          "user_id": 501,
+          "user_name": "Coppola [CHI]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 811574,
+          "user_id": 77,
+          "user_name": "BrianM",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812498,
+          "user_id": 531,
+          "user_name": "\u00af\\_(\u30c4)_/\u00af [SEA]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812408,
+          "user_id": 316,
+          "user_name": "Richard [SEA] [SEA]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812638,
+          "user_id": 67,
+          "user_name": "Dangief",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812653,
+          "user_id": 1198,
+          "user_name": "Bakonfat [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812705,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812799,
+          "user_id": 166,
+          "user_name": "Jason G [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812887,
+          "user_id": 652,
+          "user_name": "Shake n\u2019 Blake",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813045,
+          "user_id": 1067,
+          "user_name": "Kelly V [PHL]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813105,
+          "user_id": 250,
+          "user_name": "JohnnyKooch",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813190,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813386,
+          "user_id": 1220,
+          "user_name": "Brandon [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813642,
+          "user_id": 699,
+          "user_name": "Red Chris [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813769,
+          "user_id": 848,
+          "user_name": "Alice [NYC]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813856,
+          "user_id": 1249,
+          "user_name": "Nick B [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 813259,
+          "user_id": 1,
+          "user_name": "\u2728Abby \ud83c\udf08\ud83e\udd84\ud83e\udddc\u200d\u2640\ufe0f [BMOR]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 814155,
+          "user_id": 589,
+          "user_name": "Joelseph",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 814184,
+          "user_id": 181,
+          "user_name": "NathanV [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 814274,
+          "user_id": 505,
+          "user_name": "Joyce",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 814324,
+          "user_id": 167,
+          "user_name": "\ud83d\udc41\ufe0f\ud83d\udc44\ud83d\udc41\ufe0fHeather T [PDX]",
+          "achievement": "BerryParkour"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 1249,
+          "user_name": "Nick B [PDX]",
+          "achievement": "SurviveFamine"
+        },
+        {
+          "game_id": 811875,
+          "user_id": 297,
+          "user_name": "McKilla [SLC]",
+          "achievement": "SurviveFamine"
+        },
+        {
+          "game_id": 811875,
+          "user_id": 501,
+          "user_name": "Coppola [CHI]",
+          "achievement": "SurviveFamine"
+        },
+        {
+          "game_id": 811911,
+          "user_id": 337,
+          "user_name": "Richard S [DFW]",
+          "achievement": "SurviveFamine"
+        },
+        {
+          "game_id": 813769,
+          "user_id": 164,
+          "user_name": "Nick",
+          "achievement": "SurviveFamine"
+        },
+        {
+          "game_id": 811670,
+          "user_id": 264,
+          "user_name": "Cat [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811807,
+          "user_id": 275,
+          "user_name": "Johnmark",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811807,
+          "user_id": 1043,
+          "user_name": "Jessie \ud83c\udff3\ufe0f\u200d\u26a7\ufe0f\ud83d\udc31 [BMOR]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811807,
+          "user_id": 167,
+          "user_name": "\ud83d\udc41\ufe0f\ud83d\udc44\ud83d\udc41\ufe0fHeather T [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811807,
+          "user_id": 162,
+          "user_name": "Matt A [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811807,
+          "user_id": 910,
+          "user_name": "Krispy [CLT]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 116,
+          "user_name": "MasterJoe [SFL]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 530,
+          "user_name": "J4R3D",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 661,
+          "user_name": "waizy",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 459,
+          "user_name": "Julebee [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812093,
+          "user_id": 538,
+          "user_name": "Jablonski [CHI]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812128,
+          "user_id": 268,
+          "user_name": "Gold Queen \ud83d\udc51 (Ben) [SLC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812128,
+          "user_id": 848,
+          "user_name": "Alice [NYC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812128,
+          "user_id": 2,
+          "user_name": "Blue Chris [SF]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812128,
+          "user_id": 164,
+          "user_name": "Nick",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812128,
+          "user_id": 246,
+          "user_name": "Tressa\u270c\ufe0f\ud83d\ude43\ud83d\udda4 [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811929,
+          "user_id": 250,
+          "user_name": "JohnnyKooch",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811929,
+          "user_id": 137,
+          "user_name": "\ud83d\udc7eJavan [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811929,
+          "user_id": 288,
+          "user_name": "Jeff C [SLC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811929,
+          "user_id": 1067,
+          "user_name": "Kelly V [PHL]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811929,
+          "user_id": 431,
+          "user_name": "Rachel [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 189,
+          "user_name": "Ara [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 393,
+          "user_name": "Marsh\ud83d\udc0c [CHI]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 725,
+          "user_name": "Julie",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 505,
+          "user_name": "Joyce",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811905,
+          "user_id": 437,
+          "user_name": "Nubblet",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812164,
+          "user_id": 504,
+          "user_name": "Sean [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812164,
+          "user_id": 1249,
+          "user_name": "Nick B [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811957,
+          "user_id": 429,
+          "user_name": "Mo [SF]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811562,
+          "user_id": 286,
+          "user_name": "Alee [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811562,
+          "user_id": 7,
+          "user_name": "Von Ghoul",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811562,
+          "user_id": 237,
+          "user_name": "Kevin J \ud83c\udf89 [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811562,
+          "user_id": 77,
+          "user_name": "BrianM",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811562,
+          "user_id": 544,
+          "user_name": "KEET [CHA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812572,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812615,
+          "user_id": 163,
+          "user_name": "Imandra \ud83d\udc8b\ud83d\udd95 [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812615,
+          "user_id": 507,
+          "user_name": "Jeff H [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812793,
+          "user_id": 1220,
+          "user_name": "Brandon [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812844,
+          "user_id": 156,
+          "user_name": "Dylan Lee [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 812844,
+          "user_id": 652,
+          "user_name": "Shake n\u2019 Blake",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813129,
+          "user_id": 166,
+          "user_name": "Jason G [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813129,
+          "user_id": 552,
+          "user_name": "Lex \ud83e\udd18\ud83d\udc80 [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813131,
+          "user_id": 691,
+          "user_name": "Austin [ATX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813131,
+          "user_id": 1,
+          "user_name": "\u2728Abby \ud83c\udf08\ud83e\udd84\ud83e\udddc\u200d\u2640\ufe0f [BMOR]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813175,
+          "user_id": 36,
+          "user_name": "Dom Pham [BMOR]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813175,
+          "user_id": 310,
+          "user_name": "Stat Daddy Curtis Podracers [SLC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813157,
+          "user_id": 592,
+          "user_name": "Robe guy [CHI]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813157,
+          "user_id": 1102,
+          "user_name": "Ty [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813157,
+          "user_id": 297,
+          "user_name": "McKilla [SLC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813228,
+          "user_id": 531,
+          "user_name": "\u00af\\_(\u30c4)_/\u00af [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813465,
+          "user_id": 317,
+          "user_name": "Haramberto",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813504,
+          "user_id": 578,
+          "user_name": "Meowlanie [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813600,
+          "user_id": 674,
+          "user_name": "Cadsy baby [CHI]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813600,
+          "user_id": 315,
+          "user_name": "David Henry [PDX] [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813600,
+          "user_id": 1247,
+          "user_name": "Nate [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813623,
+          "user_id": 287,
+          "user_name": "Elyse \ud83e\udd5a [SLC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813732,
+          "user_id": 181,
+          "user_name": "NathanV [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813732,
+          "user_id": 93,
+          "user_name": "Napalm",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813817,
+          "user_id": 282,
+          "user_name": "Xtos [MKE]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813817,
+          "user_id": 432,
+          "user_name": "Toshi [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813899,
+          "user_id": 305,
+          "user_name": "Mark [SLC]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813899,
+          "user_id": 577,
+          "user_name": "Carly [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813899,
+          "user_id": 337,
+          "user_name": "Richard S [DFW]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 813257,
+          "user_id": 457,
+          "user_name": "Matthew [SEA] [SEA]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 814310,
+          "user_id": 105,
+          "user_name": "Good Girl \ud83d\ude18 [SF]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 814310,
+          "user_id": 300,
+          "user_name": "Howl \ud83d\udef9 [PDX]",
+          "achievement": "GateQueue"
+        },
+        {
+          "game_id": 811725,
+          "user_id": 282,
+          "user_name": "Xtos [MKE]",
+          "achievement": "DepositAndKickIn"
+        },
+        {
+          "game_id": 813682,
+          "user_id": 305,
+          "user_name": "Mark [SLC]",
+          "achievement": "DepositAndKickIn"
+        },
+        {
+          "game_id": 813824,
+          "user_id": 264,
+          "user_name": "Cat [SEA]",
+          "achievement": "DepositAndKickIn"
+        },
+        {
+          "game_id": 811615,
+          "user_id": 1,
+          "user_name": "\u2728Abby \ud83c\udf08\ud83e\udd84\ud83e\udddc\u200d\u2640\ufe0f [BMOR]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 811615,
+          "user_id": 649,
+          "user_name": "Melski [CHA]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 811615,
+          "user_id": 456,
+          "user_name": "KT",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 811615,
+          "user_id": 1123,
+          "user_name": "Mat K [SLC]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 811615,
+          "user_id": 1198,
+          "user_name": "Bakonfat [PDX]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 201,
+          "user_name": "Alex Hogan [CBUS]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 225,
+          "user_name": "Griner [CLT]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 163,
+          "user_name": "Imandra \ud83d\udc8b\ud83d\udd95 [PDX]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 234,
+          "user_name": "\ud83d\udc96 \ud83d\udd2a Lizz \ud83d\udd2a \ud83d\udc96 [CHI]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812280,
+          "user_id": 968,
+          "user_name": "Caroline",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812044,
+          "user_id": 137,
+          "user_name": "\ud83d\udc7eJavan [PDX]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812044,
+          "user_id": 1067,
+          "user_name": "Kelly V [PHL]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812044,
+          "user_id": 288,
+          "user_name": "Jeff C [SLC]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812044,
+          "user_id": 250,
+          "user_name": "JohnnyKooch",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812044,
+          "user_id": 431,
+          "user_name": "Rachel [SEA]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812257,
+          "user_id": 848,
+          "user_name": "Alice [NYC]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812257,
+          "user_id": 268,
+          "user_name": "Gold Queen \ud83d\udc51 (Ben) [SLC]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812257,
+          "user_id": 164,
+          "user_name": "Nick",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812257,
+          "user_id": 246,
+          "user_name": "Tressa\u270c\ufe0f\ud83d\ude43\ud83d\udda4 [PDX]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812257,
+          "user_id": 2,
+          "user_name": "Blue Chris [SF]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812494,
+          "user_id": 275,
+          "user_name": "Johnmark",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812494,
+          "user_id": 531,
+          "user_name": "\u00af\\_(\u30c4)_/\u00af [SEA]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 433,
+          "user_name": "Mikio\ud83c\udf2f\ud83d\ude9b [PDX]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 1086,
+          "user_name": "BeeBearBandito [PHX]",
+          "achievement": "FiveSceneTeam"
+        },
+        {
+          "game_id": 812530,
+          "user_id": 691,
+          "user_name": "Austin [ATX]",
+          "achievement": "FiveSceneTeam"
+        }
+      ],
+      "tournament_id": 226
+    },
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 217,
+    "name": "Camp KQ 2023 (old)",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "camp-kq-2023-old",
+    "date": "2023-07-29",
+    "is_active": false,
+    "location": "",
+    "description": "National Killer Queen mixer tournament designed to play with people you wouldn't normally and have fun raising money for charity.",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "manual",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": true,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 196,
+    "name": "July '23 Competitive Clash",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-23-competitive-clash",
+    "date": "2023-07-16",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 195,
+    "name": "July '23 Mixer",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-23-mixer",
+    "date": "2023-07-03",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 194,
+    "name": "June '23 Competitive Clash",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-23-competitive-clash",
+    "date": "2023-06-18",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 184,
+    "name": "June '23 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-23-mixer-tournament",
+    "date": "2023-06-05",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 154,
+    "name": "May '23 Competitive Clash",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-23-competitive-clash",
+    "date": "2023-05-21",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 178,
+    "name": "New Test",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "new-test",
+    "date": "2023-05-18",
+    "is_active": false,
+    "location": "",
+    "description": "new system, new test",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 165,
+    "name": "May '23 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-23-mixer-tournament",
+    "date": "2023-05-01",
+    "is_active": false,
+    "location": "",
+    "description": "Killer Queen Portland's May 2023 Mixer draft tournament.",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 149,
+    "name": "May '23 Mixer (Old)",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "may-23-mixer-old",
+    "date": "2023-05-01",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 148,
+    "name": "April '23 Competitive Clash",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "april-23-competitive-clash",
+    "date": "2023-04-16",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 137,
+    "name": "April '23 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "april-23-mixer-tournament",
+    "date": "2023-04-03",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 121,
+    "name": "March '23 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-23-competitive-clash-tournament",
+    "date": "2023-03-19",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 120,
+    "name": "March '23 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "march-23-mixer-tournament",
+    "date": "2023-03-06",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 97,
+    "name": "February '23 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-23-competitive-clash-tournament",
+    "date": "2023-02-19",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 91,
+    "name": "February '23 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "february-23-mixer-tournament",
+    "date": "2023-02-06",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 90,
+    "name": "January '23 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-23-competitive-clash-tournament",
+    "date": "2023-01-15",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 89,
+    "name": "January '23 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "january-23-mixer-tournament",
+    "date": "2023-01-02",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 79,
+    "name": "December '22 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-22-competitive-clash-tournament",
+    "date": "2022-12-18",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 78,
+    "name": "December '22 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "december-22-mixer-tournament",
+    "date": "2022-12-05",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 72,
+    "name": "November '22 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-22-competitive-clash-tournament",
+    "date": "2022-11-20",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 71,
+    "name": "November '22 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "november-22-mixer-tournament",
+    "date": "2022-11-07",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 63,
+    "name": "Rose City Bumble",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "rose-city-bumble",
+    "date": "2022-10-15",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 68,
+    "name": "Test",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "test-2",
+    "date": "2022-10-12",
+    "is_active": false,
+    "location": "",
+    "description": "It's that time again",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "manual",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 58,
+    "name": "October '22 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "october-22-mixer-tournament",
+    "date": "2022-10-03",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 49,
+    "name": "September '22 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-22-competitive-clash-tournament",
+    "date": "2022-09-18",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 48,
+    "name": "September '22 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "september-22-mixer-tournament",
+    "date": "2022-09-05",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 45,
+    "name": "August '22 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-22-competitive-clash-tournament",
+    "date": "2022-08-21",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 43,
+    "name": "August '22 Mixer Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "august-22-mixer-tournament",
+    "date": "2022-08-01",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 40,
+    "name": "July '22 Competitive Clash Tournament",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "july-22-competitive-clash-tournament",
+    "date": "2022-07-17",
+    "is_active": false,
+    "location": "",
+    "description": "5pm PST, Ground Kontrol Classic Arcade",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  },
+  {
+    "id": 37,
+    "name": "June '22 Competitive Clash",
+    "scene": 13,
+    "scene_name": "kqpdx",
+    "slug": "june-22-competitive-clash",
+    "date": "2022-06-19",
+    "is_active": false,
+    "location": "",
+    "description": "https://www.facebook.com/events/1329492250865876/\nhttps://www.twitch.tv/kqpdx\nhttps://challonge.com/kqpdx061922\nTeam sheet: https://bit.ly/KQPDXcc2022",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Portland"
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "id": 736,
+    "name": "Killer Queen City BYOT 2025",
+    "scene": 21,
+    "scene_name": "clt",
+    "slug": "killer-queen-city-byot-2025",
+    "date": "2025-07-26",
+    "is_active": false,
+    "location": "",
+    "description": "2 day tournament @ Seoul Food Mill District in Charlotte, NC.",
+    "allow_registration": true,
+    "registration_close_date": "2025-07-28",
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "hivemind",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [
+      130,
+      132
+    ],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Charlotte"
+  }
+]

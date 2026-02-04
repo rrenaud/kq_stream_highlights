@@ -1,0 +1,26 @@
+[
+  {
+    "id": 75,
+    "name": "MKE ExtraLife Draft",
+    "scene": 12,
+    "scene_name": "mke",
+    "slug": "mke-extralife-draft",
+    "date": "2022-10-23",
+    "is_active": false,
+    "location": "",
+    "description": "",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "challonge",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "Milwaukee"
+  }
+]

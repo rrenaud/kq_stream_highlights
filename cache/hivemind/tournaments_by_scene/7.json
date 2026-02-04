@@ -1,0 +1,26 @@
+[
+  {
+    "id": 229,
+    "name": "test 0.0",
+    "scene": 7,
+    "scene_name": "stl",
+    "slug": "test-00",
+    "date": "2023-07-31",
+    "is_active": false,
+    "location": "",
+    "description": "test 0.0",
+    "allow_registration": false,
+    "registration_close_date": null,
+    "registration_banner": null,
+    "accept_payments": false,
+    "link_type": "manual",
+    "registration_message": "",
+    "payment_message": "",
+    "stripe_configured": false,
+    "awards": null,
+    "require_player_photo": false,
+    "assigned_cabinets": [],
+    "tidbit_prompt": "Interesting tidbit about yourself",
+    "scene_display_name": "St. Louis"
+  }
+]

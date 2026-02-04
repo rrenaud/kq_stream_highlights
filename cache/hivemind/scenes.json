@@ -1,0 +1,317 @@
+[
+  {
+    "id": 44,
+    "name": "ABL",
+    "display_name": "Abilene",
+    "background_color": "",
+    "foreground_color": ""
+  },
+  {
+    "id": 43,
+    "name": "AKL",
+    "display_name": "Auckland",
+    "background_color": "#0054cd",
+    "foreground_color": "#ffffff"
+  },
+  {
+    "id": 2,
+    "name": "ATL",
+    "display_name": "Atlanta",
+    "background_color": "#0b5394",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 3,
+    "name": "ATX",
+    "display_name": "Austin",
+    "background_color": "#ff9900",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 1,
+    "name": "AVL",
+    "display_name": "Asheville",
+    "background_color": "#6aa84f",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 5,
+    "name": "BHAM",
+    "display_name": "Bellingham",
+    "background_color": "#bcbbba",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 4,
+    "name": "BMOR",
+    "display_name": "Baltimore",
+    "background_color": "#660000",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 6,
+    "name": "BOS",
+    "display_name": "Boston",
+    "background_color": "#c72b89",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 42,
+    "name": "CAE",
+    "display_name": "Columbia",
+    "background_color": "#ff9900",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 11,
+    "name": "CBUS",
+    "display_name": "Columbus",
+    "background_color": "#ea9999",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 12,
+    "name": "CC",
+    "display_name": "Corpus Christi",
+    "background_color": "#d9d9d9",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 7,
+    "name": "CHA",
+    "display_name": "Chattanooga",
+    "background_color": "#674ea7",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 9,
+    "name": "CHI",
+    "display_name": "Chicago",
+    "background_color": "#9fc5e8",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 10,
+    "name": "CIN",
+    "display_name": "Cincinnati",
+    "background_color": "#b6d7a8",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 8,
+    "name": "CLT",
+    "display_name": "Charlotte",
+    "background_color": "#ffd966",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 13,
+    "name": "DC",
+    "display_name": "DC",
+    "background_color": "#cc0000",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 15,
+    "name": "DEN",
+    "display_name": "Denver",
+    "background_color": "#134f5c",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 14,
+    "name": "DFW",
+    "display_name": "Dallas",
+    "background_color": "#00ff00",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 16,
+    "name": "DSM",
+    "display_name": "Des Moines",
+    "background_color": "#6d9eeb",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 17,
+    "name": "EUG",
+    "display_name": "Eugene",
+    "background_color": "#f1c232",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 18,
+    "name": "FM",
+    "display_name": "Fargo/Moorhead",
+    "background_color": "#38761d",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 19,
+    "name": "HTX",
+    "display_name": "Houston",
+    "background_color": "#073763",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 41,
+    "name": "INDY",
+    "display_name": "Indianapolis",
+    "background_color": "#f4cccc",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 20,
+    "name": "JAX",
+    "display_name": "Jacksonville",
+    "background_color": "#741b47",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 21,
+    "name": "KC",
+    "display_name": "Kansas City",
+    "background_color": "#a64d79",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 23,
+    "name": "LAX",
+    "display_name": "Los Angeles",
+    "background_color": "#0000ff",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 24,
+    "name": "LOU",
+    "display_name": "Louisville",
+    "background_color": "#ad0000",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 25,
+    "name": "MAD",
+    "display_name": "Madison",
+    "background_color": "#0b5394",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 28,
+    "name": "MGW",
+    "display_name": "Morgantown",
+    "background_color": "#20124d",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 26,
+    "name": "MKE",
+    "display_name": "Milwaukee",
+    "background_color": "#ffff00",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 27,
+    "name": "MPLS",
+    "display_name": "Minneapolis",
+    "background_color": "#3c78d8",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 45,
+    "name": "NASH",
+    "display_name": "Nashville",
+    "background_color": "#cfe2f3",
+    "foreground_color": "#000000"
+  },
+  {
+    "id": 22,
+    "name": "NOX",
+    "display_name": "Knoxville",
+    "background_color": "#dd7e6b",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 29,
+    "name": "NYC",
+    "display_name": "New York",
+    "background_color": "#b4a7d6",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 30,
+    "name": "OMA",
+    "display_name": "Omaha",
+    "background_color": "#bcbbba",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 33,
+    "name": "PDX",
+    "display_name": "Portland",
+    "background_color": "#6aa84f",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 31,
+    "name": "PHL",
+    "display_name": "Philadelphia",
+    "background_color": "#004c54",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 32,
+    "name": "PHX",
+    "display_name": "Phoenix",
+    "background_color": "#b45f06",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 34,
+    "name": "RAL",
+    "display_name": "Raleigh",
+    "background_color": "#351c75",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 35,
+    "name": "SAC",
+    "display_name": "Sacramento",
+    "background_color": "#a64d79",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 38,
+    "name": "SEA",
+    "display_name": "Seattle",
+    "background_color": "#76a5af",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 37,
+    "name": "SF",
+    "display_name": "San Francisco",
+    "background_color": "#ff00ff",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 39,
+    "name": "SFL",
+    "display_name": "South Florida",
+    "background_color": "#f1c232",
+    "foreground_color": "#101010"
+  },
+  {
+    "id": 36,
+    "name": "SLC",
+    "display_name": "Salt Lake City",
+    "background_color": "#666666",
+    "foreground_color": "#efefef"
+  },
+  {
+    "id": 40,
+    "name": "STL",
+    "display_name": "St. Louis",
+    "background_color": "#b6d7a8",
+    "foreground_color": "#101010"
+  }
+]
