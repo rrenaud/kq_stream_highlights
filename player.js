@@ -1,3 +1,10 @@
+// Escape HTML special characters to prevent XSS when inserting into innerHTML.
+function esc(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+
 const chapterList = document.getElementById('chapterList');
 const currentChapterInfo = document.getElementById('currentChapterInfo');
 const timeDisplay = document.getElementById('timeDisplay');
@@ -14,6 +21,8 @@ let timeUpdateInterval;
 // Player highlight state
 let selectedPosition = null;
 let playerHighlights = [];  // Filtered events for selected position
+let playerHighlightCount = 0;
+let playerLowlightCount = 0;
 let lastHighlightIndex = -1;
 
 // Tournament user data
@@ -135,8 +144,12 @@ function onYouTubeIframeAPIReady() {
     youtubeApiReady = true;
     initializePlayer();
 }
-// Expose to window for YouTube API callback
+// Expose to window for YouTube API callback.
+// If the API loaded before this script, call initializePlayer directly.
 window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+if (window.YT && window.YT.Player) {
+    onYouTubeIframeAPIReady();
+}
 
 function onPlayerReady(event) {
     console.log('YouTube player ready');
@@ -246,10 +259,10 @@ function updateCurrentChapter() {
     // Update info panel
     if (currentChapterIndex >= 0) {
         const ch = chapters[currentChapterIndex];
-        currentChapterInfo.innerHTML = `<h3>${ch.title}</h3>
-            <span class="${ch.winner}">${ch.winner}</span> wins by ${ch.win_condition}
+        currentChapterInfo.innerHTML = `<h3>${esc(ch.title)}</h3>
+            <span class="${esc(ch.winner)}">${esc(ch.winner)}</span> wins by ${esc(ch.win_condition)}
             &nbsp;|&nbsp; ${formatTime(ch.duration)}
-            &nbsp;|&nbsp; <a href="${ch.hivemind_url}" target="_blank" style="color: #e94560;">HiveMind</a>`;
+            &nbsp;|&nbsp; <a href="${esc(ch.hivemind_url)}" target="_blank" style="color: #e94560;">HiveMind</a>`;
     }
 
     // Update time display
@@ -489,7 +502,7 @@ function updateOverlay(currentTime) {
     }
 
     const ch = chapters[currentChapterIndex];
-    if (!ch.model_timelines || !ch.map || ch.gold_on_left === undefined) {
+    if (!chapterData || !ch.model_timelines || !ch.map || ch.gold_on_left === undefined) {
         overlay.innerHTML = '';
         return;
     }
@@ -500,28 +513,13 @@ function updateOverlay(currentTime) {
         return;
     }
 
-    // Find closest timeline point with counterfactual data
-    let point = null;
-    for (const name of Object.keys(ch.model_timelines)) {
-        const timeline = ch.model_timelines[name];
-        if (!timeline || timeline.length === 0) continue;
-        if (!timeline.some(pt => pt.c)) continue;
-        point = findClosestPoint(timeline, currentTime);
-        break;
-    }
-
+    const point = findTimelinePoint(ch, currentTime, 'c');
     if (!point || !point.c) {
         overlay.innerHTML = '';
         return;
     }
 
-    // Determine gold perspective flip
-    let chapterPosition = selectedPosition;
-    if (selectedUserId && currentChapterIndex >= 0) {
-        const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
-        chapterPosition = pos ? String(pos) : null;
-    }
-    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+    const flipForGold = getFlipForGold();
 
     // Collect positioned counterfactual entries
     const positionedEntries = [];
@@ -589,6 +587,24 @@ function findClosestPoint(timeline, time) {
     return timeline[lo];
 }
 
+// Find the closest point in the first model timeline that has the given field.
+// Caches which timelines have which fields to avoid repeated .some() scans.
+function findTimelinePoint(ch, currentTime, field) {
+    if (!ch.model_timelines) return null;
+    if (!ch._timelineFields) ch._timelineFields = {};
+    for (const name of Object.keys(ch.model_timelines)) {
+        const timeline = ch.model_timelines[name];
+        if (!timeline || timeline.length === 0) continue;
+        const cacheKey = name + ':' + field;
+        if (!(cacheKey in ch._timelineFields)) {
+            ch._timelineFields[cacheKey] = timeline.some(pt => pt[field]);
+        }
+        if (!ch._timelineFields[cacheKey]) continue;
+        return findClosestPoint(timeline, currentTime);
+    }
+    return null;
+}
+
 // Update the contribution bars display
 function updateContributionBars(currentTime) {
     const container = document.getElementById('contributionBars');
@@ -605,17 +621,7 @@ function updateContributionBars(currentTime) {
         return;
     }
 
-    // Find the first model timeline that has 'c' data
-    let point = null;
-    for (const name of Object.keys(ch.model_timelines)) {
-        const timeline = ch.model_timelines[name];
-        if (!timeline || timeline.length === 0) continue;
-        // Check if this timeline has counterfactual data
-        if (!timeline.some(pt => pt.c)) continue;
-        point = findClosestPoint(timeline, currentTime);
-        break;
-    }
-
+    const point = findTimelinePoint(ch, currentTime, 'c');
     if (!point || !point.c) {
         container.style.display = 'none';
         return;
@@ -623,13 +629,7 @@ function updateContributionBars(currentTime) {
 
     container.style.display = '';
 
-    // Determine if we should flip for gold perspective
-    let chapterPosition = selectedPosition;
-    if (selectedUserId && currentChapterIndex >= 0) {
-        const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
-        chapterPosition = pos ? String(pos) : null;
-    }
-    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+    const flipForGold = getFlipForGold();
 
     // Build sorted entries
     const entries = [];
@@ -689,16 +689,7 @@ function updateEggGrid(currentTime) {
         return;
     }
 
-    // Find the first model timeline that has egg grid data
-    let point = null;
-    for (const name of Object.keys(ch.model_timelines)) {
-        const timeline = ch.model_timelines[name];
-        if (!timeline || timeline.length === 0) continue;
-        if (!timeline.some(pt => pt.eg)) continue;
-        point = findClosestPoint(timeline, currentTime);
-        break;
-    }
-
+    const point = findTimelinePoint(ch, currentTime, 'eg');
     if (!point || !point.eg) {
         container.style.display = 'none';
         return;
@@ -706,13 +697,7 @@ function updateEggGrid(currentTime) {
 
     container.style.display = '';
 
-    // Determine if we should flip for gold perspective
-    let chapterPosition = selectedPosition;
-    if (selectedUserId && currentChapterIndex >= 0) {
-        const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
-        chapterPosition = pos ? String(pos) : null;
-    }
-    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+    const flipForGold = getFlipForGold();
 
     const eg = point.eg;  // 9-element array indexed as [blue_eggs * 3 + gold_eggs]
     const ee = point.ee;  // [current_blue_eggs, current_gold_eggs]
@@ -806,16 +791,7 @@ function updateBerryGrid(currentTime) {
         return;
     }
 
-    // Find the first model timeline that has berry grid data
-    let point = null;
-    for (const name of Object.keys(ch.model_timelines)) {
-        const timeline = ch.model_timelines[name];
-        if (!timeline || timeline.length === 0) continue;
-        if (!timeline.some(pt => pt.bg)) continue;
-        point = findClosestPoint(timeline, currentTime);
-        break;
-    }
-
+    const point = findTimelinePoint(ch, currentTime, 'bg');
     if (!point || !point.bg) {
         container.style.display = 'none';
         return;
@@ -823,13 +799,7 @@ function updateBerryGrid(currentTime) {
 
     container.style.display = '';
 
-    // Determine if we should flip for gold perspective
-    let chapterPosition = selectedPosition;
-    if (selectedUserId && currentChapterIndex >= 0) {
-        const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
-        chapterPosition = pos ? String(pos) : null;
-    }
-    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+    const flipForGold = getFlipForGold();
 
     const bg = point.bg;  // 25-element array indexed as [blue_delta * 5 + gold_delta]
     const bc = point.bc;  // [current_blue_food, current_gold_food]
@@ -880,6 +850,8 @@ function updateBerryGrid(currentTime) {
 
         for (let col = 0; col < n; col++) {
             const prob = berryProbs[row][col];
+            // Delta (0,0) is always the current game state — unlike the egg grid
+            // which checks actual egg counts, berry deltas are always relative to now.
             const isCurrent = (row === 0 && col === 0);
 
             // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
@@ -993,6 +965,24 @@ function isGoldTeam(positionId) {
     return pos % 2 === 1;
 }
 
+// Get the selected player's position in a chapter (or current chapter).
+function getChapterPosition(ch) {
+    if (!ch) ch = currentChapterIndex >= 0 ? chapters[currentChapterIndex] : null;
+    if (!ch) return null;
+    let pos = selectedPosition;
+    if (selectedUserId) {
+        const p = getUserPositionInChapter(selectedUserId, ch);
+        pos = p ? String(p) : null;
+    }
+    return pos;
+}
+
+// Determine if the current perspective should be flipped to gold's viewpoint.
+function getFlipForGold(ch) {
+    const pos = getChapterPosition(ch);
+    return pos && isGoldTeam(pos);
+}
+
 // Build SVG path string from a timeline array
 function buildTimelinePath(timeline, startTime, duration, width, height, padding, flipForGold) {
     let pathD = '';
@@ -1028,13 +1018,7 @@ function renderWinProbPlot(ch, index) {
     const duration = endTime - startTime;
 
     // Get position for this chapter (may vary if user is selected)
-    let chapterPosition = selectedPosition;
-    if (selectedUserId) {
-        const pos = getUserPositionInChapter(selectedUserId, ch);
-        chapterPosition = pos ? String(pos) : null;
-    }
-
-    // Determine if we need to flip perspective for gold team
+    const chapterPosition = getChapterPosition(ch);
     const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
 
     // Find high-impact ranges for selected player
@@ -1106,11 +1090,7 @@ function renderChapters(filter = '') {
     chapterList.innerHTML = chapters
         .map((ch, i) => {
             // Calculate player's position in this chapter first (needed for filtering)
-            let chapterPosition = selectedPosition;
-            if (selectedUserId) {
-                const pos = getUserPositionInChapter(selectedUserId, ch);
-                chapterPosition = pos ? String(pos) : null;
-            }
+            const chapterPosition = getChapterPosition(ch);
 
             // Filter by selected player - skip games they're not in
             if (selectedUserId && !chapterPosition) {
@@ -1129,7 +1109,7 @@ function renderChapters(filter = '') {
             const activeClass = i === currentChapterIndex ? 'active' : '';
             const setClass = ch.is_set_start ? 'set-start' : 'in-set';
             const setLabel = ch.is_set_start && ch.match_info ?
-                `<div class="set-label"><span class="blue">${ch.match_info.blue}</span> vs <span class="gold">${ch.match_info.gold}</span></div>` : '';
+                `<div class="set-label"><span class="blue">${esc(ch.match_info.blue)}</span> vs <span class="gold">${esc(ch.match_info.gold)}</span></div>` : '';
 
             const plotHtml = renderWinProbPlot(ch, i);
 
@@ -1150,9 +1130,9 @@ function renderChapters(filter = '') {
             return `
                 <div class="chapter-item ${winnerClass} ${activeClass} ${setClass}" data-index="${i}">
                     ${setLabel}
-                    <div class="chapter-title">${ch.title}</div>
+                    <div class="chapter-title">${esc(ch.title)}</div>
                     <div class="chapter-meta">
-                        <span class="winner ${ch.winner}">${ch.winner}</span> ${ch.win_condition}
+                        <span class="winner ${esc(ch.winner)}">${esc(ch.winner)}</span> ${esc(ch.win_condition)}
                         &nbsp;|&nbsp; ${formatTime(ch.duration)}
                         ${statsHtml ? '&nbsp;|&nbsp;' + statsHtml : ''}
                     </div>
@@ -1475,19 +1455,16 @@ function updatePlayerHighlights() {
     playerHighlights.sort((a, b) => a.time - b.time);
 
     // Count highlights (good for player) vs lowlights (bad for player)
-    let highlightCount = 0;
-    let lowlightCount = 0;
+    playerHighlightCount = 0;
+    playerLowlightCount = 0;
     for (const h of playerHighlights) {
         const isGold = h.position && isGoldTeam(h.position);
         const displayDelta = isGold ? -h.delta : h.delta;
-        if (displayDelta >= 0) {
-            highlightCount++;
-        } else {
-            lowlightCount++;
-        }
+        if (displayDelta >= 0) playerHighlightCount++;
+        else playerLowlightCount++;
     }
     document.getElementById('highlightCount').innerHTML =
-        `<span class="good-prob">${highlightCount}</span> / <span class="bad-prob">${lowlightCount}</span>`;
+        `<span class="good-prob">${playerHighlightCount}</span> / <span class="bad-prob">${playerLowlightCount}</span>`;
 
     // Update debug UI
     renderHighlightDebug();
@@ -1522,16 +1499,10 @@ function renderHighlightDebug() {
         playerIcon = getPositionIconImg(selectedPosition, 20);
     }
 
-    // Count highlights vs lowlights and build items HTML
-    let highlightCount = 0;
-    let lowlightCount = 0;
     const itemsHtml = playerHighlights.map((h, idx) => {
-        // Check if player is on gold team for this specific event
         const isGold = h.position && isGoldTeam(h.position);
-        // For gold players, flip the delta since it's from blue's perspective
         const displayDelta = isGold ? -h.delta : h.delta;
         const deltaClass = displayDelta >= 0 ? 'positive' : 'negative';
-        if (displayDelta >= 0) highlightCount++; else lowlightCount++;
         const deltaStr = (displayDelta >= 0 ? '+' : '') + (displayDelta * 100).toFixed(0) + '%';
         const scoreStr = h.score ? `(${(h.score * 100).toFixed(0)})` : '';
         const valuesStr = h.values ? h.values.join(', ') : '';
@@ -1553,7 +1524,7 @@ function renderHighlightDebug() {
     }).join('');
 
     debugEl.innerHTML = `
-        <h4>${playerIcon}${playerName} - <span class="good-prob">${highlightCount}</span> / <span class="bad-prob">${lowlightCount}</span></h4>
+        <h4>${playerIcon}${esc(playerName)} - <span class="good-prob">${playerHighlightCount}</span> / <span class="bad-prob">${playerLowlightCount}</span></h4>
         ${itemsHtml}
     `;
 
