@@ -1,33 +1,192 @@
+/// <reference path="youtube.d.ts" />
+// --- Type definitions ---
+
+type MapName = 'Day' | 'Dusk' | 'Night' | 'Twilight';
+type Team = 'gold' | 'blue';
+type PositionId = string;
+
+interface AffineTransform {
+    a_x: number;
+    b_x: number;
+    a_y: number;
+    b_y: number;
+}
+
+interface QueenKill {
+    time: number;
+    victim: number;
+}
+
+interface PlayerEvent {
+    time: number;
+    delta: number;
+    type: string;
+    positions?: number[];
+    id?: number;
+    values?: string[];
+    ml_score?: number;
+}
+
+interface KillEvent {
+    killer: number;
+    victim: number;
+    time: number;
+}
+
+interface TimelinePoint {
+    t: number;
+    p: number;
+}
+
+interface ModelTimelinePoint extends TimelinePoint {
+    c?: Record<string, number>;
+    eg?: number[];
+    ee?: [number, number];
+    bg?: (number | null)[];
+    bc?: [number, number];
+    sx?: number;
+}
+
+interface MatchInfo {
+    blue: string;
+    gold: string;
+}
+
+interface Chapter {
+    title: string;
+    start_time: number;
+    end_time: number;
+    duration: number;
+    map: MapName;
+    winner: Team;
+    win_condition: string;
+    game_id: number;
+    set_number: number;
+    is_set_start: boolean;
+    match_info?: MatchInfo;
+    queen_kills?: QueenKill[];
+    player_events?: PlayerEvent[];
+    kill_events?: KillEvent[];
+    win_timeline?: TimelinePoint[];
+    model_timelines?: Record<string, ModelTimelinePoint[]>;
+    users?: Record<string, string | number>;
+    gold_on_left?: boolean;
+    hivemind_url: string;
+    _timelineFields?: Record<string, boolean>;
+}
+
+interface UserInfo {
+    name: string;
+    scene?: string;
+}
+
+interface ChapterData {
+    video_id: string | null;
+    chapters: Chapter[];
+    users: Record<string, UserInfo>;
+    game_transform?: AffineTransform;
+}
+
+interface FlatQueenKill {
+    time: number;
+    victim: number;
+    game_id: number;
+}
+
+interface PlayerHighlight {
+    time: number;
+    delta: number;
+    type: string;
+    game_id: number;
+    set_number: number;
+    event_id?: number;
+    values?: string[];
+    position: number | null;
+    ml_score?: number;
+    score?: number;
+    id?: number;
+}
+
+interface HighImpactRange {
+    start: number;
+    end: number;
+    delta: number;
+}
+
+interface KDStats {
+    kills: number;
+    deaths: number;
+}
+
+interface MaidenInfo {
+    0: string;  // type: 'maiden_speed' | 'maiden_wings'
+    1: number;  // x
+    2: number;  // y
+}
+
+interface MapStructureInfo {
+    maiden_info: [string, number, number][];
+    left_berries_centroid: [number, number];
+    right_berries_centroid: [number, number];
+    snail_center: [number, number];
+    blue_hive: [number, number];
+    gold_hive: [number, number];
+    gold_eggs_centroid: [number, number];
+}
+
+interface SpeedGates {
+    left: { gx: number; gy: number };
+    right: { gx: number; gy: number };
+}
+
+interface CalibrationClick {
+    x: number;
+    y: number;
+}
+
+interface OverlayEntry {
+    key: string;
+    delta: number;
+    rawDelta: number;
+    x: number;
+    y: number;
+}
+
+// --- End type definitions ---
+
 // Escape HTML special characters to prevent XSS when inserting into innerHTML.
-function esc(s) {
+function esc(s: string): string {
     const d = document.createElement('div');
     d.textContent = s;
     return d.innerHTML;
 }
 
-const chapterList = document.getElementById('chapterList');
-const currentChapterInfo = document.getElementById('currentChapterInfo');
-const timeDisplay = document.getElementById('timeDisplay');
-const chapterFilter = document.getElementById('chapterFilter');
-const playPauseBtn = document.getElementById('playPause');
+const chapterList = document.getElementById('chapterList')!;
+const currentChapterInfo = document.getElementById('currentChapterInfo')!;
+const timeDisplay = document.getElementById('timeDisplay')!;
+const chapterFilter = document.getElementById('chapterFilter') as HTMLInputElement;
+const playPauseBtn = document.getElementById('playPause')!;
 
-let player;
-let chapters = [];
-let queenKills = [];  // Flat list of all queen kill timestamps
+let player: YT.Player | null = null;
+let chapters: Chapter[] = [];
+let queenKills: FlatQueenKill[] = [];  // Flat list of all queen kill timestamps
 let currentChapterIndex = -1;
 let lastQueenKillIndex = -1;  // Track last navigated queen kill
-let timeUpdateInterval;
+let timeUpdateInterval: ReturnType<typeof setInterval> | undefined;
+
+// Favorite team perspective toggle: null = auto (from player selection), 'blue', 'gold'
+let favoriteTeam: 'blue' | 'gold' | null = null;
 
 // Player highlight state
-let selectedPosition = null;
-let playerHighlights = [];  // Filtered events for selected position
+let selectedPosition: PositionId | null = null;
+let playerHighlights: PlayerHighlight[] = [];  // Filtered events for selected position
 let playerHighlightCount = 0;
 let playerLowlightCount = 0;
 let lastHighlightIndex = -1;
 
 // Tournament user data
-let users = {};  // user_id -> {name, scene}
-let selectedUserId = null;  // Currently selected user
+let users: Record<string, UserInfo> = {};  // user_id -> {name, scene}
+let selectedUserId: string | null = null;  // Currently selected user
 
 // Seconds to seek before a highlight event
 const HIGHLIGHT_SEEK_BUFFER = 4.5;
@@ -43,14 +202,14 @@ let highlightModeEnabled = false;
 const HIGHLIGHT_PLAY_DURATION = 6.0;  // Seconds to play each highlight before advancing
 
 // Position names and icons for each character
-const POSITION_NAMES = {
+const POSITION_NAMES: Record<string, string> = {
     '1': 'Gold Queen', '2': 'Blue Queen',
     '3': 'Gold Stripes', '4': 'Gold Skull', '5': 'Gold Abs', '6': 'Gold Checkers',
     '7': 'Blue Stripes', '8': 'Blue Skull', '9': 'Blue Abs', '10': 'Blue Checkers'
 };
 
 // Emoji icons (for dropdowns where we can't use HTML)
-const POSITION_ICONS = {
+const POSITION_ICONS: Record<string, string> = {
     '1': '👑',   // Gold Queen
     '2': '👑',   // Blue Queen
     '3': '☰',    // Gold Stripes (trigram)
@@ -68,22 +227,25 @@ const GOLD_COLOR = '#ffc107';
 const BLUE_COLOR = '#2196f3';
 const DARK_BG = '#1a1a1a';
 
+// Temporary: 'pulse' | 'bold' — press X to toggle, remove after picking winner
+let currentCellStyle: 'pulse' | 'bold' = 'pulse';
+
 // SVG templates for each character type (using encodeURIComponent for proper encoding)
-const SVG_TEMPLATES = {
+const SVG_TEMPLATES: Record<string, (color: string) => string> = {
     // Crown for queens
-    crown: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`)}`,
+    crown: (color: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/></svg>`)}`,
     // Horizontal stripes
-    stripes: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><rect x="3" y="4" width="18" height="3" rx="1"/><rect x="3" y="10" width="18" height="3" rx="1"/><rect x="3" y="16" width="18" height="3" rx="1"/></svg>`)}`,
+    stripes: (color: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><rect x="3" y="4" width="18" height="3" rx="1"/><rect x="3" y="10" width="18" height="3" rx="1"/><rect x="3" y="16" width="18" height="3" rx="1"/></svg>`)}`,
     // Skull
-    skull: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M12 2C6.5 2 2 6.5 2 12v3.5c0 1.4 1.1 2.5 2.5 2.5H6v-3h2v4h3v-4h2v4h3v-4h2v3h1.5c1.4 0 2.5-1.1 2.5-2.5V12c0-5.5-4.5-10-10-10zm-3 12a2 2 0 110-4 2 2 0 010 4zm6 0a2 2 0 110-4 2 2 0 010 4z"/></svg>`)}`,
+    skull: (color: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><path d="M12 2C6.5 2 2 6.5 2 12v3.5c0 1.4 1.1 2.5 2.5 2.5H6v-3h2v4h3v-4h2v4h3v-4h2v3h1.5c1.4 0 2.5-1.1 2.5-2.5V12c0-5.5-4.5-10-10-10zm-3 12a2 2 0 110-4 2 2 0 010 4zm6 0a2 2 0 110-4 2 2 0 010 4z"/></svg>`)}`,
     // Abs/muscular figure
-    abs: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><ellipse cx="12" cy="5" rx="4" ry="3"/><path d="M8 9h8v13H8V9z"/><rect x="9" y="10" width="2.5" height="3" fill="${DARK_BG}"/><rect x="12.5" y="10" width="2.5" height="3" fill="${DARK_BG}"/><rect x="9" y="14" width="2.5" height="3" fill="${DARK_BG}"/><rect x="12.5" y="14" width="2.5" height="3" fill="${DARK_BG}"/><rect x="9" y="18" width="2.5" height="2.5" fill="${DARK_BG}"/><rect x="12.5" y="18" width="2.5" height="2.5" fill="${DARK_BG}"/></svg>`)}`,
+    abs: (color: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="${color}"><ellipse cx="12" cy="5" rx="4" ry="3"/><path d="M8 9h8v13H8V9z"/><rect x="9" y="10" width="2.5" height="3" fill="${DARK_BG}"/><rect x="12.5" y="10" width="2.5" height="3" fill="${DARK_BG}"/><rect x="9" y="14" width="2.5" height="3" fill="${DARK_BG}"/><rect x="12.5" y="14" width="2.5" height="3" fill="${DARK_BG}"/><rect x="9" y="18" width="2.5" height="2.5" fill="${DARK_BG}"/><rect x="12.5" y="18" width="2.5" height="2.5" fill="${DARK_BG}"/></svg>`)}`,
     // Checkerboard pattern
-    checkers: (color) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="${color}"/><rect x="0" y="0" width="6" height="6" fill="${DARK_BG}"/><rect x="12" y="0" width="6" height="6" fill="${DARK_BG}"/><rect x="6" y="6" width="6" height="6" fill="${DARK_BG}"/><rect x="18" y="6" width="6" height="6" fill="${DARK_BG}"/><rect x="0" y="12" width="6" height="6" fill="${DARK_BG}"/><rect x="12" y="12" width="6" height="6" fill="${DARK_BG}"/><rect x="6" y="18" width="6" height="6" fill="${DARK_BG}"/><rect x="18" y="18" width="6" height="6" fill="${DARK_BG}"/></svg>`)}`
+    checkers: (color: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect width="24" height="24" fill="${color}"/><rect x="0" y="0" width="6" height="6" fill="${DARK_BG}"/><rect x="12" y="0" width="6" height="6" fill="${DARK_BG}"/><rect x="6" y="6" width="6" height="6" fill="${DARK_BG}"/><rect x="18" y="6" width="6" height="6" fill="${DARK_BG}"/><rect x="0" y="12" width="6" height="6" fill="${DARK_BG}"/><rect x="12" y="12" width="6" height="6" fill="${DARK_BG}"/><rect x="6" y="18" width="6" height="6" fill="${DARK_BG}"/><rect x="18" y="18" width="6" height="6" fill="${DARK_BG}"/></svg>`)}`
 };
 
 // SVG data URLs for each position
-const POSITION_SVGS = {
+const POSITION_SVGS: Record<string, string> = {
     '1': SVG_TEMPLATES.crown(GOLD_COLOR),    // Gold Queen
     '2': SVG_TEMPLATES.crown(BLUE_COLOR),    // Blue Queen
     '3': SVG_TEMPLATES.stripes(GOLD_COLOR),  // Gold Stripes
@@ -97,13 +259,13 @@ const POSITION_SVGS = {
 };
 
 // Create an img element with the position's SVG icon
-function getPositionIconImg(pos, size = 18) {
+function getPositionIconImg(pos: string, size: number = 18): string {
     if (!POSITION_SVGS[pos]) return '';
     return `<img src="${POSITION_SVGS[pos]}" width="${size}" height="${size}" style="vertical-align: middle; margin-right: 4px;" alt="${POSITION_NAMES[pos] || 'Position'}">`;
 }
 
 // Get display string for a position (icon + name)
-function getPositionDisplay(pos, includeIcon = true, useImage = false) {
+function getPositionDisplay(pos: string, includeIcon: boolean = true, useImage: boolean = false): string {
     const name = POSITION_NAMES[pos] || `Position ${pos}`;
     if (includeIcon) {
         if (useImage && POSITION_SVGS[pos]) {
@@ -116,12 +278,12 @@ function getPositionDisplay(pos, includeIcon = true, useImage = false) {
 }
 
 // Video ID from chapters data
-let videoId = null;
-let chapterData = null;  // top-level JSON data (for game_transform etc.)
+let videoId: string | null = null;
+let chapterData: ChapterData | null = null;  // top-level JSON data (for game_transform etc.)
 let youtubeApiReady = false;
 
 // Initialize YouTube player (called when both API and chapters are ready)
-function initializePlayer() {
+function initializePlayer(): void {
     if (!youtubeApiReady || !videoId || player) return;
 
     player = new YT.Player('player', {
@@ -140,7 +302,7 @@ function initializePlayer() {
 }
 
 // Called by YouTube API when ready
-function onYouTubeIframeAPIReady() {
+function onYouTubeIframeAPIReady(): void {
     youtubeApiReady = true;
     initializePlayer();
 }
@@ -151,7 +313,7 @@ if (window.YT && window.YT.Player) {
     onYouTubeIframeAPIReady();
 }
 
-function onPlayerReady(event) {
+function onPlayerReady(event: YT.PlayerEvent): void {
     console.log('YouTube player ready');
     // Start time update interval
     timeUpdateInterval = setInterval(updateCurrentChapter, 500);
@@ -173,7 +335,7 @@ function onPlayerReady(event) {
     }
 }
 
-function onPlayerStateChange(event) {
+function onPlayerStateChange(event: YT.OnStateChangeEvent): void {
     if (event.data === YT.PlayerState.PLAYING) {
         playPauseBtn.textContent = '⏸ Pause';
     } else {
@@ -182,24 +344,24 @@ function onPlayerStateChange(event) {
 }
 
 // Get current time from YouTube player
-function getCurrentTime() {
+function getCurrentTime(): number {
     return player && player.getCurrentTime ? player.getCurrentTime() : 0;
 }
 
 // Get video duration
-function getDuration() {
+function getDuration(): number {
     return player && player.getDuration ? player.getDuration() : 0;
 }
 
 // Seek to time
-function seekTo(seconds) {
+function seekTo(seconds: number): void {
     if (player && player.seekTo) {
         player.seekTo(seconds, true);
     }
 }
 
 // Play/Pause
-function togglePlayPause() {
+function togglePlayPause(): void {
     if (!player) return;
     const state = player.getPlayerState();
     if (state === YT.PlayerState.PLAYING) {
@@ -210,7 +372,7 @@ function togglePlayPause() {
 }
 
 // Format time as M:SS or H:MM:SS
-function formatTime(seconds) {
+function formatTime(seconds: number): string {
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = Math.floor(seconds % 60);
@@ -221,7 +383,7 @@ function formatTime(seconds) {
 }
 
 // Find chapter at current time
-function findChapterAtTime(time) {
+function findChapterAtTime(time: number): number {
     for (let i = chapters.length - 1; i >= 0; i--) {
         if (time >= chapters[i].start_time) {
             return i;
@@ -231,7 +393,7 @@ function findChapterAtTime(time) {
 }
 
 // Update current chapter display
-function updateCurrentChapter() {
+function updateCurrentChapter(): void {
     const currentTime = getCurrentTime();
     const newIndex = findChapterAtTime(currentTime);
 
@@ -285,7 +447,7 @@ function updateCurrentChapter() {
 }
 
 // Counterfactual event display labels
-const CF_LABELS = {
+const CF_LABELS: Record<string, [string, string | null]> = {
     'bqk': ['Queen Kill', 'blue'],
     'gqk': ['Queen Kill', 'gold'],
     'bb': ['Berry', 'blue'],
@@ -311,7 +473,7 @@ for (let i = 0; i < 5; i++) {
 
 // Map structure data for overlay positioning (from map_structure_info.json)
 // Coordinates are in game space (1920x1080), converted to percentages for overlay
-const MAP_STRUCTURE = {
+const MAP_STRUCTURE: Record<string, MapStructureInfo> = {
     'Day': {
         maiden_info: [
             ['maiden_speed', 410, 860],
@@ -378,13 +540,13 @@ const MAP_STRUCTURE = {
 // snailX: raw pixel position of snail (from timeline point 'sx'), or null
 // cfDict: counterfactual dict (point.c) for gate ownership inference, or null
 // Returns: array of [x%, y%] positions, or null if no position available
-function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX, cfDict) {
+function getOverlayPosition(key: string, mapInfo: MapStructureInfo, goldOnLeft: boolean | undefined, transform: AffineTransform | undefined, snailX: number | undefined, cfDict: Record<string, number> | undefined): [number, number][] | null {
     if (!mapInfo) return null;
 
     // Helper: convert game coords (1920x1080) to overlay percentages,
     // using affine transform from landmark calibration if available.
     // Game uses y-up (cartesian) coordinates; flip to screen y-down.
-    function toPercent(x, y, flipX) {
+    function toPercent(x: number, y: number, flipX: boolean): [number, number] {
         const px = flipX ? (1920 - x) : x;
         const py = 1080 - y;
         if (transform) {
@@ -459,7 +621,7 @@ function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX, cfDict)
     if (key === 'bdw' || key === 'bsdw' || key === 'gdw' || key === 'gsdw') {
         const isBlue = key.startsWith('b');
         const yOff = isBlue ? -OVERLAY_LINE_HEIGHT : OVERLAY_LINE_HEIGHT;
-        const positions = [];
+        const positions: [number, number][] = [];
         mapInfo.maiden_info.forEach(([type, mx, my], idx) => {
             if (type !== 'maiden_wings') return;
             const flipKey = isBlue ? `mb${idx}` : `mg${idx}`;
@@ -474,7 +636,7 @@ function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX, cfDict)
     // Speed upgrades — at each team-controlled speed maiden
     if (key === 'bws' || key === 'gws') {
         const isBlue = key === 'bws';
-        const positions = [];
+        const positions: [number, number][] = [];
         mapInfo.maiden_info.forEach(([type, mx, my], idx) => {
             if (type !== 'maiden_speed') return;
             // Gate is team-controlled if flipping to that team is NOT in cfDict
@@ -492,7 +654,7 @@ function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX, cfDict)
 }
 
 // Update the map overlay with counterfactual bars at map positions
-function updateOverlay(currentTime) {
+function updateOverlay(currentTime: number): void {
     const overlay = document.getElementById('cfOverlay');
     if (!overlay) return;
 
@@ -519,7 +681,7 @@ function updateOverlay(currentTime) {
         return;
     }
 
-    const flipForGold = getFlipForGold();
+    const flipForGold = shouldFlipForGold();
 
     // Collect positioned counterfactual entries
     const positionedEntries = [];
@@ -569,7 +731,7 @@ function updateOverlay(currentTime) {
 }
 
 // Find the closest timeline point to a given time using binary search
-function findClosestPoint(timeline, time) {
+function findClosestPoint(timeline: ModelTimelinePoint[], time: number): ModelTimelinePoint | null {
     if (!timeline || timeline.length === 0) return null;
     let lo = 0, hi = timeline.length - 1;
     while (lo < hi) {
@@ -586,7 +748,7 @@ function findClosestPoint(timeline, time) {
 
 // Find the closest point in the first model timeline that has the given field.
 // Caches which timelines have which fields to avoid repeated .some() scans.
-function findTimelinePoint(ch, currentTime, field) {
+function findTimelinePoint(ch: Chapter, currentTime: number, field: string): ModelTimelinePoint | null {
     if (!ch.model_timelines) return null;
     if (!ch._timelineFields) ch._timelineFields = {};
     for (const name of Object.keys(ch.model_timelines)) {
@@ -594,7 +756,7 @@ function findTimelinePoint(ch, currentTime, field) {
         if (!timeline || timeline.length === 0) continue;
         const cacheKey = name + ':' + field;
         if (!(cacheKey in ch._timelineFields)) {
-            ch._timelineFields[cacheKey] = timeline.some(pt => pt[field]);
+            ch._timelineFields[cacheKey] = timeline.some(pt => (pt as unknown as Record<string, unknown>)[field]);
         }
         if (!ch._timelineFields[cacheKey]) continue;
         return findClosestPoint(timeline, currentTime);
@@ -603,9 +765,9 @@ function findTimelinePoint(ch, currentTime, field) {
 }
 
 // Update the contribution bars display
-function updateContributionBars(currentTime) {
-    const container = document.getElementById('contributionBars');
-    const content = document.getElementById('cfBarsContent');
+function updateContributionBars(currentTime: number): void {
+    const container = document.getElementById('contributionBars')!;
+    const content = document.getElementById('cfBarsContent')!;
 
     if (currentChapterIndex < 0) {
         container.style.display = 'none';
@@ -626,7 +788,7 @@ function updateContributionBars(currentTime) {
 
     container.style.display = '';
 
-    const flipForGold = getFlipForGold();
+    const flipForGold = shouldFlipForGold();
 
     // Build sorted entries
     const entries = [];
@@ -668,32 +830,127 @@ function updateContributionBars(currentTime) {
 }
 
 // Color interpolation: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low.
-function probToColor(prob) {
+function probToColor(prob: number): string {
     const r = Math.round(249 + (59 - 249) * prob);
     const g = Math.round(115 + (130 - 115) * prob);
     const b = Math.round(22 + (246 - 22) * prob);
     return `rgba(${r},${g},${b},0.9)`;
 }
 
-// Render a grid cell with contour borders and current-state highlight.
-function renderGridCell(html, prob, isCurrent, probs, row, col, nRows, nCols) {
-    const pct = Math.round(prob * 100);
-    const bgColor = probToColor(prob);
-    let borderRight = '', borderBottom = '';
-    if (col < nCols - 1 && ((prob >= 0.5) !== (probs[row][col+1] >= 0.5))) {
-        borderRight = 'border-right:2px solid #fff;';
+// Return per-edge contour border CSS for edges where the 50% boundary crosses.
+// rotate(45deg) maps CSS borders to diamond edges:
+//   CSS border-top    → upper-right diamond edge (neighbor depends on mirror)
+//   CSS border-right  → lower-right diamond edge
+//   CSS border-bottom → lower-left diamond edge
+//   CSS border-left   → upper-left diamond edge
+function contourBorderCSS(
+    probs: (number | null)[][], row: number, col: number, n: number, needsMirror: boolean
+): string {
+    const p = probs[row][col];
+    if (p === null) return '';
+    const side = p >= 0.5;
+
+    // Grid neighbors: up(row-1), down(row+1), left(col-1), right(col+1)
+    function crosses(r: number, c: number): boolean {
+        if (r < 0 || r >= n || c < 0 || c >= n) return false;
+        const np = probs[r][c];
+        if (np === null) return false;
+        return (np >= 0.5) !== side;
     }
-    if (row < nRows - 1 && ((prob >= 0.5) !== (probs[row+1][col] >= 0.5))) {
-        borderBottom = 'border-bottom:2px solid #fff;';
+
+    // In the diamond layout, dx = col - row, dy = col + row.
+    // Without mirror:
+    //   row-1 neighbor is up-right in diamond space → CSS border-top
+    //   col+1 neighbor is down-right               → CSS border-right
+    //   row+1 neighbor is down-left                 → CSS border-bottom
+    //   col-1 neighbor is up-left                   → CSS border-left
+    // With mirror (dx negated):
+    //   row-1 neighbor is up-left  → CSS border-left
+    //   col+1 neighbor is down-left → CSS border-bottom
+    //   row+1 neighbor is down-right → CSS border-right
+    //   col-1 neighbor is up-right  → CSS border-top
+    const borderStyle = '2px solid rgba(255,255,255,0.85)';
+    const parts: string[] = [];
+
+    if (!needsMirror) {
+        if (crosses(row - 1, col)) parts.push(`border-top:${borderStyle};`);
+        if (crosses(row, col + 1)) parts.push(`border-right:${borderStyle};`);
+        if (crosses(row + 1, col)) parts.push(`border-bottom:${borderStyle};`);
+        if (crosses(row, col - 1)) parts.push(`border-left:${borderStyle};`);
+    } else {
+        if (crosses(row, col - 1)) parts.push(`border-top:${borderStyle};`);
+        if (crosses(row + 1, col)) parts.push(`border-right:${borderStyle};`);
+        if (crosses(row, col + 1)) parts.push(`border-bottom:${borderStyle};`);
+        if (crosses(row - 1, col)) parts.push(`border-left:${borderStyle};`);
     }
-    const currentClass = isCurrent ? ' egg-current' : '';
-    return `<td class="${currentClass}" style="background:${bgColor};color:#fff;${borderRight}${borderBottom}">${pct}</td>`;
+
+    return parts.join('');
+}
+
+// Render a diamond-shaped grid with rotated cells.
+// probs: n*n array of probabilities (null entries are skipped).
+// currentRow/currentCol: position of the current-state cell (-1 if none).
+// needsMirror: if true, negate dx to swap left/right.
+// cellSize: size of each diamond cell in pixels.
+// fontSize: font size for the probability text.
+// leftLabel/rightLabel: labels for the left and right tips of the diamond.
+function renderDiamondGrid(
+    probs: (number | null)[][], n: number,
+    currentRow: number, currentCol: number,
+    needsMirror: boolean, cellSize: number, fontSize: number,
+    leftLabel: string, rightLabel: string
+): string {
+    const step = cellSize * Math.SQRT2 / 2;
+    const halfCell = cellSize / 2;
+    // dx = col - row (horizontal), dy = col + row (vertical)
+    // step = center-to-center distance for edge-sharing rotated squares
+    const diagSpan = 2 * n - 1;
+    const containerWidth = diagSpan * step + cellSize + 20;
+    const containerHeight = diagSpan * step + cellSize;
+    const cx = containerWidth / 2;
+    const topPad = halfCell; // offset from top
+
+    let html = `<div class="diamond-grid-container" style="width:${containerWidth}px;height:${containerHeight}px;">`;
+
+    for (let row = 0; row < n; row++) {
+        for (let col = 0; col < n; col++) {
+            const prob = probs[row][col];
+            if (prob === null || prob === undefined) continue;
+
+            let dx = col - row;
+            if (needsMirror) dx = -dx;
+            const dy = col + row;
+
+            const x = cx + dx * step - halfCell;
+            const y = topPad + dy * step - halfCell;
+
+            const pct = Math.round(prob * 100);
+            const bgColor = probToColor(prob);
+            const isCurrent = (row === currentRow && col === currentCol);
+            const currentClass = isCurrent
+                ? (currentCellStyle === 'pulse' ? ' egg-current-pulse' : ' egg-current-bold')
+                : '';
+            const contour = contourBorderCSS(probs, row, col, n, needsMirror);
+
+            html += `<div class="diamond-cell${currentClass}" style="left:${x}px;top:${y}px;width:${cellSize + 1}px;height:${cellSize + 1}px;background:${bgColor};${contour}"><span style="font-size:${fontSize}px;">${pct}</span></div>`;
+        }
+    }
+
+    // Axis labels at left and right tips of the diamond
+    const leftX = cx - (n - 0.5) * step;
+    const rightX = cx + (n - 0.5) * step;
+    const midY = topPad + (n - 1) * step;
+    html += `<span class="diamond-axis-label" style="right:${containerWidth - leftX + 4}px;top:${midY - 7}px;">${leftLabel}</span>`;
+    html += `<span class="diamond-axis-label" style="left:${rightX + 4}px;top:${midY - 7}px;">${rightLabel}</span>`;
+
+    html += '</div>';
+    return html;
 }
 
 // Update the 3x3 egg counterfactual grid
-function updateEggGrid(currentTime) {
-    const container = document.getElementById('eggGrid');
-    const content = document.getElementById('eggGridContent');
+function updateEggGrid(currentTime: number): void {
+    const container = document.getElementById('eggGrid')!;
+    const content = document.getElementById('eggGridContent')!;
 
     if (currentChapterIndex < 0) {
         container.style.display = 'none';
@@ -714,67 +971,49 @@ function updateEggGrid(currentTime) {
 
     container.style.display = '';
 
-    const flipForGold = getFlipForGold();
+    const flipForGold = shouldFlipForGold();
+    const needsMirror = !!ch.gold_on_left;
 
     const eg = point.eg;  // 9-element array indexed as [blue_eggs * 3 + gold_eggs]
     const ee = point.ee;  // [current_blue_eggs, current_gold_eggs]
 
-    // Build 3x3 table
-    // Rows: blue eggs 0,1,2 (top to bottom), Columns: gold eggs 0,1,2 (left to right)
-    let html = '<div class="egg-grid-wrapper">';
-    html += '<span class="egg-grid-axis-label row-label">' + (flipForGold ? 'Gold eggs' : 'Blue eggs') + '</span>';
-    html += '<div class="egg-grid-table-area">';
-    html += '<table>';
-
-    // Column headers
-    html += '<tr><th></th>';
-    const colLabel = flipForGold ? 'Blue' : 'Gold';
-    for (let c = 0; c < 3; c++) html += `<th>${c}</th>`;
-    html += '</tr>';
-
-    // Pre-compute probabilities for 50/50 contour detection
-    const eggProbs = [];
-    for (let row = 0; row < 3; row++) {
+    // Build 3x3 probability grid
+    // row = blue eggs, col = gold eggs (fixed orientation)
+    const n = 3;
+    const eggProbs: (number | null)[][] = [];
+    let currentRow = -1, currentCol = -1;
+    for (let row = 0; row < n; row++) {
         eggProbs[row] = [];
-        for (let col = 0; col < 3; col++) {
-            let blueEggs, goldEggs;
-            if (flipForGold) { goldEggs = row; blueEggs = col; }
-            else { blueEggs = row; goldEggs = col; }
-            const idx = blueEggs * 3 + goldEggs;
+        for (let col = 0; col < n; col++) {
+            const blueEggs = row;
+            const goldEggs = col;
+            const idx = blueEggs * n + goldEggs;
             let prob = eg[idx];
             if (flipForGold) prob = 1 - prob;
             eggProbs[row][col] = prob;
+            if (ee && blueEggs === ee[0] && goldEggs === ee[1]) {
+                currentRow = row;
+                currentCol = col;
+            }
         }
     }
 
-    for (let row = 0; row < 3; row++) {
-        html += '<tr>';
-        html += `<th>${row}</th>`;
+    // Axis labels based on spatial layout (which team is on which side of the video)
+    const leftTeam = ch.gold_on_left ? 'Gold' : 'Blue';
+    const rightTeam = ch.gold_on_left ? 'Blue' : 'Gold';
+    const leftLabel = `${leftTeam} +eggs`;
+    const rightLabel = `${rightTeam} +eggs`;
 
-        for (let col = 0; col < 3; col++) {
-            let blueEggs, goldEggs;
-            if (flipForGold) { goldEggs = row; blueEggs = col; }
-            else { blueEggs = row; goldEggs = col; }
-            const isCurrent = ee && (blueEggs === ee[0] && goldEggs === ee[1]);
-            html += renderGridCell(html, eggProbs[row][col], isCurrent, eggProbs, row, col, 3, 3);
-        }
-        html += '</tr>';
-    }
-
-    html += '</table>';
-    html += `<span class="egg-grid-axis-label">${colLabel} eggs</span>`;
-    html += '</div></div>';
-
-    content.innerHTML = html;
+    content.innerHTML = renderDiamondGrid(eggProbs, n, currentRow, currentCol, needsMirror, 60, 14, leftLabel, rightLabel);
 }
 
 const BERRY_DELTAS = [0, 1, 2, 3, 4];
 const MAX_FOOD = 12;
 
 // Update the 5x5 berry counterfactual grid
-function updateBerryGrid(currentTime) {
-    const container = document.getElementById('berryGrid');
-    const content = document.getElementById('berryGridContent');
+function updateBerryGrid(currentTime: number): void {
+    const container = document.getElementById('berryGrid')!;
+    const content = document.getElementById('berryGridContent')!;
 
     if (currentChapterIndex < 0) {
         container.style.display = 'none';
@@ -795,74 +1034,44 @@ function updateBerryGrid(currentTime) {
 
     container.style.display = '';
 
-    const flipForGold = getFlipForGold();
+    const flipForGold = shouldFlipForGold();
+    const needsMirror = !!ch.gold_on_left;
 
     const bg = point.bg;  // 25-element array indexed as [blue_delta * 5 + gold_delta]
-    const bc = point.bc;  // [current_blue_food, current_gold_food]
     const n = BERRY_DELTAS.length;
 
-    // Build 5x5 table
-    // Display order: delta=0 (current state) at top-left,
-    // highest delta (fewest berries left = close to econ win) at bottom-right.
-    // Blue-favored corner at bottom-left, gold-favored at top-right (matches egg grid).
-    // Headers show "berries left to win" = 12 - (food_count + delta)
-    let html = '<div class="egg-grid-wrapper">';
-    const rowLabel = flipForGold ? 'Gold left' : 'Blue left';
-    html += '<span class="egg-grid-axis-label row-label">' + rowLabel + '</span>';
-    html += '<div class="egg-grid-table-area">';
-    html += '<table>';
-
-    // Rows: blue berries left, most at top (delta=0) to fewest at bottom (high delta)
-    // Cols: gold berries left, most at left (delta=0) to fewest at right (high delta)
-    // Blue-favored corner: bottom-left (matches egg table)
-    const colTeamFood = bc ? (flipForGold ? bc[0] : bc[1]) : 0;
-    const rowTeamFood = bc ? (flipForGold ? bc[1] : bc[0]) : 0;
-    html += '<tr><th></th>';
-    for (let c = 0; c < n; c++) {
-        const left = MAX_FOOD - Math.min(MAX_FOOD, colTeamFood + BERRY_DELTAS[c]);
-        html += `<th>${left}</th>`;
-    }
-    html += '</tr>';
-
-    // Pre-compute probabilities for 50/50 contour detection
-    const berryProbs = [];
+    // Build n*n probability grid, skipping null entries (game-over states)
+    // row = blue delta, col = gold delta (fixed orientation)
+    const berryProbs: (number | null)[][] = [];
     for (let row = 0; row < n; row++) {
         berryProbs[row] = [];
         for (let col = 0; col < n; col++) {
-            let blueDelta, goldDelta;
-            if (flipForGold) { goldDelta = row; blueDelta = col; }
-            else { blueDelta = row; goldDelta = col; }
+            const blueDelta = row;
+            const goldDelta = col;
             const idx = blueDelta * n + goldDelta;
-            let prob = bg[idx];
-            if (flipForGold) prob = 1 - prob;
-            berryProbs[row][col] = prob;
+            const raw = bg[idx];
+            if (raw === null || raw === undefined) {
+                berryProbs[row][col] = null;
+            } else {
+                berryProbs[row][col] = flipForGold ? 1 - raw : raw;
+            }
         }
     }
 
-    for (let row = 0; row < n; row++) {
-        const rowLeft = MAX_FOOD - Math.min(MAX_FOOD, rowTeamFood + BERRY_DELTAS[row]);
-        html += '<tr>';
-        html += `<th>${rowLeft}</th>`;
+    // Delta (0,0) is always the current game state
+    const currentRow = 0, currentCol = 0;
 
-        for (let col = 0; col < n; col++) {
-            // Delta (0,0) is always the current game state — unlike the egg grid
-            // which checks actual egg counts, berry deltas are always relative to now.
-            const isCurrent = (row === 0 && col === 0);
-            html += renderGridCell(html, berryProbs[row][col], isCurrent, berryProbs, row, col, n, n);
-        }
-        html += '</tr>';
-    }
+    // Axis labels based on spatial layout (which team is on which side of the video)
+    const leftTeam = ch.gold_on_left ? 'Gold' : 'Blue';
+    const rightTeam = ch.gold_on_left ? 'Blue' : 'Gold';
+    const leftLabel = `${leftTeam} +berries`;
+    const rightLabel = `${rightTeam} +berries`;
 
-    html += '</table>';
-    const colLabel = flipForGold ? 'Blue left' : 'Gold left';
-    html += `<span class="egg-grid-axis-label">${colLabel}</span>`;
-    html += '</div></div>';
-
-    content.innerHTML = html;
+    content.innerHTML = renderDiamondGrid(berryProbs, n, currentRow, currentCol, needsMirror, 40, 11, leftLabel, rightLabel);
 }
 
 // Calculate net win probability change for a player in a chapter
-function calculateNetWinProb(ch, positionId) {
+function calculateNetWinProb(ch: Chapter, positionId: string): number | null {
     if (!positionId || !ch.player_events) return null;
     const pos = parseInt(positionId);
     let netDelta = 0;
@@ -877,7 +1086,7 @@ function calculateNetWinProb(ch, positionId) {
 }
 
 // Find high-impact time ranges for a player in a chapter
-function findHighImpactRanges(ch, positionId) {
+function findHighImpactRanges(ch: Chapter, positionId: string): HighImpactRange[] {
     if (!positionId || !ch.player_events) return [];
     const pos = parseInt(positionId);
 
@@ -889,9 +1098,9 @@ function findHighImpactRanges(ch, positionId) {
     if (playerEvents.length === 0) return [];
 
     // Cluster nearby events (within 5 seconds)
-    const ranges = [];
-    let rangeStart = null;
-    let rangeEnd = null;
+    const ranges: HighImpactRange[] = [];
+    let rangeStart: number | null = null;
+    let rangeEnd: number | null = null;
     let rangeDelta = 0;
 
     for (const evt of playerEvents) {
@@ -899,12 +1108,12 @@ function findHighImpactRanges(ch, positionId) {
             rangeStart = evt.time;
             rangeEnd = evt.time;
             rangeDelta = evt.delta;
-        } else if (evt.time - rangeEnd <= 5) {
+        } else if (evt.time - rangeEnd! <= 5) {
             rangeEnd = evt.time;
             rangeDelta += evt.delta;
         } else {
             if (Math.abs(rangeDelta) >= 0.10) {
-                ranges.push({ start: rangeStart, end: rangeEnd, delta: rangeDelta });
+                ranges.push({ start: rangeStart, end: rangeEnd!, delta: rangeDelta });
             }
             rangeStart = evt.time;
             rangeEnd = evt.time;
@@ -913,14 +1122,14 @@ function findHighImpactRanges(ch, positionId) {
     }
     // Don't forget the last range
     if (rangeStart !== null && Math.abs(rangeDelta) >= 0.10) {
-        ranges.push({ start: rangeStart, end: rangeEnd, delta: rangeDelta });
+        ranges.push({ start: rangeStart, end: rangeEnd!, delta: rangeDelta });
     }
 
     return ranges;
 }
 
 // Calculate K/D stats for a chapter and selected position
-function calculateKD(ch, positionId) {
+function calculateKD(ch: Chapter, positionId: string): KDStats | null {
     if (!positionId || !ch.kill_events) return null;
     const pos = parseInt(positionId);
     let kills = 0;
@@ -935,7 +1144,7 @@ function calculateKD(ch, positionId) {
 }
 
 // Check if a position is on the gold team
-function isGoldTeam(positionId) {
+function isGoldTeam(positionId: string): boolean {
     const pos = parseInt(positionId);
     // Gold: odd positions (1, 3, 5, 7, 9)
     // Blue: even positions (2, 4, 6, 8, 10)
@@ -943,7 +1152,7 @@ function isGoldTeam(positionId) {
 }
 
 // Get the selected player's position in a chapter (or current chapter).
-function getChapterPosition(ch) {
+function getChapterPosition(ch?: Chapter | null): string | null {
     if (!ch) ch = currentChapterIndex >= 0 ? chapters[currentChapterIndex] : null;
     if (!ch) return null;
     let pos = selectedPosition;
@@ -955,26 +1164,29 @@ function getChapterPosition(ch) {
 }
 
 // Determine if the current perspective should be flipped to gold's viewpoint.
-function getFlipForGold(ch) {
+function shouldFlipForGold(ch?: Chapter): boolean {
+    if (favoriteTeam === 'blue') return false;
+    if (favoriteTeam === 'gold') return true;
+    // Auto: use player's team
     const pos = getChapterPosition(ch);
-    return pos && isGoldTeam(pos);
+    return !!pos && isGoldTeam(pos);
 }
 
 // Flip a delta from blue's perspective based on a position.
 // Returns the delta as seen from the viewer's team.
-function perspectiveDelta(delta, position) {
-    return (position && isGoldTeam(position)) ? -delta : delta;
+function perspectiveDelta(delta: number, position: number | string | null): number {
+    return (position && isGoldTeam(String(position))) ? -delta : delta;
 }
 
 // Determine if a bar should extend rightward based on spatial layout.
-function barGoesRight(rawDelta, displayDelta, goldOnLeft) {
+function barGoesRight(rawDelta: number, displayDelta: number, goldOnLeft: boolean | undefined): boolean {
     return goldOnLeft !== undefined
         ? (rawDelta > 0) === !!goldOnLeft
         : displayDelta > 0;
 }
 
 // Build SVG path string from a timeline array
-function buildTimelinePath(timeline, startTime, duration, width, height, padding, flipForGold) {
+function buildTimelinePath(timeline: TimelinePoint[], startTime: number, duration: number, width: number, height: number, padding: number, flipForGold: boolean): string {
     let pathD = '';
     for (let i = 0; i < timeline.length; i++) {
         const pt = timeline[i];
@@ -994,7 +1206,7 @@ function buildTimelinePath(timeline, startTime, duration, width, height, padding
 const MODEL_COLORS = ['#e94560', '#5ba3ec', '#50c878', '#f5a623'];
 
 // Render win probability plot for a chapter
-function renderWinProbPlot(ch, index) {
+function renderWinProbPlot(ch: Chapter, index: number): string {
     const hasTimeline = ch.win_timeline && ch.win_timeline.length >= 2;
     const hasModels = ch.model_timelines && Object.keys(ch.model_timelines).length > 0;
     if (!hasTimeline && !hasModels) return '';
@@ -1009,7 +1221,7 @@ function renderWinProbPlot(ch, index) {
 
     // Get position for this chapter (may vary if user is selected)
     const chapterPosition = getChapterPosition(ch);
-    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+    const flipForGold = shouldFlipForGold(ch);
 
     // Find high-impact ranges for selected player
     const highImpactRanges = chapterPosition ? findHighImpactRanges(ch, chapterPosition) : [];
@@ -1028,17 +1240,17 @@ function renderWinProbPlot(ch, index) {
     let legendHtml = '';
 
     if (hasModels) {
-        const modelNames = Object.keys(ch.model_timelines);
+        const modelNames = Object.keys(ch.model_timelines!);
 
         // HiveMind baseline as gray dashed line (if available)
         if (hasTimeline) {
-            const basePathD = buildTimelinePath(ch.win_timeline, startTime, duration, width, height, padding, flipForGold);
+            const basePathD = buildTimelinePath(ch.win_timeline!, startTime, duration, width, height, padding, flipForGold);
             pathsHtml += `<path d="${basePathD}" fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,2" opacity="0.6"/>`;
         }
 
         // Model curves
         modelNames.forEach((name, idx) => {
-            const timeline = ch.model_timelines[name];
+            const timeline = ch.model_timelines![name];
             if (!timeline || timeline.length < 2) return;
             const color = MODEL_COLORS[idx % MODEL_COLORS.length];
             const pathD = buildTimelinePath(timeline, startTime, duration, width, height, padding, flipForGold);
@@ -1056,7 +1268,7 @@ function renderWinProbPlot(ch, index) {
         legendHtml = `<div style="display:flex; flex-wrap:wrap; gap:2px; margin-top:2px;">${legendItems.join('')}</div>`;
     } else {
         // Original single-curve rendering
-        const pathD = buildTimelinePath(ch.win_timeline, startTime, duration, width, height, padding, flipForGold);
+        const pathD = buildTimelinePath(ch.win_timeline!, startTime, duration, width, height, padding, flipForGold);
         pathsHtml = `<path d="${pathD}" fill="none" stroke="#888" stroke-width="1.5"/>`;
     }
 
@@ -1074,7 +1286,7 @@ function renderWinProbPlot(ch, index) {
 }
 
 // Render chapter list
-function renderChapters(filter = '') {
+function renderChapters(filter: string = ''): void {
     const filterLower = filter.toLowerCase();
 
     chapterList.innerHTML = chapters
@@ -1110,7 +1322,7 @@ function renderChapters(filter = '') {
                 const netProb = calculateNetWinProb(ch, chapterPosition);
                 if (kd) {
                     // Flip net prob for gold team (delta is from blue's perspective)
-                    const playerNetProb = isGoldTeam(chapterPosition) ? -netProb : netProb;
+                    const playerNetProb = isGoldTeam(chapterPosition) ? -netProb! : netProb;
                     const netProbStr = playerNetProb !== null ?
                         `<span class="${playerNetProb >= 0 ? 'good-prob' : 'bad-prob'}">${playerNetProb >= 0 ? '+' : ''}${(playerNetProb * 100).toFixed(0)}%</span>` : '';
                     statsHtml = `<span class="kd-stats">${kd.kills}/${kd.deaths}</span> ${netProbStr}`;
@@ -1133,20 +1345,20 @@ function renderChapters(filter = '') {
         .join('');
 
     // Add click handlers for chapter items (not on plot)
-    document.querySelectorAll('.chapter-item').forEach(el => {
+    document.querySelectorAll<HTMLElement>('.chapter-item').forEach(el => {
         el.addEventListener('click', (e) => {
             // Don't trigger if clicking on plot
-            if (e.target.closest('.win-prob-plot')) return;
-            const index = parseInt(el.dataset.index);
+            if ((e.target as HTMLElement).closest('.win-prob-plot')) return;
+            const index = parseInt(el.dataset.index!);
             jumpToChapter(index);
         });
     });
 
     // Add click handlers for plots (seek to specific time)
-    document.querySelectorAll('.win-prob-plot').forEach(plot => {
-        plot.addEventListener('click', (e) => {
+    document.querySelectorAll<HTMLElement>('.win-prob-plot').forEach(plot => {
+        plot.addEventListener('click', (e: MouseEvent) => {
             e.stopPropagation();
-            const chapterIndex = parseInt(plot.dataset.chapter);
+            const chapterIndex = parseInt(plot.dataset.chapter!);
             const ch = chapters[chapterIndex];
             const rect = plot.getBoundingClientRect();
             const clickX = (e.clientX - rect.left) / rect.width;
@@ -1158,7 +1370,7 @@ function renderChapters(filter = '') {
 }
 
 // Jump to chapter
-function jumpToChapter(index) {
+function jumpToChapter(index: number): void {
     if (index >= 0 && index < chapters.length) {
         const targetTime = chapters[index].start_time;
         console.log(`Jumping to chapter ${index}: ${chapters[index].title} at ${targetTime}s`);
@@ -1170,7 +1382,7 @@ function jumpToChapter(index) {
 }
 
 // Navigation
-function prevChapter() {
+function prevChapter(): void {
     const idx = findChapterAtTime(getCurrentTime());
     if (idx > 0) {
         jumpToChapter(idx - 1);
@@ -1179,7 +1391,7 @@ function prevChapter() {
     }
 }
 
-function nextChapter() {
+function nextChapter(): void {
     const idx = findChapterAtTime(getCurrentTime());
     if (idx < chapters.length - 1) {
         jumpToChapter(idx + 1);
@@ -1189,7 +1401,7 @@ function nextChapter() {
 }
 
 // Set navigation
-function nextSet() {
+function nextSet(): void {
     const idx = findChapterAtTime(getCurrentTime());
     for (let i = idx + 1; i < chapters.length; i++) {
         if (chapters[i].is_set_start) {
@@ -1199,7 +1411,7 @@ function nextSet() {
     }
 }
 
-function prevSet() {
+function prevSet(): void {
     const idx = findChapterAtTime(getCurrentTime());
     // If we're past the start of current set's first game, go to current set start
     const currentSetStart = chapters.findIndex((ch, i) =>
@@ -1225,7 +1437,7 @@ function prevSet() {
 }
 
 // Queen kill (egg) navigation
-function findQueenKillIndexAtTime(time) {
+function findQueenKillIndexAtTime(time: number): number {
     // Find the queen kill at or just before the given time
     for (let i = queenKills.length - 1; i >= 0; i--) {
         if (queenKills[i].time <= time + 2) {
@@ -1235,7 +1447,7 @@ function findQueenKillIndexAtTime(time) {
     return -1;
 }
 
-function nextQueenKill() {
+function nextQueenKill(): void {
     if (queenKills.length === 0) return;
 
     const currentTime = getCurrentTime();
@@ -1261,7 +1473,7 @@ function nextQueenKill() {
     }
 }
 
-function prevQueenKill() {
+function prevQueenKill(): void {
     if (queenKills.length === 0) return;
 
     const currentTime = getCurrentTime();
@@ -1297,12 +1509,12 @@ function prevQueenKill() {
 }
 
 // Player highlight functions
-function updatePlayerHighlights() {
+function updatePlayerHighlights(): void {
     playerHighlights = [];
     lastHighlightIndex = -1;
 
     // Collect events - either for selected player/position, or all high-impact events
-    let allEvents = [];
+    let allEvents: PlayerHighlight[] = [];
     let anyQueen = false;
     const noSelection = !selectedUserId && !selectedPosition;
 
@@ -1334,7 +1546,7 @@ function updatePlayerHighlights() {
                 pos = getUserPositionInChapter(selectedUserId, ch);
                 if (!pos) continue;  // User not in this chapter
             } else {
-                pos = parseInt(selectedPosition);
+                pos = parseInt(selectedPosition!);
             }
 
             if (pos === 1 || pos === 2) anyQueen = true;
@@ -1386,11 +1598,11 @@ function updatePlayerHighlights() {
     // Filter by threshold and take top events per set
     // Use lower threshold for ML-scored events (they're pre-filtered)
     const targetPerSet = 4;
-    const eventsBySet = {};
+    const eventsBySet: Record<number, PlayerHighlight[]> = {};
 
     for (const evt of allEvents) {
         const threshold = evt.ml_score !== undefined ? 0.05 : baseThreshold;
-        if (evt.score >= threshold) {
+        if (evt.score! >= threshold) {
             if (!eventsBySet[evt.set_number]) {
                 eventsBySet[evt.set_number] = [];
             }
@@ -1401,8 +1613,8 @@ function updatePlayerHighlights() {
     // Take top N per set by score, with deduplication of nearby events
     const MIN_HIGHLIGHT_GAP = 10;  // Minimum seconds between highlights
     for (const setNum in eventsBySet) {
-        eventsBySet[setNum].sort((a, b) => b.score - a.score);
-        const selected = [];
+        eventsBySet[setNum].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+        const selected: PlayerHighlight[] = [];
         for (const evt of eventsBySet[setNum]) {
             // Check if too close to an already-selected event
             const tooClose = selected.some(s => Math.abs(s.time - evt.time) < MIN_HIGHLIGHT_GAP);
@@ -1448,7 +1660,7 @@ function updatePlayerHighlights() {
         if (perspectiveDelta(h.delta, h.position) >= 0) playerHighlightCount++;
         else playerLowlightCount++;
     }
-    document.getElementById('highlightCount').innerHTML =
+    document.getElementById('highlightCount')!.innerHTML =
         `<span class="good-prob">${playerHighlightCount}</span> / <span class="bad-prob">${playerLowlightCount}</span>`;
 
     // Update debug UI
@@ -1456,8 +1668,8 @@ function updatePlayerHighlights() {
 }
 
 // Render the highlight debug panel
-function renderHighlightDebug() {
-    const debugEl = document.getElementById('highlightDebug');
+function renderHighlightDebug(): void {
+    const debugEl = document.getElementById('highlightDebug')!;
 
     if (!selectedUserId && !selectedPosition) {
         debugEl.innerHTML = '';
@@ -1513,9 +1725,9 @@ function renderHighlightDebug() {
     `;
 
     // Add click handlers
-    debugEl.querySelectorAll('.highlight-debug-item').forEach(el => {
+    debugEl.querySelectorAll<HTMLElement>('.highlight-debug-item').forEach(el => {
         el.addEventListener('click', () => {
-            const idx = parseInt(el.dataset.highlightIndex);
+            const idx = parseInt(el.dataset.highlightIndex!);
             lastHighlightIndex = idx;
             updateDebugActiveHighlight();
             seekTo(playerHighlights[idx].time - HIGHLIGHT_SEEK_BUFFER);
@@ -1525,10 +1737,10 @@ function renderHighlightDebug() {
 }
 
 // Update which debug item is marked as active
-function updateDebugActiveHighlight() {
-    const debugEl = document.getElementById('highlightDebug');
-    debugEl.querySelectorAll('.highlight-debug-item').forEach(el => {
-        const idx = parseInt(el.dataset.highlightIndex);
+function updateDebugActiveHighlight(): void {
+    const debugEl = document.getElementById('highlightDebug')!;
+    debugEl.querySelectorAll<HTMLElement>('.highlight-debug-item').forEach(el => {
+        const idx = parseInt(el.dataset.highlightIndex!);
         el.classList.toggle('active', idx === lastHighlightIndex);
     });
     // Scroll active item into view
@@ -1538,7 +1750,7 @@ function updateDebugActiveHighlight() {
     }
 }
 
-function nextHighlight() {
+function nextHighlight(): void {
     if (playerHighlights.length === 0) return;
 
     const currentTime = getCurrentTime();
@@ -1570,7 +1782,7 @@ function nextHighlight() {
     }
 }
 
-function prevHighlight() {
+function prevHighlight(): void {
     if (playerHighlights.length === 0) return;
 
     const currentTime = getCurrentTime();
@@ -1609,12 +1821,12 @@ function prevHighlight() {
 }
 
 // Toggle highlight auto-play mode
-function toggleHighlightMode() {
+function toggleHighlightMode(): void {
     highlightModeEnabled = !highlightModeEnabled;
 
     // Update button styling
-    const btn = document.getElementById('highlightModeBtn');
-    const mBtn = document.getElementById('mHighlightMode');
+    const btn = document.getElementById('highlightModeBtn')!;
+    const mBtn = document.getElementById('mHighlightMode')!;
     btn.classList.toggle('highlight-mode-active', highlightModeEnabled);
     mBtn.classList.toggle('highlight-mode-active', highlightModeEnabled);
     btn.textContent = highlightModeEnabled ? 'Stop' : 'Auto HL';
@@ -1649,7 +1861,7 @@ function toggleHighlightMode() {
 }
 
 // Check if we should auto-advance to next highlight
-function checkHighlightAutoAdvance() {
+function checkHighlightAutoAdvance(): void {
     if (!highlightModeEnabled || playerHighlights.length === 0) return;
     if (lastHighlightIndex < 0) return;
 
@@ -1671,7 +1883,7 @@ function checkHighlightAutoAdvance() {
 }
 
 // Load chapters from JSON
-function loadChaptersFromJSON(data) {
+function loadChaptersFromJSON(data: ChapterData): void {
     chapterData = data;
     chapters = data.chapters || [];
     users = data.users || {};
@@ -1694,8 +1906,8 @@ function loadChaptersFromJSON(data) {
     queenKills.sort((a, b) => a.time - b.time);
 
     // Populate player dropdowns (desktop and mobile)
-    const playerSelect = document.getElementById('playerSelect');
-    const mobilePlayerSelect = document.getElementById('mobilePlayerSelect');
+    const playerSelect = document.getElementById('playerSelect') as HTMLSelectElement;
+    const mobilePlayerSelect = document.getElementById('mobilePlayerSelect') as HTMLSelectElement;
     const sortedUsers = Object.entries(users)
         .sort((a, b) => a[1].name.toLowerCase().localeCompare(b[1].name.toLowerCase()));
 
@@ -1705,7 +1917,7 @@ function loadChaptersFromJSON(data) {
         noUsersMsg.style.color = '#888';
         noUsersMsg.style.fontStyle = 'italic';
         noUsersMsg.textContent = 'No logged in users';
-        playerSelect.parentNode.replaceChild(noUsersMsg, playerSelect);
+        playerSelect.parentNode!.replaceChild(noUsersMsg, playerSelect);
 
         // Hide mobile player selector
         mobilePlayerSelect.style.display = 'none';
@@ -1745,24 +1957,47 @@ function loadChaptersFromJSON(data) {
     initializePlayer();
 }
 
+// Cycle team perspective toggle: Auto -> Blue -> Gold -> Auto
+function cycleTeamToggle(): void {
+    if (favoriteTeam === null) favoriteTeam = 'blue';
+    else if (favoriteTeam === 'blue') favoriteTeam = 'gold';
+    else favoriteTeam = null;
+
+    const btn = document.getElementById('teamToggle')!;
+    if (favoriteTeam === null) btn.textContent = 'Team: Auto';
+    else if (favoriteTeam === 'blue') btn.textContent = 'Team: Blue';
+    else btn.textContent = 'Team: Gold';
+
+    // Force UI refresh
+    renderChapters(chapterFilter.value);
+    if (player && player.getCurrentTime) {
+        const t = player.getCurrentTime();
+        updateContributionBars(t);
+        updateEggGrid(t);
+        updateBerryGrid(t);
+        updateOverlay(t);
+    }
+}
+
 // Event listeners
-document.getElementById('prevChapter').addEventListener('click', prevChapter);
-document.getElementById('nextChapter').addEventListener('click', nextChapter);
-document.getElementById('prevSet').addEventListener('click', prevSet);
-document.getElementById('nextSet').addEventListener('click', nextSet);
-document.getElementById('prevEgg').addEventListener('click', prevQueenKill);
-document.getElementById('nextEgg').addEventListener('click', nextQueenKill);
-document.getElementById('prevHighlightBtn').addEventListener('click', prevHighlight);
-document.getElementById('nextHighlightBtn').addEventListener('click', nextHighlight);
-document.getElementById('highlightModeBtn').addEventListener('click', toggleHighlightMode);
+document.getElementById('prevChapter')!.addEventListener('click', prevChapter);
+document.getElementById('nextChapter')!.addEventListener('click', nextChapter);
+document.getElementById('prevSet')!.addEventListener('click', prevSet);
+document.getElementById('nextSet')!.addEventListener('click', nextSet);
+document.getElementById('prevEgg')!.addEventListener('click', prevQueenKill);
+document.getElementById('nextEgg')!.addEventListener('click', nextQueenKill);
+document.getElementById('prevHighlightBtn')!.addEventListener('click', prevHighlight);
+document.getElementById('nextHighlightBtn')!.addEventListener('click', nextHighlight);
+document.getElementById('highlightModeBtn')!.addEventListener('click', toggleHighlightMode);
+document.getElementById('teamToggle')!.addEventListener('click', cycleTeamToggle);
 playPauseBtn.addEventListener('click', togglePlayPause);
 
 chapterFilter.addEventListener('input', (e) => {
-    renderChapters(e.target.value);
+    renderChapters((e.target as HTMLInputElement).value);
 });
 
 // Helper: get user's position in a chapter
-function getUserPositionInChapter(userId, chapter) {
+function getUserPositionInChapter(userId: string, chapter: Chapter): number | null {
     if (!chapter.users) return null;
     for (const [pos, uid] of Object.entries(chapter.users)) {
         if (String(uid) === String(userId)) {
@@ -1773,11 +2008,14 @@ function getUserPositionInChapter(userId, chapter) {
 }
 
 // Player selector (by name) - shared handler for desktop and mobile
-function handlePlayerSelect(userId, updateUrl = true) {
+function handlePlayerSelect(userId: string, updateUrl: boolean = true): void {
     selectedUserId = userId;
+    // Reset team toggle to auto when selecting a player
+    favoriteTeam = null;
+    document.getElementById('teamToggle')!.textContent = 'Team: Auto';
     // Clear position selectors when using player selector
-    document.getElementById('positionSelect').value = '';
-    document.getElementById('mobilePositionSelect').value = '';
+    (document.getElementById('positionSelect') as HTMLSelectElement).value = '';
+    (document.getElementById('mobilePositionSelect') as HTMLSelectElement).value = '';
 
     if (selectedUserId && currentChapterIndex >= 0) {
         // Find this user's position in the current chapter
@@ -1789,7 +2027,7 @@ function handlePlayerSelect(userId, updateUrl = true) {
 
     // Update URL with player param
     if (updateUrl) {
-        const url = new URL(window.location);
+        const url = new URL(window.location.href);
         if (userId) {
             url.searchParams.set('player', userId);
         } else {
@@ -1802,66 +2040,69 @@ function handlePlayerSelect(userId, updateUrl = true) {
     renderChapters(chapterFilter.value);
 }
 
-document.getElementById('playerSelect').addEventListener('change', (e) => {
-    handlePlayerSelect(e.target.value);
+(document.getElementById('playerSelect') as HTMLSelectElement).addEventListener('change', (e) => {
+    handlePlayerSelect((e.target as HTMLSelectElement).value);
     // Sync mobile selector
-    document.getElementById('mobilePlayerSelect').value = e.target.value;
+    (document.getElementById('mobilePlayerSelect') as HTMLSelectElement).value = (e.target as HTMLSelectElement).value;
 });
 
-document.getElementById('mobilePlayerSelect').addEventListener('change', (e) => {
-    handlePlayerSelect(e.target.value);
+(document.getElementById('mobilePlayerSelect') as HTMLSelectElement).addEventListener('change', (e) => {
+    handlePlayerSelect((e.target as HTMLSelectElement).value);
     // Sync desktop selector
-    document.getElementById('playerSelect').value = e.target.value;
+    (document.getElementById('playerSelect') as HTMLSelectElement).value = (e.target as HTMLSelectElement).value;
 });
 
 // Position selector - shared handler for desktop and mobile
-function handlePositionSelect(position) {
+function handlePositionSelect(position: string): void {
     selectedPosition = position;
     selectedUserId = null;
-    document.getElementById('playerSelect').value = '';
-    document.getElementById('mobilePlayerSelect').value = '';
-    document.getElementById('positionSelect').value = position;
-    document.getElementById('mobilePositionSelect').value = position;
+    // Reset team toggle to auto when selecting a position
+    favoriteTeam = null;
+    document.getElementById('teamToggle')!.textContent = 'Team: Auto';
+    (document.getElementById('playerSelect') as HTMLSelectElement).value = '';
+    (document.getElementById('mobilePlayerSelect') as HTMLSelectElement).value = '';
+    (document.getElementById('positionSelect') as HTMLSelectElement).value = position;
+    (document.getElementById('mobilePositionSelect') as HTMLSelectElement).value = position;
     updatePlayerHighlights();
     renderChapters(chapterFilter.value);
 }
 
-document.getElementById('positionSelect').addEventListener('change', (e) => {
-    handlePositionSelect(e.target.value);
+(document.getElementById('positionSelect') as HTMLSelectElement).addEventListener('change', (e) => {
+    handlePositionSelect((e.target as HTMLSelectElement).value);
 });
 
 // Mobile controls
 let mobileControlsVisible = true;
 
-document.getElementById('mobileToggle').addEventListener('click', () => {
+document.getElementById('mobileToggle')!.addEventListener('click', () => {
     mobileControlsVisible = !mobileControlsVisible;
-    document.getElementById('mobileControls').classList.toggle('visible', mobileControlsVisible);
-    document.getElementById('mobileToggle').textContent = mobileControlsVisible ? '✕' : '☰';
+    document.getElementById('mobileControls')!.classList.toggle('visible', mobileControlsVisible);
+    document.getElementById('mobileToggle')!.textContent = mobileControlsVisible ? '✕' : '☰';
 });
 
-document.getElementById('mPrevSet').addEventListener('click', prevSet);
-document.getElementById('mNextSet').addEventListener('click', nextSet);
-document.getElementById('mPrevGame').addEventListener('click', prevChapter);
-document.getElementById('mNextGame').addEventListener('click', nextChapter);
-document.getElementById('mPrevHighlight').addEventListener('click', prevHighlight);
-document.getElementById('mNextHighlight').addEventListener('click', nextHighlight);
-document.getElementById('mHighlightMode').addEventListener('click', toggleHighlightMode);
+document.getElementById('mPrevSet')!.addEventListener('click', prevSet);
+document.getElementById('mNextSet')!.addEventListener('click', nextSet);
+document.getElementById('mPrevGame')!.addEventListener('click', prevChapter);
+document.getElementById('mNextGame')!.addEventListener('click', nextChapter);
+document.getElementById('mPrevHighlight')!.addEventListener('click', prevHighlight);
+document.getElementById('mNextHighlight')!.addEventListener('click', nextHighlight);
+document.getElementById('mHighlightMode')!.addEventListener('click', toggleHighlightMode);
 
-document.getElementById('mobilePositionSelect').addEventListener('change', (e) => {
-    handlePositionSelect(e.target.value);
+(document.getElementById('mobilePositionSelect') as HTMLSelectElement).addEventListener('change', (e) => {
+    handlePositionSelect((e.target as HTMLSelectElement).value);
 });
 
 // File loading (hidden input, kept for flexibility)
-document.getElementById('chaptersInput').addEventListener('change', (e) => {
-    const file = e.target.files[0];
+(document.getElementById('chaptersInput') as HTMLInputElement).addEventListener('change', (e) => {
+    const file = (e.target as HTMLInputElement).files![0];
     if (file) {
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
-                const data = JSON.parse(event.target.result);
+                const data = JSON.parse(event.target!.result as string);
                 loadChaptersFromJSON(data);
             } catch (err) {
-                alert('Error parsing chapters.json: ' + err.message);
+                alert('Error parsing chapters.json: ' + (err as Error).message);
             }
         };
         reader.readAsText(file);
@@ -1871,7 +2112,7 @@ document.getElementById('chaptersInput').addEventListener('change', (e) => {
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     // Ignore if typing in input
-    if (e.target.tagName === 'INPUT') return;
+    if ((e.target as HTMLElement).tagName === 'INPUT') return;
 
     switch (e.key) {
         case ' ':
@@ -1924,10 +2165,19 @@ document.addEventListener('keydown', (e) => {
         case 'A':
             toggleHighlightMode();
             break;
+        case 't':
+        case 'T':
+            cycleTeamToggle();
+            break;
+        case 'x':
+        case 'X':
+            currentCellStyle = currentCellStyle === 'pulse' ? 'bold' : 'pulse';
+            { const t = getCurrentTime(); updateEggGrid(t); updateBerryGrid(t); }
+            break;
         case '1': case '2': case '3': case '4': case '5':
         case '6': case '7': case '8': case '9': case '0':
             // Map keyboard to internal position IDs (viewer perspective)
-            const keyToPosition = {
+            const keyToPosition: Record<string, string> = {
                 '1': '10',  // Blue Checkers
                 '2': '8',   // Blue Skull
                 '3': '2',   // Blue Queen
@@ -1939,24 +2189,24 @@ document.addEventListener('keydown', (e) => {
                 '9': '5',   // Gold Abs
                 '0': '3',   // Gold Stripes
             };
-            const posSelect = document.getElementById('positionSelect');
+            const posSelect = document.getElementById('positionSelect') as HTMLSelectElement;
             posSelect.value = keyToPosition[e.key];
             selectedPosition = keyToPosition[e.key];
             updatePlayerHighlights();
             renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
             // Sync mobile selector
-            document.getElementById('mobilePositionSelect').value = selectedPosition;
+            (document.getElementById('mobilePositionSelect') as HTMLSelectElement).value = selectedPosition;
             break;
     }
 });
 
 // --- Calibration mode (landmark-based: click on speed gates) ---
-let calibrationClicks = [];
+let calibrationClicks: CalibrationClick[] = [];
 let calibrating = false;
-let calibrationGates = null;  // {left: {gx, gy}, right: {gx, gy}} in effective (flipped) coords
+let calibrationGates: SpeedGates | null = null;  // {left: {gx, gy}, right: {gx, gy}} in effective (flipped) coords
 
 // Find speed gates for the current chapter, returning effective screen coords
-function getSpeedGates(ch) {
+function getSpeedGates(ch: Chapter | null): SpeedGates | null {
     if (!ch || !ch.map) return null;
     const mapInfo = MAP_STRUCTURE[ch.map];
     if (!mapInfo) return null;
@@ -1978,12 +2228,12 @@ function getSpeedGates(ch) {
     return { left: effectiveGates[0], right: effectiveGates[effectiveGates.length - 1] };
 }
 
-document.getElementById('calibrateBtn').addEventListener('click', () => {
+document.getElementById('calibrateBtn')!.addEventListener('click', () => {
     calibrating = !calibrating;
     calibrationClicks = [];
     calibrationGates = null;
-    const btn = document.getElementById('calibrateBtn');
-    const overlay = document.getElementById('cfOverlay');
+    const btn = document.getElementById('calibrateBtn')!;
+    const overlay = document.getElementById('cfOverlay')!;
 
     if (calibrating) {
         const ch = currentChapterIndex >= 0 ? chapters[currentChapterIndex] : null;
@@ -2012,17 +2262,17 @@ document.getElementById('calibrateBtn').addEventListener('click', () => {
     }
 });
 
-document.getElementById('cfOverlay').addEventListener('click', (e) => {
+document.getElementById('cfOverlay')!.addEventListener('click', (e: MouseEvent) => {
     if (!calibrating) return;
     e.stopPropagation();
-    const rect = e.currentTarget.getBoundingClientRect();
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     const xPct = (e.clientX - rect.left) / rect.width * 100;
     const yPct = (e.clientY - rect.top) / rect.height * 100;
     calibrationClicks.push({ x: xPct, y: yPct });
-    const btn = document.getElementById('calibrateBtn');
-    const overlay = document.getElementById('cfOverlay');
+    const btn = document.getElementById('calibrateBtn')!;
+    const overlay = document.getElementById('cfOverlay')!;
 
-    function crosshairHTML(x, y) {
+    function crosshairHTML(x: number, y: number): string {
         return `<div style="position:absolute;left:${x}%;top:0;width:2px;height:100%;background:rgba(255,255,0,0.7);pointer-events:none;"></div>
             <div style="position:absolute;top:${y}%;left:0;width:100%;height:2px;background:rgba(255,255,0,0.7);pointer-events:none;"></div>
             <div style="position:absolute;left:${x}%;top:${y}%;width:16px;height:16px;border-radius:50%;background:yellow;border:2px solid red;transform:translate(-50%,-50%);pointer-events:none;z-index:999;"></div>`;
@@ -2034,8 +2284,8 @@ document.getElementById('cfOverlay').addEventListener('click', (e) => {
     } else if (calibrationClicks.length === 2) {
         const ox1 = calibrationClicks[0].x, oy1 = calibrationClicks[0].y;
         const ox2 = calibrationClicks[1].x, oy2 = calibrationClicks[1].y;
-        const gx1 = calibrationGates.left.gx, gy1 = calibrationGates.left.gy;
-        const gx2 = calibrationGates.right.gx, gy2 = calibrationGates.right.gy;
+        const gx1 = calibrationGates!.left.gx, gy1 = calibrationGates!.left.gy;
+        const gx2 = calibrationGates!.right.gx, gy2 = calibrationGates!.right.gy;
 
         // Solve affine transform: overlayX% = a_x + b_x * gameX
         const b_x = (ox2 - ox1) / (gx2 - gx1);
