@@ -550,10 +550,7 @@ function updateOverlay(currentTime) {
         const fillPct = (Math.abs(e.delta) / maxDelta) * 50; // max 50% of bar width
         const isBlueGood = e.rawDelta > 0;  // positive raw delta = good for blue
         const color = isBlueGood ? BLUE_CF : ORANGE_CF;
-        // Spatial direction: blue-good extends toward blue's side, gold-good toward gold's side
-        const goesRight = ch.gold_on_left !== undefined
-            ? (e.rawDelta > 0) === !!ch.gold_on_left   // spatial: blue-good → right when gold is left
-            : e.delta > 0;                               // fallback: use display delta
+        const goesRight = barGoesRight(e.rawDelta, e.delta, ch.gold_on_left);
         const barStyle = goesRight
             ? `left:50%;width:${fillPct}%;background:${color};`
             : `right:50%;width:${fillPct}%;background:${color};`;
@@ -647,11 +644,8 @@ function updateContributionBars(currentTime) {
     let html = '';
     for (const e of entries) {
         const pct = (Math.abs(e.delta) / maxDelta) * 50;  // max 50% of track width
-        const barClass = e.rawDelta > 0 ? 'positive' : 'negative';  // blue vs orange by raw delta
-        // Spatial direction: blue-good extends toward blue's side, gold-good toward gold's side
-        const goesRight = ch.gold_on_left !== undefined
-            ? (e.rawDelta > 0) === !!ch.gold_on_left   // spatial: blue-good → right when gold is left
-            : e.delta > 0;                               // fallback: use display delta
+        const barClass = e.rawDelta > 0 ? 'positive' : 'negative';
+        const goesRight = barGoesRight(e.rawDelta, e.delta, ch.gold_on_left);
         const barStyle = goesRight
             ? `left: 50%; width: ${pct}%;`
             : `left: ${50 - pct}%; width: ${pct}%;`;
@@ -671,6 +665,29 @@ function updateContributionBars(currentTime) {
     }
 
     content.innerHTML = html;
+}
+
+// Color interpolation: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low.
+function probToColor(prob) {
+    const r = Math.round(249 + (59 - 249) * prob);
+    const g = Math.round(115 + (130 - 115) * prob);
+    const b = Math.round(22 + (246 - 22) * prob);
+    return `rgba(${r},${g},${b},0.9)`;
+}
+
+// Render a grid cell with contour borders and current-state highlight.
+function renderGridCell(html, prob, isCurrent, probs, row, col, nRows, nCols) {
+    const pct = Math.round(prob * 100);
+    const bgColor = probToColor(prob);
+    let borderRight = '', borderBottom = '';
+    if (col < nCols - 1 && ((prob >= 0.5) !== (probs[row][col+1] >= 0.5))) {
+        borderRight = 'border-right:2px solid #fff;';
+    }
+    if (row < nRows - 1 && ((prob >= 0.5) !== (probs[row+1][col] >= 0.5))) {
+        borderBottom = 'border-bottom:2px solid #fff;';
+    }
+    const currentClass = isCurrent ? ' egg-current' : '';
+    return `<td class="${currentClass}" style="background:${bgColor};color:#fff;${borderRight}${borderBottom}">${pct}</td>`;
 }
 
 // Update the 3x3 egg counterfactual grid
@@ -735,32 +752,11 @@ function updateEggGrid(currentTime) {
         html += `<th>${row}</th>`;
 
         for (let col = 0; col < 3; col++) {
-            const prob = eggProbs[row][col];
-
-            // Check if this is the current state
             let blueEggs, goldEggs;
             if (flipForGold) { goldEggs = row; blueEggs = col; }
             else { blueEggs = row; goldEggs = col; }
-            let isCurrent = ee && (blueEggs === ee[0] && goldEggs === ee[1]);
-
-            // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
-            const pct = Math.round(prob * 100);
-            const r = Math.round(249 + (59 - 249) * prob);
-            const g = Math.round(115 + (130 - 115) * prob);
-            const b = Math.round(22 + (246 - 22) * prob);
-            const bgColor = `rgba(${r},${g},${b},0.9)`;
-
-            // 50/50 contour: thick white border where adjacent cells cross 50%
-            let borderRight = '', borderBottom = '';
-            if (col < 2 && ((prob >= 0.5) !== (eggProbs[row][col+1] >= 0.5))) {
-                borderRight = 'border-right:2px solid #fff;';
-            }
-            if (row < 2 && ((prob >= 0.5) !== (eggProbs[row+1][col] >= 0.5))) {
-                borderBottom = 'border-bottom:2px solid #fff;';
-            }
-
-            const currentClass = isCurrent ? ' egg-current' : '';
-            html += `<td class="${currentClass}" style="background:${bgColor};color:#fff;${borderRight}${borderBottom}">${pct}</td>`;
+            const isCurrent = ee && (blueEggs === ee[0] && goldEggs === ee[1]);
+            html += renderGridCell(html, eggProbs[row][col], isCurrent, eggProbs, row, col, 3, 3);
         }
         html += '</tr>';
     }
@@ -849,29 +845,10 @@ function updateBerryGrid(currentTime) {
         html += `<th>${rowLeft}</th>`;
 
         for (let col = 0; col < n; col++) {
-            const prob = berryProbs[row][col];
             // Delta (0,0) is always the current game state — unlike the egg grid
             // which checks actual egg counts, berry deltas are always relative to now.
             const isCurrent = (row === 0 && col === 0);
-
-            // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
-            const pct = Math.round(prob * 100);
-            const r = Math.round(249 + (59 - 249) * prob);
-            const g = Math.round(115 + (130 - 115) * prob);
-            const b = Math.round(22 + (246 - 22) * prob);
-            const bgColor = `rgba(${r},${g},${b},0.9)`;
-
-            // 50/50 contour: thick white border where adjacent cells cross 50%
-            let borderRight = '', borderBottom = '';
-            if (col < n-1 && ((prob >= 0.5) !== (berryProbs[row][col+1] >= 0.5))) {
-                borderRight = 'border-right:2px solid #fff;';
-            }
-            if (row < n-1 && ((prob >= 0.5) !== (berryProbs[row+1][col] >= 0.5))) {
-                borderBottom = 'border-bottom:2px solid #fff;';
-            }
-
-            const currentClass = isCurrent ? ' egg-current' : '';
-            html += `<td class="${currentClass}" style="background:${bgColor};color:#fff;${borderRight}${borderBottom}">${pct}</td>`;
+            html += renderGridCell(html, berryProbs[row][col], isCurrent, berryProbs, row, col, n, n);
         }
         html += '</tr>';
     }
@@ -981,6 +958,19 @@ function getChapterPosition(ch) {
 function getFlipForGold(ch) {
     const pos = getChapterPosition(ch);
     return pos && isGoldTeam(pos);
+}
+
+// Flip a delta from blue's perspective based on a position.
+// Returns the delta as seen from the viewer's team.
+function perspectiveDelta(delta, position) {
+    return (position && isGoldTeam(position)) ? -delta : delta;
+}
+
+// Determine if a bar should extend rightward based on spatial layout.
+function barGoesRight(rawDelta, displayDelta, goldOnLeft) {
+    return goldOnLeft !== undefined
+        ? (rawDelta > 0) === !!goldOnLeft
+        : displayDelta > 0;
 }
 
 // Build SVG path string from a timeline array
@@ -1427,9 +1417,7 @@ function updatePlayerHighlights() {
     // Check if there are any positive highlights for this player
     // If not, include their best positive move regardless of threshold
     const hasPositiveHighlight = playerHighlights.some(h => {
-        const isGold = h.position && isGoldTeam(h.position);
-        const displayDelta = isGold ? -h.delta : h.delta;
-        return displayDelta > 0;
+        return perspectiveDelta(h.delta, h.position) > 0;
     });
 
     if (!hasPositiveHighlight && allEvents.length > 0) {
@@ -1438,8 +1426,7 @@ function updatePlayerHighlights() {
         let bestPositiveDelta = 0;
 
         for (const evt of allEvents) {
-            const isGold = evt.position && isGoldTeam(evt.position);
-            const displayDelta = isGold ? -evt.delta : evt.delta;
+            const displayDelta = perspectiveDelta(evt.delta, evt.position);
             if (displayDelta > bestPositiveDelta) {
                 bestPositiveDelta = displayDelta;
                 bestPositiveMove = evt;
@@ -1458,9 +1445,7 @@ function updatePlayerHighlights() {
     playerHighlightCount = 0;
     playerLowlightCount = 0;
     for (const h of playerHighlights) {
-        const isGold = h.position && isGoldTeam(h.position);
-        const displayDelta = isGold ? -h.delta : h.delta;
-        if (displayDelta >= 0) playerHighlightCount++;
+        if (perspectiveDelta(h.delta, h.position) >= 0) playerHighlightCount++;
         else playerLowlightCount++;
     }
     document.getElementById('highlightCount').innerHTML =
@@ -1500,8 +1485,7 @@ function renderHighlightDebug() {
     }
 
     const itemsHtml = playerHighlights.map((h, idx) => {
-        const isGold = h.position && isGoldTeam(h.position);
-        const displayDelta = isGold ? -h.delta : h.delta;
+        const displayDelta = perspectiveDelta(h.delta, h.position);
         const deltaClass = displayDelta >= 0 ? 'positive' : 'negative';
         const deltaStr = (displayDelta >= 0 ? '+' : '') + (displayDelta * 100).toFixed(0) + '%';
         const scoreStr = h.score ? `(${(h.score * 100).toFixed(0)})` : '';
@@ -1830,16 +1814,20 @@ document.getElementById('mobilePlayerSelect').addEventListener('change', (e) => 
     document.getElementById('playerSelect').value = e.target.value;
 });
 
-// Position selector
-document.getElementById('positionSelect').addEventListener('change', (e) => {
-    selectedPosition = e.target.value;
-    selectedUserId = null;  // Clear user selection when using position
+// Position selector - shared handler for desktop and mobile
+function handlePositionSelect(position) {
+    selectedPosition = position;
+    selectedUserId = null;
     document.getElementById('playerSelect').value = '';
     document.getElementById('mobilePlayerSelect').value = '';
+    document.getElementById('positionSelect').value = position;
+    document.getElementById('mobilePositionSelect').value = position;
     updatePlayerHighlights();
-    renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
-    // Sync mobile selector
-    document.getElementById('mobilePositionSelect').value = selectedPosition;
+    renderChapters(chapterFilter.value);
+}
+
+document.getElementById('positionSelect').addEventListener('change', (e) => {
+    handlePositionSelect(e.target.value);
 });
 
 // Mobile controls
@@ -1860,14 +1848,7 @@ document.getElementById('mNextHighlight').addEventListener('click', nextHighligh
 document.getElementById('mHighlightMode').addEventListener('click', toggleHighlightMode);
 
 document.getElementById('mobilePositionSelect').addEventListener('change', (e) => {
-    selectedPosition = e.target.value;
-    selectedUserId = null;  // Clear user selection when using position
-    // Sync desktop selectors and clear player selectors
-    document.getElementById('positionSelect').value = selectedPosition;
-    document.getElementById('playerSelect').value = '';
-    document.getElementById('mobilePlayerSelect').value = '';
-    updatePlayerHighlights();
-    renderChapters(chapterFilter.value);
+    handlePositionSelect(e.target.value);
 });
 
 // File loading (hidden input, kept for flexibility)
