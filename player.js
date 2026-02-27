@@ -730,47 +730,52 @@ function updateEggGrid(currentTime) {
     for (let c = 0; c < 3; c++) html += `<th>${c}</th>`;
     html += '</tr>';
 
+    // Pre-compute probabilities for 50/50 contour detection
+    const eggProbs = [];
     for (let row = 0; row < 3; row++) {
-        const rowEggs = row;  // 0,1,2 top to bottom
-        html += '<tr>';
-        html += `<th>${rowEggs}</th>`;
-
+        eggProbs[row] = [];
         for (let col = 0; col < 3; col++) {
-            const colEggs = col;
-
-            // Map to array index: eg[blue_eggs * 3 + gold_eggs]
             let blueEggs, goldEggs;
-            if (flipForGold) {
-                // Rows are gold eggs (rowEggs), columns are blue eggs (colEggs)
-                goldEggs = rowEggs;
-                blueEggs = colEggs;
-            } else {
-                // Rows are blue eggs (rowEggs), columns are gold eggs (colEggs)
-                blueEggs = rowEggs;
-                goldEggs = colEggs;
-            }
-
+            if (flipForGold) { goldEggs = row; blueEggs = col; }
+            else { blueEggs = row; goldEggs = col; }
             const idx = blueEggs * 3 + goldEggs;
             let prob = eg[idx];
             if (flipForGold) prob = 1 - prob;
+            eggProbs[row][col] = prob;
+        }
+    }
+
+    for (let row = 0; row < 3; row++) {
+        html += '<tr>';
+        html += `<th>${row}</th>`;
+
+        for (let col = 0; col < 3; col++) {
+            const prob = eggProbs[row][col];
 
             // Check if this is the current state
-            let isCurrent = false;
-            if (ee) {
-                isCurrent = (blueEggs === ee[0] && goldEggs === ee[1]);
-            }
+            let blueEggs, goldEggs;
+            if (flipForGold) { goldEggs = row; blueEggs = col; }
+            else { blueEggs = row; goldEggs = col; }
+            let isCurrent = ee && (blueEggs === ee[0] && goldEggs === ee[1]);
 
             // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
-            // Matches the butterfly plot bar colors
             const pct = Math.round(prob * 100);
             const r = Math.round(249 + (59 - 249) * prob);
             const g = Math.round(115 + (130 - 115) * prob);
             const b = Math.round(22 + (246 - 22) * prob);
             const bgColor = `rgba(${r},${g},${b},0.9)`;
-            const textColor = '#fff';
+
+            // 50/50 contour: thick white border where adjacent cells cross 50%
+            let borderRight = '', borderBottom = '';
+            if (col < 2 && ((prob >= 0.5) !== (eggProbs[row][col+1] >= 0.5))) {
+                borderRight = 'border-right:2px solid #fff;';
+            }
+            if (row < 2 && ((prob >= 0.5) !== (eggProbs[row+1][col] >= 0.5))) {
+                borderBottom = 'border-bottom:2px solid #fff;';
+            }
 
             const currentClass = isCurrent ? ' egg-current' : '';
-            html += `<td class="${currentClass}" style="background:${bgColor};color:${textColor}">${pct}</td>`;
+            html += `<td class="${currentClass}" style="background:${bgColor};color:#fff;${borderRight}${borderBottom}">${pct}</td>`;
         }
         html += '</tr>';
     }
@@ -853,27 +858,28 @@ function updateBerryGrid(currentTime) {
     }
     html += '</tr>';
 
+    // Pre-compute probabilities for 50/50 contour detection
+    const berryProbs = [];
+    for (let row = 0; row < n; row++) {
+        berryProbs[row] = [];
+        for (let col = 0; col < n; col++) {
+            let blueDelta, goldDelta;
+            if (flipForGold) { goldDelta = row; blueDelta = col; }
+            else { blueDelta = row; goldDelta = col; }
+            const idx = blueDelta * n + goldDelta;
+            let prob = bg[idx];
+            if (flipForGold) prob = 1 - prob;
+            berryProbs[row][col] = prob;
+        }
+    }
+
     for (let row = 0; row < n; row++) {
         const rowLeft = MAX_FOOD - Math.min(MAX_FOOD, rowTeamFood + BERRY_DELTAS[row]);
         html += '<tr>';
         html += `<th>${rowLeft}</th>`;
 
         for (let col = 0; col < n; col++) {
-            // Map display position back to data index
-            let blueDelta, goldDelta;
-            if (flipForGold) {
-                goldDelta = row;
-                blueDelta = col;
-            } else {
-                blueDelta = row;
-                goldDelta = col;
-            }
-
-            const idx = blueDelta * n + goldDelta;
-            let prob = bg[idx];
-            if (flipForGold) prob = 1 - prob;
-
-            // Current state = delta (0,0) = top-left cell
+            const prob = berryProbs[row][col];
             const isCurrent = (row === 0 && col === 0);
 
             // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
@@ -883,8 +889,17 @@ function updateBerryGrid(currentTime) {
             const b = Math.round(22 + (246 - 22) * prob);
             const bgColor = `rgba(${r},${g},${b},0.9)`;
 
+            // 50/50 contour: thick white border where adjacent cells cross 50%
+            let borderRight = '', borderBottom = '';
+            if (col < n-1 && ((prob >= 0.5) !== (berryProbs[row][col+1] >= 0.5))) {
+                borderRight = 'border-right:2px solid #fff;';
+            }
+            if (row < n-1 && ((prob >= 0.5) !== (berryProbs[row+1][col] >= 0.5))) {
+                borderBottom = 'border-bottom:2px solid #fff;';
+            }
+
             const currentClass = isCurrent ? ' egg-current' : '';
-            html += `<td class="${currentClass}" style="background:${bgColor};color:#fff">${pct}</td>`;
+            html += `<td class="${currentClass}" style="background:${bgColor};color:#fff;${borderRight}${borderBottom}">${pct}</td>`;
         }
         html += '</tr>';
     }
