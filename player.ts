@@ -227,8 +227,6 @@ const GOLD_COLOR = '#ffc107';
 const BLUE_COLOR = '#2196f3';
 const DARK_BG = '#1a1a1a';
 
-// Temporary: 'pulse' | 'bold' — press X to toggle, remove after picking winner
-let currentCellStyle: 'pulse' | 'bold' = 'pulse';
 
 // SVG templates for each character type (using encodeURIComponent for proper encoding)
 const SVG_TEMPLATES: Record<string, (color: string) => string> = {
@@ -892,16 +890,24 @@ function contourBorderCSS(
 // currentRow/currentCol: position of the current-state cell (-1 if none).
 // needsMirror: if true, negate dx to swap left/right.
 // cellSize: size of each diamond cell in pixels.
-// fontSize: font size for the probability text.
-// leftLabel/rightLabel: labels for the left and right tips of the diamond.
-function renderDiamondGrid(
-    probs: (number | null)[][], n: number,
-    currentRow: number, currentCol: number,
-    needsMirror: boolean, cellSize: number, fontSize: number,
-    leftLabel: string, rightLabel: string,
-    flipDisplay: boolean,
-    leftEdgeLabels?: string[], rightEdgeLabels?: string[]
-): string {
+interface DiamondGridOptions {
+    probs: (number | null)[][];
+    n: number;
+    currentRow: number;
+    currentCol: number;
+    needsMirror: boolean;
+    cellSize: number;
+    fontSize: number;
+    leftLabel: string;
+    rightLabel: string;
+    flipDisplay: boolean;
+    leftEdgeLabels?: string[];
+    rightEdgeLabels?: string[];
+}
+
+function renderDiamondGrid(opts: DiamondGridOptions): string {
+    const { probs, n, currentRow, currentCol, needsMirror, cellSize, fontSize,
+            leftLabel, rightLabel, flipDisplay, leftEdgeLabels, rightEdgeLabels } = opts;
     const step = cellSize * Math.SQRT2 / 2;
     const halfCell = cellSize / 2;
     // dx = col - row (horizontal), dy = col + row (vertical)
@@ -934,9 +940,7 @@ function renderDiamondGrid(
             const pct = flipDisplay ? Math.round((1 - prob) * 100) : Math.round(prob * 100);
             const bgColor = probToColor(prob);
             const isCurrent = (row === currentRow && col === currentCol);
-            const currentClass = isCurrent
-                ? (currentCellStyle === 'pulse' ? ' egg-current-pulse' : ' egg-current-bold')
-                : '';
+            const currentClass = isCurrent ? ' egg-current-bold' : '';
             const contour = contourBorderCSS(probs, row, col, n, needsMirror);
 
             html += `<div class="diamond-cell${currentClass}" style="left:${x}px;top:${y}px;width:${cellSize + 1}px;height:${cellSize + 1}px;background:${bgColor};${contour}"><span style="font-size:${fontSize}px;">${pct}</span></div>`;
@@ -1022,9 +1026,10 @@ function updateEggGrid(currentTime: number): void {
     const leftLabel = `${leftTeam} eggs`;
     const rightLabel = `${rightTeam} eggs`;
 
-    const eggCell = (window as any)._eggCellSize || 66;
-    const eggFont = (window as any)._eggFontSize || 15;
-    content.innerHTML = renderDiamondGrid(eggProbs, n, currentRow, currentCol, needsMirror, eggCell, eggFont, leftLabel, rightLabel, flipForGold);
+    content.innerHTML = renderDiamondGrid({
+        probs: eggProbs, n, currentRow, currentCol, needsMirror,
+        cellSize: 66, fontSize: 15, leftLabel, rightLabel, flipDisplay: flipForGold,
+    });
 }
 
 const BERRY_DELTAS = [0, 1, 2, 3, 4];
@@ -1089,12 +1094,16 @@ function updateBerryGrid(currentTime: number): void {
 
     // Absolute berries remaining: MAX_FOOD - scored - delta
     const bc = point.bc || [0, 0];  // [blue_scored, gold_scored]
-    const blueLabels = BERRY_DELTAS.map(d => String(MAX_FOOD - bc[0] - d));
-    const goldLabels = BERRY_DELTAS.map(d => String(MAX_FOOD - bc[1] - d));
+    const blueLabels = BERRY_DELTAS.map(d => String(Math.max(0, MAX_FOOD - bc[0] - d)));
+    const goldLabels = BERRY_DELTAS.map(d => String(Math.max(0, MAX_FOOD - bc[1] - d)));
     const leftEdgeLabels = ch.gold_on_left ? goldLabels : blueLabels;
     const rightEdgeLabels = ch.gold_on_left ? blueLabels : goldLabels;
 
-    content.innerHTML = renderDiamondGrid(berryProbs, n, currentRow, currentCol, needsMirror, 40, 11, leftLabel, rightLabel, flipForGold, leftEdgeLabels, rightEdgeLabels);
+    content.innerHTML = renderDiamondGrid({
+        probs: berryProbs, n, currentRow, currentCol, needsMirror,
+        cellSize: 40, fontSize: 11, leftLabel, rightLabel, flipDisplay: flipForGold,
+        leftEdgeLabels, rightEdgeLabels,
+    });
 }
 
 // Calculate net win probability change for a player in a chapter
@@ -2196,13 +2205,8 @@ document.addEventListener('keydown', (e) => {
         case 'T':
             cycleTeamToggle();
             break;
-        case 'x':
-        case 'X':
-            currentCellStyle = currentCellStyle === 'pulse' ? 'bold' : 'pulse';
-            { const t = getCurrentTime(); updateEggGrid(t); updateBerryGrid(t); }
-            break;
         case '1': case '2': case '3': case '4': case '5':
-        case '6': case '7': case '8': case '9': case '0':
+        case '6': case '7': case '8': case '9': case '0': {
             // Map keyboard to internal position IDs (viewer perspective)
             const keyToPosition: Record<string, string> = {
                 '1': '10',  // Blue Checkers
@@ -2216,14 +2220,9 @@ document.addEventListener('keydown', (e) => {
                 '9': '5',   // Gold Abs
                 '0': '3',   // Gold Stripes
             };
-            const posSelect = document.getElementById('positionSelect') as HTMLSelectElement;
-            posSelect.value = keyToPosition[e.key];
-            selectedPosition = keyToPosition[e.key];
-            updatePlayerHighlights();
-            renderChapters(chapterFilter.value);  // Re-render to show player dots on plots
-            // Sync mobile selector
-            (document.getElementById('mobilePositionSelect') as HTMLSelectElement).value = selectedPosition;
+            handlePositionSelect(keyToPosition[e.key]);
             break;
+        }
     }
 });
 
