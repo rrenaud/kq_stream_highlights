@@ -26,6 +26,9 @@ const HIGHLIGHT_SEEK_BUFFER = 4.5;
 // Y-offset (in overlay %) for maiden gate overlay items
 const GATE_Y_OFFSET = 4;
 
+// Vertical spacing in game-space pixels between stacked overlay items
+const OVERLAY_LINE_HEIGHT = 20;
+
 // Highlight auto-play mode
 let highlightModeEnabled = false;
 const HIGHLIGHT_PLAY_DURATION = 6.0;  // Seconds to play each highlight before advancing
@@ -139,6 +142,22 @@ function onPlayerReady(event) {
     console.log('YouTube player ready');
     // Start time update interval
     timeUpdateInterval = setInterval(updateCurrentChapter, 500);
+
+    // Handle URL params: ?game=1714369&t=60
+    const params = new URLSearchParams(window.location.search);
+    const gameParam = params.get('game');
+    const tParam = params.get('t');
+    if (gameParam) {
+        const gid = parseInt(gameParam);
+        const idx = chapters.findIndex(ch => ch.game_id === gid);
+        if (idx >= 0) {
+            const seekTime = tParam ? chapters[idx].start_time + parseFloat(tParam) : chapters[idx].start_time;
+            seekTo(seekTime);
+            console.log(`URL nav: game ${gid} (chapter ${idx}), seeking to ${seekTime}s`);
+        }
+    } else if (tParam) {
+        seekTo(parseFloat(tParam));
+    }
 }
 
 function onPlayerStateChange(event) {
@@ -227,14 +246,10 @@ function updateCurrentChapter() {
     // Update info panel
     if (currentChapterIndex >= 0) {
         const ch = chapters[currentChapterIndex];
-        currentChapterInfo.innerHTML = `
-            <h3>${ch.title}</h3>
-            <p>
-                <span class="${ch.winner}">${ch.winner}</span> wins by ${ch.win_condition}
-                &nbsp;|&nbsp; Duration: ${formatTime(ch.duration)}
-                &nbsp;|&nbsp; <a href="${ch.hivemind_url}" target="_blank" style="color: #e94560;">HiveMind</a>
-            </p>
-        `;
+        currentChapterInfo.innerHTML = `<h3>${ch.title}</h3>
+            <span class="${ch.winner}">${ch.winner}</span> wins by ${ch.win_condition}
+            &nbsp;|&nbsp; ${formatTime(ch.duration)}
+            &nbsp;|&nbsp; <a href="${ch.hivemind_url}" target="_blank" style="color: #e94560;">HiveMind</a>`;
     }
 
     // Update time display
@@ -245,6 +260,12 @@ function updateCurrentChapter() {
 
     // Update counterfactual bars
     updateContributionBars(currentTime);
+
+    // Update egg grid
+    updateEggGrid(currentTime);
+
+    // Update berry grid
+    updateBerryGrid(currentTime);
 
     // Update map overlay
     updateOverlay(currentTime);
@@ -290,7 +311,8 @@ const MAP_STRUCTURE = {
         right_berries_centroid: [1090, 937],
         snail_center: [960, 1010],
         blue_hive: [1860, 980],
-        gold_hive: [60, 980]
+        gold_hive: [60, 980],
+        gold_eggs_centroid: [850, 899]
     },
     'Dusk': {
         maiden_info: [
@@ -304,7 +326,8 @@ const MAP_STRUCTURE = {
         right_berries_centroid: [1120, 685],
         snail_center: [960, 870],
         blue_hive: [1860, 980],
-        gold_hive: [60, 980]
+        gold_hive: [60, 980],
+        gold_eggs_centroid: [746, 532]
     },
     'Night': {
         maiden_info: [
@@ -318,7 +341,8 @@ const MAP_STRUCTURE = {
         right_berries_centroid: [1750, 96],
         snail_center: [960, 970],
         blue_hive: [1860, 980],
-        gold_hive: [60, 980]
+        gold_hive: [60, 980],
+        gold_eggs_centroid: [97, 55]
     },
     'Twilight': {
         maiden_info: [
@@ -332,13 +356,16 @@ const MAP_STRUCTURE = {
         right_berries_centroid: [1762, 322],
         snail_center: [960, 1010],
         blue_hive: [1860, 980],
-        gold_hive: [60, 980]
+        gold_hive: [60, 980],
+        gold_eggs_centroid: [164, 52]
     }
 };
 
 // Get overlay position for a counterfactual key
 // snailX: raw pixel position of snail (from timeline point 'sx'), or null
-function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX) {
+// cfDict: counterfactual dict (point.c) for gate ownership inference, or null
+// Returns: array of [x%, y%] positions, or null if no position available
+function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX, cfDict) {
     if (!mapInfo) return null;
 
     // Helper: convert game coords (1920x1080) to overlay percentages,
@@ -366,7 +393,7 @@ function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX) {
         const idx = parseInt(maidenMatch[1]);
         if (idx < mapInfo.maiden_info.length) {
             const [, mx, my] = mapInfo.maiden_info[idx];
-            return toPercent(mx, my, needsFlip);
+            return [toPercent(mx, my, needsFlip)];
         }
         return null;
     }
@@ -374,34 +401,80 @@ function getOverlayPosition(key, mapInfo, goldOnLeft, transform, snailX) {
     // Berry deposits — canonical positions (gold_on_left=True frame), x-flip handles mirroring
     if (key === 'bb') {
         const c = mapInfo.right_berries_centroid;  // blue's canonical side
-        return toPercent(c[0], c[1], needsFlip);
+        return [toPercent(c[0], c[1], needsFlip)];
     }
     if (key === 'gb') {
         const c = mapInfo.left_berries_centroid;  // gold's canonical side
-        return toPercent(c[0], c[1], needsFlip);
+        return [toPercent(c[0], c[1], needsFlip)];
     }
 
     // Snail — follows actual snail position from timeline data
+    // snail_center y is in screen-space (y-down); convert to y-up for toPercent
     if (key === 'sb' || key === 'sg') {
         const sx = (snailX != null) ? snailX : mapInfo.snail_center[0];
-        const sy = mapInfo.snail_center[1];
+        const sy = 1080 - mapInfo.snail_center[1];
         // Offset sb/sg vertically so they don't overlap
-        const yOff = key === 'sb' ? -20 : 20;
-        return toPercent(sx, sy + yOff, false);  // snailX is already in absolute coords
+        const yOff = key === 'sb' ? OVERLAY_LINE_HEIGHT : -OVERLAY_LINE_HEIGHT;
+        return [toPercent(sx, sy + yOff, false)];  // snailX is already in absolute coords
     }
 
-    // Queen kills — position near opposition's egg display in top HUD
-    // Eggs are shown in the scoreboard strip at the top of the game area
-    if (key === 'bqk') {
-        // Blue queen kill: show near blue's eggs (right side when gold_on_left, left when not)
-        return toPercent(goldOnLeft ? 1500 : 420, 50, false);
-    }
-    if (key === 'gqk') {
-        // Gold queen kill: show near gold's eggs (left side when gold_on_left, right when not)
-        return toPercent(goldOnLeft ? 420 : 1500, 50, false);
+    // Queen kills — position near team's egg display in top HUD
+    // Per-map calibrated positions; blue side derived by symmetry about x=960
+    if (key === 'bqk' || key === 'gqk') {
+        const gc = mapInfo.gold_eggs_centroid || [850, 899];
+        const blueX = 960 + (960 - gc[0]);
+        const ey = gc[1] - 45;  // shift down 45px below eggs
+        if (key === 'gqk') {
+            return [toPercent(goldOnLeft ? gc[0] : blueX, ey, false)];
+        }
+        return [toPercent(goldOnLeft ? blueX : gc[0], ey, false)];
     }
 
-    // Warrior events — no overlay position
+    // Warrior deaths — near team's hive, offset vertically between vanilla/speed
+    if (key === 'bvwd' || key === 'bswd') {
+        const h = mapInfo.blue_hive;
+        const yOff = key === 'bswd' ? OVERLAY_LINE_HEIGHT : 0;
+        return [toPercent(h[0], h[1] + yOff, needsFlip)];
+    }
+    if (key === 'gvwd' || key === 'gswd') {
+        const h = mapInfo.gold_hive;
+        const yOff = key === 'gswd' ? OVERLAY_LINE_HEIGHT : 0;
+        return [toPercent(h[0], h[1] + yOff, needsFlip)];
+    }
+
+    // Wing upgrades — at each team-controlled wings maiden
+    if (key === 'bdw' || key === 'bsdw' || key === 'gdw' || key === 'gsdw') {
+        const isBlue = key.startsWith('b');
+        const yOff = isBlue ? -OVERLAY_LINE_HEIGHT : OVERLAY_LINE_HEIGHT;
+        const positions = [];
+        mapInfo.maiden_info.forEach(([type, mx, my], idx) => {
+            if (type !== 'maiden_wings') return;
+            const flipKey = isBlue ? `mb${idx}` : `mg${idx}`;
+            const isControlled = cfDict && !(flipKey in cfDict);
+            if (isControlled) {
+                positions.push(toPercent(mx, my + yOff, needsFlip));
+            }
+        });
+        return positions.length > 0 ? positions : null;
+    }
+
+    // Speed upgrades — at each team-controlled speed maiden
+    if (key === 'bws' || key === 'gws') {
+        const isBlue = key === 'bws';
+        const positions = [];
+        mapInfo.maiden_info.forEach(([type, mx, my], idx) => {
+            if (type !== 'maiden_speed') return;
+            // Gate is team-controlled if flipping to that team is NOT in cfDict
+            // (i.e., flipping would be a no-op because it's already that team's)
+            const flipKey = isBlue ? `mb${idx}` : `mg${idx}`;
+            const isControlled = cfDict && !(flipKey in cfDict);
+            if (isControlled) {
+                positions.push(toPercent(mx, my, needsFlip));
+            }
+        });
+        return positions.length > 0 ? positions : null;
+    }
+
     return null;
 }
 
@@ -455,10 +528,12 @@ function updateOverlay(currentTime) {
     for (const [key, delta] of Object.entries(point.c)) {
         const displayDelta = flipForGold ? -delta : delta;
         if (Math.abs(displayDelta) < 0.005) continue;
-        const pos = getOverlayPosition(key, mapInfo, ch.gold_on_left, chapterData.game_transform, point.sx);
-        if (!pos) continue;
+        const positions = getOverlayPosition(key, mapInfo, ch.gold_on_left, chapterData.game_transform, point.sx, point.c);
+        if (!positions) continue;
         const isGate = /^m[bg]\d$/.test(key);
-        positionedEntries.push({ key, delta: displayDelta, rawDelta: delta, x: pos[0], y: pos[1] + (isGate ? GATE_Y_OFFSET : 0) });
+        for (const pos of positions) {
+            positionedEntries.push({ key, delta: displayDelta, rawDelta: delta, x: pos[0], y: pos[1] + (isGate ? GATE_Y_OFFSET : 0) });
+        }
     }
 
     if (positionedEntries.length === 0) {
@@ -484,7 +559,7 @@ function updateOverlay(currentTime) {
         const barStyle = goesRight
             ? `left:50%;width:${fillPct}%;background:${color};`
             : `right:50%;width:${fillPct}%;background:${color};`;
-        const pctText = `${(Math.abs(e.delta) * 100).toFixed(0)}%`;
+        const pctText = `${e.key} ${(Math.abs(e.delta) * 100).toFixed(0)}%`;
         const labelColor = isBlueGood ? '#93c5fd' : '#fdba74';
 
         html += `<div class="cf-overlay-item" style="left:${e.x}%;top:${e.y}%;">
@@ -562,7 +637,7 @@ function updateContributionBars(currentTime) {
         const displayDelta = flipForGold ? -delta : delta;
         if (Math.abs(displayDelta) < 0.005) continue;  // hide < 0.5%
         const labelInfo = CF_LABELS[key] || [key, null];
-        entries.push({ key, label: labelInfo[0], team: labelInfo[1], delta: displayDelta, rawDelta: delta });
+        entries.push({ key, label: `${key} ${labelInfo[0]}`, team: labelInfo[1], delta: displayDelta, rawDelta: delta });
     }
     entries.sort((a, b) => Math.abs(b.delta) - Math.abs(a.delta));
 
@@ -594,6 +669,230 @@ function updateContributionBars(currentTime) {
             <span class="cf-bar-value">${valueStr}</span>
         </div>`;
     }
+
+    content.innerHTML = html;
+}
+
+// Update the 3x3 egg counterfactual grid
+function updateEggGrid(currentTime) {
+    const container = document.getElementById('eggGrid');
+    const content = document.getElementById('eggGridContent');
+
+    if (currentChapterIndex < 0) {
+        container.style.display = 'none';
+        return;
+    }
+
+    const ch = chapters[currentChapterIndex];
+    if (!ch.model_timelines) {
+        container.style.display = 'none';
+        return;
+    }
+
+    // Find the first model timeline that has egg grid data
+    let point = null;
+    for (const name of Object.keys(ch.model_timelines)) {
+        const timeline = ch.model_timelines[name];
+        if (!timeline || timeline.length === 0) continue;
+        if (!timeline.some(pt => pt.eg)) continue;
+        point = findClosestPoint(timeline, currentTime);
+        break;
+    }
+
+    if (!point || !point.eg) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = '';
+
+    // Determine if we should flip for gold perspective
+    let chapterPosition = selectedPosition;
+    if (selectedUserId && currentChapterIndex >= 0) {
+        const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
+        chapterPosition = pos ? String(pos) : null;
+    }
+    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+
+    const eg = point.eg;  // 9-element array indexed as [blue_eggs * 3 + gold_eggs]
+    const ee = point.ee;  // [current_blue_eggs, current_gold_eggs]
+
+    // Build 3x3 table
+    // Rows: blue eggs 0,1,2 (top to bottom), Columns: gold eggs 0,1,2 (left to right)
+    let html = '<div class="egg-grid-wrapper">';
+    html += '<span class="egg-grid-axis-label row-label">' + (flipForGold ? 'Gold eggs' : 'Blue eggs') + '</span>';
+    html += '<div class="egg-grid-table-area">';
+    html += '<table>';
+
+    // Column headers
+    html += '<tr><th></th>';
+    const colLabel = flipForGold ? 'Blue' : 'Gold';
+    for (let c = 0; c < 3; c++) html += `<th>${c}</th>`;
+    html += '</tr>';
+
+    for (let row = 0; row < 3; row++) {
+        const rowEggs = row;  // 0,1,2 top to bottom
+        html += '<tr>';
+        html += `<th>${rowEggs}</th>`;
+
+        for (let col = 0; col < 3; col++) {
+            const colEggs = col;
+
+            // Map to array index: eg[blue_eggs * 3 + gold_eggs]
+            let blueEggs, goldEggs;
+            if (flipForGold) {
+                // Rows are gold eggs (rowEggs), columns are blue eggs (colEggs)
+                goldEggs = rowEggs;
+                blueEggs = colEggs;
+            } else {
+                // Rows are blue eggs (rowEggs), columns are gold eggs (colEggs)
+                blueEggs = rowEggs;
+                goldEggs = colEggs;
+            }
+
+            const idx = blueEggs * 3 + goldEggs;
+            let prob = eg[idx];
+            if (flipForGold) prob = 1 - prob;
+
+            // Check if this is the current state
+            let isCurrent = false;
+            if (ee) {
+                isCurrent = (blueEggs === ee[0] && goldEggs === ee[1]);
+            }
+
+            // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
+            // Matches the butterfly plot bar colors
+            const pct = Math.round(prob * 100);
+            const r = Math.round(249 + (59 - 249) * prob);
+            const g = Math.round(115 + (130 - 115) * prob);
+            const b = Math.round(22 + (246 - 22) * prob);
+            const bgColor = `rgba(${r},${g},${b},0.9)`;
+            const textColor = '#fff';
+
+            const currentClass = isCurrent ? ' egg-current' : '';
+            html += `<td class="${currentClass}" style="background:${bgColor};color:${textColor}">${pct}</td>`;
+        }
+        html += '</tr>';
+    }
+
+    html += '</table>';
+    html += `<span class="egg-grid-axis-label">${colLabel} eggs</span>`;
+    html += '</div></div>';
+
+    content.innerHTML = html;
+}
+
+const BERRY_DELTAS = [0, 1, 2, 3, 4];
+const MAX_FOOD = 12;
+
+// Update the 5x5 berry counterfactual grid
+function updateBerryGrid(currentTime) {
+    const container = document.getElementById('berryGrid');
+    const content = document.getElementById('berryGridContent');
+
+    if (currentChapterIndex < 0) {
+        container.style.display = 'none';
+        return;
+    }
+
+    const ch = chapters[currentChapterIndex];
+    if (!ch.model_timelines) {
+        container.style.display = 'none';
+        return;
+    }
+
+    // Find the first model timeline that has berry grid data
+    let point = null;
+    for (const name of Object.keys(ch.model_timelines)) {
+        const timeline = ch.model_timelines[name];
+        if (!timeline || timeline.length === 0) continue;
+        if (!timeline.some(pt => pt.bg)) continue;
+        point = findClosestPoint(timeline, currentTime);
+        break;
+    }
+
+    if (!point || !point.bg) {
+        container.style.display = 'none';
+        return;
+    }
+
+    container.style.display = '';
+
+    // Determine if we should flip for gold perspective
+    let chapterPosition = selectedPosition;
+    if (selectedUserId && currentChapterIndex >= 0) {
+        const pos = getUserPositionInChapter(selectedUserId, chapters[currentChapterIndex]);
+        chapterPosition = pos ? String(pos) : null;
+    }
+    const flipForGold = chapterPosition && isGoldTeam(chapterPosition);
+
+    const bg = point.bg;  // 25-element array indexed as [blue_delta * 5 + gold_delta]
+    const bc = point.bc;  // [current_blue_food, current_gold_food]
+    const n = BERRY_DELTAS.length;
+
+    // Build 5x5 table
+    // Display order: delta=0 (current state) at top-left,
+    // highest delta (fewest berries left = close to econ win) at bottom-right.
+    // Blue-favored corner at bottom-left, gold-favored at top-right (matches egg grid).
+    // Headers show "berries left to win" = 12 - (food_count + delta)
+    let html = '<div class="egg-grid-wrapper">';
+    const rowLabel = flipForGold ? 'Gold left' : 'Blue left';
+    html += '<span class="egg-grid-axis-label row-label">' + rowLabel + '</span>';
+    html += '<div class="egg-grid-table-area">';
+    html += '<table>';
+
+    // Rows: blue berries left, most at top (delta=0) to fewest at bottom (high delta)
+    // Cols: gold berries left, most at left (delta=0) to fewest at right (high delta)
+    // Blue-favored corner: bottom-left (matches egg table)
+    const colTeamFood = bc ? (flipForGold ? bc[0] : bc[1]) : 0;
+    const rowTeamFood = bc ? (flipForGold ? bc[1] : bc[0]) : 0;
+    html += '<tr><th></th>';
+    for (let c = 0; c < n; c++) {
+        const left = MAX_FOOD - Math.min(MAX_FOOD, colTeamFood + BERRY_DELTAS[c]);
+        html += `<th>${left}</th>`;
+    }
+    html += '</tr>';
+
+    for (let row = 0; row < n; row++) {
+        const rowLeft = MAX_FOOD - Math.min(MAX_FOOD, rowTeamFood + BERRY_DELTAS[row]);
+        html += '<tr>';
+        html += `<th>${rowLeft}</th>`;
+
+        for (let col = 0; col < n; col++) {
+            // Map display position back to data index
+            let blueDelta, goldDelta;
+            if (flipForGold) {
+                goldDelta = row;
+                blueDelta = col;
+            } else {
+                blueDelta = row;
+                goldDelta = col;
+            }
+
+            const idx = blueDelta * n + goldDelta;
+            let prob = bg[idx];
+            if (flipForGold) prob = 1 - prob;
+
+            // Current state = delta (0,0) = top-left cell
+            const isCurrent = (row === 0 && col === 0);
+
+            // Color: blue rgba(59,130,246) for high prob, orange rgba(249,115,22) for low
+            const pct = Math.round(prob * 100);
+            const r = Math.round(249 + (59 - 249) * prob);
+            const g = Math.round(115 + (130 - 115) * prob);
+            const b = Math.round(22 + (246 - 22) * prob);
+            const bgColor = `rgba(${r},${g},${b},0.9)`;
+
+            const currentClass = isCurrent ? ' egg-current' : '';
+            html += `<td class="${currentClass}" style="background:${bgColor};color:#fff">${pct}</td>`;
+        }
+        html += '</tr>';
+    }
+
+    html += '</table>';
+    const colLabel = flipForGold ? 'Blue left' : 'Gold left';
+    html += `<span class="egg-grid-axis-label">${colLabel}</span>`;
+    html += '</div></div>';
 
     content.innerHTML = html;
 }
