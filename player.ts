@@ -898,19 +898,26 @@ function renderDiamondGrid(
     probs: (number | null)[][], n: number,
     currentRow: number, currentCol: number,
     needsMirror: boolean, cellSize: number, fontSize: number,
-    leftLabel: string, rightLabel: string
+    leftLabel: string, rightLabel: string,
+    flipDisplay: boolean,
+    leftEdgeLabels?: string[], rightEdgeLabels?: string[]
 ): string {
     const step = cellSize * Math.SQRT2 / 2;
     const halfCell = cellSize / 2;
     // dx = col - row (horizontal), dy = col + row (vertical)
     // step = center-to-center distance for edge-sharing rotated squares
     const diagSpan = 2 * n - 1;
+    const titleHeight = 16;
     const containerWidth = diagSpan * step + cellSize + 20;
-    const containerHeight = diagSpan * step + cellSize;
+    const containerHeight = titleHeight + diagSpan * step + cellSize;
     const cx = containerWidth / 2;
-    const topPad = halfCell; // offset from top
+    const topPad = halfCell + titleHeight; // offset from top, leaving room for titles
 
     let html = `<div class="diamond-grid-container" style="width:${containerWidth}px;height:${containerHeight}px;">`;
+
+    // Team name titles at top-left and top-right
+    html += `<span class="diamond-axis-label" style="left:0;top:0;">${leftLabel}</span>`;
+    html += `<span class="diamond-axis-label" style="right:0;top:0;">${rightLabel}</span>`;
 
     for (let row = 0; row < n; row++) {
         for (let col = 0; col < n; col++) {
@@ -924,7 +931,7 @@ function renderDiamondGrid(
             const x = cx + dx * step - halfCell;
             const y = topPad + dy * step - halfCell;
 
-            const pct = Math.round(prob * 100);
+            const pct = flipDisplay ? Math.round((1 - prob) * 100) : Math.round(prob * 100);
             const bgColor = probToColor(prob);
             const isCurrent = (row === currentRow && col === currentCol);
             const currentClass = isCurrent
@@ -936,12 +943,24 @@ function renderDiamondGrid(
         }
     }
 
-    // Axis labels at left and right tips of the diamond
-    const leftX = cx - (n - 0.5) * step;
-    const rightX = cx + (n - 0.5) * step;
-    const midY = topPad + (n - 1) * step;
-    html += `<span class="diamond-axis-label" style="right:${containerWidth - leftX + 4}px;top:${midY - 7}px;">${leftLabel}</span>`;
-    html += `<span class="diamond-axis-label" style="left:${rightX + 4}px;top:${midY - 7}px;">${rightLabel}</span>`;
+    // Per-cell labels along left and right diagonal edges, aligned with cell centers
+    const tickGap = 4;
+    const tickFontSize = Math.max(9, fontSize - 2);
+    // Offset perpendicular to each edge (upper-left for left edge, upper-right for right)
+    const perpDist = (halfCell + tickGap) / Math.SQRT2;
+    for (let i = 0; i < n; i++) {
+        const cellCY = topPad + i * step;
+        const leftText = leftEdgeLabels ? leftEdgeLabels[i] : String(i);
+        const rightText = rightEdgeLabels ? rightEdgeLabels[i] : String(i);
+        // Left edge: offset upper-left from cell center
+        const lx = cx - i * step - perpDist;
+        const ly = cellCY - perpDist;
+        html += `<span class="diamond-axis-label" style="right:${containerWidth - lx}px;top:${ly}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${leftText}</span>`;
+        // Right edge: offset upper-right from cell center
+        const rx = cx + i * step + perpDist;
+        const ry = cellCY - perpDist;
+        html += `<span class="diamond-axis-label" style="left:${rx}px;top:${ry}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${rightText}</span>`;
+    }
 
     html += '</div>';
     return html;
@@ -988,8 +1007,7 @@ function updateEggGrid(currentTime: number): void {
             const blueEggs = row;
             const goldEggs = col;
             const idx = blueEggs * n + goldEggs;
-            let prob = eg[idx];
-            if (flipForGold) prob = 1 - prob;
+            const prob = eg[idx];
             eggProbs[row][col] = prob;
             if (ee && blueEggs === ee[0] && goldEggs === ee[1]) {
                 currentRow = row;
@@ -1001,10 +1019,12 @@ function updateEggGrid(currentTime: number): void {
     // Axis labels based on spatial layout (which team is on which side of the video)
     const leftTeam = ch.gold_on_left ? 'Gold' : 'Blue';
     const rightTeam = ch.gold_on_left ? 'Blue' : 'Gold';
-    const leftLabel = `${leftTeam} +eggs`;
-    const rightLabel = `${rightTeam} +eggs`;
+    const leftLabel = `${leftTeam} eggs`;
+    const rightLabel = `${rightTeam} eggs`;
 
-    content.innerHTML = renderDiamondGrid(eggProbs, n, currentRow, currentCol, needsMirror, 60, 14, leftLabel, rightLabel);
+    const eggCell = (window as any)._eggCellSize || 66;
+    const eggFont = (window as any)._eggFontSize || 15;
+    content.innerHTML = renderDiamondGrid(eggProbs, n, currentRow, currentCol, needsMirror, eggCell, eggFont, leftLabel, rightLabel, flipForGold);
 }
 
 const BERRY_DELTAS = [0, 1, 2, 3, 4];
@@ -1053,7 +1073,7 @@ function updateBerryGrid(currentTime: number): void {
             if (raw === null || raw === undefined) {
                 berryProbs[row][col] = null;
             } else {
-                berryProbs[row][col] = flipForGold ? 1 - raw : raw;
+                berryProbs[row][col] = raw;
             }
         }
     }
@@ -1064,10 +1084,17 @@ function updateBerryGrid(currentTime: number): void {
     // Axis labels based on spatial layout (which team is on which side of the video)
     const leftTeam = ch.gold_on_left ? 'Gold' : 'Blue';
     const rightTeam = ch.gold_on_left ? 'Blue' : 'Gold';
-    const leftLabel = `${leftTeam} +berries`;
-    const rightLabel = `${rightTeam} +berries`;
+    const leftLabel = `${leftTeam} berries left`;
+    const rightLabel = `${rightTeam} berries left`;
 
-    content.innerHTML = renderDiamondGrid(berryProbs, n, currentRow, currentCol, needsMirror, 40, 11, leftLabel, rightLabel);
+    // Absolute berries remaining: MAX_FOOD - scored - delta
+    const bc = point.bc || [0, 0];  // [blue_scored, gold_scored]
+    const blueLabels = BERRY_DELTAS.map(d => String(MAX_FOOD - bc[0] - d));
+    const goldLabels = BERRY_DELTAS.map(d => String(MAX_FOOD - bc[1] - d));
+    const leftEdgeLabels = ch.gold_on_left ? goldLabels : blueLabels;
+    const rightEdgeLabels = ch.gold_on_left ? blueLabels : goldLabels;
+
+    content.innerHTML = renderDiamondGrid(berryProbs, n, currentRow, currentCol, needsMirror, 40, 11, leftLabel, rightLabel, flipForGold, leftEdgeLabels, rightEdgeLabels);
 }
 
 // Calculate net win probability change for a player in a chapter
