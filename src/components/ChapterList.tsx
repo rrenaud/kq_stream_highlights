@@ -13,7 +13,7 @@ interface ChapterListProps {
     videos?: Record<string, VideoSource>;
     cabFilter?: string | null;
     onJumpToChapter: (index: number) => void;
-    onSeek: (time: number) => void;
+    onSeek: (time: number, videoSource?: string) => void;
 }
 
 export function ChapterList({ chapters, currentChapterIndex, selectedPosition, selectedUserId, favoriteTeam, filter, videos, cabFilter, onJumpToChapter, onSeek }: ChapterListProps) {

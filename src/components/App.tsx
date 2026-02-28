@@ -280,15 +280,32 @@ export function App() {
         jumpToChapter(index);
     }
 
-    function handleSeek(time: number) {
+    function seekWithVideoSwitch(time: number, videoSource?: string) {
+        if (videoSource) {
+            const vs = videosSignal.value;
+            if (vs[videoSource]) {
+                currentVideoSource.value = videoSource;
+                const targetId = vs[videoSource].video_id;
+                const p = ytPlayer.value;
+                if (p && targetId !== videoId.value) {
+                    videoId.value = targetId;
+                    p.loadVideoById(targetId, time);
+                    return;
+                }
+            }
+        }
         seekTo(time);
         if (ytPlayer.value) ytPlayer.value.playVideo();
     }
 
+    function handleSeek(time: number, videoSource?: string) {
+        seekWithVideoSwitch(time, videoSource);
+    }
+
     function handleHighlightClick(index: number) {
+        const hl = playerHighlights.value[index];
         lastHighlightIndex.value = index;
-        seekTo(playerHighlights.value[index].time - HIGHLIGHT_SEEK_BUFFER);
-        if (ytPlayer.value) ytPlayer.value.playVideo();
+        seekWithVideoSwitch(hl.time - HIGHLIGHT_SEEK_BUFFER, hl.video_source);
     }
 
     // --- Calibration ---

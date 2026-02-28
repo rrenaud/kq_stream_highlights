@@ -137,7 +137,7 @@ def generate_chapters(
     if include_users:
         if verbose:
             print(f"\n=== Collecting user data for {len(all_game_ids)} games ===")
-        users_dict, game_users_map = collect_users_for_games(all_game_ids, verbose=verbose)
+        users_dict, game_users_map, _ = collect_users_for_games(all_game_ids, verbose=verbose)
         for ch in all_chapters:
             if ch['game_id'] in game_users_map:
                 ch['users'] = game_users_map[ch['game_id']]

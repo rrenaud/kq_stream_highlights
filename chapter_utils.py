@@ -139,21 +139,19 @@ def extract_win_prob_timeline(events, reference_utc: datetime) -> list[dict]:
 def collect_users_for_games(
     game_ids: list[int],
     verbose: bool = True,
-    return_game_details: bool = False
-) -> tuple[dict, dict] | tuple[dict, dict, dict]:
+) -> tuple[dict, dict, dict]:
     """
     Fetch user data for a list of games.
 
     Args:
         game_ids: List of HiveMind game IDs
         verbose: Print progress
-        return_game_details: Also return full game details dict
 
     Returns:
-        Tuple of (users_dict, game_users_map) or (users_dict, game_users_map, game_details):
+        Tuple of (users_dict, game_users_map, game_details):
         - users_dict: {user_id_str: {name, scene}} for root-level output
         - game_users_map: {game_id: {position: user_id}} for chapter-level
-        - game_details: {game_id: detail_dict} (only if return_game_details=True)
+        - game_details: {game_id: detail_dict}
     """
     if verbose:
         print(f"  Fetching game details for {len(game_ids)} games...")
@@ -194,9 +192,7 @@ def collect_users_for_games(
             'scene': user_data.get('scene'),
         }
 
-    if return_game_details:
-        return users_dict, game_users_map, game_details
-    return users_dict, game_users_map
+    return users_dict, game_users_map, game_details
 
 
 def build_chapters_for_games(
