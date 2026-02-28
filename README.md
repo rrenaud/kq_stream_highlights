@@ -26,6 +26,17 @@ A tool for navigating Killer Queen arcade league night gameplay videos with chap
 
 ## Setup
 
+### Player UI (Preact + Vite)
+
+```bash
+npm install
+npm run dev      # Start dev server at http://localhost:5173
+npm run build    # Build for production into dist/
+npm run preview  # Preview the production build
+```
+
+### Python tools (chapter generation)
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -42,12 +53,12 @@ Example:
 python generate_chapters.py sf_12_15_2025.mkv https://kqhivemind.com/cabinet/sf/sf chapters.json
 ```
 
-2. Serve the player:
+2. Start the dev server:
 ```bash
-python -m http.server 8080
+npm run dev
 ```
 
-3. Open http://localhost:8080/player.html
+3. Open http://localhost:5173
 
 ## How It Works
 
