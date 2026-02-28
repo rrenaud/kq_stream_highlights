@@ -3,9 +3,11 @@ import type { Chapter } from './types';
 
 export function findChapterAtTime(chapterList: Chapter[], time: number): number {
     const cvs = currentVideoSource.value;
+    // When a video source is active, only consider chapters on that source
+    // (times from different cabs are on different timelines and can't be compared)
     for (let i = chapterList.length - 1; i >= 0; i--) {
+        if (cvs && chapterList[i].video_source !== cvs) continue;
         if (time >= chapterList[i].start_time) {
-            if (cvs && chapterList[i].video_source !== cvs) continue;
             return i;
         }
     }
@@ -20,10 +22,10 @@ export function jumpToChapter(index: number): void {
     // Switch video if chapter is on a different source
     const vs = videos.value;
     if (ch.video_source && vs[ch.video_source]) {
+        currentVideoSource.value = ch.video_source;
         const targetVideoId = vs[ch.video_source].video_id;
         const p = ytPlayer.value;
         if (p && targetVideoId !== videoId.value) {
-            currentVideoSource.value = ch.video_source;
             videoId.value = targetVideoId;
             p.loadVideoById(targetVideoId, ch.start_time);
             currentChapterIndex.value = index;

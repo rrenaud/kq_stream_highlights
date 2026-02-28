@@ -4,7 +4,7 @@ Shared utilities for chapter generation.
 
 from datetime import datetime
 
-from hivemind_api import fetch_game_detail, fetch_user_public_data
+from hivemind_api import fetch_game_detail, fetch_game_events, fetch_user_public_data
 
 
 def extract_positions_from_event(event) -> list[int]:
@@ -96,12 +96,8 @@ def extract_kill_events(events, reference_utc: datetime) -> list[dict]:
             continue
 
         try:
-            if event.event_type == 'playerKill':
-                killer = int(values[2])
-                victim = int(values[3])
-            else:
-                killer = int(values[2])
-                victim = int(values[3])
+            killer = int(values[2])
+            victim = int(values[3])
         except (ValueError, TypeError):
             continue
 
@@ -201,6 +197,111 @@ def collect_users_for_games(
     if return_game_details:
         return users_dict, game_users_map, game_details
     return users_dict, game_users_map
+
+
+def build_chapters_for_games(
+    games: list[dict],
+    ref_utc: datetime,
+    video_source: str | None = None,
+    verbose: bool = True,
+) -> list[list[dict]]:
+    """
+    Build chapters from a list of games, grouped into sets.
+
+    Uses set-detection heuristics (5-min gap, Twilight→Day transition,
+    Day + 2-min gap) to group games into sets.
+
+    Args:
+        games: List of game dicts with parsed datetime start_time/end_time.
+        ref_utc: Reference UTC time (video start) — timestamps are relative to this.
+        video_source: If set, added to each chapter dict (for multi-cab).
+        verbose: Print progress.
+
+    Returns:
+        List of sets, where each set is a list of chapter dicts.
+        Set numbering and game_in_set are NOT assigned here — the caller
+        handles global numbering after merging across cabs.
+    """
+    games = sorted(games, key=lambda g: g['start_time'])
+
+    sets: list[list[dict]] = []
+    current_set: list[dict] = []
+    prev_chapter = None
+    prev_game = None
+    skipped = 0
+
+    for i, game in enumerate(games):
+        start_seconds = (game['start_time'] - ref_utc).total_seconds()
+        end_seconds = (game['end_time'] - ref_utc).total_seconds()
+
+        if end_seconds < 0:
+            skipped += 1
+            continue
+
+        game_id = game['id']
+
+        # Detect set boundaries
+        is_set_start = False
+        if prev_chapter is None:
+            is_set_start = True
+        else:
+            gap_seconds = (game['start_time'] - prev_game['end_time']).total_seconds()
+            if gap_seconds > 300:
+                is_set_start = True
+            elif prev_chapter['map'] == 'Twilight' and game['map_name'] == 'Day' and gap_seconds > 90:
+                is_set_start = True
+            elif game['map_name'] == 'Day' and gap_seconds > 120:
+                is_set_start = True
+
+        if is_set_start and current_set:
+            sets.append(current_set)
+            current_set = []
+
+        adjusted_start = max(0, start_seconds - 1)
+
+        if verbose:
+            print(f"  [{i+1}/{len(games)}] Game {game_id} ({game['map_name']})...", end=" ", flush=True)
+
+        game_events = fetch_game_events(game_id, verbose=False)
+        queen_kills = extract_queen_kills(game_events, ref_utc)
+        player_events = extract_player_events(game_events, ref_utc)
+        kill_events = extract_kill_events(game_events, ref_utc)
+        win_timeline = extract_win_prob_timeline(game_events, ref_utc)
+
+        if verbose:
+            print(f"{len(game_events)} events")
+
+        chapter = {
+            'game_id': game_id,
+            'title': f"Game {game_id}: {game['map_name']}",
+            'map': game['map_name'],
+            'winner': game['winning_team'],
+            'win_condition': game['win_condition'],
+            'start_time': adjusted_start,
+            'end_time': end_seconds,
+            'duration': end_seconds - adjusted_start,
+            'hivemind_url': f"https://kqhivemind.com/game/{game_id}",
+            'is_set_start': is_set_start,
+            'queen_kills': queen_kills,
+            'player_events': player_events,
+            'kill_events': kill_events,
+            'win_timeline': win_timeline,
+        }
+        if video_source is not None:
+            chapter['video_source'] = video_source
+
+        current_set.append(chapter)
+        prev_chapter = chapter
+        prev_game = game
+
+    # Flush last set
+    if current_set:
+        sets.append(current_set)
+
+    if verbose and skipped:
+        print(f"  Skipped {skipped} pre-stream games")
+
+    return sets
 
 
 def build_output_data(

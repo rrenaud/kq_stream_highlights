@@ -1,222 +1,221 @@
+#!/usr/bin/env python3
 """
 Generate chapter data for a video based on HiveMind game data.
+
+Supports both single-cab (games from live API) and multi-cab
+(games from JSONL cache files) workflows. Single-cab is just
+multi-cab with one cab config.
 """
 
+import gzip
 import json
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from fetch_games import fetch_games_for_day, Game
-from hivemind_api import fetch_game_events
-from video_align import find_first_qr, calculate_video_offset, VideoOffset
 from chapter_utils import (
-    collect_users_for_games, build_output_data,
-    extract_queen_kills, extract_player_events,
-    extract_kill_events, extract_win_prob_timeline,
+    collect_users_for_games, build_output_data, build_chapters_for_games,
 )
 
 
+def load_games_from_cache(cache_path: Path) -> list[dict]:
+    """Load games from a JSONL cache file, handling both flat and nested formats."""
+    games = []
+    with open(cache_path) as f:
+        for line in f:
+            item = json.loads(line)
+            # Normalize: the kqsf0 cache uses nested format from the API
+            if 'cabinet' in item and isinstance(item['cabinet'], dict):
+                start_time = item['start_time'].replace('Z', '+00:00')
+                end_time = item['end_time'].replace('Z', '+00:00')
+                games.append({
+                    'id': item['id'],
+                    'cabinet_id': item['cabinet']['id'],
+                    'cabinet_name': item['cabinet']['name'],
+                    'map_name': item.get('map_name', ''),
+                    'start_time': start_time,
+                    'end_time': end_time,
+                    'win_condition': item.get('win_condition', ''),
+                    'winning_team': item.get('winning_team', ''),
+                    'player_count': item.get('player_count', 0),
+                })
+            else:
+                games.append(item)
+    return games
+
+
+def games_from_api(cabinet_url: str, target_date: datetime, verbose: bool = True) -> list[dict]:
+    """Fetch games from HiveMind API and return as dicts."""
+    games = fetch_games_for_day(cabinet_url, target_date, verbose=verbose)
+    return [
+        {
+            'id': g.id,
+            'map_name': g.map_name,
+            'start_time': g.start_time,
+            'end_time': g.end_time,
+            'win_condition': g.win_condition,
+            'winning_team': g.winning_team,
+        }
+        for g in games
+    ]
+
+
 def generate_chapters(
-    video_path: str,
-    cabinet_url: str,
-    output_path: str | None = None,
-    cab_id: str | None = None,
-    video_id: str | None = None,
+    cab_configs: list[dict],
+    output_path: str,
     include_users: bool = True,
-    verbose: bool = True
+    verbose: bool = True,
 ) -> list[dict]:
     """
-    Generate chapter data for a video.
+    Generate chapter data from one or more cabinet configs.
 
     Args:
-        video_path: Path to the video file
-        cabinet_url: Cabinet URL (e.g., https://kqhivemind.com/cabinet/sf/sf)
-        output_path: Path to save JSON output (optional, auto-generated if None and cab_id provided)
-        cab_id: Cabinet ID for auto-generating output path (e.g., "sf")
-        video_id: YouTube video ID for the stream
+        cab_configs: List of dicts, each with:
+            - games: list[dict] — pre-loaded games (from cache or API)
+            - ref_utc: datetime — reference time for timestamps (video start)
+            - video_source: str | None — key for multi-video (None for single-cab)
+            - video_id: str | None — YouTube video ID
+            - label: str | None — display label (e.g., "Cab 1")
+        output_path: Where to write the output JSON
         include_users: Fetch HiveMind user sign-ins (default True)
         verbose: Print progress
 
     Returns:
         List of chapter dicts with video timing info
     """
+    is_multi = len(cab_configs) > 1 or any(c.get('video_source') for c in cab_configs)
+
+    all_sets = []  # list of (utc_start, [chapters])
+    all_game_ids = []
+    videos = {}
+
+    for config in cab_configs:
+        games = config['games']
+        ref_utc = config['ref_utc']
+        source_key = config.get('video_source')
+        video_id = config.get('video_id')
+        label = config.get('label')
+
+        if is_multi and source_key:
+            videos[source_key] = {
+                'video_id': video_id,
+                'label': label,
+            }
+
+        # Parse string timestamps if needed
+        for g in games:
+            if isinstance(g['start_time'], str):
+                g['start_time'] = datetime.fromisoformat(g['start_time'])
+            if isinstance(g['end_time'], str):
+                g['end_time'] = datetime.fromisoformat(g['end_time'])
+
+        if verbose:
+            cab_label = label or 'default'
+            print(f"\n=== Building chapters for {cab_label} ({len(games)} games) ===")
+            if games:
+                offset = (games[0]['start_time'] - ref_utc).total_seconds()
+                print(f"  Video 00:00 at {ref_utc}")
+                print(f"  First game at {games[0]['start_time']} ({offset:+.0f}s into video)")
+
+        sets = build_chapters_for_games(
+            games, ref_utc, video_source=source_key, verbose=verbose,
+        )
+
+        # Collect game IDs and convert sets to (utc_start, chapters) tuples
+        for s in sets:
+            if s:
+                # Use the first game's start_time as the set's UTC start
+                first_game_start = None
+                for g in sorted(games, key=lambda g: g['start_time']):
+                    if g['id'] == s[0]['game_id']:
+                        first_game_start = g['start_time']
+                        break
+                all_sets.append((first_game_start or ref_utc, s))
+            for ch in s:
+                all_game_ids.append(ch['game_id'])
+
+    # Sort sets by their start time, then flatten with global set numbering
+    all_sets.sort(key=lambda s: s[0])
+
+    all_chapters = []
+    for set_number, (_utc, set_chapters) in enumerate(all_sets, start=1):
+        for game_in_set, ch in enumerate(set_chapters, start=1):
+            ch['set_number'] = set_number
+            ch['game_in_set'] = game_in_set
+            ch['is_set_start'] = (game_in_set == 1)
+            all_chapters.append(ch)
+
     if verbose:
-        print("Step 1: Finding QR code in video...")
+        print(f"\n  {len(all_sets)} sets, {len(all_chapters)} chapters across {len(cab_configs)} cab(s)")
 
-    qr = find_first_qr(video_path, verbose=verbose)
-    if qr is None:
-        raise ValueError("No QR code found in video")
-
-    if verbose:
-        print(f"\nStep 2: Fetching game events for game {qr.game_id}...")
-
-    events = fetch_game_events(qr.game_id, verbose=verbose)
-    victory_events = [e for e in events if e.event_type == "victory"]
-    if not victory_events:
-        raise ValueError(f"No victory event found for game {qr.game_id}")
-
-    hivemind_victory_utc = victory_events[0].timestamp
-
-    if verbose:
-        print(f"\nStep 3: Calculating video offset...")
-
-    offset = calculate_video_offset(video_path, hivemind_victory_utc, qr, verbose=verbose)
-
-    # Determine the target date from the game
-    target_date = hivemind_victory_utc.replace(hour=0, minute=0, second=0, microsecond=0)
-
-    if verbose:
-        print(f"\nStep 4: Fetching all games for {target_date.date()}...")
-
-    games = fetch_games_for_day(cabinet_url, target_date, verbose=verbose)
-
-    # Step 5: Fetch user data if requested
+    # Collect user data
     users_dict = None
-    game_users_map = {}
     if include_users:
         if verbose:
-            print(f"\nStep 5: Fetching user sign-ins...")
-        game_ids = [g.id for g in games]
-        users_dict, game_users_map = collect_users_for_games(game_ids, verbose=verbose)
+            print(f"\n=== Collecting user data for {len(all_game_ids)} games ===")
+        users_dict, game_users_map = collect_users_for_games(all_game_ids, verbose=verbose)
+        for ch in all_chapters:
+            if ch['game_id'] in game_users_map:
+                ch['users'] = game_users_map[ch['game_id']]
         if verbose:
-            print(f"  Found {len(users_dict)} unique users")
+            print(f"  {len(users_dict)} unique users")
 
-    if verbose:
-        print(f"\nStep 6: Generating chapters for {len(games)} games...")
-        print("  Fetching events for each game...")
-
-    chapters = []
-    set_number = 1
-    game_in_set = 0
-
-    for i, game in enumerate(games):
-        # Calculate video timestamps
-        start_seconds = (game.start_time - offset.video_start_utc).total_seconds()
-        end_seconds = (game.end_time - offset.video_start_utc).total_seconds()
-
-        # Skip games that are before or after the video
-        if end_seconds < 0:
-            continue
-
-        # Detect set boundaries
-        is_set_start = False
-
-        if len(chapters) == 0:
-            # First game always starts a set
-            is_set_start = True
-        else:
-            prev_chapter = chapters[-1]
-            prev_game = games[i - 1]
-
-            # Calculate gap between games
-            gap_seconds = (game.start_time - prev_game.end_time).total_seconds()
-
-            # Heuristics for new set:
-            # 1. Long gap (> 5 minutes) between games - definite set break
-            # 2. Previous game was Twilight AND current is Day AND gap > 90s
-            #    (need some gap to avoid false positives from quick restarts)
-            # 3. Current is Day and gap > 2 minutes (weaker signal)
-
-            if gap_seconds > 300:  # > 5 minutes gap - definite break
-                is_set_start = True
-            elif prev_chapter['map'] == 'Twilight' and game.map_name == 'Day' and gap_seconds > 90:
-                is_set_start = True
-            elif game.map_name == 'Day' and gap_seconds > 120:
-                is_set_start = True
-
-        if is_set_start:
-            set_number += 1 if len(chapters) > 0 else 0
-            game_in_set = 1
-        else:
-            game_in_set += 1
-
-        # Start 1 second earlier to not miss the beginning
-        adjusted_start = max(0, start_seconds - 1)
-
-        # Fetch events for this game
-        game_events = fetch_game_events(game.id, verbose=False)
-        queen_kills = extract_queen_kills(game_events, offset.video_start_utc)
-        player_events = extract_player_events(game_events, offset.video_start_utc)
-        kill_events = extract_kill_events(game_events, offset.video_start_utc)
-        win_prob_timeline = extract_win_prob_timeline(game_events, offset.video_start_utc)
-
-        chapter = {
-            "game_id": game.id,
-            "title": f"Game {game.id}: {game.map_name}",
-            "map": game.map_name,
-            "winner": game.winning_team,
-            "win_condition": game.win_condition,
-            "start_time": adjusted_start,
-            "end_time": end_seconds,
-            "duration": end_seconds - adjusted_start,
-            "hivemind_url": f"https://kqhivemind.com/game/{game.id}",
-            "set_number": set_number,
-            "game_in_set": game_in_set,
-            "is_set_start": is_set_start,
-            "queen_kills": queen_kills,
-            "player_events": player_events,
-            "kill_events": kill_events,
-            "win_timeline": win_prob_timeline,
-        }
-        # Add user mapping if available
-        if game.id in game_users_map:
-            chapter["users"] = game_users_map[game.id]
-        chapters.append(chapter)
-
-    if verbose:
-        print(f"  Generated {len(chapters)} chapters")
-
-    # Auto-generate output path if cab_id provided but no output_path
-    if output_path is None and cab_id:
-        date_str = target_date.strftime("%Y-%m-%d")
-        output_path = str(Path(__file__).parent / "chapters" / "league_nights" / f"{cab_id}-{date_str}.json")
-        if verbose:
-            print(f"  Auto-generated output path: {output_path}")
-
-    # Save to file if we have a path
-    if output_path:
-        output_data = build_output_data(
-            video_id=video_id,
-            video_start_utc=offset.video_start_utc,
-            chapters=chapters,
+    # Build output
+    if is_multi:
+        output = build_output_data(
+            video_id=None,
+            video_start_utc=None,
+            chapters=all_chapters,
             users=users_dict,
-            video_path=video_path,
-            cabinet_url=cabinet_url,
-            fps=offset.fps,
+            videos=videos,
         )
-        with open(output_path, 'w') as f:
-            json.dump(output_data, f, indent=2)
-        if verbose:
-            print(f"\nSaved to: {output_path}")
+    else:
+        config = cab_configs[0]
+        output = build_output_data(
+            video_id=config.get('video_id'),
+            video_start_utc=config['ref_utc'],
+            chapters=all_chapters,
+            users=users_dict,
+        )
 
-    return chapters
+    out = Path(output_path)
+    if out.suffix != '.gz':
+        out = out.with_suffix('.json.gz')
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with gzip.open(out, 'wt') as f:
+        json.dump(output, f)
+
+    if verbose:
+        print(f"\nSaved {len(all_chapters)} chapters to {out}")
+
+    return all_chapters
 
 
-if __name__ == "__main__":
-    import sys
-    import re
+if __name__ == '__main__':
+    base = Path(__file__).parent
+    output = str(base / 'chapters' / 'league_nights' / 'sf-2026-02-24.json')
 
-    if len(sys.argv) < 4:
-        print("Usage: python generate_chapters.py <video_file> <cabinet_url> <video_id> [output.json]")
-        print("Example: python generate_chapters.py sf_12_15_2025.mkv https://kqhivemind.com/cabinet/sf/sf UmxLa4CW9cY")
-        print("Output defaults to: chapters/league_nights/{cab_id}-{YYYY-MM-DD}.json")
-        sys.exit(1)
+    # Video alignment: stream time 00:00 in local PST (UTC-8)
+    pst = timezone(timedelta(hours=-8))
+    cab1_video_start = datetime(2026, 2, 23, 20, 3, 50, tzinfo=pst)
+    # Derived from game 1744898 gamestart at 1:06:58 in video
+    cab2_video_start = datetime(2026, 2, 23, 19, 13, 32, tzinfo=pst)
 
-    video_path = sys.argv[1]
-    cabinet_url = sys.argv[2]
-    video_id = sys.argv[3]
-    output_path = sys.argv[4] if len(sys.argv) > 4 else None
+    cab_configs = [
+        {
+            'games': load_games_from_cache(base / 'cache' / 'cabinets' / 'sf_2026-02-24.jsonl'),
+            'ref_utc': cab1_video_start.astimezone(timezone.utc),
+            'video_source': 'cab1',
+            'video_id': 'anblmlk4SNo',
+            'label': 'Cab 1',
+        },
+        {
+            'games': load_games_from_cache(base / 'cache' / 'cabinets' / 'kqsf0_2026-02-24.jsonl'),
+            'ref_utc': cab2_video_start.astimezone(timezone.utc),
+            'video_source': 'cab2',
+            'video_id': '-TulQI6RKJA',
+            'label': 'Cab 2',
+        },
+    ]
 
-    # Extract cabinet ID from URL (e.g., "sf" from "https://kqhivemind.com/cabinet/sf/sf")
-    cab_match = re.search(r'/cabinet/([^/]+)', cabinet_url)
-    cab_id = cab_match.group(1) if cab_match else "unknown"
-
-    chapters = generate_chapters(video_path, cabinet_url, output_path, cab_id=cab_id, video_id=video_id)
-
-    print(f"\nChapters:")
-    for ch in chapters[:10]:
-        start_min = int(ch['start_time'] // 60)
-        start_sec = ch['start_time'] % 60
-        print(f"  {start_min}:{start_sec:05.2f} - {ch['title']} ({ch['winner']} {ch['win_condition']})")
-    if len(chapters) > 10:
-        print(f"  ... and {len(chapters) - 10} more")
+    generate_chapters(cab_configs, output)

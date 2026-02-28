@@ -65,10 +65,9 @@ def main():
                         help='Path to LightGBM model')
     parser.add_argument('--name', default='model',
                         help='Model name for the timeline key')
-    parser.add_argument('--counterfactuals', action='store_true', default=True,
-                        help='Compute counterfactuals (default: True)')
     parser.add_argument('--no-counterfactuals', dest='counterfactuals',
-                        action='store_false')
+                        action='store_false', default=True,
+                        help='Disable counterfactual computation')
     args = parser.parse_args()
 
     # Load chapter data (support both .json and .json.gz)
