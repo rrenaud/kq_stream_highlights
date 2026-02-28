@@ -24,7 +24,6 @@ import { ContributionBars } from './ContributionBars';
 import { ChapterList } from './ChapterList';
 import { HighlightDebug } from './HighlightDebug';
 import { KeyboardHints } from './KeyboardHints';
-import { SnailBar } from './SnailBar';
 
 export function App() {
     const calState = useMemo(() => createCalibrationState(), []);
@@ -436,7 +435,6 @@ export function App() {
                                     />
                                 )}
                             </div>
-                            <SnailBar ch={_ch} currentTime={_ct} flipForGold={_ffg} chapterData={_cd} />
                         </div>
                     </div>
 
