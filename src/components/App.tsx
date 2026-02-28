@@ -127,9 +127,11 @@ export function App() {
             const gid = parseInt(gameParam);
             const idx = chapters.value.findIndex(ch => ch.game_id === gid);
             if (idx >= 0) {
-                const seekTime = tParam ? chapters.value[idx].start_time + parseFloat(tParam) : chapters.value[idx].start_time;
-                seekTo(seekTime);
-                console.log(`URL nav: game ${gid} (chapter ${idx}), seeking to ${seekTime}s`);
+                jumpToChapter(idx);
+                if (tParam) {
+                    seekTo(chapters.value[idx].start_time + parseFloat(tParam));
+                }
+                console.log(`URL nav: game ${gid} (chapter ${idx})`);
             }
         } else if (tParam) {
             seekTo(parseFloat(tParam));
@@ -457,13 +459,25 @@ export function App() {
                             <div class="cab-filter">
                                 <button
                                     class={`cab-filter-btn${!_cabFilter ? ' active' : ''}`}
-                                    onClick={() => { cabFilter.value = null; }}
+                                    onClick={() => { cabFilter.value = null; currentVideoSource.value = null; }}
                                 >All</button>
                                 {Object.entries(_vs).map(([key, v]) => (
                                     <button
                                         key={key}
                                         class={`cab-filter-btn${_cabFilter === key ? ' active' : ''}`}
-                                        onClick={() => { cabFilter.value = _cabFilter === key ? null : key; }}
+                                        onClick={() => {
+                                            const newFilter = _cabFilter === key ? null : key;
+                                            cabFilter.value = newFilter;
+                                            currentVideoSource.value = newFilter;
+                                            if (newFilter && _vs[newFilter]) {
+                                                const targetId = _vs[newFilter].video_id;
+                                                const p = ytPlayer.value;
+                                                if (p && targetId !== videoId.value) {
+                                                    videoId.value = targetId;
+                                                    p.loadVideoById(targetId, getCurrentTime());
+                                                }
+                                            }
+                                        }}
                                     >{v.label}</button>
                                 ))}
                             </div>

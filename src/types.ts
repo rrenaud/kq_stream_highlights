@@ -113,6 +113,7 @@ export interface PlayerHighlight {
     ml_score?: number;
     score?: number;
     id?: number;
+    video_source?: string;
 }
 
 export interface HighImpactRange {
