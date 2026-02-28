@@ -4,13 +4,18 @@
 Converts cached events to the format expected by export_predictions,
 runs the model, and assembles into the chapter file.
 
+Accepts .json or .json.gz input; always writes .json.gz output.
+
 Usage:
     python run_kquity.py chapters/league_nights/sf-2026-02-24.json
+    python run_kquity.py chapters/league_nights/sf-2026-02-24.json.gz
 """
 
 import argparse
 import datetime
+import gzip
 import json
+import multiprocessing
 import sys
 from pathlib import Path
 from typing import Any
@@ -19,7 +24,7 @@ from typing import Any
 KQUITY_DIR = Path.home() / 'KQuity'
 sys.path.insert(0, str(KQUITY_DIR))
 
-from export_predictions import _vectorize_game, _predict_and_assemble
+from export_predictions import _vectorize_game_wrapper, _predict_and_assemble
 from assemble_comparison import main as assemble_main
 import lightgbm as lgb
 
@@ -66,9 +71,14 @@ def main():
                         action='store_false')
     args = parser.parse_args()
 
-    # Load chapter data
-    with open(args.chapters) as f:
-        chapter_data: dict[str, Any] = json.load(f)
+    # Load chapter data (support both .json and .json.gz)
+    chapters_path = Path(args.chapters)
+    if chapters_path.suffix == '.gz':
+        with gzip.open(chapters_path, 'rt') as f:
+            chapter_data: dict[str, Any] = json.load(f)
+    else:
+        with open(chapters_path) as f:
+            chapter_data = json.load(f)
 
     game_ids = [ch['game_id'] for ch in chapter_data['chapters']]
     unique_ids = sorted(set(game_ids))
@@ -78,23 +88,29 @@ def main():
     print(f"Loading model from {args.model}...")
     model = lgb.Booster(model_file=args.model)
 
-    # Process each game
-    results: dict[str, list[dict[str, Any]]] = {}
-    gold_on_left_map: dict[str, bool] = {}
+    # Phase 1: Load events and vectorize in parallel (CPU-bound)
+    work_items = []
     missing = 0
-
-    for i, game_id in enumerate(unique_ids):
-        print(f"  [{i+1}/{len(unique_ids)}] Game {game_id}...", end=" ", flush=True)
-
+    for game_id in unique_ids:
         events = load_cached_events(game_id)
         if events is None:
-            print("no cached events, skipping")
+            print(f"  Game {game_id}: no cached events, skipping")
             missing += 1
             continue
+        work_items.append((game_id, events, args.counterfactuals))
 
-        vec_data = _vectorize_game(events, counterfactuals=args.counterfactuals)
+    n_workers = min(len(work_items), multiprocessing.cpu_count() or 1)
+    print(f"Vectorizing {len(work_items)} games with {n_workers} workers...")
+    with multiprocessing.Pool(n_workers) as pool:
+        vec_results = pool.map(_vectorize_game_wrapper, work_items)
+
+    # Phase 2: Predict sequentially (LightGBM uses threads internally)
+    results: dict[str, list[dict[str, Any]]] = {}
+    gold_on_left_map: dict[str, bool] = {}
+
+    for game_id, vec_data in vec_results:
         if vec_data is None:
-            print("vectorization failed, skipping")
+            print(f"  Game {game_id}: vectorization failed, skipping")
             missing += 1
             continue
 
@@ -102,7 +118,7 @@ def main():
         results[str(game_id)] = preds
         gold_on_left_map[str(game_id)] = gol
         n_cf = sum(1 for p in preds if 'c' in p) if args.counterfactuals else 0
-        print(f"{len(preds)} predictions" + (f", {n_cf} with counterfactuals" if n_cf else ""))
+        print(f"  Game {game_id}: {len(preds)} predictions" + (f", {n_cf} with counterfactuals" if n_cf else ""))
 
     print(f"\nPredictions for {len(results)}/{len(unique_ids)} games"
           f" ({missing} missing/failed)")
@@ -125,7 +141,7 @@ def main():
                 't': round(pt['t'] + video_offset, 2),
                 'p': pt['p'],
             }
-            for key in ('c', 'sx', 'eg', 'ee', 'bg', 'bc'):
+            for key in ('c', 'sx', 'eg', 'ee', 'bg', 'bc', 'sp', 'sc', 'st'):
                 if key in pt:
                     entry[key] = pt[key]
             timeline.append(entry)
@@ -137,10 +153,14 @@ def main():
 
     print(f"Augmented {augmented}/{len(chapter_data['chapters'])} chapters")
 
-    # Write back
-    with open(args.chapters, 'w') as f:
-        json.dump(chapter_data, f, indent=2)
-    print(f"Saved to {args.chapters}")
+    # Write back as .json.gz
+    if chapters_path.suffix == '.gz':
+        out_path = chapters_path
+    else:
+        out_path = chapters_path.with_suffix('.json.gz')
+    with gzip.open(out_path, 'wt') as f:
+        json.dump(chapter_data, f)
+    print(f"Saved to {out_path}")
 
 
 if __name__ == '__main__':
