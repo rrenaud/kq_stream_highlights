@@ -42,6 +42,14 @@ export interface ModelTimelinePoint extends TimelinePoint {
     bg?: (number | null)[];
     bc?: [number, number];
     sx?: number;
+    sp?: number[];    // 12 probabilities at each discrete snail position
+    sc?: number;      // current snail position index (0-11)
+    st?: number;      // takeover probability (opponent takes snail)
+}
+
+export interface VideoSource {
+    video_id: string;
+    label: string;
 }
 
 export interface MatchInfo {
@@ -69,6 +77,7 @@ export interface Chapter {
     users?: Record<string, string | number>;
     gold_on_left?: boolean;
     hivemind_url: string;
+    video_source?: string;
     _timelineFields?: Record<string, boolean>;
 }
 
@@ -82,12 +91,14 @@ export interface ChapterData {
     chapters: Chapter[];
     users: Record<string, UserInfo>;
     game_transform?: AffineTransform;
+    videos?: Record<string, VideoSource>;
 }
 
 export interface FlatQueenKill {
     time: number;
     victim: number;
     game_id: number;
+    video_source?: string;
 }
 
 export interface PlayerHighlight {
@@ -102,6 +113,7 @@ export interface PlayerHighlight {
     ml_score?: number;
     score?: number;
     id?: number;
+    video_source?: string;
 }
 
 export interface HighImpactRange {

@@ -1,4 +1,4 @@
-import { getCurrentTime, seekTo, chapters, selectedUserId, selectedPosition, playerHighlights, lastHighlightIndex, highlightModeEnabled, ytPlayer } from './state';
+import { getCurrentTime, seekTo, chapters, selectedUserId, selectedPosition, playerHighlights, lastHighlightIndex, highlightModeEnabled, ytPlayer, currentVideoSource } from './state';
 import type { Chapter, PlayerHighlight, HighImpactRange, KDStats } from './types';
 import { HIGHLIGHT_SEEK_BUFFER, HIGHLIGHT_PLAY_DURATION } from './constants';
 import { isGoldTeam, perspectiveDelta, getUserPositionInChapter } from './utils';
@@ -86,7 +86,8 @@ export function computePlayerHighlights(): PlayerHighlight[] {
                         event_id: evt.id,
                         values: evt.values,
                         position: evt.positions ? evt.positions[0] : null,
-                        ml_score: evt.ml_score
+                        ml_score: evt.ml_score,
+                        video_source: ch.video_source,
                     });
                 }
             }
@@ -111,7 +112,8 @@ export function computePlayerHighlights(): PlayerHighlight[] {
                         set_number: ch.set_number,
                         event_id: evt.id,
                         values: evt.values,
-                        position: pos
+                        position: pos,
+                        video_source: ch.video_source,
                     });
                 }
             }
@@ -188,8 +190,16 @@ export function computePlayerHighlights(): PlayerHighlight[] {
     return result;
 }
 
+/** Filter highlights to those matching the current video source. */
+function filteredHighlights() {
+    const cvs = currentVideoSource.value;
+    const hl = playerHighlights.value;
+    if (!cvs) return hl;
+    return hl.filter(h => h.video_source === cvs);
+}
+
 export function nextHighlight(): void {
-    const highlights = playerHighlights.value;
+    const highlights = filteredHighlights();
     if (highlights.length === 0) return;
 
     const ct = getCurrentTime();
@@ -220,7 +230,7 @@ export function nextHighlight(): void {
 }
 
 export function prevHighlight(): void {
-    const highlights = playerHighlights.value;
+    const highlights = filteredHighlights();
     if (highlights.length === 0) return;
 
     const ct = getCurrentTime();
@@ -258,10 +268,9 @@ export function prevHighlight(): void {
 export function checkHighlightAutoAdvance(
     toggleCallback: () => void,
 ): void {
-    if (!highlightModeEnabled.value || playerHighlights.value.length === 0) return;
+    const highlights = filteredHighlights();
+    if (!highlightModeEnabled.value || highlights.length === 0) return;
     if (lastHighlightIndex.value < 0) return;
-
-    const highlights = playerHighlights.value;
     const ct = getCurrentTime();
     const currentHighlight = highlights[lastHighlightIndex.value];
 

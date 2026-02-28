@@ -6,6 +6,7 @@ declare global {
             playVideo(): void;
             pauseVideo(): void;
             seekTo(seconds: number, allowSeekAhead: boolean): void;
+            loadVideoById(videoId: string, startSeconds?: number): void;
             getCurrentTime(): number;
             getDuration(): number;
             getPlayerState(): number;

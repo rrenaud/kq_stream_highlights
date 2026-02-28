@@ -1,4 +1,4 @@
-import type { Chapter } from '../types';
+import type { Chapter, VideoSource } from '../types';
 import { formatTime, isGoldTeam, getChapterPosition } from '../utils';
 import { calculateKD, calculateNetWinProb } from '../highlights';
 import { WinProbPlot } from './WinProbPlot';
@@ -10,16 +10,20 @@ interface ChapterListProps {
     selectedUserId: string | null;
     favoriteTeam: 'blue' | 'gold' | null;
     filter: string;
+    videos?: Record<string, VideoSource>;
+    cabFilter?: string | null;
     onJumpToChapter: (index: number) => void;
-    onSeek: (time: number) => void;
+    onSeek: (time: number, videoSource?: string) => void;
 }
 
-export function ChapterList({ chapters, currentChapterIndex, selectedPosition, selectedUserId, favoriteTeam, filter, onJumpToChapter, onSeek }: ChapterListProps) {
+export function ChapterList({ chapters, currentChapterIndex, selectedPosition, selectedUserId, favoriteTeam, filter, videos, cabFilter, onJumpToChapter, onSeek }: ChapterListProps) {
+    const hasMultipleVideos = Object.keys(videos || {}).length > 1;
     const filterLower = filter.toLowerCase();
 
     return (
         <div class="chapter-list" id="chapterList">
             {chapters.map((ch, i) => {
+                if (cabFilter && ch.video_source !== cabFilter) return null;
                 const chapterPosition = getChapterPosition(ch, selectedPosition, selectedUserId);
                 if (selectedUserId && !chapterPosition) return null;
                 if (filter) {
@@ -56,7 +60,12 @@ export function ChapterList({ chapters, currentChapterIndex, selectedPosition, s
                                 <span class="blue">{ch.match_info.blue}</span> vs <span class="gold">{ch.match_info.gold}</span>
                             </div>
                         )}
-                        <div class="chapter-title">{ch.title}</div>
+                        <div class="chapter-title">
+                            {ch.title}
+                            {hasMultipleVideos && ch.video_source && videos?.[ch.video_source] && (
+                                <span class="cab-badge">{videos[ch.video_source].label}</span>
+                            )}
+                        </div>
                         <div class="chapter-meta">
                             <span class={`winner ${ch.winner}`}>{ch.winner}</span> {ch.win_condition}
                             &nbsp;|&nbsp; {formatTime(ch.duration)}

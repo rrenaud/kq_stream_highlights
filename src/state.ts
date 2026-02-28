@@ -1,5 +1,5 @@
 import { signal, computed } from '@preact/signals';
-import type { Chapter, ChapterData, FlatQueenKill, PlayerHighlight, PositionId, UserInfo } from './types';
+import type { Chapter, ChapterData, FlatQueenKill, PlayerHighlight, PositionId, UserInfo, VideoSource } from './types';
 import { shouldFlipForGold } from './utils';
 
 // Core player state
@@ -29,6 +29,11 @@ export const users = signal<Record<string, UserInfo>>({});
 export const videoId = signal<string | null>(null);
 export const chapterData = signal<ChapterData | null>(null);
 export const youtubeApiReady = signal(false);
+
+// Multi-video support
+export const videos = signal<Record<string, VideoSource>>({});
+export const currentVideoSource = signal<string | null>(null);
+export const cabFilter = signal<string | null>(null);
 
 // Computed values
 export const currentChapter = computed(() => {

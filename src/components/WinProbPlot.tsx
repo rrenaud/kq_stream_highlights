@@ -10,7 +10,7 @@ interface WinProbPlotProps {
     selectedPosition: string | null;
     selectedUserId: string | null;
     favoriteTeam: 'blue' | 'gold' | null;
-    onSeek: (time: number) => void;
+    onSeek: (time: number, videoSource?: string) => void;
 }
 
 export function WinProbPlot({ ch, index, selectedPosition, selectedUserId, favoriteTeam, onSeek }: WinProbPlotProps) {
@@ -33,7 +33,7 @@ export function WinProbPlot({ ch, index, selectedPosition, selectedUserId, favor
         const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
         const clickX = (e.clientX - rect.left) / rect.width;
         const targetTime = ch.start_time + clickX * (ch.end_time - ch.start_time);
-        onSeek(targetTime);
+        onSeek(targetTime, ch.video_source);
     };
 
     const highlightRects = highImpactRanges.map((range, i) => {

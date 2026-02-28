@@ -13,6 +13,7 @@ import {
     favoriteTeam, selectedPosition, selectedUserId,
     playerHighlights, playerHighlightCount, playerLowlightCount, lastHighlightIndex, highlightModeEnabled,
     users, videoId, chapterData, currentChapter, flipForGold,
+    videos as videosSignal, currentVideoSource, cabFilter,
 } from '../state';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
@@ -50,6 +51,8 @@ export function App() {
     const _lhi = lastHighlightIndex.value;
     const _hme = highlightModeEnabled.value;
     const _us = users.value;
+    const _vs = videosSignal.value;
+    const _cabFilter = cabFilter.value;
 
     // Derived values (replace useState that was manually synced)
     const teamToggleText = _ft === null ? 'Team: Auto' : _ft === 'blue' ? 'Team: Blue' : 'Team: Gold';
@@ -66,11 +69,22 @@ export function App() {
         users.value = data.users || {};
         videoId.value = data.video_id || null;
 
+        // Multi-video support
+        videosSignal.value = data.videos || {};
+        const vKeys = Object.keys(data.videos || {});
+        if (vKeys.length > 0) {
+            const firstKey = vKeys[0];
+            currentVideoSource.value = firstKey;
+            if (!data.video_id && data.videos![firstKey].video_id) {
+                videoId.value = data.videos![firstKey].video_id;
+            }
+        }
+
         const flatKills: typeof queenKills.value = [];
         for (const ch of (data.chapters || [])) {
             if (ch.queen_kills) {
                 for (const qk of ch.queen_kills) {
-                    flatKills.push({ time: qk.time, victim: qk.victim, game_id: ch.game_id });
+                    flatKills.push({ time: qk.time, victim: qk.victim, game_id: ch.game_id, video_source: ch.video_source });
                 }
             }
         }
@@ -112,9 +126,11 @@ export function App() {
             const gid = parseInt(gameParam);
             const idx = chapters.value.findIndex(ch => ch.game_id === gid);
             if (idx >= 0) {
-                const seekTime = tParam ? chapters.value[idx].start_time + parseFloat(tParam) : chapters.value[idx].start_time;
-                seekTo(seekTime);
-                console.log(`URL nav: game ${gid} (chapter ${idx}), seeking to ${seekTime}s`);
+                jumpToChapter(idx);
+                if (tParam) {
+                    seekTo(chapters.value[idx].start_time + parseFloat(tParam));
+                }
+                console.log(`URL nav: game ${gid} (chapter ${idx})`);
             }
         } else if (tParam) {
             seekTo(parseFloat(tParam));
@@ -263,15 +279,32 @@ export function App() {
         jumpToChapter(index);
     }
 
-    function handleSeek(time: number) {
+    function seekWithVideoSwitch(time: number, videoSource?: string) {
+        if (videoSource) {
+            const vs = videosSignal.value;
+            if (vs[videoSource]) {
+                currentVideoSource.value = videoSource;
+                const targetId = vs[videoSource].video_id;
+                const p = ytPlayer.value;
+                if (p && targetId !== videoId.value) {
+                    videoId.value = targetId;
+                    p.loadVideoById(targetId, time);
+                    return;
+                }
+            }
+        }
         seekTo(time);
         if (ytPlayer.value) ytPlayer.value.playVideo();
     }
 
+    function handleSeek(time: number, videoSource?: string) {
+        seekWithVideoSwitch(time, videoSource);
+    }
+
     function handleHighlightClick(index: number) {
+        const hl = playerHighlights.value[index];
         lastHighlightIndex.value = index;
-        seekTo(playerHighlights.value[index].time - HIGHLIGHT_SEEK_BUFFER);
-        if (ytPlayer.value) ytPlayer.value.playVideo();
+        seekWithVideoSwitch(hl.time - HIGHLIGHT_SEEK_BUFFER, hl.video_source);
     }
 
     // --- Calibration ---
@@ -350,66 +383,59 @@ export function App() {
         <>
             <div class="container">
                 <div class="video-section">
-                    <div class="video-wrapper">
-                        <div id="player"></div>
-                        {calibrating ? (
-                            <div
-                                ref={overlayRef}
-                                id="cfOverlay"
-                                class="cf-overlay"
-                                style="pointer-events:auto;cursor:crosshair;background:rgba(0,0,0,0.15);"
-                                onClick={handleOverlayClick}
-                            ></div>
-                        ) : (
-                            <MapOverlay
-                                ch={_ch}
-                                currentTime={_ct}
-                                flipForGold={_ffg}
-                                chapterData={_cd}
-                            />
-                        )}
-                    </div>
-
-                    <div class="controls">
-                        <button onClick={() => togglePlayPause()}>{playPauseText}</button>
-                        <span class="time-display">{timeDisplayText}</span>
-                        <span class="nav-group">
-                            <button onClick={() => prevSet()} title="Previous set (Shift+S)">{'\u25C0'}Set</button>
-                            <button onClick={() => nextSet()} title="Next set (S)">Set{'\u25B6'}</button>
-                        </span>
-                        <span class="nav-group">
-                            <button onClick={() => prevChapter()} title="Previous game (Shift+G)">{'\u25C0'}Game</button>
-                            <button onClick={() => nextChapter()} title="Next game (G)">Game{'\u25B6'}</button>
-                        </span>
-                        <span class="nav-group">
-                            <button onClick={() => prevQueenKill()} title="Previous queen kill (Shift+E)">{'\u25C0'}Egg</button>
-                            <button onClick={() => nextQueenKill()} title="Next queen kill (E)">Egg{'\u25B6'}</button>
-                        </span>
-                        <span class="nav-group">
-                            <button onClick={() => prevHighlight()} title="Previous highlight (Shift+H)">{'\u25C0'}HL</button>
-                            <button onClick={() => nextHighlight()} title="Next highlight (H)">HL{'\u25B6'}</button>
-                        </span>
-                        <button
-                            class={_hme ? 'highlight-mode-active' : ''}
-                            onClick={toggleHighlightMode}
-                            title="Auto-play highlights (A)"
-                        >{highlightBtnText}</button>
-                        <button onClick={cycleTeamToggle} title="Toggle team perspective (T)">{teamToggleText}</button>
-                        <button
-                            onClick={handleCalibrateClick}
-                            title="Click to calibrate game rectangle"
-                            style={calibrateBg ? `background:${calibrateBg}` : ''}
-                        >{calibrateText}</button>
-                        <span class="current-chapter">
-                            {_ch && (
-                                <>
-                                    <h3>{_ch.title}</h3>
-                                    <span class={_ch.winner}>{_ch.winner}</span> wins by {_ch.win_condition}
-                                    &nbsp;|&nbsp; {formatTime(_ch.duration)}
-                                    &nbsp;|&nbsp; <a href={_ch.hivemind_url} target="_blank" style="color: #e94560;">HiveMind</a>
-                                </>
-                            )}
-                        </span>
+                    <div class="video-with-controls">
+                        <div class="controls">
+                            <button onClick={() => togglePlayPause()}>{playPauseText}</button>
+                            <span class="time-display">{timeDisplayText}</span>
+                            <span class="nav-group">
+                                <button onClick={() => prevSet()} title="Previous set (Shift+S)">{'\u25C0'}Set</button>
+                                <button onClick={() => nextSet()} title="Next set (S)">Set{'\u25B6'}</button>
+                            </span>
+                            <span class="nav-group">
+                                <button onClick={() => prevChapter()} title="Previous game (Shift+G)">{'\u25C0'}Game</button>
+                                <button onClick={() => nextChapter()} title="Next game (G)">Game{'\u25B6'}</button>
+                            </span>
+                            <span class="nav-group">
+                                <button onClick={() => prevQueenKill()} title="Previous queen kill (Shift+E)">{'\u25C0'}Egg</button>
+                                <button onClick={() => nextQueenKill()} title="Next queen kill (E)">Egg{'\u25B6'}</button>
+                            </span>
+                            <span class="nav-group">
+                                <button onClick={() => prevHighlight()} title="Previous highlight (Shift+H)">{'\u25C0'}HL</button>
+                                <button onClick={() => nextHighlight()} title="Next highlight (H)">HL{'\u25B6'}</button>
+                            </span>
+                            <button
+                                class={_hme ? 'highlight-mode-active' : ''}
+                                onClick={toggleHighlightMode}
+                                title="Auto-play highlights (A)"
+                            >{highlightBtnText}</button>
+                            <button onClick={cycleTeamToggle} title="Toggle team perspective (T)">{teamToggleText}</button>
+                            <button
+                                onClick={handleCalibrateClick}
+                                title="Click to calibrate game rectangle"
+                                style={calibrateBg ? `background:${calibrateBg}` : ''}
+                            >{calibrateText}</button>
+                        </div>
+                        <div class="video-and-snail">
+                            <div class="video-wrapper">
+                                <div id="player"></div>
+                                {calibrating ? (
+                                    <div
+                                        ref={overlayRef}
+                                        id="cfOverlay"
+                                        class="cf-overlay"
+                                        style="pointer-events:auto;cursor:crosshair;background:rgba(0,0,0,0.15);"
+                                        onClick={handleOverlayClick}
+                                    ></div>
+                                ) : (
+                                    <MapOverlay
+                                        ch={_ch}
+                                        currentTime={_ct}
+                                        flipForGold={_ffg}
+                                        chapterData={_cd}
+                                    />
+                                )}
+                            </div>
+                        </div>
                     </div>
 
                     <div class="cf-grids-row">
@@ -444,6 +470,33 @@ export function App() {
                             value={filter}
                             onInput={(e) => setFilter((e.target as HTMLInputElement).value)}
                         />
+                        {Object.keys(_vs).length > 1 && (
+                            <div class="cab-filter">
+                                <button
+                                    class={`cab-filter-btn${!_cabFilter ? ' active' : ''}`}
+                                    onClick={() => { cabFilter.value = null; currentVideoSource.value = null; }}
+                                >All</button>
+                                {Object.entries(_vs).map(([key, v]) => (
+                                    <button
+                                        key={key}
+                                        class={`cab-filter-btn${_cabFilter === key ? ' active' : ''}`}
+                                        onClick={() => {
+                                            const newFilter = _cabFilter === key ? null : key;
+                                            cabFilter.value = newFilter;
+                                            currentVideoSource.value = newFilter;
+                                            if (newFilter && _vs[newFilter]) {
+                                                const targetId = _vs[newFilter].video_id;
+                                                const p = ytPlayer.value;
+                                                if (p && targetId !== videoId.value) {
+                                                    videoId.value = targetId;
+                                                    p.loadVideoById(targetId, getCurrentTime());
+                                                }
+                                            }
+                                        }}
+                                    >{v.label}</button>
+                                ))}
+                            </div>
+                        )}
                         <div class="position-selector">
                             <label>Player:</label>
                             {sortedUsers.length === 0 ? (
@@ -494,6 +547,8 @@ export function App() {
                         selectedUserId={_su}
                         favoriteTeam={_ft}
                         filter={filter}
+                        videos={_vs}
+                        cabFilter={_cabFilter}
                         onJumpToChapter={handleJumpToChapter}
                         onSeek={handleSeek}
                     />

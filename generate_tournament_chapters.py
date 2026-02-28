@@ -96,7 +96,7 @@ def generate_tournament_chapters(
 
     game_ids = [g['id'] for g in games]
     users, game_users_map, game_details = collect_users_for_games(
-        game_ids, verbose=verbose, return_game_details=True
+        game_ids, verbose=verbose
     )
     if verbose:
         print(f"  Found {len(users)} unique users")
