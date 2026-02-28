@@ -1,0 +1,27 @@
+{
+  "name": "kq_stream_highlights-ui_framework_modernization",
+  "version": "1.0.0",
+  "description": "A tool for navigating Killer Queen arcade league night gameplay videos with chapter markers synced to [KQHiveMind](https://kqhivemind.com) game data.",
+  "main": "player.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@preact/signals": "^2.8.1",
+    "preact": "^10.28.4"
+  },
+  "devDependencies": {
+    "@preact/preset-vite": "^2.10.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  }
+}
