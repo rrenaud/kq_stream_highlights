@@ -456,6 +456,46 @@
         .chapter-meta .gold, .set-label .gold { color: #ffd700; }
         .chapter-meta .blue, .set-label .blue { color: #5ba3ec; }
 
+        .cab-badge {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 8px;
+            background: #555;
+            color: #eee;
+            margin-right: 6px;
+            vertical-align: middle;
+        }
+
+        #cabFilter {
+            display: none;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .cab-filter-btn {
+            background: #1a1a1a;
+            border: 1px solid #555;
+            color: #aaa;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .cab-filter-btn:hover {
+            border-color: #888;
+            color: #fff;
+        }
+
+        .cab-filter-btn.active {
+            background: #e94560;
+            border-color: #e94560;
+            color: #fff;
+        }
+
         .kd-stats {
             color: #e94560;
             font-weight: 600;
@@ -818,6 +858,7 @@
             <div class="sidebar-header">
                 <h2>Chapters</h2>
                 <input type="text" id="chapterFilter" placeholder="Filter by map, winner...">
+                <div id="cabFilter"></div>
                 <div class="position-selector">
                     <label for="playerSelect">Player:</label>
                     <select id="playerSelect">

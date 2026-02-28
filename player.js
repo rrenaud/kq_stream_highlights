@@ -86,6 +86,9 @@
   var videoId = null;
   var chapterData = null;
   var youtubeApiReady = false;
+  var videos = {};
+  var currentVideoSource = null;
+  var cabFilter = null;
   function initializePlayer() {
     if (!youtubeApiReady || !videoId || player) return;
     player = new YT.Player("player", {
@@ -167,6 +170,7 @@
   function findChapterAtTime(time) {
     for (let i = chapters.length - 1; i >= 0; i--) {
       if (time >= chapters[i].start_time) {
+        if (currentVideoSource && chapters[i].video_source !== currentVideoSource) continue;
         return i;
       }
     }
@@ -587,12 +591,16 @@
       const cellCY = topPad + i * step;
       const leftText = leftEdgeLabels ? leftEdgeLabels[i] : String(i);
       const rightText = rightEdgeLabels ? rightEdgeLabels[i] : String(i);
-      const lx = cx - i * step - perpDist;
-      const ly = cellCY - perpDist;
-      html += `<span class="diamond-axis-label" style="right:${containerWidth - lx}px;top:${ly}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${leftText}</span>`;
-      const rx = cx + i * step + perpDist;
-      const ry = cellCY - perpDist;
-      html += `<span class="diamond-axis-label" style="left:${rx}px;top:${ry}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${rightText}</span>`;
+      if (leftText !== null) {
+        const lx = cx - i * step - perpDist;
+        const ly = cellCY - perpDist;
+        html += `<span class="diamond-axis-label" style="right:${containerWidth - lx}px;top:${ly}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${leftText}</span>`;
+      }
+      if (rightText !== null) {
+        const rx = cx + i * step + perpDist;
+        const ry = cellCY - perpDist;
+        html += `<span class="diamond-axis-label" style="left:${rx}px;top:${ry}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${rightText}</span>`;
+      }
     }
     html += "</div>";
     return html;
@@ -677,12 +685,17 @@
     const needsMirror = !!ch.gold_on_left;
     const bg = point.bg;
     const n = BERRY_DELTAS.length;
+    const bc = point.bc || [0, 0];
     const berryProbs = [];
     for (let row = 0; row < n; row++) {
       berryProbs[row] = [];
       for (let col = 0; col < n; col++) {
         const blueDelta = row;
         const goldDelta = col;
+        if (bc[0] + blueDelta >= MAX_FOOD || bc[1] + goldDelta >= MAX_FOOD) {
+          berryProbs[row][col] = null;
+          continue;
+        }
         const idx = blueDelta * n + goldDelta;
         const raw = bg[idx];
         if (raw === null || raw === void 0) {
@@ -697,9 +710,12 @@
     const rightTeam = ch.gold_on_left ? "Blue" : "Gold";
     const leftLabel = `${leftTeam} berries left`;
     const rightLabel = `${rightTeam} berries left`;
-    const bc = point.bc || [0, 0];
-    const blueLabels = BERRY_DELTAS.map((d) => String(Math.max(0, MAX_FOOD - bc[0] - d)));
-    const goldLabels = BERRY_DELTAS.map((d) => String(Math.max(0, MAX_FOOD - bc[1] - d)));
+    const berryLabel = (scored, d) => {
+      const left = MAX_FOOD - scored - d;
+      return left <= 0 ? null : String(left);
+    };
+    const blueLabels = BERRY_DELTAS.map((d) => berryLabel(bc[0], d));
+    const goldLabels = BERRY_DELTAS.map((d) => berryLabel(bc[1], d));
     const leftEdgeLabels = ch.gold_on_left ? goldLabels : blueLabels;
     const rightEdgeLabels = ch.gold_on_left ? blueLabels : goldLabels;
     content.innerHTML = renderDiamondGrid({
@@ -874,9 +890,30 @@
   }
   function renderChapters(filter = "") {
     const filterLower = filter.toLowerCase();
+    const hasMultipleVideos = Object.keys(videos).length > 1;
+    const cabFilterContainer = document.getElementById("cabFilter");
+    if (cabFilterContainer) {
+      if (hasMultipleVideos) {
+        cabFilterContainer.style.display = "flex";
+        cabFilterContainer.innerHTML = `<button class="cab-filter-btn ${cabFilter === null ? "active" : ""}" data-cab="">All</button>` + Object.entries(videos).map(
+          ([key, vs]) => `<button class="cab-filter-btn ${cabFilter === key ? "active" : ""}" data-cab="${esc(key)}">${esc(vs.label)}</button>`
+        ).join("");
+        cabFilterContainer.querySelectorAll(".cab-filter-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            cabFilter = btn.dataset.cab || null;
+            renderChapters(chapterFilter.value);
+          });
+        });
+      } else {
+        cabFilterContainer.style.display = "none";
+      }
+    }
     chapterList.innerHTML = chapters.map((ch, i) => {
       const chapterPosition = getChapterPosition(ch);
       if (selectedUserId && !chapterPosition) {
+        return "";
+      }
+      if (cabFilter && ch.video_source !== cabFilter) {
         return "";
       }
       if (filter) {
@@ -890,6 +927,10 @@
       const setClass = ch.is_set_start ? "set-start" : "in-set";
       const setLabel = ch.is_set_start && ch.match_info ? `<div class="set-label"><span class="blue">${esc(ch.match_info.blue)}</span> vs <span class="gold">${esc(ch.match_info.gold)}</span></div>` : "";
       const plotHtml = renderWinProbPlot(ch, i);
+      let cabBadgeHtml = "";
+      if (hasMultipleVideos && ch.video_source && videos[ch.video_source]) {
+        cabBadgeHtml = `<span class="cab-badge">${esc(videos[ch.video_source].label)}</span>`;
+      }
       let statsHtml = "";
       if (chapterPosition) {
         const kd = calculateKD(ch, chapterPosition);
@@ -903,7 +944,7 @@
       return `
                 <div class="chapter-item ${winnerClass} ${activeClass} ${setClass}" data-index="${i}">
                     ${setLabel}
-                    <div class="chapter-title">${esc(ch.title)}</div>
+                    <div class="chapter-title">${cabBadgeHtml}${esc(ch.title)}</div>
                     <div class="chapter-meta">
                         <span class="winner ${esc(ch.winner)}">${esc(ch.winner)}</span> ${esc(ch.win_condition)}
                         &nbsp;|&nbsp; ${formatTime(ch.duration)}
@@ -935,8 +976,20 @@
   }
   function jumpToChapter(index) {
     if (index >= 0 && index < chapters.length) {
-      const targetTime = chapters[index].start_time;
-      console.log(`Jumping to chapter ${index}: ${chapters[index].title} at ${targetTime}s`);
+      const ch = chapters[index];
+      const targetTime = ch.start_time;
+      console.log(`Jumping to chapter ${index}: ${ch.title} at ${targetTime}s`);
+      if (ch.video_source && videos[ch.video_source]) {
+        const targetVideoId = videos[ch.video_source].video_id;
+        if (player && targetVideoId !== videoId) {
+          currentVideoSource = ch.video_source;
+          videoId = targetVideoId;
+          player.loadVideoById(targetVideoId, targetTime);
+          currentChapterIndex = index;
+          updateCurrentChapter();
+          return;
+        }
+      }
       seekTo(targetTime);
       currentChapterIndex = index;
       updateCurrentChapter();
@@ -1325,6 +1378,19 @@
     chapters = data.chapters || [];
     users = data.users || {};
     videoId = data.video_id || null;
+    videos = data.videos || {};
+    const videoKeys = Object.keys(videos);
+    if (videoKeys.length > 0 && !videoId) {
+      videoId = videos[videoKeys[0]].video_id;
+      currentVideoSource = videoKeys[0];
+    } else if (videoKeys.length > 0) {
+      for (const key of videoKeys) {
+        if (videos[key].video_id === videoId) {
+          currentVideoSource = key;
+          break;
+        }
+      }
+    }
     queenKills = [];
     for (const ch of chapters) {
       if (ch.queen_kills) {

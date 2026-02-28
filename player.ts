@@ -73,6 +73,7 @@ interface Chapter {
     gold_on_left?: boolean;
     hivemind_url: string;
     _timelineFields?: Record<string, boolean>;
+    video_source?: string;  // key into ChapterData.videos
 }
 
 interface UserInfo {
@@ -80,8 +81,14 @@ interface UserInfo {
     scene?: string;
 }
 
+interface VideoSource {
+    video_id: string;
+    label: string;
+}
+
 interface ChapterData {
     video_id: string | null;
+    videos?: Record<string, VideoSource>;
     chapters: Chapter[];
     users: Record<string, UserInfo>;
     game_transform?: AffineTransform;
@@ -280,6 +287,11 @@ let videoId: string | null = null;
 let chapterData: ChapterData | null = null;  // top-level JSON data (for game_transform etc.)
 let youtubeApiReady = false;
 
+// Multi-video support
+let videos: Record<string, VideoSource> = {};
+let currentVideoSource: string | null = null;  // key into videos
+let cabFilter: string | null = null;  // null = show all, otherwise key into videos
+
 // Initialize YouTube player (called when both API and chapters are ready)
 function initializePlayer(): void {
     if (!youtubeApiReady || !videoId || player) return;
@@ -384,6 +396,8 @@ function formatTime(seconds: number): string {
 function findChapterAtTime(time: number): number {
     for (let i = chapters.length - 1; i >= 0; i--) {
         if (time >= chapters[i].start_time) {
+            // In multi-video mode, only match chapters from current video
+            if (currentVideoSource && chapters[i].video_source !== currentVideoSource) continue;
             return i;
         }
     }
@@ -901,8 +915,8 @@ interface DiamondGridOptions {
     leftLabel: string;
     rightLabel: string;
     flipDisplay: boolean;
-    leftEdgeLabels?: string[];
-    rightEdgeLabels?: string[];
+    leftEdgeLabels?: (string | null)[];
+    rightEdgeLabels?: (string | null)[];
 }
 
 function renderDiamondGrid(opts: DiamondGridOptions): string {
@@ -956,14 +970,16 @@ function renderDiamondGrid(opts: DiamondGridOptions): string {
         const cellCY = topPad + i * step;
         const leftText = leftEdgeLabels ? leftEdgeLabels[i] : String(i);
         const rightText = rightEdgeLabels ? rightEdgeLabels[i] : String(i);
-        // Left edge: offset upper-left from cell center
-        const lx = cx - i * step - perpDist;
-        const ly = cellCY - perpDist;
-        html += `<span class="diamond-axis-label" style="right:${containerWidth - lx}px;top:${ly}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${leftText}</span>`;
-        // Right edge: offset upper-right from cell center
-        const rx = cx + i * step + perpDist;
-        const ry = cellCY - perpDist;
-        html += `<span class="diamond-axis-label" style="left:${rx}px;top:${ry}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${rightText}</span>`;
+        if (leftText !== null) {
+            const lx = cx - i * step - perpDist;
+            const ly = cellCY - perpDist;
+            html += `<span class="diamond-axis-label" style="right:${containerWidth - lx}px;top:${ly}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${leftText}</span>`;
+        }
+        if (rightText !== null) {
+            const rx = cx + i * step + perpDist;
+            const ry = cellCY - perpDist;
+            html += `<span class="diamond-axis-label" style="left:${rx}px;top:${ry}px;transform:translateY(-50%);font-size:${tickFontSize}px;">${rightText}</span>`;
+        }
     }
 
     html += '</div>';
@@ -1065,14 +1081,20 @@ function updateBerryGrid(currentTime: number): void {
     const bg = point.bg;  // 25-element array indexed as [blue_delta * 5 + gold_delta]
     const n = BERRY_DELTAS.length;
 
-    // Build n*n probability grid, skipping null entries (game-over states)
+    // Build n*n probability grid, skipping game-over states
     // row = blue delta, col = gold delta (fixed orientation)
+    const bc = point.bc || [0, 0];  // [blue_scored, gold_scored]
     const berryProbs: (number | null)[][] = [];
     for (let row = 0; row < n; row++) {
         berryProbs[row] = [];
         for (let col = 0; col < n; col++) {
             const blueDelta = row;
             const goldDelta = col;
+            // Null out winning states (either team fills hive)
+            if (bc[0] + blueDelta >= MAX_FOOD || bc[1] + goldDelta >= MAX_FOOD) {
+                berryProbs[row][col] = null;
+                continue;
+            }
             const idx = blueDelta * n + goldDelta;
             const raw = bg[idx];
             if (raw === null || raw === undefined) {
@@ -1093,9 +1115,12 @@ function updateBerryGrid(currentTime: number): void {
     const rightLabel = `${rightTeam} berries left`;
 
     // Absolute berries remaining: MAX_FOOD - scored - delta
-    const bc = point.bc || [0, 0];  // [blue_scored, gold_scored]
-    const blueLabels = BERRY_DELTAS.map(d => String(Math.max(0, MAX_FOOD - bc[0] - d)));
-    const goldLabels = BERRY_DELTAS.map(d => String(Math.max(0, MAX_FOOD - bc[1] - d)));
+    const berryLabel = (scored: number, d: number): string | null => {
+        const left = MAX_FOOD - scored - d;
+        return left <= 0 ? null : String(left);
+    };
+    const blueLabels = BERRY_DELTAS.map(d => berryLabel(bc[0], d));
+    const goldLabels = BERRY_DELTAS.map(d => berryLabel(bc[1], d));
     const leftEdgeLabels = ch.gold_on_left ? goldLabels : blueLabels;
     const rightEdgeLabels = ch.gold_on_left ? blueLabels : goldLabels;
 
@@ -1324,6 +1349,27 @@ function renderWinProbPlot(ch: Chapter, index: number): string {
 // Render chapter list
 function renderChapters(filter: string = ''): void {
     const filterLower = filter.toLowerCase();
+    const hasMultipleVideos = Object.keys(videos).length > 1;
+
+    // Render cab filter buttons if multiple video sources
+    const cabFilterContainer = document.getElementById('cabFilter');
+    if (cabFilterContainer) {
+        if (hasMultipleVideos) {
+            cabFilterContainer.style.display = 'flex';
+            cabFilterContainer.innerHTML = `<button class="cab-filter-btn ${cabFilter === null ? 'active' : ''}" data-cab="">All</button>` +
+                Object.entries(videos).map(([key, vs]) =>
+                    `<button class="cab-filter-btn ${cabFilter === key ? 'active' : ''}" data-cab="${esc(key)}">${esc(vs.label)}</button>`
+                ).join('');
+            cabFilterContainer.querySelectorAll<HTMLElement>('.cab-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    cabFilter = btn.dataset.cab || null;
+                    renderChapters(chapterFilter.value);
+                });
+            });
+        } else {
+            cabFilterContainer.style.display = 'none';
+        }
+    }
 
     chapterList.innerHTML = chapters
         .map((ch, i) => {
@@ -1332,6 +1378,11 @@ function renderChapters(filter: string = ''): void {
 
             // Filter by selected player - skip games they're not in
             if (selectedUserId && !chapterPosition) {
+                return '';
+            }
+
+            // Filter by cab
+            if (cabFilter && ch.video_source !== cabFilter) {
                 return '';
             }
 
@@ -1351,6 +1402,12 @@ function renderChapters(filter: string = ''): void {
 
             const plotHtml = renderWinProbPlot(ch, i);
 
+            // Cab badge (only shown when multiple video sources)
+            let cabBadgeHtml = '';
+            if (hasMultipleVideos && ch.video_source && videos[ch.video_source]) {
+                cabBadgeHtml = `<span class="cab-badge">${esc(videos[ch.video_source].label)}</span>`;
+            }
+
             // Calculate K/D and net win prob for selected player
             let statsHtml = '';
             if (chapterPosition) {
@@ -1368,7 +1425,7 @@ function renderChapters(filter: string = ''): void {
             return `
                 <div class="chapter-item ${winnerClass} ${activeClass} ${setClass}" data-index="${i}">
                     ${setLabel}
-                    <div class="chapter-title">${esc(ch.title)}</div>
+                    <div class="chapter-title">${cabBadgeHtml}${esc(ch.title)}</div>
                     <div class="chapter-meta">
                         <span class="winner ${esc(ch.winner)}">${esc(ch.winner)}</span> ${esc(ch.win_condition)}
                         &nbsp;|&nbsp; ${formatTime(ch.duration)}
@@ -1408,8 +1465,23 @@ function renderChapters(filter: string = ''): void {
 // Jump to chapter
 function jumpToChapter(index: number): void {
     if (index >= 0 && index < chapters.length) {
-        const targetTime = chapters[index].start_time;
-        console.log(`Jumping to chapter ${index}: ${chapters[index].title} at ${targetTime}s`);
+        const ch = chapters[index];
+        const targetTime = ch.start_time;
+        console.log(`Jumping to chapter ${index}: ${ch.title} at ${targetTime}s`);
+
+        // Switch video if this chapter is on a different source
+        if (ch.video_source && videos[ch.video_source]) {
+            const targetVideoId = videos[ch.video_source].video_id;
+            if (player && targetVideoId !== videoId) {
+                currentVideoSource = ch.video_source;
+                videoId = targetVideoId;
+                player.loadVideoById(targetVideoId, targetTime);
+                currentChapterIndex = index;
+                updateCurrentChapter();
+                return;  // loadVideoById will auto-play
+            }
+        }
+
         seekTo(targetTime);
         currentChapterIndex = index;
         updateCurrentChapter();
@@ -1924,6 +1996,22 @@ function loadChaptersFromJSON(data: ChapterData): void {
     chapters = data.chapters || [];
     users = data.users || {};
     videoId = data.video_id || null;
+
+    // Multi-video support
+    videos = data.videos || {};
+    const videoKeys = Object.keys(videos);
+    if (videoKeys.length > 0 && !videoId) {
+        videoId = videos[videoKeys[0]].video_id;
+        currentVideoSource = videoKeys[0];
+    } else if (videoKeys.length > 0) {
+        // Find which source matches the default video_id
+        for (const key of videoKeys) {
+            if (videos[key].video_id === videoId) {
+                currentVideoSource = key;
+                break;
+            }
+        }
+    }
 
     // Build flat list of queen kills from all chapters
     queenKills = [];
