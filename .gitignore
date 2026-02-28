@@ -2,3 +2,5 @@ __pycache__/
 *.py[cod]
 *.mkv
 *.mp4
+node_modules/
+dist/
