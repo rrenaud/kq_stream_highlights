@@ -24,6 +24,7 @@ import { ContributionBars } from './ContributionBars';
 import { ChapterList } from './ChapterList';
 import { HighlightDebug } from './HighlightDebug';
 import { KeyboardHints } from './KeyboardHints';
+import { SnailBar } from './SnailBar';
 
 export function App() {
     const calState = useMemo(() => createCalibrationState(), []);
@@ -84,7 +85,7 @@ export function App() {
         for (const ch of (data.chapters || [])) {
             if (ch.queen_kills) {
                 for (const qk of ch.queen_kills) {
-                    flatKills.push({ time: qk.time, victim: qk.victim, game_id: ch.game_id });
+                    flatKills.push({ time: qk.time, victim: qk.victim, game_id: ch.game_id, video_source: ch.video_source });
                 }
             }
         }
@@ -364,66 +365,60 @@ export function App() {
         <>
             <div class="container">
                 <div class="video-section">
-                    <div class="video-wrapper">
-                        <div id="player"></div>
-                        {calibrating ? (
-                            <div
-                                ref={overlayRef}
-                                id="cfOverlay"
-                                class="cf-overlay"
-                                style="pointer-events:auto;cursor:crosshair;background:rgba(0,0,0,0.15);"
-                                onClick={handleOverlayClick}
-                            ></div>
-                        ) : (
-                            <MapOverlay
-                                ch={_ch}
-                                currentTime={_ct}
-                                flipForGold={_ffg}
-                                chapterData={_cd}
-                            />
-                        )}
-                    </div>
-
-                    <div class="controls">
-                        <button onClick={() => togglePlayPause()}>{playPauseText}</button>
-                        <span class="time-display">{timeDisplayText}</span>
-                        <span class="nav-group">
-                            <button onClick={() => prevSet()} title="Previous set (Shift+S)">{'\u25C0'}Set</button>
-                            <button onClick={() => nextSet()} title="Next set (S)">Set{'\u25B6'}</button>
-                        </span>
-                        <span class="nav-group">
-                            <button onClick={() => prevChapter()} title="Previous game (Shift+G)">{'\u25C0'}Game</button>
-                            <button onClick={() => nextChapter()} title="Next game (G)">Game{'\u25B6'}</button>
-                        </span>
-                        <span class="nav-group">
-                            <button onClick={() => prevQueenKill()} title="Previous queen kill (Shift+E)">{'\u25C0'}Egg</button>
-                            <button onClick={() => nextQueenKill()} title="Next queen kill (E)">Egg{'\u25B6'}</button>
-                        </span>
-                        <span class="nav-group">
-                            <button onClick={() => prevHighlight()} title="Previous highlight (Shift+H)">{'\u25C0'}HL</button>
-                            <button onClick={() => nextHighlight()} title="Next highlight (H)">HL{'\u25B6'}</button>
-                        </span>
-                        <button
-                            class={_hme ? 'highlight-mode-active' : ''}
-                            onClick={toggleHighlightMode}
-                            title="Auto-play highlights (A)"
-                        >{highlightBtnText}</button>
-                        <button onClick={cycleTeamToggle} title="Toggle team perspective (T)">{teamToggleText}</button>
-                        <button
-                            onClick={handleCalibrateClick}
-                            title="Click to calibrate game rectangle"
-                            style={calibrateBg ? `background:${calibrateBg}` : ''}
-                        >{calibrateText}</button>
-                        <span class="current-chapter">
-                            {_ch && (
-                                <>
-                                    <h3>{_ch.title}</h3>
-                                    <span class={_ch.winner}>{_ch.winner}</span> wins by {_ch.win_condition}
-                                    &nbsp;|&nbsp; {formatTime(_ch.duration)}
-                                    &nbsp;|&nbsp; <a href={_ch.hivemind_url} target="_blank" style="color: #e94560;">HiveMind</a>
-                                </>
-                            )}
-                        </span>
+                    <div class="video-with-controls">
+                        <div class="controls">
+                            <button onClick={() => togglePlayPause()}>{playPauseText}</button>
+                            <span class="time-display">{timeDisplayText}</span>
+                            <span class="nav-group">
+                                <button onClick={() => prevSet()} title="Previous set (Shift+S)">{'\u25C0'}Set</button>
+                                <button onClick={() => nextSet()} title="Next set (S)">Set{'\u25B6'}</button>
+                            </span>
+                            <span class="nav-group">
+                                <button onClick={() => prevChapter()} title="Previous game (Shift+G)">{'\u25C0'}Game</button>
+                                <button onClick={() => nextChapter()} title="Next game (G)">Game{'\u25B6'}</button>
+                            </span>
+                            <span class="nav-group">
+                                <button onClick={() => prevQueenKill()} title="Previous queen kill (Shift+E)">{'\u25C0'}Egg</button>
+                                <button onClick={() => nextQueenKill()} title="Next queen kill (E)">Egg{'\u25B6'}</button>
+                            </span>
+                            <span class="nav-group">
+                                <button onClick={() => prevHighlight()} title="Previous highlight (Shift+H)">{'\u25C0'}HL</button>
+                                <button onClick={() => nextHighlight()} title="Next highlight (H)">HL{'\u25B6'}</button>
+                            </span>
+                            <button
+                                class={_hme ? 'highlight-mode-active' : ''}
+                                onClick={toggleHighlightMode}
+                                title="Auto-play highlights (A)"
+                            >{highlightBtnText}</button>
+                            <button onClick={cycleTeamToggle} title="Toggle team perspective (T)">{teamToggleText}</button>
+                            <button
+                                onClick={handleCalibrateClick}
+                                title="Click to calibrate game rectangle"
+                                style={calibrateBg ? `background:${calibrateBg}` : ''}
+                            >{calibrateText}</button>
+                        </div>
+                        <div class="video-and-snail">
+                            <div class="video-wrapper">
+                                <div id="player"></div>
+                                {calibrating ? (
+                                    <div
+                                        ref={overlayRef}
+                                        id="cfOverlay"
+                                        class="cf-overlay"
+                                        style="pointer-events:auto;cursor:crosshair;background:rgba(0,0,0,0.15);"
+                                        onClick={handleOverlayClick}
+                                    ></div>
+                                ) : (
+                                    <MapOverlay
+                                        ch={_ch}
+                                        currentTime={_ct}
+                                        flipForGold={_ffg}
+                                        chapterData={_cd}
+                                    />
+                                )}
+                            </div>
+                            <SnailBar ch={_ch} currentTime={_ct} flipForGold={_ffg} chapterData={_cd} />
+                        </div>
                     </div>
 
                     <div class="cf-grids-row">

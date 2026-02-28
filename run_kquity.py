@@ -25,7 +25,6 @@ KQUITY_DIR = Path.home() / 'KQuity'
 sys.path.insert(0, str(KQUITY_DIR))
 
 from export_predictions import _vectorize_game_wrapper, _predict_and_assemble
-from assemble_comparison import main as assemble_main
 import lightgbm as lgb
 
 
@@ -130,8 +129,9 @@ def main():
         if game_preds is None:
             continue
 
-        # video_offset: chapter start_time was computed as max(0, game_start_seconds - 1)
-        # so game-relative time 0 ≈ chapter start_time + 1
+        # video_offset: start_time = max(0, game_start_seconds - 1), so
+        # game-relative time 0 ≈ start_time + 1. When game_start_seconds < 1,
+        # start_time is clamped to 0, introducing up to ~1s offset error.
         video_offset: float = ch['start_time'] + 1
 
         timeline = []

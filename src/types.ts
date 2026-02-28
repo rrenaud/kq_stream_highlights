@@ -42,6 +42,9 @@ export interface ModelTimelinePoint extends TimelinePoint {
     bg?: (number | null)[];
     bc?: [number, number];
     sx?: number;
+    sp?: number[];    // 12 probabilities at each discrete snail position
+    sc?: number;      // current snail position index (0-11)
+    st?: number;      // takeover probability (opponent takes snail)
 }
 
 export interface VideoSource {
@@ -95,6 +98,7 @@ export interface FlatQueenKill {
     time: number;
     victim: number;
     game_id: number;
+    video_source?: string;
 }
 
 export interface PlayerHighlight {
@@ -130,6 +134,8 @@ export interface MapStructureInfo {
     blue_hive: [number, number];
     gold_hive: [number, number];
     gold_eggs_centroid: [number, number];
+    snail_left: number;
+    snail_right: number;
 }
 
 export interface SpeedGates {

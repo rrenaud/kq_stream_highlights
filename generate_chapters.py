@@ -12,7 +12,6 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from fetch_games import fetch_games_for_day, Game
 from chapter_utils import (
     collect_users_for_games, build_output_data, build_chapters_for_games,
 )
@@ -43,21 +42,6 @@ def load_games_from_cache(cache_path: Path) -> list[dict]:
                 games.append(item)
     return games
 
-
-def games_from_api(cabinet_url: str, target_date: datetime, verbose: bool = True) -> list[dict]:
-    """Fetch games from HiveMind API and return as dicts."""
-    games = fetch_games_for_day(cabinet_url, target_date, verbose=verbose)
-    return [
-        {
-            'id': g.id,
-            'map_name': g.map_name,
-            'start_time': g.start_time,
-            'end_time': g.end_time,
-            'win_condition': g.win_condition,
-            'winning_team': g.winning_team,
-        }
-        for g in games
-    ]
 
 
 def generate_chapters(
