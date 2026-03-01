@@ -171,62 +171,64 @@ body {
 .cf-bar-row {
     display: flex;
     align-items: center;
-    margin-bottom: 3px;
-    font-size: 11px;
-    height: 18px;
+    margin-bottom: 2px;
+    font-size: 13px;
+    height: 24px;
+    background: #242424;
+    border-radius: 3px;
+    padding: 0 4px;
 }
 
 .cf-bar-label {
-    width: 150px;
-    text-align: right;
-    padding-right: 6px;
+    width: 170px;
     color: #aaa;
     flex-shrink: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: 500;
 }
 
-.cf-bar-track {
+.cf-bar-label-blue {
+    text-align: right;
+    padding-right: 6px;
+    color: #7bb8f0;
+}
+
+.cf-bar-label-gold {
+    text-align: left;
+    padding-left: 6px;
+    color: #ffe04a;
+}
+
+.cf-bar-half {
     flex: 1;
-    height: 14px;
-    position: relative;
+    height: 18px;
     background: #1a1a1a;
-    border-radius: 2px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
 }
 
-.cf-bar-center {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: #444;
+.cf-bar-half-left {
+    justify-content: flex-end;
 }
 
 .cf-bar-fill {
-    position: absolute;
-    top: 1px;
-    bottom: 1px;
-    border-radius: 1px;
-    transition: left 0.3s, width 0.3s;
-}
-
-.cf-bar-fill.positive {
-    background: rgba(59,130,246,0.9);
-}
-
-.cf-bar-fill.negative {
-    background: rgba(249,115,22,0.9);
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s;
 }
 
 .cf-bar-value {
-    width: 45px;
-    text-align: right;
-    padding-left: 4px;
+    width: 70px;
+    text-align: center;
     font-family: monospace;
-    font-size: 10px;
-    color: #888;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ddd;
+    flex-shrink: 0;
     flex-shrink: 0;
 }
 

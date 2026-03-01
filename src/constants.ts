@@ -45,28 +45,33 @@ export const POSITION_SVGS: Record<string, string> = {
 };
 
 export const CF_LABELS: Record<string, [string, string | null]> = {
-    'bqk': ['Queen Kill', 'blue'],
-    'gqk': ['Queen Kill', 'gold'],
-    'bb': ['Berry', 'blue'],
-    'gb': ['Berry', 'gold'],
-    'bswd': ['Speed Warrior Dies', 'blue'],
-    'bvwd': ['Warrior Dies', 'blue'],
-    'gswd': ['Speed Warrior Dies', 'gold'],
-    'gvwd': ['Warrior Dies', 'gold'],
-    'bsdw': ['Speed Gets Wings', 'blue'],
-    'bdw': ['Gets Wings', 'blue'],
-    'bws': ['Gets Speed', 'blue'],
-    'gsdw': ['Speed Gets Wings', 'gold'],
-    'gdw': ['Gets Wings', 'gold'],
-    'gws': ['Gets Speed', 'gold'],
+    'bqk': ['Blue Queen Dies', 'blue'],
+    'gqk': ['Gold Queen Dies', 'gold'],
+    'bb': ['Blue Berry Deposited', 'blue'],
+    'gb': ['Gold Berry Deposited', 'gold'],
+    'bswd': ['Blue Speed Warrior Dies', 'blue'],
+    'bvwd': ['Blue Vanilla Warrior Dies', 'blue'],
+    'gswd': ['Gold Speed Warrior Dies', 'gold'],
+    'gvwd': ['Gold Vanilla Warrior Dies', 'gold'],
+    'bsdw': ['Blue Speed Gets Wings', 'blue'],
+    'bdw': ['Blue Vanilla Gets Wings', 'blue'],
+    'bws': ['Blue Drone Gets Speed', 'blue'],
+    'gsdw': ['Gold Speed Gets Wings', 'gold'],
+    'gdw': ['Gold Vanilla Gets Wings', 'gold'],
+    'gws': ['Gold Drone Gets Speed', 'gold'],
     'sb': ['Snail \u2192 Blue', null],
     'sg': ['Snail \u2192 Gold', null],
+    'mb0': ['Left Speed Gate \u2192 Blue', 'blue'],
+    'mb1': ['Right Speed Gate \u2192 Blue', 'blue'],
+    'mb2': ['Left Mil Gate \u2192 Blue', 'blue'],
+    'mb3': ['Center Mil Gate \u2192 Blue', 'blue'],
+    'mb4': ['Right Mil Gate \u2192 Blue', 'blue'],
+    'mg0': ['Left Speed Gate \u2192 Gold', 'gold'],
+    'mg1': ['Right Speed Gate \u2192 Gold', 'gold'],
+    'mg2': ['Left Mil Gate \u2192 Gold', 'gold'],
+    'mg3': ['Center Mil Gate \u2192 Gold', 'gold'],
+    'mg4': ['Right Mil Gate \u2192 Gold', 'gold'],
 };
-// Add per-maiden labels dynamically
-for (let i = 0; i < 5; i++) {
-    CF_LABELS[`mb${i}`] = [`Gate ${i} \u2192 Blue`, 'blue'];
-    CF_LABELS[`mg${i}`] = [`Gate ${i} \u2192 Gold`, 'gold'];
-}
 
 export const MAP_STRUCTURE: Record<string, MapStructureInfo> = {
     'Day': {
