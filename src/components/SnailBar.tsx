@@ -1,4 +1,4 @@
-import type { Chapter, ChapterData, AffineTransform } from '../types';
+import type { Chapter, ChapterData } from '../types';
 import { MAP_STRUCTURE, SNAIL_CHUNKS } from '../constants';
 import { probToColor } from '../utils';
 import { findTimelinePoint } from '../timeline';
@@ -44,10 +44,9 @@ export function SnailBar({ ch, currentTime, flipForGold, chapterData }: SnailBar
         leftPct = transform.a_x + transform.b_x * leftPx;
         rightPct = transform.a_x + transform.b_x * rightPx;
     } else {
-        // No calibration — can't map game coords to video position,
-        // so just span the full width as a reasonable default.
-        leftPct = 0;
-        rightPct = 100;
+        // No calibration — approximate using raw game coords over 1920px width
+        leftPct = leftPx / 1920 * 100;
+        rightPct = rightPx / 1920 * 100;
     }
 
     // Ensure left < right
