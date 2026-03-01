@@ -9,6 +9,7 @@ import { nextHighlight, prevHighlight } from '../highlights';
 interface KeyboardCallbacks {
     toggleHighlightMode: () => void;
     cycleTeamToggle: () => void;
+    toggleOverlay: () => void;
     handlePositionSelect: (position: string) => void;
 }
 
@@ -74,6 +75,10 @@ export function useKeyboardShortcuts(callbacks: KeyboardCallbacks): void {
                 case 't':
                 case 'T':
                     cb.cycleTeamToggle();
+                    break;
+                case 'o':
+                case 'O':
+                    cb.toggleOverlay();
                     break;
                 case '1': case '2': case '3': case '4': case '5':
                 case '6': case '7': case '8': case '9': case '0':

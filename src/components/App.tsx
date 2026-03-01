@@ -35,6 +35,7 @@ export function App() {
     const [calibrateText, setCalibrateText] = useState('Calibrate');
     const [calibrateBg, setCalibrateBg] = useState('');
     const [calibrating, setCalibrating] = useState(false);
+    const [hideOverlay, setHideOverlay] = useState(true);
 
     // Force re-render when signals change (read signal values to subscribe)
     const _ct = currentTime.value;
@@ -370,7 +371,7 @@ export function App() {
     }
 
     // --- Keyboard shortcuts ---
-    useKeyboardShortcuts({ toggleHighlightMode, cycleTeamToggle, handlePositionSelect });
+    useKeyboardShortcuts({ toggleHighlightMode, cycleTeamToggle, toggleOverlay: () => setHideOverlay(!hideOverlay), handlePositionSelect });
 
     // --- Derived values for rendering ---
     const timeDisplayText = `${formatTime(_ct)} / ${formatTime(ytPlayer.value?.getDuration?.() || 0)}`;
@@ -410,6 +411,7 @@ export function App() {
                                 title="Auto-play highlights (A)"
                             >{highlightBtnText}</button>
                             <button onClick={cycleTeamToggle} title="Toggle team perspective (T)">{teamToggleText}</button>
+                            <button onClick={() => setHideOverlay(!hideOverlay)} title="Toggle map overlay (O)">{hideOverlay ? 'Overlay: Off' : 'Overlay: On'}</button>
                             <button
                                 onClick={handleCalibrateClick}
                                 title="Click to calibrate game rectangle"
@@ -427,14 +429,14 @@ export function App() {
                                         style="pointer-events:auto;cursor:crosshair;background:rgba(0,0,0,0.15);"
                                         onClick={handleOverlayClick}
                                     ></div>
-                                ) : (
+                                ) : !hideOverlay ? (
                                     <MapOverlay
                                         ch={_ch}
                                         currentTime={_ct}
                                         flipForGold={_ffg}
                                         chapterData={_cd}
                                     />
-                                )}
+                                ) : null}
                             </div>
                             <SnailBar ch={_ch} currentTime={_ct} flipForGold={_ffg} chapterData={_cd} />
                         </div>
