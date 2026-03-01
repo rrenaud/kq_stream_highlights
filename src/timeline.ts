@@ -1,4 +1,4 @@
-import type { Chapter, ModelTimelinePoint, TimelinePoint } from './types';
+import type { Chapter, ModelTimelinePoint } from './types';
 
 export function findClosestPoint(timeline: ModelTimelinePoint[], time: number): ModelTimelinePoint | null {
     if (!timeline || timeline.length === 0) return null;
@@ -28,20 +28,4 @@ export function findTimelinePoint(ch: Chapter, currentTime: number, field: strin
         return findClosestPoint(timeline, currentTime);
     }
     return null;
-}
-
-export function buildTimelinePath(timeline: TimelinePoint[], startTime: number, duration: number, width: number, height: number, padding: number, flipForGold: boolean): string {
-    let pathD = '';
-    for (let i = 0; i < timeline.length; i++) {
-        const pt = timeline[i];
-        const x = padding + ((pt.t - startTime) / duration) * (width - 2 * padding);
-        const prob = flipForGold ? (1 - pt.p) : pt.p;
-        const y = height - padding - (prob * (height - 2 * padding));
-        if (i === 0) {
-            pathD += `M ${x} ${y}`;
-        } else {
-            pathD += ` L ${x} ${y}`;
-        }
-    }
-    return pathD;
 }

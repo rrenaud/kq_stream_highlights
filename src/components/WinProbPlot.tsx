@@ -1,7 +1,6 @@
 import type { Chapter } from '../types';
-import { MODEL_COLORS } from '../constants';
-import { getChapterPosition, shouldFlipForGold } from '../utils';
-import { buildTimelinePath } from '../timeline';
+import { getChapterPosition, shouldFlipForGold, probToColor } from '../utils';
+import type { TimelinePoint } from '../types';
 import { findHighImpactRanges } from '../highlights';
 
 interface WinProbPlotProps {
@@ -45,32 +44,36 @@ export function WinProbPlot({ ch, index, selectedPosition, selectedUserId, favor
         return <rect key={i} x={x1 - 2} y="0" width={rangeWidth + 4} height={height} fill={color} />;
     });
 
-    let paths: preact.JSX.Element[] = [];
-    let legendItems: preact.JSX.Element[] = [];
+    // Build colored line segments where each segment's color reflects the probability
+    function buildColoredSegments(timeline: TimelinePoint[], keyPrefix: string): preact.JSX.Element[] {
+        const segs: preact.JSX.Element[] = [];
+        for (let i = 0; i < timeline.length - 1; i++) {
+            const pt = timeline[i];
+            const next = timeline[i + 1];
+            const x1 = padding + ((pt.t - startTime) / duration) * (width - 2 * padding);
+            const x2 = padding + ((next.t - startTime) / duration) * (width - 2 * padding);
+            const p1 = flipForGold ? (1 - pt.p) : pt.p;
+            const p2 = flipForGold ? (1 - next.p) : next.p;
+            const y1 = height - padding - (p1 * (height - 2 * padding));
+            const y2 = height - padding - (p2 * (height - 2 * padding));
+            const avgP = (p1 + p2) / 2;
+            segs.push(<line key={`${keyPrefix}-${i}`} x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke={probToColor(avgP)} stroke-width="2" />);
+        }
+        return segs;
+    }
+
+    let segments: preact.JSX.Element[] = [];
 
     if (hasModels) {
         const modelNames = Object.keys(ch.model_timelines!);
-        if (hasTimeline) {
-            const basePathD = buildTimelinePath(ch.win_timeline!, startTime, duration, width, height, padding, flipForGold);
-            paths.push(<path key="baseline" d={basePathD} fill="none" stroke="#888" stroke-width="1" stroke-dasharray="3,2" opacity="0.6" />);
-        }
-        modelNames.forEach((name, idx) => {
+        modelNames.forEach((name) => {
             const timeline = ch.model_timelines![name];
             if (!timeline || timeline.length < 2) return;
-            const color = MODEL_COLORS[idx % MODEL_COLORS.length];
-            const pathD = buildTimelinePath(timeline, startTime, duration, width, height, padding, flipForGold);
-            paths.push(<path key={name} d={pathD} fill="none" stroke={color} stroke-width="1.5" />);
+            segments = segments.concat(buildColoredSegments(timeline, name));
         });
-        legendItems = modelNames.map((name, idx) => {
-            const color = MODEL_COLORS[idx % MODEL_COLORS.length];
-            return <span key={name} style={`color:${color}; margin-right:8px; font-size:10px;`}>{'\u25CF'} {name}</span>;
-        });
-        if (hasTimeline) {
-            legendItems.push(<span key="hivemind" style="color:#888; font-size:10px;">{'\u2504'} HiveMind</span>);
-        }
-    } else {
-        const pathD = buildTimelinePath(ch.win_timeline!, startTime, duration, width, height, padding, flipForGold);
-        paths.push(<path key="single" d={pathD} fill="none" stroke="#888" stroke-width="1.5" />);
+    } else if (hasTimeline) {
+        segments = buildColoredSegments(ch.win_timeline!, 'wt');
     }
 
     return (
@@ -79,13 +82,8 @@ export function WinProbPlot({ ch, index, selectedPosition, selectedUserId, favor
                 {highlightRects}
                 <line x1={padding} y1={height / 2} x2={width - padding} y2={height / 2}
                     stroke="#333" stroke-width="1" stroke-dasharray="2,2" />
-                {paths}
+                {segments}
             </svg>
-            {legendItems.length > 0 && (
-                <div style="display:flex; flex-wrap:wrap; gap:2px; margin-top:2px;">
-                    {legendItems}
-                </div>
-            )}
         </div>
     );
 }
