@@ -23,6 +23,10 @@ body {
     padding: 20px;
 }
 
+.video-and-snail {
+    flex-shrink: 0;
+}
+
 .video-wrapper {
     position: relative;
     background: #000;
