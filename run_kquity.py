@@ -29,7 +29,7 @@ import lightgbm as lgb
 
 
 CACHE_DIR = Path(__file__).parent / 'cache' / 'game_events'
-DEFAULT_MODEL = KQUITY_DIR / 'model_experiments' / 'new_data_model' / 'model.mdl'
+DEFAULT_MODEL = KQUITY_DIR / 'current_preferred_model.mdl'
 
 
 def load_cached_events(game_id: int) -> list[tuple[datetime.datetime, str, str]] | None:
