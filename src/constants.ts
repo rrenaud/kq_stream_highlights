@@ -82,7 +82,9 @@ export const MAP_STRUCTURE: Record<string, MapStructureInfo> = {
         snail_center: [960, 1010],
         blue_hive: [1860, 980],
         gold_hive: [60, 980],
-        gold_eggs_centroid: [850, 899]
+        gold_eggs_centroid: [850, 899],
+        snail_left: 110,
+        snail_right: 1810
     },
     'Dusk': {
         maiden_info: [
@@ -97,7 +99,9 @@ export const MAP_STRUCTURE: Record<string, MapStructureInfo> = {
         snail_center: [960, 870],
         blue_hive: [1860, 980],
         gold_hive: [60, 980],
-        gold_eggs_centroid: [746, 532]
+        gold_eggs_centroid: [746, 532],
+        snail_left: 110,
+        snail_right: 1810
     },
     'Night': {
         maiden_info: [
@@ -112,7 +116,9 @@ export const MAP_STRUCTURE: Record<string, MapStructureInfo> = {
         snail_center: [960, 970],
         blue_hive: [1860, 980],
         gold_hive: [60, 980],
-        gold_eggs_centroid: [97, 55]
+        gold_eggs_centroid: [97, 55],
+        snail_left: 210,
+        snail_right: 1710
     },
     'Twilight': {
         maiden_info: [
@@ -127,9 +133,13 @@ export const MAP_STRUCTURE: Record<string, MapStructureInfo> = {
         snail_center: [960, 1010],
         blue_hive: [1860, 980],
         gold_hive: [60, 980],
-        gold_eggs_centroid: [164, 52]
+        gold_eggs_centroid: [164, 52],
+        snail_left: 110,
+        snail_right: 1810
     }
 };
+
+export const SNAIL_CHUNKS = 12;
 
 export const MODEL_COLORS = ['#e94560', '#5ba3ec', '#50c878', '#f5a623'];
 
