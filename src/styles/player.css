@@ -37,6 +37,43 @@ body {
     height: 100%;
 }
 
+/* Snail bar — positioned below video, aligned to snail track */
+.snail-bar {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2px;
+}
+
+.snail-bar-row {
+    display: flex;
+    gap: 1px;
+}
+
+.snail-bar-cell {
+    flex: 1;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    padding: 2px 0;
+    border-radius: 2px;
+    transition: background 0.3s;
+    position: relative;
+}
+
+.snail-bar-cell.current {
+    outline: 2px solid #fff;
+    outline-offset: -1px;
+    z-index: 1;
+}
+
+.snail-takeover {
+    font-size: 9px;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-left: 2px;
+}
+
 .controls {
     display: flex;
     align-items: center;

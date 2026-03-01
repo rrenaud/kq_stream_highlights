@@ -135,6 +135,8 @@ export interface MapStructureInfo {
     blue_hive: [number, number];
     gold_hive: [number, number];
     gold_eggs_centroid: [number, number];
+    snail_left: number;
+    snail_right: number;
 }
 
 export interface SpeedGates {
