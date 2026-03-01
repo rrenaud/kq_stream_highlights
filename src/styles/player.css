@@ -209,6 +209,7 @@ body {
     display: flex;
     justify-content: flex-start;
     overflow: hidden;
+    position: relative;
 }
 
 .cf-bar-half-left {
