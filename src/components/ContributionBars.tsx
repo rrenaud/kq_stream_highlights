@@ -69,6 +69,9 @@ export function ContributionBars({ ch, currentTime, flipForGold, chapterData }: 
     const show50 = delta50 > 0.001 && delta50 <= maxDelta;
     const marker50Side: 'left' | 'right' = currentP < 0.5 ? 'left' : 'right';
     const marker50Pct = (delta50 / maxDelta) * 100;
+    const markerStyle = `position:absolute;top:0;bottom:0;width:1px;background:white;opacity:0.6;${
+        marker50Side === 'left' ? `right:${marker50Pct}%` : `left:${marker50Pct}%`
+    }`;
 
     return (
         <div class="contribution-bars">
@@ -80,7 +83,8 @@ export function ContributionBars({ ch, currentTime, flipForGold, chapterData }: 
                     const leftVal = pair.left ? (Math.abs(pair.left.delta) * 100).toFixed(1) : '';
                     const rightVal = pair.right ? (Math.abs(pair.right.delta) * 100).toFixed(1) : '';
 
-                    // background-size stretches gradient to full track width so iso-probability verticals align
+                    // If the bar is X% of the track, size the gradient at (100/X * 100)% so
+                    // equal probability offsets map to equal pixel positions across all rows.
                     const bgSizeLeft = leftPct > 0 ? `${10000 / leftPct}%` : '100%';
                     const bgSizeRight = rightPct > 0 ? `${10000 / rightPct}%` : '100%';
 
@@ -94,10 +98,6 @@ export function ContributionBars({ ch, currentTime, flipForGold, chapterData }: 
                     const valueText = leftVal && rightVal
                         ? `${leftVal}\u2502${rightVal}`
                         : leftVal || rightVal;
-
-                    const markerStyle = `position:absolute;top:0;bottom:0;width:1px;background:white;opacity:0.6;${
-                        marker50Side === 'left' ? `right:${marker50Pct}%` : `left:${marker50Pct}%`
-                    }`;
 
                     return (
                         <div class="cf-bar-row" key={pk}>

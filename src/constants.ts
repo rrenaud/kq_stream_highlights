@@ -44,6 +44,9 @@ export const POSITION_SVGS: Record<string, string> = {
     '10': SVG_TEMPLATES.checkers(BLUE_COLOR)
 };
 
+// Keys match the data model: v = "vanilla" (displayed as "slow"), s = "speed",
+// b/g prefix = blue/gold, qk = queen kill, wd = warrior dies, dw = gets wings,
+// ws = gets speed, mb/mg = maiden blessing
 export const CF_LABELS: Record<string, [string, string | null]> = {
     'bqk': ['Blue Queen Dies', 'blue'],
     'gqk': ['Gold Queen Dies', 'gold'],
