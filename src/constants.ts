@@ -44,20 +44,23 @@ export const POSITION_SVGS: Record<string, string> = {
     '10': SVG_TEMPLATES.checkers(BLUE_COLOR)
 };
 
+// Keys match the data model: v = "vanilla" (displayed as "slow"), s = "speed",
+// b/g prefix = blue/gold, qk = queen kill, wd = warrior dies, dw = gets wings,
+// ws = gets speed, mb/mg = maiden blessing
 export const CF_LABELS: Record<string, [string, string | null]> = {
     'bqk': ['Blue Queen Dies', 'blue'],
     'gqk': ['Gold Queen Dies', 'gold'],
     'bb': ['Blue Berry Deposited', 'blue'],
     'gb': ['Gold Berry Deposited', 'gold'],
     'bswd': ['Blue Speed Warrior Dies', 'blue'],
-    'bvwd': ['Blue Vanilla Warrior Dies', 'blue'],
+    'bvwd': ['Blue Slow Warrior Dies', 'blue'],
     'gswd': ['Gold Speed Warrior Dies', 'gold'],
-    'gvwd': ['Gold Vanilla Warrior Dies', 'gold'],
+    'gvwd': ['Gold Slow Warrior Dies', 'gold'],
     'bsdw': ['Blue Speed Gets Wings', 'blue'],
-    'bdw': ['Blue Vanilla Gets Wings', 'blue'],
+    'bdw': ['Blue Slow Gets Wings', 'blue'],
     'bws': ['Blue Drone Gets Speed', 'blue'],
     'gsdw': ['Gold Speed Gets Wings', 'gold'],
-    'gdw': ['Gold Vanilla Gets Wings', 'gold'],
+    'gdw': ['Gold Slow Gets Wings', 'gold'],
     'gws': ['Gold Drone Gets Speed', 'gold'],
     'sb': ['Snail \u2192 Blue', null],
     'sg': ['Snail \u2192 Gold', null],
