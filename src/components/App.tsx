@@ -40,7 +40,10 @@ function formatRelativeTime(dateStr: string): string {
 function formatDataAge(dateStr: string | null): string | null {
     if (!dateStr) return null;
     const d = new Date(dateStr);
+    // sv-SE locale gives YYYY-MM-DD HH:MM format
     const local = d.toLocaleString('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(',', '');
+    // Relative time updates as a side effect of currentTime signal polling (500ms),
+    // which is frequent enough for a debug display.
     return `${local} (${formatRelativeTime(dateStr)})`;
 }
 

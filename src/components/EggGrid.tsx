@@ -42,7 +42,7 @@ export function EggGrid({ ch, currentTime, flipForGold }: EggGridProps) {
         <div class="egg-grid">
             <h4>Egg what-ifs</h4>
             <DiamondGrid
-                probs={eggProbs} n={n} currentRow={currentRow} currentCol={currentCol}
+                probs={eggProbs} nRows={n} nCols={n} currentRow={currentRow} currentCol={currentCol}
                 needsMirror={needsMirror} cellSize={66} fontSize={15}
                 leftLabel={`${leftTeam} eggs`} rightLabel={`${rightTeam} eggs`}
                 flipDisplay={flipForGold}

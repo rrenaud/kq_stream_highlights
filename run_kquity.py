@@ -163,9 +163,10 @@ def main():
     print(f"Saved to {out_path}")
 
     # Auto-copy to public/ for Vite dev server
+    chapters_dir = Path(__file__).parent / 'chapters'
     public_chapters = Path(__file__).parent / 'public' / 'chapters'
-    if public_chapters.exists():
-        rel = out_path.relative_to(Path(__file__).parent / 'chapters')
+    if public_chapters.exists() and out_path.is_relative_to(chapters_dir):
+        rel = out_path.relative_to(chapters_dir)
         public_out = public_chapters / rel
         public_out.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(out_path, public_out)

@@ -2,7 +2,8 @@ import { probToColor } from '../utils';
 
 interface DiamondGridProps {
     probs: (number | null)[][];
-    n: number;
+    nRows: number;
+    nCols: number;
     currentRow: number;
     currentCol: number;
     needsMirror: boolean;
@@ -21,14 +22,15 @@ interface DiamondGridProps {
 }
 
 function contourBorderCSS(
-    probs: (number | null)[][], row: number, col: number, n: number, needsMirror: boolean
+    probs: (number | null)[][], row: number, col: number,
+    nRows: number, nCols: number, needsMirror: boolean
 ): string {
     const p = probs[row][col];
     if (p === null) return '';
     const side = p >= 0.5;
 
     function crosses(r: number, c: number): boolean {
-        if (r < 0 || r >= n || c < 0 || c >= n) return false;
+        if (r < 0 || r >= nRows || c < 0 || c >= nCols) return false;
         const np = probs[r][c];
         if (np === null) return false;
         return (np >= 0.5) !== side;
@@ -53,17 +55,17 @@ function contourBorderCSS(
 }
 
 export function DiamondGrid(props: DiamondGridProps) {
-    const { probs, n, currentRow, currentCol, needsMirror, cellSize, fontSize,
+    const { probs, nRows, nCols, currentRow, currentCol, needsMirror, cellSize, fontSize,
             leftLabel, rightLabel, flipDisplay, leftEdgeLabels, rightEdgeLabels,
-            chasmBeforeRow, chasmBeforeCol, chasmAfterRow, chasmAfterCol } = props;
-    const gap = props.chasmGap || 0;
+            chasmBeforeRow, chasmBeforeCol, chasmAfterRow, chasmAfterCol,
+            chasmGap = 0 } = props;
     const step = cellSize * Math.SQRT2 / 2;
     const halfCell = cellSize / 2;
-    const rowGapBefore = (chasmBeforeRow !== undefined && chasmBeforeRow > 0) ? gap : 0;
-    const colGapBefore = (chasmBeforeCol !== undefined && chasmBeforeCol > 0) ? gap : 0;
-    const rowGapAfter = (chasmAfterRow !== undefined && chasmAfterRow < n - 1) ? gap : 0;
-    const colGapAfter = (chasmAfterCol !== undefined && chasmAfterCol < n - 1) ? gap : 0;
-    const diagSpan = 2 * n - 1 + rowGapBefore + colGapBefore + rowGapAfter + colGapAfter;
+    const rowGapBefore = (chasmBeforeRow !== undefined && chasmBeforeRow > 0) ? chasmGap : 0;
+    const colGapBefore = (chasmBeforeCol !== undefined && chasmBeforeCol > 0) ? chasmGap : 0;
+    const rowGapAfter = (chasmAfterRow !== undefined && chasmAfterRow < nRows - 1) ? chasmGap : 0;
+    const colGapAfter = (chasmAfterCol !== undefined && chasmAfterCol < nCols - 1) ? chasmGap : 0;
+    const diagSpan = nRows + nCols - 1 + rowGapBefore + colGapBefore + rowGapAfter + colGapAfter;
     const titleHeight = 16;
     const containerWidth = diagSpan * step + cellSize + 20;
     const containerHeight = titleHeight + diagSpan * step + cellSize;
@@ -72,17 +74,17 @@ export function DiamondGrid(props: DiamondGridProps) {
     const topPad = halfCell + titleHeight + topShift;
 
     const cells: preact.JSX.Element[] = [];
-    for (let row = 0; row < n; row++) {
-        for (let col = 0; col < n; col++) {
+    for (let row = 0; row < nRows; row++) {
+        for (let col = 0; col < nCols; col++) {
             const prob = probs[row][col];
             const isNull = prob === null || prob === undefined;
 
             let effRow = row;
-            if (chasmBeforeRow !== undefined && row < chasmBeforeRow) effRow -= gap;
-            if (chasmAfterRow !== undefined && row > chasmAfterRow) effRow += gap;
+            if (chasmBeforeRow !== undefined && row < chasmBeforeRow) effRow -= chasmGap;
+            if (chasmAfterRow !== undefined && row > chasmAfterRow) effRow += chasmGap;
             let effCol = col;
-            if (chasmBeforeCol !== undefined && col < chasmBeforeCol) effCol -= gap;
-            if (chasmAfterCol !== undefined && col > chasmAfterCol) effCol += gap;
+            if (chasmBeforeCol !== undefined && col < chasmBeforeCol) effCol -= chasmGap;
+            if (chasmAfterCol !== undefined && col > chasmAfterCol) effCol += chasmGap;
 
             let dx = effCol - effRow;
             if (needsMirror) dx = -dx;
@@ -110,7 +112,9 @@ export function DiamondGrid(props: DiamondGridProps) {
                 const bgColor = probToColor(prob);
                 const isCurrent = (row === currentRow && col === currentCol);
                 const currentClass = isCurrent ? ' egg-current-bold' : '';
-                const contour = contourBorderCSS(probs, row, col, n, needsMirror);
+                // Note: contour borders may cross chasms — this is a known cosmetic
+                // imperfection that's acceptable since chasms are already visually distinct.
+                const contour = contourBorderCSS(probs, row, col, nRows, nCols, needsMirror);
                 const opacity = beyondChasm ? 'opacity:0.5;' : '';
 
                 cells.push(
@@ -129,20 +133,18 @@ export function DiamondGrid(props: DiamondGridProps) {
     const tickGap = 4;
     const tickFontSize = Math.max(9, fontSize - 2);
     const perpDist = (halfCell + tickGap) / Math.SQRT2;
+    const nLeft = needsMirror ? nCols : nRows;
+    const nRight = needsMirror ? nRows : nCols;
     const leftChasmBefore = needsMirror ? chasmBeforeCol : chasmBeforeRow;
     const leftChasmAfter = needsMirror ? chasmAfterCol : chasmAfterRow;
     const rightChasmBefore = needsMirror ? chasmBeforeRow : chasmBeforeCol;
     const rightChasmAfter = needsMirror ? chasmAfterRow : chasmAfterCol;
     const edgeLabels: preact.JSX.Element[] = [];
-    for (let i = 0; i < n; i++) {
+    for (let i = 0; i < nLeft; i++) {
         let leftEffI = i;
-        if (leftChasmBefore !== undefined && i < leftChasmBefore) leftEffI -= gap;
-        if (leftChasmAfter !== undefined && i > leftChasmAfter) leftEffI += gap;
-        let rightEffI = i;
-        if (rightChasmBefore !== undefined && i < rightChasmBefore) rightEffI -= gap;
-        if (rightChasmAfter !== undefined && i > rightChasmAfter) rightEffI += gap;
+        if (leftChasmBefore !== undefined && i < leftChasmBefore) leftEffI -= chasmGap;
+        if (leftChasmAfter !== undefined && i > leftChasmAfter) leftEffI += chasmGap;
         const leftText = leftEdgeLabels ? leftEdgeLabels[i] : String(i);
-        const rightText = rightEdgeLabels ? rightEdgeLabels[i] : String(i);
         const lx = cx - leftEffI * step - perpDist;
         const ly = topPad + leftEffI * step - perpDist;
         edgeLabels.push(
@@ -151,6 +153,12 @@ export function DiamondGrid(props: DiamondGridProps) {
                 {leftText}
             </span>
         );
+    }
+    for (let i = 0; i < nRight; i++) {
+        let rightEffI = i;
+        if (rightChasmBefore !== undefined && i < rightChasmBefore) rightEffI -= chasmGap;
+        if (rightChasmAfter !== undefined && i > rightChasmAfter) rightEffI += chasmGap;
+        const rightText = rightEdgeLabels ? rightEdgeLabels[i] : String(i);
         const rx = cx + rightEffI * step + perpDist;
         const ry = topPad + rightEffI * step - perpDist;
         edgeLabels.push(

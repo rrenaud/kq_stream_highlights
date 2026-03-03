@@ -24,19 +24,23 @@ export function BerryGrid({ ch, currentTime, flipForGold }: BerryGridProps) {
     const bd = point.bd;
     const blueDeltas = bd ? bd[0] : BERRY_DELTAS;
     const goldDeltas = bd ? bd[1] : BERRY_DELTAS;
-    const n = blueDeltas.length;
+    const nRows = blueDeltas.length;
+    const nCols = goldDeltas.length;
 
     const berryProbs: (number | null)[][] = [];
-    for (let row = 0; row < n; row++) {
+    for (let row = 0; row < nRows; row++) {
         berryProbs[row] = [];
-        for (let col = 0; col < n; col++) {
-            const idx = row * n + col;
+        for (let col = 0; col < nCols; col++) {
+            const idx = row * nCols + col;
             const raw = bg[idx];
             berryProbs[row][col] = (raw === null || raw === undefined) ? null : raw;
         }
     }
 
-    // Current position: where delta=0 is for each team
+    // Current position: where delta=0 is for each team.
+    // indexOf returns -1 if absent, which is safe: DiamondGrid treats -1 as
+    // "no current cell" (isCurrent never matches) and chasmBefore with -1
+    // produces no gap (-1 > 0 is false).
     const currentRow = blueDeltas.indexOf(0);
     const currentCol = goldDeltas.indexOf(0);
 
@@ -52,14 +56,14 @@ export function BerryGrid({ ch, currentTime, flipForGold }: BerryGridProps) {
     // Old format: ascending deltas [0..4], game-over at high indices → chasmAfter
     const chasmBeforeRow = bd ? currentRow : undefined;
     const chasmBeforeCol = bd ? currentCol : undefined;
-    const chasmAfterRow = bd ? undefined : Math.min(n - 1, MAX_FOOD - bc[0] - 1);
-    const chasmAfterCol = bd ? undefined : Math.min(n - 1, MAX_FOOD - bc[1] - 1);
+    const chasmAfterRow = bd ? undefined : Math.min(nRows - 1, MAX_FOOD - bc[0] - 1);
+    const chasmAfterCol = bd ? undefined : Math.min(nCols - 1, MAX_FOOD - bc[1] - 1);
 
     return (
         <div class="egg-grid">
             <h4>Berry what-ifs</h4>
             <DiamondGrid
-                probs={berryProbs} n={n} currentRow={currentRow} currentCol={currentCol}
+                probs={berryProbs} nRows={nRows} nCols={nCols} currentRow={currentRow} currentCol={currentCol}
                 needsMirror={needsMirror} cellSize={40} fontSize={11}
                 leftLabel={`${leftTeam} berries left`} rightLabel={`${rightTeam} berries left`}
                 flipDisplay={flipForGold}
