@@ -29,6 +29,7 @@ export const users = signal<Record<string, UserInfo>>({});
 export const videoId = signal<string | null>(null);
 export const chapterData = signal<ChapterData | null>(null);
 export const youtubeApiReady = signal(false);
+export const dataLastModified = signal<string | null>(null);
 
 // Multi-video support
 export const videos = signal<Record<string, VideoSource>>({});

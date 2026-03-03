@@ -13,7 +13,7 @@ import {
     favoriteTeam, selectedPosition, selectedUserId,
     playerHighlights, playerHighlightCount, playerLowlightCount, lastHighlightIndex, highlightModeEnabled,
     users, videoId, chapterData, currentChapter, flipForGold,
-    videos as videosSignal, currentVideoSource, cabFilter,
+    videos as videosSignal, currentVideoSource, cabFilter, dataLastModified,
 } from '../state';
 import { useKeyboardShortcuts } from '../hooks/useKeyboardShortcuts';
 
@@ -25,6 +25,24 @@ import { ChapterList } from './ChapterList';
 import { HighlightDebug } from './HighlightDebug';
 import { KeyboardHints } from './KeyboardHints';
 import { SnailBar } from './SnailBar';
+
+function formatRelativeTime(dateStr: string): string {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 1) return 'just now';
+    if (mins < 60) return `${mins}m ago`;
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    return `${days}d ago`;
+}
+
+function formatDataAge(dateStr: string | null): string | null {
+    if (!dateStr) return null;
+    const d = new Date(dateStr);
+    const local = d.toLocaleString('sv-SE', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }).replace(',', '');
+    return `${local} (${formatRelativeTime(dateStr)})`;
+}
 
 export function App() {
     const calState = useMemo(() => createCalibrationState(), []);
@@ -55,6 +73,7 @@ export function App() {
     const _us = users.value;
     const _vs = videosSignal.value;
     const _cabFilter = cabFilter.value;
+    const _dlm = dataLastModified.value;
 
     // Derived values (replace useState that was manually synced)
     const teamToggleText = _ft === null ? 'Team: Auto' : _ft === 'blue' ? 'Team: Blue' : 'Team: Gold';
@@ -157,7 +176,10 @@ export function App() {
         const urlParams = new URLSearchParams(window.location.search);
         const chaptersUrl = urlParams.get('chapters') || 'chapters/tournaments/842.json';
         fetchJSON<ChapterData>(chaptersUrl)
-            .then(loadChaptersFromJSON)
+            .then(result => {
+                dataLastModified.value = result.lastModified;
+                loadChaptersFromJSON(result.data);
+            })
             .catch(err => console.log(`Failed to load ${chaptersUrl}: ${err.message}`));
     }, [loadChaptersFromJSON]);
 
@@ -468,6 +490,11 @@ export function App() {
                 <div class="chapter-sidebar">
                     <div class="sidebar-header">
                         <h2>Chapters</h2>
+                        {_dlm && (
+                            <div style="font-size:0.75em;color:#888;margin-bottom:4px;">
+                                Data: {formatDataAge(_dlm)}
+                            </div>
+                        )}
                         <input
                             type="text"
                             placeholder="Filter by map, winner..."

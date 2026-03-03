@@ -16,6 +16,7 @@ import datetime
 import gzip
 import json
 import multiprocessing
+import shutil
 import sys
 from pathlib import Path
 from typing import Any
@@ -140,7 +141,7 @@ def main():
                 't': round(pt['t'] + video_offset, 2),
                 'p': pt['p'],
             }
-            for key in ('c', 'sx', 'eg', 'ee', 'bg', 'bc', 'sp', 'sc', 'st'):
+            for key in ('c', 'sx', 'eg', 'ee', 'bg', 'bc', 'bd', 'sp', 'sc', 'st'):
                 if key in pt:
                     entry[key] = pt[key]
             timeline.append(entry)
@@ -160,6 +161,15 @@ def main():
     with gzip.open(out_path, 'wt') as f:
         json.dump(chapter_data, f)
     print(f"Saved to {out_path}")
+
+    # Auto-copy to public/ for Vite dev server
+    public_chapters = Path(__file__).parent / 'public' / 'chapters'
+    if public_chapters.exists():
+        rel = out_path.relative_to(Path(__file__).parent / 'chapters')
+        public_out = public_chapters / rel
+        public_out.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(out_path, public_out)
+        print(f"Copied to {public_out}")
 
 
 if __name__ == '__main__':

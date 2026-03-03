@@ -13,6 +13,11 @@ interface DiamondGridProps {
     flipDisplay: boolean;
     leftEdgeLabels?: string[];
     rightEdgeLabels?: string[];
+    chasmBeforeRow?: number;
+    chasmBeforeCol?: number;
+    chasmAfterRow?: number;
+    chasmAfterCol?: number;
+    chasmGap?: number;
 }
 
 function contourBorderCSS(
@@ -49,65 +54,105 @@ function contourBorderCSS(
 
 export function DiamondGrid(props: DiamondGridProps) {
     const { probs, n, currentRow, currentCol, needsMirror, cellSize, fontSize,
-            leftLabel, rightLabel, flipDisplay, leftEdgeLabels, rightEdgeLabels } = props;
+            leftLabel, rightLabel, flipDisplay, leftEdgeLabels, rightEdgeLabels,
+            chasmBeforeRow, chasmBeforeCol, chasmAfterRow, chasmAfterCol } = props;
+    const gap = props.chasmGap || 0;
     const step = cellSize * Math.SQRT2 / 2;
     const halfCell = cellSize / 2;
-    const diagSpan = 2 * n - 1;
+    const rowGapBefore = (chasmBeforeRow !== undefined && chasmBeforeRow > 0) ? gap : 0;
+    const colGapBefore = (chasmBeforeCol !== undefined && chasmBeforeCol > 0) ? gap : 0;
+    const rowGapAfter = (chasmAfterRow !== undefined && chasmAfterRow < n - 1) ? gap : 0;
+    const colGapAfter = (chasmAfterCol !== undefined && chasmAfterCol < n - 1) ? gap : 0;
+    const diagSpan = 2 * n - 1 + rowGapBefore + colGapBefore + rowGapAfter + colGapAfter;
     const titleHeight = 16;
     const containerWidth = diagSpan * step + cellSize + 20;
     const containerHeight = titleHeight + diagSpan * step + cellSize;
     const cx = containerWidth / 2;
-    const topPad = halfCell + titleHeight;
+    const topShift = (rowGapBefore + colGapBefore) * step;
+    const topPad = halfCell + titleHeight + topShift;
 
     const cells: preact.JSX.Element[] = [];
     for (let row = 0; row < n; row++) {
         for (let col = 0; col < n; col++) {
             const prob = probs[row][col];
-            if (prob === null || prob === undefined) continue;
+            const isNull = prob === null || prob === undefined;
 
-            let dx = col - row;
+            let effRow = row;
+            if (chasmBeforeRow !== undefined && row < chasmBeforeRow) effRow -= gap;
+            if (chasmAfterRow !== undefined && row > chasmAfterRow) effRow += gap;
+            let effCol = col;
+            if (chasmBeforeCol !== undefined && col < chasmBeforeCol) effCol -= gap;
+            if (chasmAfterCol !== undefined && col > chasmAfterCol) effCol += gap;
+
+            let dx = effCol - effRow;
             if (needsMirror) dx = -dx;
-            const dy = col + row;
+            const dy = effCol + effRow;
 
             const x = cx + dx * step - halfCell;
             const y = topPad + dy * step - halfCell;
 
-            const pct = flipDisplay ? Math.round((1 - prob) * 100) : Math.round(prob * 100);
-            const bgColor = probToColor(prob);
-            const isCurrent = (row === currentRow && col === currentCol);
-            const currentClass = isCurrent ? ' egg-current-bold' : '';
-            const contour = contourBorderCSS(probs, row, col, n, needsMirror);
+            const beyondChasm =
+                (chasmBeforeRow !== undefined && row < chasmBeforeRow) ||
+                (chasmBeforeCol !== undefined && col < chasmBeforeCol) ||
+                (chasmAfterRow !== undefined && row > chasmAfterRow) ||
+                (chasmAfterCol !== undefined && col > chasmAfterCol);
 
-            cells.push(
-                <div
-                    key={`${row}-${col}`}
-                    class={`diamond-cell${currentClass}`}
-                    style={`left:${x}px;top:${y}px;width:${cellSize + 1}px;height:${cellSize + 1}px;background:${bgColor};${contour}`}
-                >
-                    <span style={`font-size:${fontSize}px;`}>{pct}</span>
-                </div>
-            );
+            if (isNull) {
+                cells.push(
+                    <div
+                        key={`${row}-${col}`}
+                        class="diamond-cell"
+                        style={`left:${x}px;top:${y}px;width:${cellSize + 1}px;height:${cellSize + 1}px;background:#333;opacity:0.4;`}
+                    />
+                );
+            } else {
+                const pct = flipDisplay ? Math.round((1 - prob) * 100) : Math.round(prob * 100);
+                const bgColor = probToColor(prob);
+                const isCurrent = (row === currentRow && col === currentCol);
+                const currentClass = isCurrent ? ' egg-current-bold' : '';
+                const contour = contourBorderCSS(probs, row, col, n, needsMirror);
+                const opacity = beyondChasm ? 'opacity:0.5;' : '';
+
+                cells.push(
+                    <div
+                        key={`${row}-${col}`}
+                        class={`diamond-cell${currentClass}`}
+                        style={`left:${x}px;top:${y}px;width:${cellSize + 1}px;height:${cellSize + 1}px;background:${bgColor};${contour}${opacity}`}
+                    >
+                        <span style={`font-size:${fontSize}px;`}>{pct}</span>
+                    </div>
+                );
+            }
         }
     }
 
     const tickGap = 4;
     const tickFontSize = Math.max(9, fontSize - 2);
     const perpDist = (halfCell + tickGap) / Math.SQRT2;
+    const leftChasmBefore = needsMirror ? chasmBeforeCol : chasmBeforeRow;
+    const leftChasmAfter = needsMirror ? chasmAfterCol : chasmAfterRow;
+    const rightChasmBefore = needsMirror ? chasmBeforeRow : chasmBeforeCol;
+    const rightChasmAfter = needsMirror ? chasmAfterRow : chasmAfterCol;
     const edgeLabels: preact.JSX.Element[] = [];
     for (let i = 0; i < n; i++) {
-        const cellCY = topPad + i * step;
+        let leftEffI = i;
+        if (leftChasmBefore !== undefined && i < leftChasmBefore) leftEffI -= gap;
+        if (leftChasmAfter !== undefined && i > leftChasmAfter) leftEffI += gap;
+        let rightEffI = i;
+        if (rightChasmBefore !== undefined && i < rightChasmBefore) rightEffI -= gap;
+        if (rightChasmAfter !== undefined && i > rightChasmAfter) rightEffI += gap;
         const leftText = leftEdgeLabels ? leftEdgeLabels[i] : String(i);
         const rightText = rightEdgeLabels ? rightEdgeLabels[i] : String(i);
-        const lx = cx - i * step - perpDist;
-        const ly = cellCY - perpDist;
+        const lx = cx - leftEffI * step - perpDist;
+        const ly = topPad + leftEffI * step - perpDist;
         edgeLabels.push(
             <span key={`l-${i}`} class="diamond-axis-label"
                 style={`right:${containerWidth - lx}px;top:${ly}px;transform:translateY(-50%);font-size:${tickFontSize}px;`}>
                 {leftText}
             </span>
         );
-        const rx = cx + i * step + perpDist;
-        const ry = cellCY - perpDist;
+        const rx = cx + rightEffI * step + perpDist;
+        const ry = topPad + rightEffI * step - perpDist;
         edgeLabels.push(
             <span key={`r-${i}`} class="diamond-axis-label"
                 style={`left:${rx}px;top:${ry}px;transform:translateY(-50%);font-size:${tickFontSize}px;`}>
