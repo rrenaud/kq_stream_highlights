@@ -41,6 +41,7 @@ export interface ModelTimelinePoint extends TimelinePoint {
     ee?: [number, number];
     bg?: (number | null)[];
     bc?: [number, number];
+    bd?: [number[], number[]];  // per-team berry deltas [blue, gold]
     sx?: number;
     sp?: number[];    // 12 probabilities at each discrete snail position
     sc?: number;      // current snail position index (0-11)
@@ -155,19 +156,4 @@ export interface OverlayEntry {
     rawDelta: number;
     x: number;
     y: number;
-}
-
-export interface DiamondGridOptions {
-    probs: (number | null)[][];
-    n: number;
-    currentRow: number;
-    currentCol: number;
-    needsMirror: boolean;
-    cellSize: number;
-    fontSize: number;
-    leftLabel: string;
-    rightLabel: string;
-    flipDisplay: boolean;
-    leftEdgeLabels?: string[];
-    rightEdgeLabels?: string[];
 }
